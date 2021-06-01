@@ -1,14 +1,18 @@
 import 'package:bid/auth/auth_service.dart';
+
+import 'package:bid/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 
-class CreateNewUser extends StatelessWidget {
+class CreateNewUser extends StatefulWidget {
   static const routeName = '/create_new_user';
-  //  String cid;
-  // bool isAdmin = false;
-  // CreateNewUser({this.cid, this.isAdmin});
 
+  @override
+  _CreateNewUserState createState() => _CreateNewUserState();
+}
+
+class _CreateNewUserState extends State<CreateNewUser> {
+  // cid is a ref to company id if db
+  String tenantId = 'xvK2sXGx2QlHDq7OWvdN';
   String email = '';
   String password = '';
   String name = '';
@@ -17,9 +21,10 @@ class CreateNewUser extends StatelessWidget {
 
   Future<String> _createUser() async {
     try {
-      final authInstance = AuthenticationService(FirebaseAuth.instance);
-      final newUser = await authInstance.createUser(
-          email: email, password: password, name: name, isAdmin: false);
+      final authInstance = AuthenticationService();
+      CustomUser user = new CustomUser(
+          tenantId: tenantId, email: email, password: password, name: name);
+      final newUser = await authInstance.createUser(user: user);
       if (newUser.isNotEmpty) {
         _newUserFlag = true;
       }
@@ -76,7 +81,7 @@ class CreateNewUser extends StatelessWidget {
                 onChanged: (value) {
                   password = value;
                 },
-              )
+              ),
             ],
           ),
         ),

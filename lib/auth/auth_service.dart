@@ -1,11 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bid/db/database.dart';
+import 'package:bid/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  AuthenticationService(this._firebaseAuth);
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  Future<User?> get getCurrentUser async => _firebaseAuth.currentUser;
+  Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
+
+  Future<String?> getCurrentUserTenantId() async {
+    print(_firebaseAuth.currentUser!.tenantId);
+    return _firebaseAuth.currentUser!.tenantId;
+  }
 
   Future<String?> signIn(
       {required String email, required String password}) async {
@@ -18,18 +25,25 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+  Future signOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      print('sign out');
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
-  Future<String> createUser(
-      {required String email,
-      required String password,
-      required bool isAdmin,
-      required String name}) async {
+  Future<String> createUser({required CustomUser user}) async {
     final newUser = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+        email: user.email, password: user.password);
     final userId = newUser.user!.uid;
+    user.uid = userId;
+
+    await DatabaseSevice().addUserToUserCollection(user);
+    await DatabaseSevice().addUserToCompanyUserList(user.tenantId, user);
+
     return userId;
   }
 }

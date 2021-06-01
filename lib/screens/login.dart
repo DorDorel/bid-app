@@ -1,5 +1,6 @@
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/screens/add_new_company.dart';
+import 'package:bid/screens/main_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthenticationService _auth = AuthenticationService();
+
   late String email;
   late String password;
   @override
@@ -53,17 +56,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 50.0),
                 Container(
                   child: TextButton(
-                    onPressed: () => {
-                      context
-                          .read<AuthenticationService>()
-                          .signIn(email: email, password: password),
+                    onPressed: () async {
+                      dynamic result =
+                          await _auth.signIn(email: email, password: password);
+                      if (result == null) {
+                        print('error signing in');
+                      } else {
+                        print('singing in');
+                        print(result.uid);
+                      }
                     },
                     child: Text('Sign In'),
                   ),
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AddNewCompany.routeName);
+                      Navigator.pushNamed(
+                        context,
+                        AddNewCompany.routeName,
+                      );
                     },
                     child: Text('Register Your Business'))
               ],

@@ -1,6 +1,8 @@
 import 'package:bid/screens/add_new_company.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
+import 'package:bid/screens/config/user_config.dart';
 import 'package:bid/screens/login.dart';
+import 'package:bid/screens/main_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,11 +23,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           Provider<AuthenticationService>(
-            create: (_) => AuthenticationService(FirebaseAuth.instance),
+            create: (_) => AuthenticationService(),
           ),
           StreamProvider(
             create: (context) =>
-                context.read<AuthenticationService>().authStateChanges,
+                Provider.of<AuthenticationService>(context, listen: false)
+                    .authStateChanges,
             initialData: null,
           ),
         ],
@@ -44,6 +47,8 @@ class MyApp extends StatelessWidget {
             routes: {
               AddNewCompany.routeName: (context) => AddNewCompany(),
               CreateNewUser.routeName: (context) => CreateNewUser(),
+              MainDashboard.routeName: (context) => MainDashboard(),
+              UserConfig.routeName: (context) => UserConfig(),
             }));
   }
 }
@@ -54,7 +59,8 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = Provider.of<User?>(context);
 
     if (firebaseUser != null) {
-      return AddNewCompany();
+      print(firebaseUser.email! + '   ' + firebaseUser.uid);
+      return MainDashboard();
     }
     return LoginScreen();
   }
