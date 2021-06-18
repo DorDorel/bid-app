@@ -1,5 +1,4 @@
 import 'package:bid/auth/auth_service.dart';
-
 import 'package:bid/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ class CreateNewUser extends StatefulWidget {
 }
 
 class _CreateNewUserState extends State<CreateNewUser> {
-  // cid is a ref to company id if db
+  // tenantId is a ref to company id if db
   String tenantId = 'xvK2sXGx2QlHDq7OWvdN';
   String email = '';
   String password = '';
@@ -30,6 +29,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
       }
       return newUser;
     } catch (e) {
+      print(e.toString());
       return e.toString();
     }
   }

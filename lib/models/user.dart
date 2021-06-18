@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class CustomUser {
   late String uid;
   final String tenantId;
@@ -17,9 +15,18 @@ class CustomUser {
 
   Map<String, dynamic> toMap() => {
         'uid': this.uid,
-        'cid': this.tenantId,
+        'tenantId': this.tenantId,
         'email': this.email,
         'name': this.name,
         'isAdmin': this.isAdmin
       };
+
+  factory CustomUser.fromMap(Map<String, dynamic> firestoreObj) {
+    CustomUser user = CustomUser(
+        tenantId: firestoreObj['tenantId'],
+        email: firestoreObj['email'],
+        password: 'null',
+        name: firestoreObj['name']);
+    return user;
+  }
 }

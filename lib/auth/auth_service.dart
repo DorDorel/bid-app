@@ -1,5 +1,6 @@
 import 'package:bid/db/database.dart';
 import 'package:bid/models/user.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
@@ -40,10 +41,19 @@ class AuthenticationService {
         email: user.email, password: user.password);
     final userId = newUser.user!.uid;
     user.uid = userId;
-
+    // HttpsCallable setNewUserTenantId =
+    //     FirebaseFunctions.instance.httpsCallable('setNewUserTenantId');
+    // await setNewUserTenantId(user.toMap()).then((value) => print(value));
     await DatabaseSevice().addUserToUserCollection(user);
     await DatabaseSevice().addUserToCompanyUserList(user.tenantId, user);
 
     return userId;
   }
+
+  // Future<bool> tenantIdValidation() async {
+  //   // await DatabaseSevice().findUserinCompaniyCollectionbyUid(getCurrentUserUID, tenantId)
+  //   final uid = await getCurrentUserUID;
+  //   DatabaseSevice().getTenanetIdByUid(uid);
+  //   return false;
+  // }
 }

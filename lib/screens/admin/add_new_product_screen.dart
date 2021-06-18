@@ -1,3 +1,5 @@
+import 'package:bid/db/products_db.dart';
+import 'package:bid/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +10,25 @@ class AddNewProductScreen extends StatefulWidget {
 }
 
 class _AddNewProductScreenState extends State<AddNewProductScreen> {
+  var _editProduct = Product(
+      productId: '', productName: '', price: 0, imageUrl: '', description: '');
   final _form = GlobalKey<FormState>();
+
+  void _saveForm() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _form.currentState!.save();
+    ProductsDb().addNewProduct(_editProduct);
+  }
+
+  @override
+  void initState() {
+    print('init state');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +41,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           IconButton(
               icon: Icon(Icons.save),
               onPressed: () {
-                // _saveForm();
+                _saveForm();
+                Navigator.pop(context);
               })
         ],
       ),
@@ -40,6 +61,14 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   }
                   return null;
                 },
+                onSaved: (value) => {
+                  _editProduct = new Product(
+                      productId: value!,
+                      productName: _editProduct.productName,
+                      price: _editProduct.price,
+                      imageUrl: _editProduct.imageUrl,
+                      description: _editProduct.description),
+                },
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Product Name'),
@@ -48,7 +77,16 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   if (value!.isEmpty) {
                     return 'Name is a require tile';
                   }
+
                   return null;
+                },
+                onSaved: (value) => {
+                  _editProduct = new Product(
+                      productId: _editProduct.productId,
+                      productName: value!,
+                      price: _editProduct.price,
+                      imageUrl: _editProduct.imageUrl,
+                      description: _editProduct.description),
                 },
               ),
               TextFormField(
@@ -65,7 +103,16 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   if (double.parse(value) <= 0) {
                     return 'Plese enter a number GREATER then Zero';
                   }
+
                   return null;
+                },
+                onSaved: (value) => {
+                  _editProduct = new Product(
+                      productId: _editProduct.productId,
+                      productName: _editProduct.productName,
+                      price: double.parse(value!),
+                      imageUrl: _editProduct.imageUrl,
+                      description: _editProduct.description),
                 },
               ),
               TextFormField(
@@ -80,7 +127,16 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   if (value.length < 10) {
                     return 'Should be at least 10 characters long';
                   }
+
                   return null;
+                },
+                onSaved: (value) => {
+                  _editProduct = new Product(
+                      productId: _editProduct.productId,
+                      productName: _editProduct.productName,
+                      price: _editProduct.price,
+                      imageUrl: _editProduct.imageUrl,
+                      description: value!),
                 },
               ),
               TextFormField(

@@ -1,4 +1,3 @@
-import 'package:bid/auth/auth_service.dart';
 import 'package:bid/models/company.dart';
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,10 +31,6 @@ class DatabaseSevice {
     return userRef;
   }
 
-  // Future<User?> findUserByUid(String uid) async{
-
-  // }
-
   Future<void> addUserToUserCollection(CustomUser user) async {
     await usersCollection.add(user.toMap());
   }
@@ -43,5 +38,20 @@ class DatabaseSevice {
   Future<void> addUserToCompanyUserList(String cid, CustomUser user) async {
     final docRef = await findCompanyByCid(cid);
     await docRef.collection('users').doc(user.uid).set(user.toMap());
+  }
+
+  Future<Object?> findUserinCompaniyCollectionbyUid(
+      String uid, String tenantId) async {
+    final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
+    final CollectionReference<Map<String, dynamic>> userList =
+        tenantDoc.collection('users');
+    try {
+      QuerySnapshot<Map<String, dynamic>> userUid =
+          await userList.where('uid', isEqualTo: uid).get();
+      return userUid.docs.first.data()['uid'];
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
