@@ -26,8 +26,6 @@ class TenantDB {
       final String firstValitation =
           CustomUser.fromMap(currentUser.docs.first.data()).tenantId;
 
-      curentTenantId = firstValitation;
-
       final DocumentReference tenantDoc =
           companiesCollection.doc(firstValitation);
       final CollectionReference<Map<String, dynamic>> userList =
@@ -37,12 +35,13 @@ class TenantDB {
       final String secondValidation = userUid.docs.first.data()['tenantId'];
 
       if (firstValitation == secondValidation) {
+        curentTenantId = firstValitation;
         return true;
       } else {
         return false;
       }
     } catch (err) {
-      print('err');
+      print(err);
       return false;
     }
   }

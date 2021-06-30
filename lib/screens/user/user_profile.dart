@@ -13,6 +13,7 @@ class UserConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
+    final tenantProvider = Provider.of<TenantProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -29,8 +30,10 @@ class UserConfig extends StatelessWidget {
         ],
       ),
       body: ProfileBody(
-          userProfileMail: firebaseUser!.email.toString(),
-          uid: firebaseUser.uid.toString()),
+        userProfileMail: firebaseUser!.email.toString(),
+        uid: firebaseUser.uid.toString(),
+        tenantId: tenantProvider.tenantId,
+      ),
     );
   }
 }
@@ -38,12 +41,14 @@ class UserConfig extends StatelessWidget {
 class ProfileBody extends StatelessWidget {
   final String userProfileMail;
   final String uid;
-  // String tenantId;
-  ProfileBody({required this.userProfileMail, required this.uid});
+  final String tenantId;
+  ProfileBody(
+      {required this.userProfileMail,
+      required this.uid,
+      required this.tenantId});
 
   @override
   Widget build(BuildContext context) {
-    final tenantProvider = Provider.of<TenantProvider>(context);
     return Center(
       child: Column(
         children: [
@@ -51,14 +56,9 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text('Email: $userProfileMail'),
+          Text('User: $userProfileMail'),
           Text('User Id: $uid'),
-          Text('Tenant Id: ' + tenantProvider.tenantId),
-          TextButton(
-              onPressed: () {
-                print(tenantProvider.tenantId);
-              },
-              child: Text('get'))
+          Text('Tenant Id: $tenantId'),
         ],
       ),
     );
