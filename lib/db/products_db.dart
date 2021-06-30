@@ -14,6 +14,8 @@ class ProductsDb {
     try {
       final newProductDbObject =
           await productsCollectionMap.add(product.toMap());
+      newProductDbObject
+          .set({"documetId": newProductDbObject.id}, SetOptions(merge: true));
       return newProductDbObject.id;
     } catch (e) {
       print(e.toString());
@@ -36,5 +38,41 @@ class ProductsDb {
     return productList;
   }
 
-  Future<void> deleteProduct(Product product) async {}
+  Future<Product?> findProductByProductId(String productId) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> currentProduct =
+          await productsCollectionMap
+              .where('productId', isEqualTo: productId)
+              .get();
+      return Product.fromMap(currentProduct.docs.first.data());
+    } catch (err) {
+      print('err');
+      return null;
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>?> findFirestoreDocumentId(
+      String productId) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> currentProduct =
+          await productsCollectionMap
+              .where('productId', isEqualTo: productId)
+              .get();
+      return currentProduct;
+    } catch (err) {
+      print('err');
+      return null;
+    }
+  }
+
+  Future<void> removeProduct(String productId) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>>? currentProduct =
+          await findFirestoreDocumentId(productId);
+      final String documentId = currentProduct!.docs.first.data()['documetId'];
+      await productsCollection.doc(documentId).delete();
+    } catch (err) {
+      print(err);
+    }
+  }
 }

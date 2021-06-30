@@ -1,13 +1,11 @@
 import 'package:bid/models/product.dart';
 import 'package:flutter/foundation.dart';
 
-final TAX = 17;
-
 class Bid {
-   String bidId;
-   String clientMail;
-   String clientName;
-   int warrantyMonths;
+  String bidId;
+  String clientMail;
+  String clientName;
+  int warrantyMonths;
   List<Product> selectedProducts = [];
 
   Bid({

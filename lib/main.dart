@@ -1,20 +1,22 @@
-import 'package:bid/providers/products_provider.dart';
-import 'package:bid/screens/add_new_company.dart';
-import 'package:bid/screens/admin/add_new_product_screen.dart';
-import 'package:bid/screens/admin/admin_screen.dart';
-import 'package:bid/screens/admin/admin_test.dart';
-import 'package:bid/screens/admin/create_new_user.dart';
-import 'package:bid/screens/bid.dart';
-import 'package:bid/screens/config/user_config.dart';
-import 'package:bid/screens/login.dart';
-import 'package:bid/screens/main_dashboard.dart';
-import 'package:bid/screens/products/products_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bid/auth/auth_service.dart';
+import 'package:bid/providers/tenant_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
-import 'auth/auth_service.dart';
+import 'package:bid/providers/products_provider.dart';
+import 'package:bid/screens/company/company_onbording/add_new_company.dart';
+import 'package:bid/screens/admin/add_new_product_screen.dart';
+import 'package:bid/screens/admin/admin_screen.dart';
+import 'package:bid/screens/admin/notifcation_screen.dart';
+import 'package:bid/screens/admin/create_new_user.dart';
+import 'package:bid/screens/bids/create_bid_screen.dart';
+import 'package:bid/screens/main_dashboard.dart';
+import 'package:bid/screens/products/products_screen.dart';
+import 'package:bid/screens/user/login.dart';
+import 'package:bid/screens/user/user_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +39,10 @@ class MyApp extends StatelessWidget {
                     .authStateChanges,
             initialData: null,
           ),
-          ChangeNotifierProvider(create: (context) => ProductProvider())
+          ChangeNotifierProvider(create: (context) => ProductProvider()),
+          ChangeNotifierProvider<TenantProvider>(
+            create: (context) => TenantProvider(),
+          )
         ],
         child: MaterialApp(
             title: ' Bid App',
@@ -52,12 +57,13 @@ class MyApp extends StatelessWidget {
                 scaffoldBackgroundColor: Colors.white),
             home: AuthenticationWrapper(),
             routes: {
+              LoginScreen.routeName: (context) => LoginScreen(),
               AddNewCompany.routeName: (context) => AddNewCompany(),
               CreateNewUser.routeName: (context) => CreateNewUser(),
               MainDashboard.routeName: (context) => MainDashboard(),
               UserConfig.routeName: (context) => UserConfig(),
               CreateBidScreen.routeName: (context) => CreateBidScreen(),
-              AdminTest.routeName: (context) => AdminTest(),
+              NotificationsScreen.routeName: (context) => NotificationsScreen(),
               AddNewProductScreen.routeName: (context) => AddNewProductScreen(),
               AdminScreen.routeName: (context) => AdminScreen(),
               ProductsScreen.routeName: (context) => ProductsScreen(),

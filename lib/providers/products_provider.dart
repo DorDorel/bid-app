@@ -1,23 +1,28 @@
 import 'package:bid/db/products_db.dart';
 import 'package:bid/models/product.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class ProductProvider with ChangeNotifier {
-  List<Product> productsList = [];
-  List<Product> get products => [...productsList];
+  List<Product> _productsList = [];
+  List<Product> get products => [..._productsList];
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     await getProducts();
     notifyListeners();
   }
 
-  Future<List<Product>?> getProducts() async {
+  Future<void> getProducts() async {
     final products = await ProductsDb().getAllProducts();
-    productsList = products!;
+    _productsList = products!;
   }
 
   Future<void> addNewProduct(Product product) async {
     await ProductsDb().addNewProduct(product);
+    notifyListeners();
+  }
+
+  Future<void> deleteProduct(String productId) async {
+    await ProductsDb().removeProduct(productId);
     notifyListeners();
   }
 }

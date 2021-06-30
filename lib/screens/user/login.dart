@@ -1,10 +1,11 @@
 import 'package:bid/auth/auth_service.dart';
-import 'package:bid/screens/add_new_company.dart';
+import 'package:bid/screens/company/company_onbording/add_new_company.dart';
 import 'package:bid/screens/main_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login_screen';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

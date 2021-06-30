@@ -1,7 +1,9 @@
-import 'package:bid/db/products_db.dart';
+import 'package:bid/config/palette.dart';
 import 'package:bid/models/product.dart';
+import 'package:bid/providers/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   static const routeName = '/add_new_product_screen';
@@ -14,13 +16,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       productId: '', productName: '', price: 0, imageUrl: '', description: '');
   final _form = GlobalKey<FormState>();
 
-  void _saveForm() {
+  bool _saveForm() {
     final isValid = _form.currentState!.validate();
     if (!isValid) {
-      return;
+      return false;
     }
     _form.currentState!.save();
-    ProductsDb().addNewProduct(_editProduct);
+    return true;
   }
 
   @override
@@ -31,6 +33,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,9 +42,14 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         ),
         actions: [
           IconButton(
-              icon: Icon(Icons.save),
+              icon: Icon(
+                Icons.save,
+              ),
               onPressed: () {
-                _saveForm();
+                // ignore: unnecessary_statements
+                _saveForm()
+                    ? productsData.addNewProduct(_editProduct)
+                    : print('error');
                 Navigator.pop(context);
               })
         ],

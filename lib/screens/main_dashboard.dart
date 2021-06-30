@@ -1,17 +1,24 @@
 import 'package:bid/auth/auth_service.dart';
-import 'package:bid/screens/admin/add_new_product_screen.dart';
+import 'package:bid/config/palette.dart';
+import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
-import 'package:bid/screens/admin/admin_test.dart';
-import 'package:bid/screens/config/user_config.dart';
-import 'package:flutter/material.dart';
+import 'package:bid/screens/admin/notifcation_screen.dart';
+import 'package:bid/screens/user/user_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'bid.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
   final AuthenticationService _auth = AuthenticationService();
   static const routeName = '/main_dashboard';
+
   @override
   Widget build(BuildContext context) {
+    final tenantProvider = Provider.of<TenantProvider>(context);
+    tenantProvider.tenantValidation();
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -27,7 +34,7 @@ class MainDashboard extends StatelessWidget {
               icon: Icon(Icons.add_box_outlined)),
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(AdminTest.routeName);
+                Navigator.of(context).pushNamed(NotificationsScreen.routeName);
               },
               icon: Icon(
                 Icons.notifications_active_outlined,
@@ -47,7 +54,10 @@ class MainDashboard extends StatelessWidget {
               color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Center(child: Text('main dashboard')),
+      body: Center(
+          child: CircularProgressIndicator(
+        color: Palette.darkBlue,
+      )),
     );
   }
 }

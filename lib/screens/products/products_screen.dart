@@ -1,7 +1,6 @@
-import 'package:bid/db/products_db.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/screens/admin/add_new_product_screen.dart';
-import 'package:bid/widgets/products/single_product_grid.dart';
+import 'package:bid/screens/products/single_product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +13,10 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
+    //data init
     final productsData = Provider.of<ProductProvider>(context);
     productsData.fetchData();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,7 +43,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 itemCount: productsData.products.length,
                 itemBuilder: (_, index) => Column(
                       children: [
-                        SingleProductGrid(
+                        SingleProductList(
                             productId: productsData.products[index].productId,
                             productName:
                                 productsData.products[index].productName,
