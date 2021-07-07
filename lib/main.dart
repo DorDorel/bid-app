@@ -1,5 +1,8 @@
 import 'package:bid/auth/auth_service.dart';
+import 'package:bid/providers/bids_provider.dart';
+import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/screens/admin/products/products_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +17,6 @@ import 'package:bid/screens/admin/notifcation_screen.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:bid/screens/bids/create_bid_screen.dart';
 import 'package:bid/screens/main_dashboard.dart';
-import 'package:bid/screens/products/products_screen.dart';
 import 'package:bid/screens/user/login.dart';
 import 'package:bid/screens/user/user_profile.dart';
 
@@ -42,7 +44,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => ProductProvider()),
           ChangeNotifierProvider<TenantProvider>(
             create: (context) => TenantProvider(),
-          )
+          ),
+          ChangeNotifierProvider<BidsProvider>(
+              create: (context) => BidsProvider()),
+          ChangeNotifierProvider<NewBidsProvider>(
+              create: (context) => NewBidsProvider())
         ],
         child: MaterialApp(
             title: ' Bid App',
@@ -75,8 +81,11 @@ class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
+    final tenantProvider = Provider.of<TenantProvider>(context);
     if (firebaseUser != null) {
-      print(firebaseUser.email! + '   ' + firebaseUser.uid);
+      tenantProvider.tenantValidation();
+      print(
+          'user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId}');
       return MainDashboard();
     }
     return LoginScreen();

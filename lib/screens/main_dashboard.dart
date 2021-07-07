@@ -17,8 +17,6 @@ class MainDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tenantProvider = Provider.of<TenantProvider>(context);
-    tenantProvider.tenantValidation();
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -27,11 +25,6 @@ class MainDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, UserConfig.routeName);
               },
               icon: Icon(Icons.account_circle_outlined)),
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, CreateBidScreen.routeName);
-              },
-              icon: Icon(Icons.add_box_outlined)),
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(NotificationsScreen.routeName);
@@ -58,6 +51,14 @@ class MainDashboard extends StatelessWidget {
           child: CircularProgressIndicator(
         color: Palette.darkBlue,
       )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            Navigator.pushNamed(context, CreateBidScreen.routeName),
+        child: Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
     );
   }
 }

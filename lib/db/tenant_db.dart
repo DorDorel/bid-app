@@ -1,14 +1,14 @@
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import './database.dart';
 
 class TenantDB {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
 
-  static String curentTenantId = '';
+  static String _curentTenantId = '';
+  String get curentTenantId => _curentTenantId;
 
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
@@ -17,6 +17,17 @@ class TenantDB {
       _db.collection('companies');
   final CollectionReference<Map<String, dynamic>> usersCollectionMap =
       _db.collection('users');
+
+  Future<DocumentReference?> getTenantReference() async {
+    try {
+      final DocumentReference tenantReference =
+          companiesCollection.doc(curentTenantId);
+      return tenantReference;
+    } catch (err) {
+      print(err);
+      return null;
+    }
+  }
 
   Future<bool> tenantAuthorization() async {
     try {
@@ -35,7 +46,7 @@ class TenantDB {
       final String secondValidation = userUid.docs.first.data()['tenantId'];
 
       if (firstValitation == secondValidation) {
-        curentTenantId = firstValitation;
+        _curentTenantId = firstValitation;
         return true;
       } else {
         return false;

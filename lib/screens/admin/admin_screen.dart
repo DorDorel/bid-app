@@ -1,5 +1,6 @@
 import 'package:bid/db/db_test_conection.dart';
-import 'package:bid/screens/products/products_screen.dart';
+import 'package:bid/screens/admin/products/products_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import 'create_new_user.dart';

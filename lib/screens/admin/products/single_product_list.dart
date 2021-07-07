@@ -1,4 +1,3 @@
-import 'package:bid/db/products_db.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

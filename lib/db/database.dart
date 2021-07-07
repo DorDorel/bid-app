@@ -1,10 +1,11 @@
+import 'package:bid/db/tenant_db.dart';
 import 'package:bid/models/company.dart';
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseSevice {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
-
+  final String tenant = TenantDB().curentTenantId;
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');

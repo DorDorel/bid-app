@@ -26,12 +26,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   }
 
   @override
-  void initState() {
-    print('init state');
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<ProductProvider>(context);
     return Scaffold(
@@ -46,7 +40,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 Icons.save,
               ),
               onPressed: () {
-                // ignore: unnecessary_statements
                 _saveForm()
                     ? productsData.addNewProduct(_editProduct)
                     : print('error');

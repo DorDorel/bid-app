@@ -1,10 +1,16 @@
+import 'package:bid/db/tenant_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BidsDb {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
+  // Database
+  final String tenant = TenantDB().curentTenantId;
 
-  // collection referance
-  final CollectionReference bidsCollection = _db.collection('bids');
-  final CollectionReference<Map<String, dynamic>> bidsCollectionMap =
-      _db.collection('bids');
+  // Collections reference
+  final CollectionReference companiesCollection = _db.collection('companies');
+  final CollectionReference<Map<String, dynamic>> companiesCollectionMap =
+      _db.collection('companies');
+
+  // Methods
+
 }
