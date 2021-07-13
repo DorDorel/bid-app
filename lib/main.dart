@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
               create: (context) => NewBidsProvider())
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: ' Bid App',
             theme: ThemeData(
                 appBarTheme: AppBarTheme(

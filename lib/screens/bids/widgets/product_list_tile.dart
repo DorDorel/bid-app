@@ -1,8 +1,10 @@
+import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class ProductListTile extends StatefulWidget {
@@ -19,17 +21,13 @@ class ProductListTile extends StatefulWidget {
       required this.imageUrl,
       required this.description});
 
-  void addProductToBid() {
-    final Product productObj = Product(
+  Product _currentProductInProductObject() {
+    return Product(
         productId: productId,
         productName: productName,
         price: price,
         imageUrl: imageUrl,
         description: description);
-
-    final currentProduct = SelectedProducts(
-        product: productObj, quantity: 1, discount: 0, warrantyMonths: 24);
-    NewBidsProvider().addProductToList(currentProduct);
   }
 
   @override
@@ -39,9 +37,16 @@ class ProductListTile extends StatefulWidget {
 class _ProductListTileState extends State<ProductListTile> {
   @override
   Widget build(BuildContext context) {
-    // data manangment
-    final productsData = Provider.of<ProductProvider>(context, listen: false);
-    final currentBidData = Provider.of<NewBidsProvider>(context);
+    final _optionsForm = GlobalKey<FormState>();
+
+    bool _saveForm() {
+      final isValid = _optionsForm.currentState!.validate();
+      if (!isValid) {
+        return false;
+      }
+      _optionsForm.currentState!.save();
+      return true;
+    }
 
     return ListTile(
         title: Text(widget.productName),
@@ -51,7 +56,28 @@ class _ProductListTileState extends State<ProductListTile> {
           child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             IconButton(
               onPressed: () {
-                widget.addProductToBid();
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: 60.0,
+                          ),
+                          Center(
+                            child: Container(
+                                width: 100.0,
+                                child: Image.network(
+                                  widget.imageUrl,
+                                )),
+                          ),
+                          OptionsForm(
+                            product: widget._currentProductInProductObject(),
+                          ),
+                        ],
+                      );
+                    });
               },
               icon: Icon(Icons.add),
               color: Theme.of(context).primaryColor,
@@ -59,4 +85,178 @@ class _ProductListTileState extends State<ProductListTile> {
           ]),
         ));
   }
+}
+
+class OptionsForm extends StatefulWidget {
+  final Product product;
+  OptionsForm({required this.product});
+  @override
+  _OptionsFormState createState() => _OptionsFormState();
+}
+
+class _OptionsFormState extends State<OptionsForm> {
+  int quantity = 1;
+  int discount = 0;
+  int warrantyMonths = 12;
+
+  bool quantityEnabled = false;
+  bool discountEnabled = false;
+  bool warrantyEnabled = false;
+
+  final _optionsForm = GlobalKey<FormState>();
+
+  bool _saveForm() {
+    final isValid = _optionsForm.currentState!.validate();
+    if (!isValid) {
+      return false;
+    }
+    _optionsForm.currentState!.save();
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _optionsForm,
+        child: Column(children: [
+          buildQuantityCard(),
+          buildDiscountCard(),
+          buildCustomPrice(),
+          buildWarrantyCard(),
+          Row(
+            children: [
+              buildAddButton(),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel'))
+            ],
+          ),
+        ]));
+  }
+
+  Widget buildQuantityCard() => Card(
+        child: ListTile(
+            leading: Checkbox(
+              onChanged: (quantityEnabled) {
+                setState(() {
+                  quantityEnabled = true;
+                });
+              },
+              value: quantityEnabled,
+            ),
+            title: Text(
+              'Quantity',
+              style: TextStyle(fontSize: 18),
+            ),
+            subtitle: Text('Enter a Round Number'),
+            trailing: Container(
+              width: 80,
+              height: 40,
+              child: TextField(
+                onChanged: (value) => {quantity = int.parse(value)},
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: '$quantity',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            )),
+      );
+
+  Widget buildDiscountCard() => Card(
+        child: ListTile(
+            leading: Checkbox(
+              onChanged: (bool? value) {
+                setState(() {
+                  value = true;
+                });
+              },
+              value: false,
+            ),
+            title: Text(
+              'Discount',
+              style: TextStyle(fontSize: 18),
+            ),
+            subtitle: Text('Enter a number without % symbol'),
+            trailing: Container(
+              width: 80,
+              height: 40,
+              child: TextField(
+                onChanged: (value) => {discount = int.parse(value)},
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: '$discount %',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            )),
+      );
+
+  Widget buildWarrantyCard() => Card(
+        child: ListTile(
+            leading: Checkbox(
+              onChanged: (bool? value) {
+                setState(() {
+                  value = true;
+                });
+              },
+              value: false,
+            ),
+            title: Text(
+              'Warranty Months',
+              style: TextStyle(fontSize: 18),
+            ),
+            subtitle: Text('Enter a Round Number'),
+            trailing: Container(
+              width: 80,
+              height: 40,
+              child: TextField(
+                onChanged: (value) => {warrantyMonths = int.parse(value)},
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: '$warrantyMonths',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            )),
+      );
+
+  Widget buildCustomPrice() => Card(
+        child: ListTile(
+            leading: Checkbox(
+              onChanged: (bool? value) {
+                setState(() {
+                  value = true;
+                });
+              },
+              value: false,
+            ),
+            title: Text(
+              'Custom Price',
+              style: TextStyle(fontSize: 18),
+            ),
+            trailing: Container(
+              width: 80,
+              height: 40,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            )),
+      );
+
+  Widget buildAddButton() => ElevatedButton(
+    
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black,
+      ),
+      onPressed: () {
+        addProductToCurrentBid(
+            widget.product, quantity, discount, warrantyMonths);
+      },
+      child: Text('ADD'));
 }

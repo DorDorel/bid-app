@@ -11,6 +11,11 @@ class _ViewCurrentBidState extends State<ViewCurrentBid> {
   @override
   Widget build(BuildContext context) {
     final currentBidData = Provider.of<NewBidsProvider>(context);
+    // final List<String> columns = ['Product Name', 'Quantity', 'Price/unit'];
+
+    // List<DataColumn> getColumns(List<String> columns) =>
+    //     columns.map((String col) => DataColumn(label: Text(col))).toList();
+    //     return DataTable(columns: getColumns(columns), rows: rows)
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),

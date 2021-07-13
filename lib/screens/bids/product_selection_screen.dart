@@ -1,6 +1,8 @@
+import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
 import 'package:bid/screens/bids/widgets/view_current_bid.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductSelectionScreen extends StatefulWidget {
   final String name;
@@ -15,6 +17,7 @@ class ProductSelectionScreen extends StatefulWidget {
 class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
   @override
   Widget build(BuildContext context) {
+    final currentBidData = Provider.of<NewBidsProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -26,7 +29,13 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
                 onPressed: () {
                   setState(() {});
                 },
-                icon: Icon(Icons.refresh))
+                icon: Icon(Icons.refresh)),
+            IconButton(
+                onPressed: () {
+                  currentBidData.clearAllCurrentBid();
+                  setState(() {});
+                },
+                icon: Icon(Icons.delete_outlined))
           ],
         ),
         body: SingleChildScrollView(
@@ -35,15 +44,29 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
               Text('${widget.name} bid:',
                   style: TextStyle(
                       fontSize: 18.0,
-                      backgroundColor: Colors.yellowAccent[100])),
+                      backgroundColor: Colors.greenAccent[100])),
               SizedBox(
                 height: 10.0,
               ),
               ViewCurrentBid(),
               SizedBox(
-                height: 200.0,
+                height: 8.0,
               ),
               ProductList(),
-            ])));
+              SizedBox(
+                height: 16.0,
+              ),
+            ])),
+        bottomNavigationBar: Padding(
+            padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),
+            child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  'CREATE BID',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black,
+                ))));
   }
 }
