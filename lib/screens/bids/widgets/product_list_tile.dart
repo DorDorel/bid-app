@@ -1,11 +1,8 @@
 import 'package:bid/controllers/product_bid_controller.dart';
-import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
-import 'package:bid/providers/new_bids_provider.dart';
-import 'package:bid/providers/products_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
 
 class ProductListTile extends StatefulWidget {
   final String productId;
@@ -102,8 +99,10 @@ class PopupOptions extends StatelessWidget {
                               widget.imageUrl,
                             )),
                       ),
-                      Text('Product: ' + widget.productName),
-                      Text('Price: ' + widget.price.toString()),
+                      Text(widget.productName,
+                          style: TextStyle(fontSize: 20.0)),
+                      Text('Price: ' + widget.price.toString(),
+                          style: TextStyle(fontSize: 14.0)),
                       OptionsForm(
                         edit: edit,
                         product: widget._currentProductInProductObject(),
