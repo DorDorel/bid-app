@@ -1,6 +1,5 @@
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
-import 'package:bid/screens/bids/widgets/view_current_bid.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,11 +26,6 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  setState(() {});
-                },
-                icon: Icon(Icons.refresh)),
-            IconButton(
-                onPressed: () {
                   currentBidData.clearAllCurrentBid();
                   setState(() {});
                 },
@@ -43,12 +37,11 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             child: Column(children: [
               Text('${widget.name} bid:',
                   style: TextStyle(
-                      fontSize: 18.0,
-                      backgroundColor: Colors.greenAccent[100])),
+                    fontSize: 18.0,
+                  )),
               SizedBox(
                 height: 10.0,
               ),
-              ViewCurrentBid(),
               SizedBox(
                 height: 8.0,
               ),

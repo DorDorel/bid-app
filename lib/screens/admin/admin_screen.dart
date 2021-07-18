@@ -34,12 +34,6 @@ class AdminScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed(CreateNewUser.routeName);
               },
               child: Text('Create new user Test')),
-          TextButton(
-            child: Text('Test connection'),
-            onPressed: () {
-              DbTestConnection().getFunctionsTestConnection();
-            },
-          ),
         ],
       ),
     );

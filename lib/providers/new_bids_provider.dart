@@ -5,9 +5,19 @@ class NewBidsProvider with ChangeNotifier {
   static List<SelectedProducts> _currentBidProduct = [];
   List<SelectedProducts> get getCurrentBidProduct => [..._currentBidProduct];
 
+  void testPrintBid() {
+    _currentBidProduct.forEach((element) {
+      print(
+          '[name: ${element.product.productName}, quantity:  ${element.quantity}, discount: ${element.discount}, price/unit: ${element.finalPricePerUnit}]');
+    });
+    print('---');
+  }
+
   bool addProductToList(SelectedProducts product) {
     try {
       _currentBidProduct.add(product);
+      //test
+      testPrintBid();
       notifyListeners();
     } catch (err) {
       print(err);
@@ -17,6 +27,26 @@ class NewBidsProvider with ChangeNotifier {
 
   void clearAllCurrentBid() {
     _currentBidProduct = [];
+    notifyListeners();
+  }
+
+  bool uptateSpacficProduct(String productId, double newPriceToSingleUnit,
+      int discount, int waeeantryMonths) {
+    try {
+      final SelectedProducts currentProduct = _currentBidProduct
+          .firstWhere((sp) => sp.product.productId == productId);
+      // currentProduct.product.price = newPriceToSingleUnit;
+      return true;
+    } catch (exp) {
+      print(exp);
+      return false;
+    }
+  }
+
+  void removeProductFromBid(String productId) {
+    final SelectedProducts currentProcut = _currentBidProduct
+        .firstWhere((element) => element.product.productId == productId);
+    _currentBidProduct.remove(currentProcut);
     notifyListeners();
   }
 }

@@ -1,5 +1,4 @@
 import 'package:bid/models/product.dart';
-import 'package:flutter/foundation.dart';
 
 class Bid {
   String bidId;
@@ -7,6 +6,7 @@ class Bid {
   DateTime date;
   String clientMail;
   String clientName;
+  double finalPrice;
   List<SelectedProducts> selectedProducts = [];
 
   Bid({
@@ -15,6 +15,7 @@ class Bid {
     required this.date,
     required this.clientName,
     required this.clientMail,
+    required this.finalPrice,
     required this.selectedProducts,
   });
 }
@@ -23,12 +24,16 @@ class SelectedProducts {
   Product product;
   int quantity;
   int discount;
-  int warrantyMonths;
+  double finalPricePerUnit;
 
-  SelectedProducts({
-    required this.product,
-    required this.quantity,
-    required this.discount,
-    required this.warrantyMonths,
-  });
+  int warrantyMonths;
+  String remark;
+
+  SelectedProducts(
+      {required this.product,
+      required this.quantity,
+      required this.discount,
+      required this.finalPricePerUnit,
+      required this.warrantyMonths,
+      required this.remark});
 }

@@ -1,6 +1,4 @@
-import 'package:bid/models/product.dart';
 import 'package:bid/models/user.dart';
-import 'package:flutter/foundation.dart';
 
 enum Status { activty, stopped, paused, not_completed }
 

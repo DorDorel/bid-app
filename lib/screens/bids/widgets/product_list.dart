@@ -18,7 +18,7 @@ class _ProductsScreenState extends State<ProductList> {
     productsData.fetchData();
 
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(2),
       child: productsData.products.length == 0
           ? Center(
               child: CircularProgressIndicator(

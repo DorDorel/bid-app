@@ -1,5 +1,6 @@
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/config/palette.dart';
+import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/admin/notifcation_screen.dart';
@@ -52,8 +53,10 @@ class MainDashboard extends StatelessWidget {
         color: Palette.darkBlue,
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.pushNamed(context, CreateBidScreen.routeName),
+        onPressed: () {
+          removeBidDraft();
+          Navigator.pushNamed(context, CreateBidScreen.routeName);
+        },
         child: Icon(
           Icons.add,
           size: 30,

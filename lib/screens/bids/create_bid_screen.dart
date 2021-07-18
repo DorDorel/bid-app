@@ -1,4 +1,5 @@
 import 'package:bid/auth/auth_service.dart';
+import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/db/database.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/providers/bids_provider.dart';
@@ -19,6 +20,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         title: Text(
           'Create new Bid',
           style: TextStyle(color: Theme.of(context).primaryColor),
@@ -65,6 +67,8 @@ class _NewBidFormState extends State<NewBidForm> {
             buildPhone(),
             const SizedBox(height: 32),
             buildNextButton(),
+            const SizedBox(height: 16),
+            // buildCancelButton(),
           ],
         ),
       ),
@@ -124,4 +128,11 @@ class _NewBidFormState extends State<NewBidForm> {
             : Text('error');
       },
       child: Text('NEXT'));
+
+  // Widget buildCancelButton() => TextButton(
+  //     onPressed: () {
+  //       removeBidDraft();
+  //       Navigator.pop(context);
+  //     },
+  //     child: Text('Cancel and Remove Bid draft'));
 }
