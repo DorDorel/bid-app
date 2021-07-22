@@ -10,13 +10,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
 import 'package:bid/providers/products_provider.dart';
-import 'package:bid/screens/company/company_onbording/add_new_company.dart';
+import 'package:bid/screens/tenant/company_onbording/add_new_company.dart';
 import 'package:bid/screens/admin/add_new_product_screen.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/admin/notifcation_screen.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:bid/screens/bids/create_bid_screen.dart';
-import 'package:bid/screens/main_dashboard.dart';
+import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/screens/user/login.dart';
 import 'package:bid/screens/user/user_profile.dart';
 

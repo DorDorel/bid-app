@@ -1,5 +1,6 @@
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/product.dart';
+import 'package:bid/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -52,7 +53,7 @@ class _ProductListTileState extends State<ProductListTile> {
                 'Quantity: ' +
                     productSelectedData!.quantity.toString() +
                     ' Price/Unit: ' +
-                    productSelectedData.finalPricePerUnit.toString() +
+                    productSelectedData.finalPricePerUnit.toStringAsFixed(2) +
                     ' Remarks: ' +
                     productSelectedData.remark,
                 style: TextStyle(
@@ -83,33 +84,43 @@ class PopupOptions extends StatelessWidget {
       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         IconButton(
           onPressed: () {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 60.0,
-                      ),
-                      Center(
-                        child: Container(
-                            width: 100.0,
-                            child: Image.network(
-                              widget.imageUrl,
-                            )),
-                      ),
-                      Text(widget.productName,
-                          style: TextStyle(fontSize: 20.0)),
-                      Text('Price: ' + widget.price.toString(),
-                          style: TextStyle(fontSize: 14.0)),
-                      OptionsForm(
-                        edit: edit,
-                        product: widget._currentProductInProductObject(),
-                      ),
-                    ],
-                  );
-                });
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => OptionsScreen(
+                          widget: widget,
+                          edit: edit,
+                        )));
+            // showModalBottomSheet(
+            //     isScrollControlled: true,
+            //     context: context,
+            //     builder: (context) {
+            //       return Column(
+            //         children: [
+            //           SizedBox(
+            //             height: 80.0,
+            //           ),
+            //           Center(
+            //             child: Container(
+            //                 width: 60.0,
+            //                 child: Image.network(
+            //                   widget.imageUrl,
+            //                 )),
+            //           ),
+            //           Text(widget.productName,
+            //               style: TextStyle(fontSize: 20.0)),
+            //           Text('Price: ' + widget.price.toString(),
+            //               style: TextStyle(fontSize: 14.0)),
+            //           SizedBox(
+            //             height: 10,
+            //           ),
+            //           OptionsForm(
+            //             edit: edit,
+            //             product: widget._currentProductInProductObject(),
+            //           ),
+            //         ],
+            //       );
+            // });
           },
           icon: edit ? Icon(Icons.edit) : Icon(Icons.add),
           color: Theme.of(context).primaryColor,
@@ -129,6 +140,43 @@ class PopupOptions extends StatelessWidget {
   }
 }
 
+class OptionsScreen extends StatelessWidget {
+  final ProductListTile widget;
+  final bool edit;
+  const OptionsScreen({required this.widget, required this.edit});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(
+      children: [
+        SizedBox(
+          height: 80.0,
+        ),
+        Center(
+            child: Container(
+          width: 60.0,
+          child: Hero(
+              tag: '${widget.productId}',
+              child: Image.network(
+                widget.imageUrl,
+              )),
+        )),
+        Text(widget.productName, style: TextStyle(fontSize: 20.0)),
+        Text('Price: ' + widget.price.toString(),
+            style: TextStyle(fontSize: 14.0)),
+        SizedBox(
+          height: 10,
+        ),
+        OptionsForm(
+          edit: edit,
+          product: widget._currentProductInProductObject(),
+        ),
+      ],
+    ));
+  }
+}
+
 class OptionsForm extends StatefulWidget {
   final Product product;
   final bool edit;
@@ -138,11 +186,17 @@ class OptionsForm extends StatefulWidget {
 }
 
 class _OptionsFormState extends State<OptionsForm> {
-  int quantity = 1;
-  int discount = 0;
-  int warrantyMonths = 12;
-  late double price = widget.product.price;
-  String remark = 'Empty';
+  late final productSelectedData =
+      findCurrentProductDataInProductsBidList(widget.product.productId);
+
+  late int quantity = widget.edit ? productSelectedData!.quantity : 1;
+  late int discount = widget.edit ? productSelectedData!.discount : 0;
+  late int warrantyMonths =
+      widget.edit ? productSelectedData!.warrantyMonths : 12;
+  late double price = widget.edit
+      ? productSelectedData!.finalPricePerUnit
+      : widget.product.price;
+  late String remark = widget.edit ? productSelectedData!.remark : 'Empty';
 
   bool quantityEnabled = false;
   bool discountEnabled = false;
@@ -164,26 +218,29 @@ class _OptionsFormState extends State<OptionsForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _optionsForm,
-        child: Column(children: [
-          buildQuantityCard(),
-          buildDiscountCard(),
-          buildCustomPrice(),
-          buildWarrantyCard(),
-          buildRemark(),
-          SizedBox(
-            height: 20.0,
-          ),
-          Column(
-            children: [
-              buildAddButton(),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'))
-            ],
-          ),
-        ]));
+        child: Expanded(
+            child: SingleChildScrollView(
+          child: Column(children: [
+            buildQuantityCard(),
+            buildDiscountCard(),
+            buildCustomPrice(),
+            buildWarrantyCard(),
+            buildRemark(),
+            SizedBox(
+              height: 20.0,
+            ),
+            Column(
+              children: [
+                buildAddButton(),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel'))
+              ],
+            ),
+          ]),
+        )));
   }
 
   Widget buildQuantityCard() => Card(
@@ -238,7 +295,7 @@ class _OptionsFormState extends State<OptionsForm> {
                 enabled: discountEnabled ? true : false,
                 onChanged: (value) => {
                   discount = int.parse(value),
-                  price = setDiscount(price, int.parse(value)),
+                  price = setDiscount(widget.product.price, int.parse(value)),
                 },
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -317,24 +374,31 @@ class _OptionsFormState extends State<OptionsForm> {
       );
 
   Widget buildAddButton() => ConstrainedBox(
-        constraints: BoxConstraints.tightFor(width: 360, height: 36),
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.black,
-            ),
-            onPressed: () {
-              customPriceEnabled
-                  ? discount =
-                      calculateDiscount(widget.product.price, price).toInt()
-                  : discount = discount;
+      constraints: BoxConstraints.tightFor(width: 360, height: 36),
+      child: NextButton(
+        title: 'ADD',
+        onPressed: () {
+          customPriceEnabled
+              ? discount =
+                  calculateDiscount(widget.product.price, price).toInt()
+              : discount = discount;
 
-              addProductToCurrentBid(widget.product, quantity, price, discount,
-                  warrantyMonths, remark);
-              Navigator.pop(context);
-            },
-            child: Text(
-              'ADD',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            )),
-      );
+          late bool editFlag = widget.edit;
+          if (editFlag) {
+            updateCurrentProductDataInBidList(
+                productId: widget.product.productId,
+                product: widget.product,
+                quantity: quantity,
+                pricePerUnit: price,
+                discount: discount,
+                warrantyMonths: warrantyMonths,
+                remark: remark);
+            Navigator.pop(context);
+          } else {
+            addProductToCurrentBid(widget.product, quantity, price, discount,
+                warrantyMonths, remark);
+            Navigator.pop(context);
+          }
+        },
+      ));
 }

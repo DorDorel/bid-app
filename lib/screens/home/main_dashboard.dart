@@ -10,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'bids/create_bid_screen.dart';
+import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
   final AuthenticationService _auth = AuthenticationService();
@@ -20,6 +20,7 @@ class MainDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.8,
         actions: [
           IconButton(
               onPressed: () {

@@ -58,14 +58,24 @@ bool findCurrentProductDataInProductsBidListBoll(String productId) {
   }
 }
 
-// boll updateCurrentProductDataInBidList(String productId) {
-//   try {
-
-//   } catch (exp) {
-//     print(exp);
-//     return false;
-//   }
-// }
+bool updateCurrentProductDataInBidList(
+    {required String productId,
+    required Product product,
+    required int quantity,
+    required double pricePerUnit,
+    required int discount,
+    required int warrantyMonths,
+    required String remark}) {
+  try {
+    NewBidsProvider().removeProductFromBid(productId);
+    addProductToCurrentBid(
+        product, quantity, pricePerUnit, discount, warrantyMonths, remark);
+    return true;
+  } catch (exp) {
+    print(exp);
+    return false;
+  }
+}
 
 double setDiscount(double originalPrice, int discountPercentage) {
   final priceAffterDiscount =
@@ -79,4 +89,15 @@ double calculateDiscount(double oringalPrice, double newPrice) {
   final double discountValue = (discountPrice / oringalPrice) * 100;
 
   return discountValue;
+}
+
+double calculateTotalBidSum() {
+  double totalSum = 0;
+  NewBidsProvider().getCurrentBidProduct.forEach((element) {
+    int singleProductUnit = element.quantity;
+    double priceForAllProductUnits =
+        singleProductUnit * element.finalPricePerUnit;
+    totalSum += priceForAllProductUnits;
+  });
+  return totalSum;
 }

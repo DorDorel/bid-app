@@ -30,19 +30,6 @@ class NewBidsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool uptateSpacficProduct(String productId, double newPriceToSingleUnit,
-      int discount, int waeeantryMonths) {
-    try {
-      final SelectedProducts currentProduct = _currentBidProduct
-          .firstWhere((sp) => sp.product.productId == productId);
-      // currentProduct.product.price = newPriceToSingleUnit;
-      return true;
-    } catch (exp) {
-      print(exp);
-      return false;
-    }
-  }
-
   void removeProductFromBid(String productId) {
     final SelectedProducts currentProcut = _currentBidProduct
         .firstWhere((element) => element.product.productId == productId);
