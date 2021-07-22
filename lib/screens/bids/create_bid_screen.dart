@@ -5,6 +5,7 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/screens/bids/product_selection_screen.dart';
+import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,7 @@ class _NewBidFormState extends State<NewBidForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(10),
       child: Form(
         key: _bidForm,
         child: ListView(
@@ -65,7 +66,7 @@ class _NewBidFormState extends State<NewBidForm> {
             buildEmail(),
             const SizedBox(height: 16),
             buildPhone(),
-            const SizedBox(height: 32),
+            const SizedBox(height: 64),
             buildNextButton(),
             const SizedBox(height: 16),
             // buildCancelButton(),
@@ -117,17 +118,18 @@ class _NewBidFormState extends State<NewBidForm> {
         onSaved: (value) => phoneNumber = value!,
       );
 
-  Widget buildNextButton() => TextButton(
-      onPressed: () {
-        _saveForm()
-            ? Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ProductSelectionScreen(
-                        name: name, email: email, phoneNumber: phoneNumber)))
-            : Text('error');
-      },
-      child: Text('NEXT'));
+  Widget buildNextButton() => NextButton(
+        title: 'NEXT',
+        onPressed: () {
+          _saveForm()
+              ? Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => ProductSelectionScreen(
+                          name: name, email: email, phoneNumber: phoneNumber)))
+              : Text('error');
+        },
+      );
 
   // Widget buildCancelButton() => TextButton(
   //     onPressed: () {

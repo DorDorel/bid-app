@@ -1,5 +1,6 @@
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
+import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,14 +53,10 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             ])),
         bottomNavigationBar: Padding(
             padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),
-            child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'CREATE BID',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
-                ))));
+            child: NextButton(
+                title: 'CREATE BID',
+                onPressed: () {
+                  print('move to final bid');
+                })));
   }
 }

@@ -27,6 +27,7 @@ class CustomUser {
         email: firestoreObj['email'],
         password: 'null',
         name: firestoreObj['name']);
+
     return user;
   }
 }
