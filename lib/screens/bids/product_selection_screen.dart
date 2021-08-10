@@ -1,3 +1,9 @@
+import 'package:bid/auth/auth_service.dart';
+
+import 'package:bid/controllers/create_bid_file_controller.dart';
+import 'package:bid/controllers/product_bid_controller.dart';
+import 'package:bid/models/bid.dart';
+
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
 import 'package:bid/widgets/next_button.dart';
@@ -56,7 +62,23 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             child: NextButton(
                 title: 'CREATE BID',
                 onPressed: () {
-                  print('move to final bid');
+                  _createBid();
                 })));
+  }
+
+  void _createBid() {
+    final Bid newBid = Bid(
+        bidId: 'dsjlkadsjlk6789',
+        createdBy: AuthenticationService().getCurrentUserName.toString(),
+        date: DateTime.now(),
+        clientName: widget.name,
+        clientMail: widget.email,
+        finalPrice: calculateTotalBidSum(),
+        selectedProducts: NewBidsProvider().getCurrentBidProduct);
+    /* pdf file */
+    // final CreateBidFile bidFile = CreateBidFile(bid: newBid);
+    // bidFile.generatePdf();
+    // html file:
+    
   }
 }

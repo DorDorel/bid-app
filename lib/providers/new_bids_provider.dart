@@ -31,9 +31,9 @@ class NewBidsProvider with ChangeNotifier {
   }
 
   void removeProductFromBid(String productId) {
-    final SelectedProducts currentProcut = _currentBidProduct
+    final SelectedProducts currentProduct = _currentBidProduct
         .firstWhere((element) => element.product.productId == productId);
-    _currentBidProduct.remove(currentProcut);
+    _currentBidProduct.remove(currentProduct);
     notifyListeners();
   }
 }

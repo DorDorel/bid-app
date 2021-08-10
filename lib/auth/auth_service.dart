@@ -8,6 +8,8 @@ class AuthenticationService {
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   Future<User?> get getCurrentUser async => _firebaseAuth.currentUser;
   Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
+  Future<String?> get getCurrentUserName async =>
+      _firebaseAuth.currentUser!.displayName;
 
   Future<String?> getCurrentUserTenantId() async {
     print(_firebaseAuth.currentUser!.tenantId);
