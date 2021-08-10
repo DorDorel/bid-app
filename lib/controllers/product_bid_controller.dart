@@ -78,15 +78,15 @@ bool updateCurrentProductDataInBidList(
 }
 
 double setDiscount(double originalPrice, int discountPercentage) {
-  final priceAffterDiscount =
+  final priceAfterDiscount =
       originalPrice - ((originalPrice / 100) * discountPercentage);
 
-  return priceAffterDiscount;
+  return priceAfterDiscount;
 }
 
-double calculateDiscount(double oringalPrice, double newPrice) {
-  final double discountPrice = oringalPrice - newPrice;
-  final double discountValue = (discountPrice / oringalPrice) * 100;
+double calculateDiscount(double originalPrice, double newPrice) {
+  final double discountPrice = originalPrice - newPrice;
+  final double discountValue = (discountPrice / originalPrice) * 100;
 
   return discountValue;
 }

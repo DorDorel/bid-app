@@ -3,6 +3,12 @@ import 'package:bid/models/company.dart';
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/*
+  This libary (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
+  Read More here: https://pub.dev/packages/cloud_firestore .
+  Spacfic documention here: https://firebase.flutter.dev/docs/firestore/usage/
+*/
+
 class DatabaseSevice {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   final String tenant = TenantDB().curentTenantId;
