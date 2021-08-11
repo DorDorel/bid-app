@@ -1,4 +1,5 @@
 import 'package:bid/providers/products_provider.dart';
+import 'package:bid/storage/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,8 @@ class SingleProductList extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
-              onPressed: () {
+              onPressed: () async {
+                StorageService().deleteProductImage(productImageURL: imageUrl);
                 productsData.deleteProduct(productId);
               },
               icon: Icon(

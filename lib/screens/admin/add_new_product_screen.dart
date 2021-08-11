@@ -1,6 +1,6 @@
-import 'package:bid/config/palette.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/providers/products_provider.dart';
+import 'package:bid/storage/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +24,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     _form.currentState!.save();
     return true;
   }
+
+  String imageName = '';
+  String imageURL = '';
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   }
                   return null;
                 },
+                onChanged: (value) => {imageName = value},
                 onSaved: (value) => {
                   _editProduct = new Product(
                       productId: value!,
@@ -140,10 +144,36 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                       description: value!),
                 },
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Upload Image'),
-                textInputAction: TextInputAction.next,
+              SizedBox(
+                height: 30.0,
               ),
+              imageURL == ''
+                  ? IconButton(
+                      onPressed: () async {
+                        print('click');
+                        String imageInBucket = await StorageService()
+                            .uploadProductImage(imageName);
+
+                        setState(() {
+                          imageURL = imageInBucket;
+                          _editProduct = new Product(
+                              productId: _editProduct.productId,
+                              productName: _editProduct.productName,
+                              price: _editProduct.price,
+                              imageUrl: imageInBucket,
+                              description: _editProduct.description);
+                        });
+                      },
+                      icon: Icon(
+                        Icons.image_not_supported_outlined,
+                        size: 120,
+                        color: Colors.red[200],
+                      ))
+                  : Image.network(
+                      imageURL,
+                      height: 100,
+                      width: 100,
+                    ),
             ],
           ),
         ),
