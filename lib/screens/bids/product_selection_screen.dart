@@ -1,6 +1,5 @@
 import 'package:bid/auth/auth_service.dart';
 
-import 'package:bid/controllers/create_bid_file_controller.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/bid.dart';
 
@@ -79,6 +78,5 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     // final CreateBidFile bidFile = CreateBidFile(bid: newBid);
     // bidFile.generatePdf();
     // html file:
-    
   }
 }

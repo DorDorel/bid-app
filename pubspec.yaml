@@ -29,27 +29,22 @@ dependencies:
   cloud_firestore: ^2.2.0
   firebase_core: ^1.2.0
   cloud_functions: ^1.1.0
+  firebase_storage: ^10.0.1
+
+ # Cupertino Icons and font 
+  cupertino_icons: ^1.0.2
 
   # state 
   provider: ^5.0.0
-
-    # create pdf document
-  pdf: ^3.1.0
-
   # save file
   path_provider: ^2.0.1
-
-  # open pdf document
-  open_file: ^3.1.0
-
-  # format dates for invoice
+  # format dates
   intl: ^0.17.0
+  # take image
+  image_picker: ^0.8.3+2
+  # check permission
+  permission_handler: ^8.1.4+2
 
-  # create html document
-  flutter_html: ^2.1.1
- 
- # Cupertino Icons and font 
-  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
