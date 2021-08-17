@@ -153,7 +153,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                         print('click');
                         String imageInBucket = await StorageService()
                             .uploadProductImage(imageName);
-
                         setState(() {
                           imageURL = imageInBucket;
                           _editProduct = new Product(

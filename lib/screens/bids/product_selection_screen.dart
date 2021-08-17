@@ -1,11 +1,14 @@
 import 'package:bid/auth/auth_service.dart';
+import 'package:bid/controllers/create_bid_controoler.dart';
 
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/bid.dart';
 
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
+import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/widgets/next_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -65,18 +68,23 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
                 })));
   }
 
-  void _createBid() {
-    final Bid newBid = Bid(
-        bidId: 'dsjlkadsjlk6789',
-        createdBy: AuthenticationService().getCurrentUserName.toString(),
+  void _createBid() async {
+    final bid = Bid(
+        bidId: '1234554321',
+        createdBy: await AuthenticationService().getCurrentUserUID,
         date: DateTime.now(),
         clientName: widget.name,
         clientMail: widget.email,
         finalPrice: calculateTotalBidSum(),
         selectedProducts: NewBidsProvider().getCurrentBidProduct);
-    /* pdf file */
-    // final CreateBidFile bidFile = CreateBidFile(bid: newBid);
-    // bidFile.generatePdf();
-    // html file:
+
+    // final BidFlowRunner bidRunner = BidFlowRunner(bid: bid);
+    // bidRunner.runner();
+
+    final startBidFlow = await CreateBidController(
+            phoneNumber: widget.phoneNumber, currentBid: bid)
+        .startNewBidFlow();
+
+    Navigator.pushNamed(context, MainDashboard.routeName);
   }
 }

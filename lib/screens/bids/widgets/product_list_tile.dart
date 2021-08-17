@@ -1,4 +1,5 @@
 import 'package:bid/controllers/product_bid_controller.dart';
+import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/widgets/next_button.dart';
 
@@ -35,9 +36,9 @@ class ProductListTile extends StatefulWidget {
 class _ProductListTileState extends State<ProductListTile> {
   @override
   Widget build(BuildContext context) {
-    final isSelected =
+    final bool isSelected =
         findCurrentProductDataInProductsBidListBoll(widget.productId);
-    final productSelectedData =
+    final SelectedProducts? productSelectedData =
         findCurrentProductDataInProductsBidList(widget.productId);
 
     return ListTile(
