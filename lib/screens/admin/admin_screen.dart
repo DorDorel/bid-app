@@ -1,4 +1,5 @@
 import 'package:bid/db/db_test_conection.dart';
+import 'package:bid/db/shared_db.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -34,6 +35,11 @@ class AdminScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed(CreateNewUser.routeName);
               },
               child: Text('Create new user Test')),
+          TextButton(
+              onPressed: () async {
+                print(await SharedDb().updateBidId());
+              },
+              child: Text('click'))
         ],
       ),
     );

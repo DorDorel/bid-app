@@ -2,6 +2,7 @@ import 'package:bid/auth/auth_service.dart';
 import 'package:bid/controllers/create_bid_controoler.dart';
 
 import 'package:bid/controllers/product_bid_controller.dart';
+import 'package:bid/db/shared_db.dart';
 import 'package:bid/models/bid.dart';
 
 import 'package:bid/providers/new_bids_provider.dart';
@@ -69,8 +70,10 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
   }
 
   void _createBid() async {
+    int currentBidNumber = await SharedDb().getCurrentBidId();
+
     final bid = Bid(
-        bidId: '1234554321',
+        bidId: currentBidNumber.toString(),
         createdBy: await AuthenticationService().getCurrentUserUID,
         date: DateTime.now(),
         clientName: widget.name,
@@ -78,13 +81,10 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         finalPrice: calculateTotalBidSum(),
         selectedProducts: NewBidsProvider().getCurrentBidProduct);
 
-    // final BidFlowRunner bidRunner = BidFlowRunner(bid: bid);
-    // bidRunner.runner();
-
     final startBidFlow = await CreateBidController(
             phoneNumber: widget.phoneNumber, currentBid: bid)
         .startNewBidFlow();
 
-    Navigator.pushNamed(context, MainDashboard.routeName);
+     Navigator.pushNamed(context, MainDashboard.routeName);
   }
 }
