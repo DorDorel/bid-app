@@ -85,6 +85,6 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             phoneNumber: widget.phoneNumber, currentBid: bid)
         .startNewBidFlow();
 
-     Navigator.pushNamed(context, MainDashboard.routeName);
+    Navigator.pushNamed(context, MainDashboard.routeName);
   }
 }

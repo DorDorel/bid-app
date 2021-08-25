@@ -39,7 +39,8 @@ class AdminScreen extends StatelessWidget {
               onPressed: () async {
                 print(await SharedDb().updateBidId());
               },
-              child: Text('click'))
+              child: Text('Update bid Id test')),
+          TextButton(onPressed: () {}, child: Text('GET Request bid data'))
         ],
       ),
     );

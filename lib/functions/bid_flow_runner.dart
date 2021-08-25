@@ -16,7 +16,7 @@ class BidFlowRunner {
     final tenant = TenantProvider().tenantId;
 
     try {
-      HttpsCallable callable = functions.httpsCallable('createBidFlowRunner');
+      HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
       await callable({
         "tenantId": tenant,
         "clientMail": customerEmail,
