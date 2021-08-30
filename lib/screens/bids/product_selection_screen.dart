@@ -29,6 +29,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final currentBidData = Provider.of<NewBidsProvider>(context);
     return Scaffold(
         appBar: AppBar(
+          elevation: 0.8,
           title: Text(
             'Select Product',
             style: TextStyle(color: Colors.black),
@@ -39,12 +40,15 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
                   currentBidData.clearAllCurrentBid();
                   setState(() {});
                 },
-                icon: Icon(Icons.delete_outlined))
+                icon: Icon(
+                  Icons.delete_outlined,
+                ))
           ],
         ),
         body: SingleChildScrollView(
             physics: ScrollPhysics(),
             child: Column(children: [
+              SizedBox(height: 12.0),
               Text('${widget.name} bid:',
                   style: TextStyle(
                     fontSize: 18.0,

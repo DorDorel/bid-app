@@ -4,21 +4,23 @@ class CustomUser {
   final String email;
   final String password;
   final String name;
+  final String phoneNumber;
   bool isAdmin = false;
 
-  CustomUser({
-    required this.tenantId,
-    required this.email,
-    required this.password,
-    required this.name,
-  });
+  CustomUser(
+      {required this.tenantId,
+      required this.email,
+      required this.password,
+      required this.name,
+      required this.phoneNumber});
 
   Map<String, dynamic> toMap() => {
         'uid': this.uid,
         'tenantId': this.tenantId,
         'email': this.email,
         'name': this.name,
-        'isAdmin': this.isAdmin
+        'isAdmin': this.isAdmin,
+        'phoneNumber': this.phoneNumber
       };
 
   factory CustomUser.fromMap(Map<String, dynamic> firestoreObj) {
@@ -26,7 +28,8 @@ class CustomUser {
         tenantId: firestoreObj['tenantId'],
         email: firestoreObj['email'],
         password: 'null',
-        name: firestoreObj['name']);
+        name: firestoreObj['name'],
+        phoneNumber: firestoreObj['phoneNumber']);
 
     return user;
   }

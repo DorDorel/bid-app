@@ -21,6 +21,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.8,
         // automaticallyImplyLeading: false,
         title: Text(
           'Create new Bid',
@@ -61,12 +62,15 @@ class _NewBidFormState extends State<NewBidForm> {
         key: _bidForm,
         child: ListView(
           children: [
+            SizedBox(
+              height: 16.0,
+            ),
             buildName(),
             const SizedBox(height: 16),
             buildEmail(),
             const SizedBox(height: 16),
             buildPhone(),
-            const SizedBox(height: 64),
+            const SizedBox(height: 40),
             buildNextButton(),
             const SizedBox(height: 16),
             // buildCancelButton(),
@@ -130,11 +134,4 @@ class _NewBidFormState extends State<NewBidForm> {
               : Text('error');
         },
       );
-
-  // Widget buildCancelButton() => TextButton(
-  //     onPressed: () {
-  //       removeBidDraft();
-  //       Navigator.pop(context);
-  //     },
-  //     child: Text('Cancel and Remove Bid draft'));
 }

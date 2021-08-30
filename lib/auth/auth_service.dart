@@ -16,14 +16,14 @@ class AuthenticationService {
     return _firebaseAuth.currentUser!.tenantId;
   }
 
-  Future<String?> signIn(
-      {required String email, required String password}) async {
+  Future<bool> signIn({required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return 'Signed In';
-    } on FirebaseAuthException catch (e) {
-      return e.message;
+      return true;
+    } on FirebaseAuthException catch (err) {
+      print(err.message);
+      return false;
     }
   }
 
@@ -50,6 +50,4 @@ class AuthenticationService {
 
     return userId;
   }
-
-  // }
 }

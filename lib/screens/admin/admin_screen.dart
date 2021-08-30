@@ -1,5 +1,5 @@
+import 'package:bid/db/database.dart';
 import 'package:bid/db/db_test_conection.dart';
-import 'package:bid/db/shared_db.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +9,12 @@ import 'create_new_user.dart';
 class AdminScreen extends StatelessWidget {
   static const routeName = '/admin_panel';
 
+  final spaceDefult = SizedBox(
+    height: 4.0,
+  );
+
+  final TextStyle textStyleDefult = TextStyle(
+      color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,29 +25,78 @@ class AdminScreen extends StatelessWidget {
               color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
-        children: [
-          TextButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, ProductsScreen.routeName),
-              child: Text('Products screen')),
-          TextButton(
-              onPressed: () {
-                DbTestConnection().getFunctionsTestConnection();
-              },
-              child: Text('Connection Test')),
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(CreateNewUser.routeName);
-              },
-              child: Text('Create new user Test')),
-          TextButton(
-              onPressed: () async {
-                print(await SharedDb().updateBidId());
-              },
-              child: Text('Update bid Id test')),
-          TextButton(onPressed: () {}, child: Text('GET Request bid data'))
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            Card(
+              color: Colors.yellow[100],
+              child: Container(
+                width: 350,
+                height: 80,
+                child: TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, ProductsScreen.routeName),
+                    child: Text(
+                      'Manage your products',
+                      style: textStyleDefult,
+                    )),
+              ),
+            ),
+            spaceDefult,
+            Card(
+              color: Colors.green[100],
+              child: Container(
+                width: 350,
+                height: 80,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CreateNewUser.routeName);
+                  },
+                  child: Text(
+                    'Create new user ',
+                    style: textStyleDefult,
+                  ),
+                ),
+              ),
+            ),
+            spaceDefult,
+            Card(
+              color: Colors.blue[100],
+              child: Container(
+                width: 350,
+                height: 80,
+                child: TextButton(
+                    onPressed: () {
+                      DbTestConnection().getFunctionsTestConnection();
+                    },
+                    child: Text(
+                      'Connection Test',
+                      style: textStyleDefult,
+                    )),
+              ),
+            ),
+            spaceDefult,
+            Card(
+              color: Colors.red[100],
+              child: Container(
+                width: 350,
+                height: 80,
+                child: TextButton(
+                    onPressed: () async {
+                      print(await DatabaseSevice().isAdmin());
+                    },
+                    child: Text(
+                      'Check Admin ',
+                      style: textStyleDefult,
+                    )),
+              ),
+            ),
+            spaceDefult,
+          ],
+        ),
       ),
     );
   }

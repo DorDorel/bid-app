@@ -1,6 +1,7 @@
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
+import 'package:bid/screens/bids/product_selection_screen.dart';
 import 'package:bid/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
@@ -92,36 +93,6 @@ class PopupOptions extends StatelessWidget {
                           widget: widget,
                           edit: edit,
                         )));
-            // showModalBottomSheet(
-            //     isScrollControlled: true,
-            //     context: context,
-            //     builder: (context) {
-            //       return Column(
-            //         children: [
-            //           SizedBox(
-            //             height: 80.0,
-            //           ),
-            //           Center(
-            //             child: Container(
-            //                 width: 60.0,
-            //                 child: Image.network(
-            //                   widget.imageUrl,
-            //                 )),
-            //           ),
-            //           Text(widget.productName,
-            //               style: TextStyle(fontSize: 20.0)),
-            //           Text('Price: ' + widget.price.toString(),
-            //               style: TextStyle(fontSize: 14.0)),
-            //           SizedBox(
-            //             height: 10,
-            //           ),
-            //           OptionsForm(
-            //             edit: edit,
-            //             product: widget._currentProductInProductObject(),
-            //           ),
-            //         ],
-            //       );
-            // });
           },
           icon: edit ? Icon(Icons.edit) : Icon(Icons.add),
           color: Theme.of(context).primaryColor,

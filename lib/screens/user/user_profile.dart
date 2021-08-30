@@ -15,26 +15,27 @@ class UserConfig extends StatelessWidget {
     final firebaseUser = Provider.of<User?>(context);
     final tenantProvider = Provider.of<TenantProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Profie',
-          style: TextStyle(color: Theme.of(context).accentColor),
+        appBar: AppBar(
+          title: Text(
+            'Profie',
+            style: TextStyle(color: Theme.of(context).accentColor),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                  Navigator.pushNamed(context, LoginScreen.routeName);
+                },
+                icon: Icon(Icons.logout_rounded))
+          ],
         ),
-        actions: [
-          IconButton(
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.pushNamed(context, LoginScreen.routeName);
-              },
-              icon: Icon(Icons.logout_rounded))
-        ],
-      ),
-      body: ProfileBody(
-        userProfileMail: firebaseUser!.email.toString(),
-        uid: firebaseUser.uid.toString(),
-        tenantId: tenantProvider.tenantId,
-      ),
-    );
+        body: firebaseUser != null
+            ? ProfileBody(
+                userProfileMail: firebaseUser.email.toString(),
+                uid: firebaseUser.uid.toString(),
+                tenantId: tenantProvider.tenantId,
+              )
+            : CircularProgressIndicator());
   }
 }
 

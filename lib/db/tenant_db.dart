@@ -44,10 +44,12 @@ class TenantDB {
       QuerySnapshot<Map<String, dynamic>> userUid =
           await userList.where('uid', isEqualTo: await getCurrentUserUID).get();
 
-      final String secondValidation = userUid.docs.first.data()['tenantId'];
+      final String secondValidation =
+          await userUid.docs.first.data()['tenantId'];
 
       if (firstValitation == secondValidation) {
         _curentTenantId = firstValitation;
+
         return true;
       } else {
         return false;
@@ -57,11 +59,4 @@ class TenantDB {
       return false;
     }
   }
-  // Future<bool> checkAdminUser() async{
-  //   QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
-  //         .where('uid', isEqualTo: await getCurrentUserUID)
-  //         .get();
-  //   final is
-
-  // }
 }

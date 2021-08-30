@@ -13,13 +13,14 @@ import 'package:provider/provider.dart';
 import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
-  final AuthenticationService _auth = AuthenticationService();
   static const routeName = '/main_dashboard';
 
+  bool admin = TenantProvider.checkAdmin;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0.8,
         actions: [
           IconButton(
@@ -34,14 +35,13 @@ class MainDashboard extends StatelessWidget {
               icon: Icon(
                 Icons.notifications_active_outlined,
               )),
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AdminScreen.routeName);
-              },
-              icon: Icon(
-                Icons.admin_panel_settings,
-                color: Colors.yellow[800],
-              ))
+          admin
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AdminScreen.routeName);
+                  },
+                  icon: Icon(Icons.admin_panel_settings))
+              : Text(''),
         ],
         title: Text(
           ' Activity',

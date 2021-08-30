@@ -78,6 +78,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
+  This Wrapper check: 
+    - User Auth
+    - Verification of user access to this current Tenant
+    - User Authorization (check if user is admin in current tenant) 
+*/
+
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -85,8 +92,10 @@ class AuthenticationWrapper extends StatelessWidget {
     final tenantProvider = Provider.of<TenantProvider>(context);
     if (firebaseUser != null) {
       tenantProvider.tenantValidation();
+
       print(
-          'user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId}');
+          'user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');
+
       return MainDashboard();
     }
     return LoginScreen();

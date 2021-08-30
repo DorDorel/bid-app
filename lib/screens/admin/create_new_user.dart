@@ -15,6 +15,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
   String email = '';
   String password = '';
   String name = '';
+  String phoneNumber = "";
 
   bool _newUserFlag = false;
 
@@ -22,7 +23,11 @@ class _CreateNewUserState extends State<CreateNewUser> {
     try {
       final authInstance = AuthenticationService();
       CustomUser user = new CustomUser(
-          tenantId: tenantId, email: email, password: password, name: name);
+          tenantId: tenantId,
+          email: email,
+          password: password,
+          name: name,
+          phoneNumber: phoneNumber);
       final newUser = await authInstance.createUser(user: user);
       if (newUser.isNotEmpty) {
         _newUserFlag = true;
@@ -80,6 +85,13 @@ class _CreateNewUserState extends State<CreateNewUser> {
                 decoration: InputDecoration(labelText: 'Password'),
                 onChanged: (value) {
                   password = value;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Phone Number'),
+                keyboardType: TextInputType.phone,
+                onChanged: (value) {
+                  phoneNumber = value;
                 },
               ),
             ],

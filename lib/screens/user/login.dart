@@ -19,10 +19,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
-        'Welcome',
-        style: TextStyle(color: Theme.of(context).primaryColor),
-      )),
+            'Welcome',
+            style: TextStyle(color: Theme.of(context).primaryColor),
+          )),
       body: Column(
         children: [
           Container(
@@ -58,13 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   child: TextButton(
                     onPressed: () async {
-                      dynamic result =
+                      bool result =
                           await _auth.signIn(email: email, password: password);
-                      if (result == null) {
-                        print('error signing in');
+                      if (!result) {
+                        print('!!!AUTHENTICATION ERROR!!!');
                       } else {
-                        print('singing in');
-                        print(result.uid);
+                        Navigator.pushNamed(context, MainDashboard.routeName);
                       }
                     },
                     child: Text('Sign In'),
