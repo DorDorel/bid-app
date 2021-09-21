@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   static const routeName = '/add_new_product_screen';
+
   @override
   _AddNewProductScreenState createState() => _AddNewProductScreenState();
 }
@@ -165,12 +166,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                       },
                       icon: Icon(
                         Icons.image_not_supported_outlined,
-                        size: 120,
+                        size: 30,
                         color: Colors.red[200],
                       ))
                   : Image.network(
                       imageURL,
-                      height: 100,
+                      height: 200,
                       width: 100,
                     ),
             ],

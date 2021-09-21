@@ -1,7 +1,8 @@
 import 'package:bid/auth/auth_service.dart';
-import 'package:bid/db/tenant_db.dart';
 import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/user/login.dart';
+import 'package:bid/widgets/admin_button_textStyle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -57,9 +58,13 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text('User: $userProfileMail'),
+          Text('Email: $userProfileMail'),
           Text('User Id: $uid'),
           Text('Tenant Id: $tenantId'),
+          SizedBox(
+            height: 40,
+          ),
+          TenantProvider.checkAdmin ? AdminButton() : Text(''),
         ],
       ),
     );
@@ -77,6 +82,26 @@ class ProfilePicture extends StatelessWidget {
       height: 115,
       width: 115,
       child: CircleAvatar(),
+    );
+  }
+}
+
+class AdminButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.yellowAccent[100],
+      child: Container(
+        width: 350,
+        height: 80,
+        child: TextButton(
+            onPressed: () =>
+                Navigator.pushNamed(context, AdminScreen.routeName),
+            child: Text(
+              'Admin Panel',
+              style: textStyleDefault,
+            )),
+      ),
     );
   }
 }

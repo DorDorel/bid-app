@@ -29,15 +29,49 @@ class SingleProductList extends StatelessWidget {
         width: 100,
         child: Row(
           children: [
+            // edit button
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                //TODO: implemet this.
+              },
               icon: Icon(Icons.edit),
               color: Theme.of(context).primaryColor,
             ),
+            // delete button
             IconButton(
               onPressed: () async {
-                StorageService().deleteProductImage(productImageURL: imageUrl);
-                productsData.deleteProduct(productId);
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Remove $productName'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: [
+                              Text(
+                                  "Delete this product from your product list?")
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cancel')),
+                          TextButton(
+                              onPressed: () {
+                                StorageService().deleteProductImage(
+                                    productImageURL: imageUrl);
+                                productsData.deleteProduct(productId);
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Delete',
+                                  style: TextStyle(color: Colors.red)))
+                        ],
+                      );
+                    });
               },
               icon: Icon(
                 Icons.remove_circle_outline,

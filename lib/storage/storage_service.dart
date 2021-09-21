@@ -36,7 +36,7 @@ class StorageService {
       }
     } else {
       print('Grant Permissions and try again');
-      return 'Grant Permissions and try again';
+      return 'ERROR';
     }
     return 'Faild';
   }

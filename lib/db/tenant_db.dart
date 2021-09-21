@@ -34,21 +34,23 @@ class TenantDB {
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
           .where('uid', isEqualTo: await getCurrentUserUID)
           .get();
-      final String firstValitation =
+      // get tenantId from user collection
+      final String firstValidation =
           CustomUser.fromMap(currentUser.docs.first.data()).tenantId;
 
       final DocumentReference tenantDoc =
-          companiesCollection.doc(firstValitation);
+          companiesCollection.doc(firstValidation);
       final CollectionReference<Map<String, dynamic>> userList =
           tenantDoc.collection('users');
       QuerySnapshot<Map<String, dynamic>> userUid =
           await userList.where('uid', isEqualTo: await getCurrentUserUID).get();
 
+      // get tenantId from tenant collection
       final String secondValidation =
           await userUid.docs.first.data()['tenantId'];
 
-      if (firstValitation == secondValidation) {
-        _curentTenantId = firstValitation;
+      if (firstValidation == secondValidation) {
+        _curentTenantId = firstValidation;
 
         return true;
       } else {

@@ -1,6 +1,7 @@
 import 'package:bid/db/database.dart';
 import 'package:bid/db/db_test_conection.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
+import 'package:bid/widgets/admin_button_textStyle.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,12 +10,6 @@ import 'create_new_user.dart';
 class AdminScreen extends StatelessWidget {
   static const routeName = '/admin_panel';
 
-  final spaceDefult = SizedBox(
-    height: 4.0,
-  );
-
-  final TextStyle textStyleDefult = TextStyle(
-      color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +36,11 @@ class AdminScreen extends StatelessWidget {
                         Navigator.pushNamed(context, ProductsScreen.routeName),
                     child: Text(
                       'Manage your products',
-                      style: textStyleDefult,
+                      style: textStyleDefault,
                     )),
               ),
             ),
-            spaceDefult,
+            spaceDefault,
             Card(
               color: Colors.green[100],
               child: Container(
@@ -57,12 +52,12 @@ class AdminScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Create new user ',
-                    style: textStyleDefult,
+                    style: textStyleDefault,
                   ),
                 ),
               ),
             ),
-            spaceDefult,
+            spaceDefault,
             Card(
               color: Colors.blue[100],
               child: Container(
@@ -74,11 +69,11 @@ class AdminScreen extends StatelessWidget {
                     },
                     child: Text(
                       'Connection Test',
-                      style: textStyleDefult,
+                      style: textStyleDefault,
                     )),
               ),
             ),
-            spaceDefult,
+            spaceDefault,
             Card(
               color: Colors.red[100],
               child: Container(
@@ -90,11 +85,11 @@ class AdminScreen extends StatelessWidget {
                     },
                     child: Text(
                       'Check Admin ',
-                      style: textStyleDefult,
+                      style: textStyleDefault,
                     )),
               ),
             ),
-            spaceDefult,
+            spaceDefault,
           ],
         ),
       ),

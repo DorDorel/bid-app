@@ -8,10 +8,10 @@ class TenantProvider with ChangeNotifier {
   String get tenantId => TenantDB().curentTenantId;
 
   Future<void> tenantValidation() async {
-    bool validiate = await TenantDB().tenantAuthorization();
-    if (!validiate) {
+    bool validate = await TenantDB().tenantAuthorization();
+    if (!validate) {
       print('not validate SIGNING OUT!');
-      AuthenticationService().signOut();
+      await AuthenticationService().signOut();
     }
     await checkAdminAsync();
   }
@@ -21,5 +21,3 @@ class TenantProvider with ChangeNotifier {
     return checkAdmin;
   }
 }
-
-// dorapp.dev@gmail.com
