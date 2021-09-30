@@ -17,9 +17,16 @@ class UserConfig extends StatelessWidget {
     final tenantProvider = Provider.of<TenantProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Profie',
-            style: TextStyle(color: Theme.of(context).accentColor),
+          elevation: 0.8,
+          title: Transform(
+            transform: Matrix4.translationValues(-100.0, 0.0, 0.0),
+            child: Text(
+              'Profile',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           actions: [
             IconButton(
@@ -54,6 +61,9 @@ class ProfileBody extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+          SizedBox(
+            height: 26,
+          ),
           ProfilePicture(),
           SizedBox(
             height: 20,
