@@ -15,15 +15,17 @@ class BidFlowRunner {
   Future<void> runner() async {
     final tenant = TenantProvider().tenantId;
 
-    try {
-      HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
-      await callable({
-        "tenantId": tenant,
-        "clientMail": customerEmail,
-        "ClientPhone": customerPhone,
-      });
-    } catch (err) {
-      print(err);
-    }
+    print('here cloud functnio runing');
+
+    // try {
+    //   HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
+    //   await callable({
+    //     "tenantId": tenant,
+    //     "clientMail": customerEmail,
+    //     "ClientPhone": customerPhone,
+    //   });
+    // } catch (err) {
+    //   print(err);
+    // }
   }
 }

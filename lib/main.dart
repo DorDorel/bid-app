@@ -60,7 +60,9 @@ class MyApp extends StatelessWidget {
                   elevation: 0.0,
                 ),
                 primaryColor: Colors.black,
-                scaffoldBackgroundColor: Colors.white, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black87)),
+                scaffoldBackgroundColor: Colors.white,
+                colorScheme: ColorScheme.fromSwatch()
+                    .copyWith(secondary: Colors.black87)),
             home: AuthenticationWrapper(),
             routes: {
               LoginScreen.routeName: (context) => LoginScreen(),
