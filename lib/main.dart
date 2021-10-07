@@ -79,12 +79,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*
-  This Wrapper check: 
-    - User Auth
-    - Verification of user access to this current Tenant
-    - User Authorization (check if user is admin in current tenant) 
-*/
+//########################################################################
+// This Wrapper check:
+//  - User Auth
+//  - Verification of user access to this current Tenant
+//  - User Authorization (check if user is admin in current tenant)
+//########################################################################
 
 class AuthenticationWrapper extends StatelessWidget {
   @override

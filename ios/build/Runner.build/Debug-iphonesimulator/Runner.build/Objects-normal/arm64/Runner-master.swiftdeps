@@ -1,4 +1,6 @@
-version: "Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)"
-options: "3ea5e620ffdf92c856ef60cda0489d64"
-build_time: [1632212548, 433644000]
+version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+options: "c15ddc0a2b4b117e98cd47fad87cf623fab4299eaf8dd37d79756372d1a46330"
+build_start_time: [1633620913, 128438949]
+build_end_time: [1633620913, 173915863]
 inputs:
+  "/Users/dor/bid-app/ios/Runner/AppDelegate.swift": !private [1628622430, 873289108]
