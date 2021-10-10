@@ -22,9 +22,13 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
       appBar: AppBar(
         elevation: 0.8,
         // automaticallyImplyLeading: false,
-        title: Text(
-          'Create new Bid',
-          style: TextStyle(color: Theme.of(context).primaryColor),
+        title: Transform(
+          transform: Matrix4.translationValues(0.0, 0.0, 0.0),
+          child: Text(
+            'New Bid',
+            style: TextStyle(
+                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
       body: NewBidForm(),

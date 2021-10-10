@@ -43,7 +43,7 @@ dependencies:
   # take image
   image_picker: ^0.8.3+2
   # check permission
-  permission_handler: ^8.1.4+2
+  permission_handler: ^8.2.2
 
 
 dev_dependencies:

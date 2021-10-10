@@ -1,8 +1,7 @@
 import 'package:bid/auth/auth_service.dart';
-import 'package:bid/screens/tenant/company_onbording/add_new_company.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
+import 'package:bid/screens/tenant/company_onboarding/add_new_company.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';

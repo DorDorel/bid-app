@@ -19,7 +19,7 @@ class UserConfig extends StatelessWidget {
         appBar: AppBar(
           elevation: 0.8,
           title: Transform(
-            transform: Matrix4.translationValues(-90.0, 0.0, 0.0),
+            transform: Matrix4.translationValues(0.0, 0.0, 0.0),
             child: Text(
               'Profile',
               style: TextStyle(

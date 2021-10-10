@@ -8,10 +8,16 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Notifications',
-          style: TextStyle(color: Colors.black),
+        elevation: 0.8,
+        title: Transform(
+          transform: Matrix4.translationValues(-0.0, 0.0, 0.0),
+          child: Text(
+            'Notification',
+            style: TextStyle(
+                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+          ),
         ),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.delete))],
       ),
       body: Column(
         children: [

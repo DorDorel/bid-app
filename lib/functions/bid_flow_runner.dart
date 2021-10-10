@@ -15,7 +15,7 @@ class BidFlowRunner {
   Future<void> runner() async {
     final tenant = TenantProvider().tenantId;
 
-    print('here cloud functnio runing');
+    print('Here cloud function running');
 
     // try {
     //   HttpsCallable callable = functions.httpsCallable('getCurrentBidData');

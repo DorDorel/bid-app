@@ -2,7 +2,7 @@ import 'package:bid/config/palette.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
-import 'package:bid/screens/admin/notifcation_screen.dart';
+import 'package:bid/screens/notification/notifcation_screen.dart';
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
 import '../bids/create_bid_screen.dart';
