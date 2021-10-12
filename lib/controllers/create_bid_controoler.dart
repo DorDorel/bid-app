@@ -11,6 +11,9 @@ class CreateBidController {
 
   Future<void> startNewBidFlow() async {
     try {
+      /*
+      setBidInDB getting the current bid doc id.
+      */
       String setBidInDB = await BidsDb().addBidToBidCollection(currentBid);
 
       if (setBidInDB != 'null') {

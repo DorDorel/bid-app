@@ -7,7 +7,9 @@ import 'package:bid/screens/admin/add_new_product_screen.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
+import 'package:bid/screens/bids/bids_archive_screen.dart';
 import 'package:bid/screens/bids/create_bid_screen.dart';
+import 'package:bid/screens/bids/open_bids_screen.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/screens/notification/notifcation_screen.dart';
 import 'package:bid/screens/tenant/company_onboarding/add_new_company.dart';
@@ -73,6 +75,8 @@ class MyApp extends StatelessWidget {
               AddNewProductScreen.routeName: (context) => AddNewProductScreen(),
               AdminScreen.routeName: (context) => AdminScreen(),
               ProductsScreen.routeName: (context) => ProductsScreen(),
+              OpenBidScreen.routeName: (context) => OpenBidScreen(),
+              BidsArchiveScreen.routeName: (context) => BidsArchiveScreen(),
             }));
   }
 }

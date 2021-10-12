@@ -1,10 +1,11 @@
-import 'package:bid/config/palette.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
-import 'package:bid/providers/tenant_provider.dart';
-import 'package:bid/screens/admin/admin_screen.dart';
+import 'package:bid/screens/bids/bids_archive_screen.dart';
+import 'package:bid/screens/bids/open_bids_screen.dart';
+import 'package:bid/screens/home/widgets/home_card.dart';
 import 'package:bid/screens/notification/notifcation_screen.dart';
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
+
 import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
@@ -36,10 +37,25 @@ class MainDashboard extends StatelessWidget {
               color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Center(
-          child: CircularProgressIndicator(
-        color: Palette.darkBlue,
-      )),
+      body: Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, OpenBidScreen.routeName),
+            child: const HomeCard(
+                imagePatch: "assets/images/bid_open.jpeg",
+                title: "Open Bids",
+                subtitle: "Unmarked bids are closed"),
+          ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, BidsArchiveScreen.routeName),
+            child: const HomeCard(
+                imagePatch: "assets/images/bid_archive.jpeg",
+                title: "Bids Archive",
+                subtitle: "The bid history you submitted"),
+          )
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           removeBidDraft();
