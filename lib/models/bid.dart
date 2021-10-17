@@ -1,16 +1,17 @@
 import 'package:bid/models/product.dart';
 
 class Bid {
-  bool open = true;
-  String bidId;
-  String createdBy;
-  DateTime date;
-  String clientMail;
-  String clientName;
-  double finalPrice;
+  bool? openFlag = true;
+  final String bidId;
+  final String createdBy;
+  final DateTime date;
+  final String clientMail;
+  final String clientName;
+  final double finalPrice;
   List<SelectedProducts> selectedProducts = [];
 
   Bid({
+    this.openFlag,
     required this.bidId,
     required this.createdBy,
     required this.date,
@@ -21,6 +22,7 @@ class Bid {
   });
 
   Map<String, dynamic> toMap() => {
+        'openFlag': this.openFlag,
         'bidId': this.bidId,
         'createdBy': this.createdBy,
         'date': this.date,
@@ -29,27 +31,39 @@ class Bid {
         'finalPrice': this.finalPrice,
         'selectedProducts': convertSelectedProduct(this.selectedProducts),
       };
+
+  factory Bid.fromMap(Map<String, dynamic> firestoreObj) {
+    // String convertFromTimestampToDateTime(int timeStamp) {
+    //   var date = DateTime.fromMillisecondsSinceEpoch(timeStamp).toString();
+    //   return date;
+    // }
+
+    Bid bidObj = Bid(
+      openFlag: firestoreObj["openFlag"],
+      bidId: firestoreObj['bidId'],
+      createdBy: firestoreObj['createdBy'],
+      date: DateTime.now(),
+      clientName: firestoreObj['clientName'],
+      clientMail: firestoreObj['clientMail'],
+      finalPrice: firestoreObj['finalPrice'],
+      selectedProducts: parserSelectedProduct(firestoreObj),
+    );
+// parserSelectedProduct(firestoreObj)
+    return bidObj;
+  }
 }
 
-List<Map<String, dynamic>> convertSelectedProduct(
-    List<SelectedProducts> spList) {
-  List<Map<String, dynamic>> spListConverted = [];
-  spList.forEach((product) {
-    final Map<String, dynamic> productConverted = product.toMap();
-    spListConverted.add(productConverted);
-  });
-
-  return spListConverted;
-}
+//##################################################
+// SelectedProduct class
+//##################################################
 
 class SelectedProducts {
-  Product product;
-  int quantity;
-  int discount;
-  double finalPricePerUnit;
-
-  int warrantyMonths;
-  String remark;
+  final Product product;
+  final int quantity;
+  final int discount;
+  final double finalPricePerUnit;
+  final int warrantyMonths;
+  final String remark;
 
   SelectedProducts(
       {required this.product,
@@ -69,28 +83,41 @@ class SelectedProducts {
       };
 
   factory SelectedProducts.fromMap(Map<String, dynamic> firestoreObj) {
-    final jsonShortcut = firestoreObj["mapValue"]["fields"];
+    // final jsonShortcut = firestoreObj["mapValue"]["fields"];
     SelectedProducts selectedProducts = SelectedProducts(
-        product: Product.fromMap(jsonShortcut["product"]["mapValue"]["fields"]),
-        quantity: jsonShortcut["quantity"]["integerValue"],
-        discount: jsonShortcut["discount"]["integerValue"],
-        finalPricePerUnit:
-            double.parse(jsonShortcut["finalPricePerUnit"]["doubleValue"]),
-        warrantyMonths: jsonShortcut["warrantyMonths"]["integerValue"],
-        remark: jsonShortcut["remark"]["stringValue"]);
+        product: Product.fromMap(firestoreObj["product"]),
+        quantity: firestoreObj["quantity"],
+        discount: firestoreObj["discount"],
+        finalPricePerUnit: firestoreObj["finalPricePerUnit"],
+        warrantyMonths: firestoreObj["warrantyMonths"],
+        remark: firestoreObj["remark"]);
 
     return selectedProducts;
   }
+}
+//############################################################
+// SelectedProduct: parser from json and converted to json
+//############################################################
 
-  List<SelectedProducts> parserSelectedProduct(
-      Map<String, dynamic> firestoreObj) {
-    List<SelectedProducts> newSelectedProductList = [];
-    final productInJson = firestoreObj["selectedProduct"]["values"];
-    productInJson.forEach((product) {
-      final p = SelectedProducts.fromMap(product);
-      newSelectedProductList.add(p);
-    });
+List<SelectedProducts> parserSelectedProduct(
+    Map<String, dynamic> firestoreObj) {
+  List<SelectedProducts> newSelectedProductList = [];
+  final productInJson = firestoreObj["selectedProducts"];
+  productInJson.forEach((product) {
+    final p = SelectedProducts.fromMap(product);
+    newSelectedProductList.add(p);
+  });
 
-    return newSelectedProductList;
-  }
+  return newSelectedProductList;
+}
+
+List<Map<String, dynamic>> convertSelectedProduct(
+    List<SelectedProducts> spList) {
+  List<Map<String, dynamic>> spListConverted = [];
+  spList.forEach((product) {
+    final Map<String, dynamic> productConverted = product.toMap();
+    spListConverted.add(productConverted);
+  });
+
+  return spListConverted;
 }

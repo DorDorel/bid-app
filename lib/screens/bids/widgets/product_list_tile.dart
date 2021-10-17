@@ -1,9 +1,7 @@
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
-import 'package:bid/screens/bids/product_selection_screen.dart';
 import 'package:bid/widgets/next_button.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

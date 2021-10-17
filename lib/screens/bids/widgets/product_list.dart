@@ -1,11 +1,10 @@
+import 'package:bid/providers/products_provider.dart';
+import 'package:bid/screens/bids/widgets/product_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:bid/providers/products_provider.dart';
-import 'package:bid/screens/bids/widgets/product_list_tile.dart';
-
 class ProductList extends StatefulWidget {
-  static const routeName = '/procuts_screen';
+  static const routeName = '/products_screen';
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
 }
