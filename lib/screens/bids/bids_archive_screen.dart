@@ -42,13 +42,17 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
                   itemCount: bidsData.allBids.length,
                   itemBuilder: (_, index) => Column(
                         children: [
-                          BidTile(
-                            archiveScreen: true,
-                            isOpen: bidsData.allBids[index].openFlag!,
-                            clientName: bidsData.allBids[index].clientName,
-                            bidId: bidsData.allBids[index].bidId,
-                            clientMail: bidsData.allBids[index].clientMail,
-                          )
+                          !bidsData.allBids[index].openFlag!
+                              ? BidTile(
+                                  archiveScreen: true,
+                                  isOpen: bidsData.allBids[index].openFlag!,
+                                  clientName:
+                                      bidsData.allBids[index].clientName,
+                                  bidId: bidsData.allBids[index].bidId,
+                                  clientMail:
+                                      bidsData.allBids[index].clientMail,
+                                )
+                              : SizedBox.shrink()
                         ],
                       )),
         ));

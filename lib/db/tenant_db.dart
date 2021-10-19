@@ -7,8 +7,8 @@ class TenantDB {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
 
-  static String _curentTenantId = '';
-  String get curentTenantId => _curentTenantId;
+  static String _currentTenantId = '';
+  String get currentTenantId => _currentTenantId;
 
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
@@ -20,8 +20,12 @@ class TenantDB {
 
   Future<DocumentReference?> getTenantReference() async {
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
+
       final DocumentReference tenantReference =
-          companiesCollection.doc(curentTenantId);
+          companiesCollection.doc(currentTenantId);
       return tenantReference;
     } catch (err) {
       print(err);
@@ -31,6 +35,10 @@ class TenantDB {
 
   Future<bool> tenantAuthorization() async {
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
+
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
           .where('uid', isEqualTo: await getCurrentUserUID)
           .get();
@@ -50,7 +58,7 @@ class TenantDB {
           await userUid.docs.first.data()['tenantId'];
 
       if (firstValidation == secondValidation) {
-        _curentTenantId = firstValidation;
+        _currentTenantId = firstValidation;
 
         return true;
       } else {

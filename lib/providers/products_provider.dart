@@ -12,8 +12,10 @@ class ProductProvider with ChangeNotifier {
   }
 
   Future<void> getProducts() async {
-    final products = await ProductsDb().getAllProducts();
-    _productsList = products!;
+    if (_productsList.isEmpty) {
+      final products = await ProductsDb().getAllProducts();
+      _productsList = products!;
+    }
   }
 
   Future<void> addNewProduct(Product product) async {

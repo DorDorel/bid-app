@@ -1,8 +1,8 @@
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
+import 'package:bid/screens/home/widgets/home_card.dart';
 import 'package:bid/screens/user/login.dart';
-import 'package:bid/widgets/admin_button_textStyle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +72,7 @@ class ProfileBody extends StatelessWidget {
           Text('User Id: $uid'),
           Text('Tenant Id: $tenantId'),
           SizedBox(
-            height: 40,
+            height: 80,
           ),
           TenantProvider.checkAdmin ? AdminButton() : Text(''),
         ],
@@ -99,18 +99,13 @@ class ProfilePicture extends StatelessWidget {
 class AdminButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.yellowAccent[100],
-      child: Container(
-        width: 350,
-        height: 80,
-        child: TextButton(
-            onPressed: () =>
-                Navigator.pushNamed(context, AdminScreen.routeName),
-            child: Text(
-              'Admin Panel',
-              style: textStyleDefault,
-            )),
+    return Container(
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, AdminScreen.routeName),
+        child: HomeCard(
+            imagePatch: "assets/images/admin.jpeg",
+            title: "Admin Panel",
+            subtitle: "Mange your Bids system"),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'open_bid_card_menu.dart';
+
 class BidTile extends StatelessWidget {
   final bool isOpen;
   final String clientName;
@@ -43,7 +45,7 @@ class BidTile extends StatelessWidget {
                         Icons.email,
                         color: Colors.blueGrey,
                       ))
-                  : IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+                  : OpenTileMenu(),
             ),
           ],
         ),

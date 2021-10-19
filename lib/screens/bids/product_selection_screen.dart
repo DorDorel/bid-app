@@ -71,6 +71,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     int currentBidNumber = await SharedDb().getCurrentBidId();
 
     final bid = Bid(
+        openFlag: true,
         bidId: currentBidNumber.toString(),
         createdBy: await AuthenticationService().getCurrentUserUID,
         date: DateTime.now(),

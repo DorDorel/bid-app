@@ -3,18 +3,22 @@ import 'package:bid/models/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /*
-    tenantRef: Reference to spacfic company(tenant) collection of current user
+    tenantRef: Reference to specific company(tenant) collection of current user
  */
 class ProductsDb {
   Future<String> addNewProduct(Product product) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - addNewProduct from ProductsDb reading");
+
       final CollectionReference<Map<String, dynamic>> productList =
           tenantRef!.collection('products');
       final newProductDbObject = await productList.add(product.toMap());
       newProductDbObject
-          .set({"documetId": newProductDbObject.id}, SetOptions(merge: true));
+          .set({"documentId": newProductDbObject.id}, SetOptions(merge: true));
       return newProductDbObject.id;
     } catch (e) {
       print(e.toString());
@@ -27,6 +31,10 @@ class ProductsDb {
         await TenantDB().getTenantReference();
     List<Product> productList = [];
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - getAllProducts from ProductsDb reading");
+
       QuerySnapshot<Map<String, dynamic>> productsCollection =
           await tenantRef!.collection('products').get();
       productsCollection.docs.forEach((product) {
@@ -43,6 +51,10 @@ class ProductsDb {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - findProductByProductId from ProductsDb reading");
+
       QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
           .collection('products')
           .where('productId', isEqualTo: productId)
@@ -59,6 +71,10 @@ class ProductsDb {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - findFirestoreDocumentId from ProductsDb reading");
+
       QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
           .collection('products')
           .where('productId', isEqualTo: productId)
@@ -74,9 +90,13 @@ class ProductsDb {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - removeProduct from ProductsDb reading");
+
       QuerySnapshot<Map<String, dynamic>>? currentProduct =
           await findFirestoreDocumentId(productId);
-      final String documentId = currentProduct!.docs.first.data()['documetId'];
+      final String documentId = currentProduct!.docs.first.data()['documentId'];
 
       try {
         await tenantRef!.collection('products').doc(documentId).delete();

@@ -44,4 +44,48 @@ class BidsDb {
     print("*DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
     return allBids;
   }
+
+  Future<Bid?> findBidByBidId(String bidId) async {
+    final DocumentReference<Object?>? tenantRef =
+        await TenantDB().getTenantReference();
+
+    try {
+      QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
+          .collection('bids')
+          .where('bidId', isEqualTo: bidId)
+          .get();
+
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+
+      return Bid.fromMap(currentProduct.docs.first.data());
+    } catch (err) {
+      print('err');
+      return null;
+    }
+  }
+
+  Future<void> closeBidFlag(String bidId) async {
+    Bid? currentBid = await findBidByBidId(bidId);
+    if (currentBid != null) {
+      final DocumentReference<Object?>? tenantRef =
+          await TenantDB().getTenantReference();
+
+      try {
+        final CollectionReference<Map<String, dynamic>> bidsList =
+            tenantRef!.collection('bids');
+        // final updateOpenBidFlagDbObject =
+        //     await bidsList.doc();
+        // updateOpenBidFlagDbObject
+        //     .set({"openFlag": false}, SetOptions(merge: true));
+
+        //DEBUG LOG - CLEAR BEFORE PRODUCTION
+        print(
+            "*DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
 }

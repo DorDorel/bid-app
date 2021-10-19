@@ -13,7 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseSevice {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String tenant = TenantDB().curentTenantId;
+  final String tenant = TenantDB().currentTenantId;
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');

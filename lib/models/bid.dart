@@ -1,7 +1,7 @@
 import 'package:bid/models/product.dart';
 
 class Bid {
-  bool? openFlag = true;
+  bool? openFlag;
   final String bidId;
   final String createdBy;
   final DateTime date;

@@ -36,6 +36,7 @@ flutter:
     - assets/fonts/ArialUnicodeMS.ttf
     - assets/images/bid_archive.jpeg
     - assets/images/bid_open.jpeg
+    - assets/images/admin.jpeg
  
 
   # An image asset can refer to one or more resolution-specific "variants", see
