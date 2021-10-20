@@ -25,6 +25,8 @@ dependencies:
   image_picker: ^0.8.3+2
   # check permission
   permission_handler: ^8.2.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,6 +39,8 @@ flutter:
     - assets/images/bid_archive.jpeg
     - assets/images/bid_open.jpeg
     - assets/images/admin.jpeg
+    - assets/images/img_login.png
+    - assets/images/new_bid_img.jpg
  
 
   # An image asset can refer to one or more resolution-specific "variants", see
