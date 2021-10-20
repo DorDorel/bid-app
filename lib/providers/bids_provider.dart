@@ -7,15 +7,15 @@ class BidsProvider with ChangeNotifier {
   List<Bid> get allBids => [..._allUserBids];
 
   Future<void> fetchData() async {
-    await getBids();
-    notifyListeners();
+    if (_allUserBids.isEmpty) {
+      await getBids();
+      notifyListeners();
+    }
   }
 
   Future<void> getBids() async {
-    if (_allUserBids.isEmpty) {
-      final bids = await BidsDb().getAllUserBids();
-      _allUserBids = bids;
-    }
+    final bids = await BidsDb().getAllUserBids();
+    _allUserBids = bids;
   }
 
   Future<void> setBidInArchive(String bidId) async {
@@ -26,7 +26,8 @@ class BidsProvider with ChangeNotifier {
     } else {}
   }
 
-  void eraseAllUserBidsList() {
+  Future<void> eraseAllUserBid() async {
     _allUserBids = [];
+    notifyListeners();
   }
 }

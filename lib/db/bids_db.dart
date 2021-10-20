@@ -50,7 +50,7 @@ class BidsDb {
         await TenantDB().getTenantReference();
 
     try {
-      QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
+      QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
           .collection('bids')
           .where('bidId', isEqualTo: bidId)
           .get();
@@ -59,7 +59,28 @@ class BidsDb {
       print(
           "*DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
 
-      return Bid.fromMap(currentProduct.docs.first.data());
+      return Bid.fromMap(currentBid.docs.first.data());
+    } catch (err) {
+      print('err');
+      return null;
+    }
+  }
+
+  Future<String?> findBidDocByBidId(String bidId) async {
+    final DocumentReference<Object?>? tenantRef =
+        await TenantDB().getTenantReference();
+
+    try {
+      QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
+          .collection('bids')
+          .where('bidId', isEqualTo: bidId)
+          .get();
+
+      //DEBUG LOG - CLEAR BEFORE PRODUCTION
+      print(
+          "*DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+
+      return currentBid.docs.first.id;
     } catch (err) {
       print('err');
       return null;
@@ -75,10 +96,10 @@ class BidsDb {
       try {
         final CollectionReference<Map<String, dynamic>> bidsList =
             tenantRef!.collection('bids');
-        // final updateOpenBidFlagDbObject =
-        //     await bidsList.doc();
-        // updateOpenBidFlagDbObject
-        //     .set({"openFlag": false}, SetOptions(merge: true));
+        final bidDocId = await findBidDocByBidId(bidId);
+        final DocumentReference updateOpenBidFlagDbObject =
+            bidsList.doc(bidDocId);
+        updateOpenBidFlagDbObject.update({"openFlag": false});
 
         //DEBUG LOG - CLEAR BEFORE PRODUCTION
         print(

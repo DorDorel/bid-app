@@ -45,7 +45,9 @@ class BidTile extends StatelessWidget {
                         Icons.email,
                         color: Colors.blueGrey,
                       ))
-                  : OpenTileMenu(),
+                  : OpenTileMenu(
+                      bidId: bidId,
+                    ),
             ),
           ],
         ),

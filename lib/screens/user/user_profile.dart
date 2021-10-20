@@ -68,8 +68,17 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text('Email: $userProfileMail'),
-          Text('User Id: $uid'),
+          Text(
+            'Email: $userProfileMail',
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 6.0,
+          ),
+          Text(
+            'User Id: $uid',
+            style: TextStyle(fontSize: 14.0),
+          ),
           Text('Tenant Id: $tenantId'),
           SizedBox(
             height: 80,

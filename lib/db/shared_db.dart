@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:bid/db/tenant_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 
 class SharedDb {
   Future<int> getCurrentBidId() async {
-    int curretnBidId = 0;
+    int currentBidId = 0;
 
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
@@ -21,10 +18,10 @@ class SharedDb {
 
     bidConfigDocObj.data()!.forEach((key, value) {
       if (key == "currentBidId") {
-        curretnBidId = value;
+        currentBidId = value;
       }
     });
-    return curretnBidId;
+    return currentBidId;
   }
 
   Future<bool> updateBidId() async {

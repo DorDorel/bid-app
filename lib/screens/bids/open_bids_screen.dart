@@ -34,24 +34,29 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
                     color: Colors.black,
                   ),
                 )
-              : ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: bidsData.allBids.length,
-                  itemBuilder: (_, index) => Column(
-                        children: [
-                          bidsData.allBids[index].openFlag!
-                              ? BidTile(
-                                  archiveScreen: false,
-                                  isOpen: bidsData.allBids[index].openFlag!,
-                                  clientName:
-                                      bidsData.allBids[index].clientName,
-                                  bidId: bidsData.allBids[index].bidId,
-                                  clientMail:
-                                      bidsData.allBids[index].clientMail,
-                                )
-                              : SizedBox.shrink()
-                        ],
-                      )),
+              : RefreshIndicator(
+                  backgroundColor: Colors.black,
+                  color: Colors.white,
+                  onRefresh: () => bidsData.eraseAllUserBid(),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: bidsData.allBids.length,
+                      itemBuilder: (_, index) => Column(
+                            children: [
+                              bidsData.allBids[index].openFlag!
+                                  ? BidTile(
+                                      archiveScreen: false,
+                                      isOpen: bidsData.allBids[index].openFlag!,
+                                      clientName:
+                                          bidsData.allBids[index].clientName,
+                                      bidId: bidsData.allBids[index].bidId,
+                                      clientMail:
+                                          bidsData.allBids[index].clientMail,
+                                    )
+                                  : SizedBox.shrink()
+                            ],
+                          )),
+                ),
         ));
   }
 }
