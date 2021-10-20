@@ -3,6 +3,7 @@ import 'package:bid/controllers/create_bid_controoler.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/db/shared_db.dart';
 import 'package:bid/models/bid.dart';
+import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
@@ -24,6 +25,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     final currentBidData = Provider.of<NewBidsProvider>(context);
+    final bidsData = Provider.of<BidsProvider>(context);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.8,
@@ -62,8 +64,9 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),
             child: NextButton(
                 title: 'CREATE BID',
-                onPressed: () {
+                onPressed: () async {
                   _createBid();
+                  await bidsData.eraseAllUserBid();
                 })));
   }
 
