@@ -1,6 +1,6 @@
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
-import 'package:bid/screens/tenant/company_onboarding/add_new_company.dart';
+import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,10 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
           automaticallyImplyLeading: false,
           title: Text(
             'Welcome',
-            style: TextStyle(color: Theme.of(context).primaryColor),
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold),
           )),
       body: Column(
         children: [
+          Image.asset("assets/images/img_login.png"),
           Container(
             child: Column(
               children: [
@@ -55,31 +59,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (value) => {password = value},
                 ),
                 SizedBox(height: 50.0),
-                Container(
-                  child: TextButton(
-                    onPressed: () async {
-                      bool result =
-                          await _auth.signIn(email: email, password: password);
-                      if (!result) {
-                        print('!!!AUTHENTICATION ERROR!!!');
-                      } else {
-                        Navigator.pushNamed(context, MainDashboard.routeName);
-                      }
-                    },
-                    child: Text('Sign In'),
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AddNewCompany.routeName,
-                      );
-                    },
-                    child: Text('Register Your Business'))
               ],
             ),
-          )
+          ),
+          Container(
+            child: NextButton(
+              title: "Sign In",
+              onPressed: () async {
+                bool result =
+                    await _auth.signIn(email: email, password: password);
+                if (!result) {
+                  print('!!!AUTHENTICATION ERROR!!!');
+                } else {
+                  Navigator.pushNamed(context, MainDashboard.routeName);
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
