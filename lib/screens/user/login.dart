@@ -17,67 +17,92 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Welcome',
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold),
-          )),
-      body: Column(
-        children: [
-          Image.asset("assets/images/img_login.png"),
-          Container(
-            child: Column(
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: 'EMAIL',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green))),
-                  onChanged: (value) => {email = value},
-                ),
-                SizedBox(
-                  height: 16.0,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: 'PASSWORD ',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green))),
-                  obscureText: true,
-                  onChanged: (value) => {password = value},
-                ),
-                SizedBox(height: 50.0),
-              ],
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Welcome',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
+            )),
+        body: Column(
+          children: [
+            Image.asset("assets/images/img_login.png"),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                      width: 400,
+                      height: 60,
+                      child: TextField(
+                        style: TextStyle(fontSize: 24),
+                        decoration: InputDecoration(
+                            labelText: 'EMAIL',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
+                        onChanged: (value) => {email = value},
+                      )),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  Container(
+                    width: 400,
+                    height: 60,
+                    child: TextField(
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      decoration: InputDecoration(
+                          labelText: 'PASSWORD ',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.green))),
+                      obscureText: true,
+                      onChanged: (value) => {password = value},
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot your password?",
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Support",
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
+          ],
+        ),
+        bottomNavigationBar: Padding(
+            padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),
             child: NextButton(
-              title: "Sign In",
-              onPressed: () async {
-                bool result =
-                    await _auth.signIn(email: email, password: password);
-                if (!result) {
-                  print('!!!AUTHENTICATION ERROR!!!');
-                } else {
-                  Navigator.pushNamed(context, MainDashboard.routeName);
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+                title: "Sign In",
+                onPressed: () async {
+                  bool result =
+                      await _auth.signIn(email: email, password: password);
+                  if (!result) {
+                    print('!!!AUTHENTICATION ERROR!!!');
+                  } else {
+                    Navigator.pushNamed(context, MainDashboard.routeName);
+                  }
+                })));
   }
 }

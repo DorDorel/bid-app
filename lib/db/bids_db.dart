@@ -42,6 +42,8 @@ class BidsDb {
     }
     //DEBUG LOG - CLEAR BEFORE PRODUCTION
     print("*DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+
+    allBids.sort((a, b) => a.bidId.compareTo(b.bidId));
     return allBids;
   }
 
