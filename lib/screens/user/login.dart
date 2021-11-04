@@ -26,70 +26,72 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold),
             )),
-        body: Column(
-          children: [
-            Image.asset("assets/images/img_login.png"),
-            Container(
-              child: Column(
-                children: [
-                  Container(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset("assets/images/img_login.png"),
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                        width: 400,
+                        height: 60,
+                        child: TextField(
+                          style: TextStyle(fontSize: 24),
+                          decoration: InputDecoration(
+                              labelText: 'EMAIL',
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.green))),
+                          onChanged: (value) => {email = value},
+                        )),
+                    SizedBox(
+                      height: 2.0,
+                    ),
+                    Container(
                       width: 400,
                       height: 60,
                       child: TextField(
-                        style: TextStyle(fontSize: 24),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 24),
                         decoration: InputDecoration(
-                            labelText: 'EMAIL',
+                            labelText: 'PASSWORD ',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey),
                             focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.green))),
-                        onChanged: (value) => {email = value},
-                      )),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  Container(
-                    width: 400,
-                    height: 60,
-                    child: TextField(
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                      decoration: InputDecoration(
-                          labelText: 'PASSWORD ',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
-                      obscureText: true,
-                      onChanged: (value) => {password = value},
+                        obscureText: true,
+                        onChanged: (value) => {password = value},
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10.0),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forgot your password?",
-                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    SizedBox(height: 4.0),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot your password?",
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Support",
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Support",
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         bottomNavigationBar: Padding(
             padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),

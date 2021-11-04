@@ -8,23 +8,23 @@ dependencies:
   flutter:
     sdk: flutter
   # firebase services
-  firebase_auth: ^1.2.0
-  cloud_firestore: ^2.2.0
-  firebase_core: ^1.2.0
-  cloud_functions: ^3.0.0
-  firebase_storage: ^10.0.1
+  firebase_auth: ^3.1.4
+  cloud_firestore: ^2.5.4
+  firebase_core: ^1.8.0
+  cloud_functions: ^3.0.5
+  firebase_storage: ^10.0.6
  # Cupertino Icons and font 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
   # state 
   provider: ^6.0.1
   # save file
-  path_provider: ^2.0.1
+  path_provider: ^2.0.6
   # format dates
   intl: ^0.17.0
   # take image
-  image_picker: ^0.8.3+2
+  image_picker: ^0.8.4+4
   # check permission
-  permission_handler: ^8.2.2
+  permission_handler: ^8.2.6
 
 
 dev_dependencies:
@@ -41,19 +41,7 @@ flutter:
     - assets/images/admin.jpeg
     - assets/images/img_login.png
     - assets/images/new_bid_img.jpg
- 
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -66,5 +54,4 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+

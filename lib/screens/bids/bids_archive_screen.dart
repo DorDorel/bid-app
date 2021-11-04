@@ -13,7 +13,6 @@ class BidsArchiveScreen extends StatefulWidget {
 
 class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
   @override
-  @override
   Widget build(BuildContext context) {
     // data init
     final bidsData = Provider.of<BidsProvider>(context);
