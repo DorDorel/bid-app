@@ -66,6 +66,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
                 title: 'CREATE BID',
                 onPressed: () async {
                   _createBid();
+                  // eraseAllUserBid becuse we want to re-reading from Bidsdb
                   await bidsData.eraseAllUserBid();
                 })));
   }
