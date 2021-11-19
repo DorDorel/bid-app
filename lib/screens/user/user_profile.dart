@@ -112,7 +112,7 @@ class AdminButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, AdminScreen.routeName),
         child: HomeCard(
-            imagePatch: "assets/images/admin.jpeg",
+            imagePatch: "",
             title: "Admin Panel",
             subtitle: "Mange your Bids system"),
       ),

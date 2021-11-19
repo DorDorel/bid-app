@@ -30,6 +30,7 @@
 .pub/
 /build/
 /lib/sandbox.dart
+analysis_options.yaml
 
 # Web related
 lib/generated_plugin_registrant.dart

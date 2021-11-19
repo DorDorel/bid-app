@@ -42,7 +42,7 @@ class MainDashboard extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, OpenBidScreen.routeName),
             child: const HomeCard(
-                imagePatch: "assets/images/bid_open.jpeg",
+                imagePatch: "",
                 title: "Open Bids",
                 subtitle: "Unmarked bids are closed"),
           ),
@@ -50,7 +50,7 @@ class MainDashboard extends StatelessWidget {
             onTap: () =>
                 Navigator.pushNamed(context, BidsArchiveScreen.routeName),
             child: const HomeCard(
-                imagePatch: "assets/images/bid_archive.jpeg",
+                imagePatch: "",
                 title: "Bids Archive",
                 subtitle: "The bid history you submitted"),
           )
