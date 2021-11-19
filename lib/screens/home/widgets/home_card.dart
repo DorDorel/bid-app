@@ -21,7 +21,7 @@ class HomeCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Image(image: AssetImage(imagePatch)),
+              // leading: Image(image: AssetImage(imagePatch)),
               title: Text(title,
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
