@@ -29,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset("assets/images/img_login.png"),
               Container(
                 child: Column(
                   children: [

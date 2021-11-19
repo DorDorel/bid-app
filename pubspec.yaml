@@ -42,11 +42,7 @@ flutter:
   assets:
     - assets/fonts/VarelaRound-Regular.ttf
     - assets/fonts/ArialUnicodeMS.ttf
-    - assets/images/bid_archive.jpeg
-    - assets/images/bid_open.jpeg
-    - assets/images/admin.jpeg
-    - assets/images/img_login.png
-    - assets/images/new_bid_img.jpg
+  
 
   # fonts:
   #   - family: Schyler

@@ -70,7 +70,6 @@ class _NewBidFormState extends State<NewBidForm> {
             const SizedBox(height: 40),
             buildNextButton(),
             const SizedBox(height: 32),
-            Image.asset("assets/images/new_bid_img.jpg")
           ],
         ),
       ),
