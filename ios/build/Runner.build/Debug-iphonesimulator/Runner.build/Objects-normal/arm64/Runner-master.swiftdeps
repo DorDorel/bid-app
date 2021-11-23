@@ -1,6 +1,6 @@
-version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+version: "Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)"
 options: "c15ddc0a2b4b117e98cd47fad87cf623fab4299eaf8dd37d79756372d1a46330"
-build_start_time: [1633620913, 128438949]
-build_end_time: [1633620913, 173915863]
+build_start_time: [1637312406, 959347963]
+build_end_time: [1637312407, 44475078]
 inputs:
   "/Users/dor/bid-app/ios/Runner/AppDelegate.swift": !private [1628622430, 873289108]

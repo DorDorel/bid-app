@@ -1,6 +1,6 @@
 import 'package:bid/models/user.dart';
 
-enum Status { activty, stopped, paused, not_completed }
+enum Status { activity, stopped, paused, not_completed }
 
 class Company {
   // Status status = Status.not_completed;

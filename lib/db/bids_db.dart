@@ -41,7 +41,8 @@ class BidsDb {
       print(err);
     }
     //DEBUG LOG - CLEAR BEFORE PRODUCTION
-    print("*DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+    print(
+        "🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
 
     allBids.sort((a, b) => a.bidId.compareTo(b.bidId));
     return allBids;
@@ -59,7 +60,7 @@ class BidsDb {
 
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+          "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
 
       return Bid.fromMap(currentBid.docs.first.data());
     } catch (err) {
@@ -80,7 +81,7 @@ class BidsDb {
 
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+          "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
 
       return currentBid.docs.first.id;
     } catch (err) {
@@ -105,7 +106,7 @@ class BidsDb {
 
         //DEBUG LOG - CLEAR BEFORE PRODUCTION
         print(
-            "*DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
+            "🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
       } catch (e) {
         print(e.toString());
       }

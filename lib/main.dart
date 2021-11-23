@@ -100,7 +100,7 @@ class AuthenticationWrapper extends StatelessWidget {
       tenantProvider.tenantValidation();
 
       print(
-          'user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');
+          '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');
 
       return MainDashboard();
     }

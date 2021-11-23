@@ -22,7 +22,7 @@ class TenantDB {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
+          "🐛  *DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
 
       final DocumentReference tenantReference =
           companiesCollection.doc(currentTenantId);
@@ -37,7 +37,7 @@ class TenantDB {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
+          "*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
 
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
           .where('uid', isEqualTo: await getCurrentUserUID)

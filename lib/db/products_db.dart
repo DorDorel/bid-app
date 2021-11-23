@@ -33,7 +33,7 @@ class ProductsDb {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - getAllProducts from ProductsDb reading");
+          "🐛 *DEBUG LOG* : Database Query - getAllProducts from ProductsDb reading");
 
       QuerySnapshot<Map<String, dynamic>> productsCollection =
           await tenantRef!.collection('products').get();
@@ -53,7 +53,7 @@ class ProductsDb {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - findProductByProductId from ProductsDb reading");
+          "🐛 *DEBUG LOG* : Database Query - findProductByProductId from ProductsDb reading");
 
       QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
           .collection('products')
@@ -73,7 +73,7 @@ class ProductsDb {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - findFirestoreDocumentId from ProductsDb reading");
+          "*🐛 DEBUG LOG* : Database Query - findFirestoreDocumentId from ProductsDb reading");
 
       QuerySnapshot<Map<String, dynamic>> currentProduct = await tenantRef!
           .collection('products')
@@ -92,7 +92,7 @@ class ProductsDb {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
       print(
-          "*DEBUG LOG* : Database Query - removeProduct from ProductsDb reading");
+          "*🐛 DEBUG LOG* : Database Query - removeProduct from ProductsDb reading");
 
       QuerySnapshot<Map<String, dynamic>>? currentProduct =
           await findFirestoreDocumentId(productId);
