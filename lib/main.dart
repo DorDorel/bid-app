@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/new_bids_provider.dart';
@@ -19,11 +21,19 @@ import 'package:bid/screens/user/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'local/notification_db.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Directory document = await getApplicationDocumentsDirectory();
+  Hive.init(document.path);
+  await NotificationDb.openBidNotifyBox();
+
   runApp(MyApp());
 }
 
@@ -51,7 +61,12 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<NewBidsProvider>(
               create: (context) => NewBidsProvider()),
           ChangeNotifierProvider<NotificationProvider>(
-              create: (context) => NotificationProvider())
+              create: (context) => NotificationProvider(null)),
+          ChangeNotifierProxyProvider<BidsProvider, NotificationProvider>(
+            create: (context) => NotificationProvider(null),
+            update: (_, bidsProviderObject, __) =>
+                NotificationProvider(bidsProviderObject.allBids),
+          )
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -99,9 +114,9 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       tenantProvider.tenantValidation();
 
+      //auth info log
       print(
           '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');
-
       return MainDashboard();
     }
     return LoginScreen();

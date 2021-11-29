@@ -44,12 +44,7 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
                           !bidsData.allBids[index].openFlag!
                               ? BidTile(
                                   archiveScreen: true,
-                                  isOpen: bidsData.allBids[index].openFlag!,
-                                  clientName:
-                                      bidsData.allBids[index].clientName,
-                                  bidId: bidsData.allBids[index].bidId,
-                                  clientMail:
-                                      bidsData.allBids[index].clientMail,
+                                  bid: bidsData.allBids[index],
                                 )
                               : SizedBox.shrink()
                         ],

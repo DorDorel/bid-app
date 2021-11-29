@@ -16,6 +16,7 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
     bidsData.fetchData();
+
     return Scaffold(
       appBar: AppBar(
           elevation: 0.8,
@@ -40,10 +41,7 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
                         bidsData.allBids[index].openFlag!
                             ? BidTile(
                                 archiveScreen: false,
-                                isOpen: bidsData.allBids[index].openFlag!,
-                                clientName: bidsData.allBids[index].clientName,
-                                bidId: bidsData.allBids[index].bidId,
-                                clientMail: bidsData.allBids[index].clientMail,
+                                bid: bidsData.allBids[index],
                               )
                             : SizedBox.shrink()
                       ],

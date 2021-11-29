@@ -10,7 +10,6 @@ import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
   static const routeName = '/main_dashboard';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

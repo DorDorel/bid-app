@@ -18,14 +18,6 @@ class BidsProvider with ChangeNotifier {
     _allUserBids = bids;
   }
 
-  Future<void> setBidInArchive(String bidId) async {
-    BidsDb bid = BidsDb();
-    Bid? currentBid = await bid.findBidByBidId(bidId);
-    if (currentBid == null) {
-      print("bid not found");
-    } else {}
-  }
-
   Future<void> eraseAllUserBid() async {
     _allUserBids = [];
     notifyListeners();
