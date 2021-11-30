@@ -13,10 +13,10 @@ class TenantProvider with ChangeNotifier {
       print('not validate SIGNING OUT!');
       await AuthenticationService().signOut();
     }
-    await checkAdminAsync();
+    await _checkAdminAsync();
   }
 
-  Future<bool> checkAdminAsync() async {
+  Future<bool> _checkAdminAsync() async {
     checkAdmin = await DatabaseSevice().isAdmin();
     return checkAdmin;
   }

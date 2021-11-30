@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bid/auth/auth_service.dart';
 import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/new_bids_provider.dart';
@@ -14,15 +12,13 @@ import 'package:bid/screens/bids/bids_archive_screen.dart';
 import 'package:bid/screens/bids/create_bid_screen.dart';
 import 'package:bid/screens/bids/open_bids_screen.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
-import 'package:bid/screens/notification/notifcation_screen.dart';
+import 'package:bid/screens/notification/notification_screen.dart';
 import 'package:bid/screens/tenant/company_onboarding/add_new_company.dart';
 import 'package:bid/screens/user/login.dart';
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'local/notification_db.dart';
@@ -30,8 +26,6 @@ import 'local/notification_db.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Directory document = await getApplicationDocumentsDirectory();
-  Hive.init(document.path);
   await NotificationDb.openBidNotifyBox();
 
   runApp(MyApp());
@@ -111,9 +105,9 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
     final tenantProvider = Provider.of<TenantProvider>(context);
+
     if (firebaseUser != null) {
       tenantProvider.tenantValidation();
-
       //auth info log
       print(
           '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${tenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');

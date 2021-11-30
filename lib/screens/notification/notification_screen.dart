@@ -1,4 +1,5 @@
 import 'package:bid/providers/notification_provider.dart';
+import 'package:bid/screens/notification/widgets/notification_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,8 +31,9 @@ class NotificationsScreen extends StatelessWidget {
             itemCount: notificationData.getRelevantNotificationBid.length,
             itemBuilder: (_, index) => Column(
                   children: [
-                    Text(notificationData
-                        .getRelevantNotificationBid[index].bidId)
+                    NotificationListTile(
+                      bid: notificationData.getRelevantNotificationBid[index],
+                    )
                   ],
                 )));
   }

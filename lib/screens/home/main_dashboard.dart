@@ -1,15 +1,20 @@
 import 'package:bid/controllers/product_bid_controller.dart';
+import 'package:bid/providers/bids_provider.dart';
+import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/bids/bids_archive_screen.dart';
 import 'package:bid/screens/bids/open_bids_screen.dart';
 import 'package:bid/screens/home/widgets/home_card.dart';
-import 'package:bid/screens/notification/notifcation_screen.dart';
+import 'package:bid/screens/notification/notification_screen.dart';
+
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatelessWidget {
   static const routeName = '/main_dashboard';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

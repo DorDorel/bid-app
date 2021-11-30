@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:bid/models/bid.dart';
 import 'package:bid/providers/notification_provider.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
 class NotificationDb {
   final Bid bid;
@@ -9,6 +12,8 @@ class NotificationDb {
   static Box? notifyBox;
   static Future<void> openBidNotifyBox() async {
     try {
+      Directory document = await getApplicationDocumentsDirectory();
+      Hive.init(document.path);
       notifyBox = await Hive.openBox<String>('bidNotify');
     } catch (err) {
       print(err);
