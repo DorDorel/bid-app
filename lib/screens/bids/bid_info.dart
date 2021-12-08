@@ -1,6 +1,7 @@
-import 'package:bid/local/notification_db.dart';
+import 'package:bid/local/local_reminder.dart';
 import 'package:bid/models/bid.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BidInfo extends StatelessWidget {
   final Bid bid;
@@ -12,6 +13,7 @@ class BidInfo extends StatelessWidget {
   final TextStyle regularTextStyle = TextStyle(fontSize: 20);
   final TextStyle boldTextStyle =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,24 +37,54 @@ class BidInfo extends StatelessWidget {
             Text("Final Price: " + bid.finalPrice.toString(),
                 style: regularTextStyle),
             Text(bid.clientMail),
+            setReminderButton(context),
             TextButton(
                 onPressed: () {
-                  NotificationDb(bid: bid).setBidReminder();
+                  LocalReminder.getAllReminders();
                 },
-                child: Text("Reminder")),
+                child: Text("get all")),
             TextButton(
                 onPressed: () {
-                  NotificationDb.getReminder();
+                  // NotificationDb(bid: bid).removeReminder();
                 },
-                child: Text("get")),
+                child: Text("remove ")),
             TextButton(
                 onPressed: () {
-                  NotificationDb(bid: bid).removeReminder();
+                  LocalReminder.removeAllReminders();
                 },
-                child: Text("remove"))
+                child: Text("remove all"))
           ],
         ),
       ),
     );
+  }
+
+  Widget setReminderButton(BuildContext context) {
+    String noteInput = "";
+    return TextButton(
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Column(children: [
+                  TextFormField(
+                    decoration: const InputDecoration(hintText: "Write a note"),
+                    maxLines: 2,
+                    onChanged: (value) => noteInput = value,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.black),
+                        onPressed: () {
+                          LocalReminder(bid: bid, note: noteInput)
+                              .setBidReminder();
+                        },
+                        child: Text("Set Reminder")),
+                  ),
+                ]);
+              });
+        },
+        child: Text("Reminder"));
   }
 }

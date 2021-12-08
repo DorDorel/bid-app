@@ -16,8 +16,10 @@
 .idea/
 
 
-.vscode/
-.firebaserc
+*.vscode
+.firebaserc/
+*.github/
+
 
 # Flutter/Dart/Pub related
 **/doc/api/

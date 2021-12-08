@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 class StorageService {
   final _storage = FirebaseStorage.instance;
-  final String tenantId = TenantProvider().tenantId;
+  final String tenantId = TenantProvider.tenantId;
 
   Future<String> _getCurrentTenantFolder() async {
     await TenantProvider().tenantValidation();

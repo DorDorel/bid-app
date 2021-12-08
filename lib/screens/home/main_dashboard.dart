@@ -1,20 +1,23 @@
 import 'package:bid/controllers/product_bid_controller.dart';
-import 'package:bid/providers/bids_provider.dart';
-import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/bids/bids_archive_screen.dart';
 import 'package:bid/screens/bids/open_bids_screen.dart';
 import 'package:bid/screens/home/widgets/home_card.dart';
+import 'package:bid/screens/home/widgets/reminders_preview.dart';
 import 'package:bid/screens/notification/notification_screen.dart';
 
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../bids/create_bid_screen.dart';
 
-class MainDashboard extends StatelessWidget {
+class MainDashboard extends StatefulWidget {
   static const routeName = '/main_dashboard';
 
+  @override
+  State<MainDashboard> createState() => _MainDashboardState();
+}
+
+class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,11 @@ class MainDashboard extends StatelessWidget {
                 imagePatch: "",
                 title: "Bids Archive",
                 subtitle: "The bid history you submitted"),
-          )
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          remindersPrivew(context)
         ],
       ),
       floatingActionButton: FloatingActionButton(

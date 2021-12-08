@@ -1,5 +1,5 @@
-import 'package:bid/providers/notification_provider.dart';
-import 'package:bid/screens/notification/widgets/notification_list_tile.dart';
+import 'package:bid/providers/reminder_provider.dart';
+import 'package:bid/screens/notification/widgets/reminder_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,8 +8,10 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notificationData = Provider.of<NotificationProvider>(context);
-    notificationData.initRelevantNotificationBid();
+    // final notificationData = Provider.of<NotificationProvider>(context);
+    // notificationData.initRelevantNotificationBid();
+
+    final reminderData = Provider.of<ReminderProvider>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -28,11 +30,11 @@ class NotificationsScreen extends StatelessWidget {
         ),
         body: ListView.builder(
             shrinkWrap: true,
-            itemCount: notificationData.getRelevantNotificationBid.length,
+            itemCount: reminderData.getReminders.length,
             itemBuilder: (_, index) => Column(
                   children: [
-                    NotificationListTile(
-                      bid: notificationData.getRelevantNotificationBid[index],
+                    ReminderListTile(
+                      reminder: reminderData.getReminders[index],
                     )
                   ],
                 )));

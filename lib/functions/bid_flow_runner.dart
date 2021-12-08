@@ -13,7 +13,7 @@ class BidFlowRunner {
   FirebaseFunctions functions = FirebaseFunctions.instance;
 
   Future<void> runner() async {
-    final String tenant = TenantProvider().tenantId;
+    final String tenant = TenantProvider.tenantId;
 
     print('Here cloud function running');
 

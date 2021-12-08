@@ -41,7 +41,7 @@ class UserConfig extends StatelessWidget {
             ? ProfileBody(
                 userProfileMail: firebaseUser.email.toString(),
                 uid: firebaseUser.uid.toString(),
-                tenantId: tenantProvider.tenantId,
+                tenantId: TenantProvider.tenantId,
               )
             : CircularProgressIndicator());
   }

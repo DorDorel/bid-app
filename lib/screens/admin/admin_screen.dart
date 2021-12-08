@@ -1,6 +1,7 @@
 import 'package:bid/db/bids_db.dart';
 import 'package:bid/db/database.dart';
 import 'package:bid/db/db_test_conection.dart';
+import 'package:bid/local/tenant_cache_box.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
 import 'package:bid/widgets/admin_button_textStyle.dart';
 
@@ -103,9 +104,8 @@ class AdminScreen extends StatelessWidget {
                 width: 350,
                 height: 80,
                 child: TextButton(
-                    onPressed: () async {
-                      BidsDb hi = BidsDb();
-                      await hi.getAllUserBids();
+                    onPressed: () {
+                      print(TenantCacheBox.tenantCashBox!.get("tenantId"));
                     },
                     child: Text(
                       'Test Button',

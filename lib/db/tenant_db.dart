@@ -1,3 +1,4 @@
+import 'package:bid/local/tenant_cache_box.dart';
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,7 @@ class TenantDB {
   Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
 
   static String _currentTenantId = '';
-  String get currentTenantId => _currentTenantId;
+  static String get currentTenantId => _currentTenantId;
 
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
@@ -17,6 +18,14 @@ class TenantDB {
       _db.collection('companies');
   final CollectionReference<Map<String, dynamic>> usersCollectionMap =
       _db.collection('users');
+
+  bool setTenantIdFromLocalCache(String tenantId) {
+    _currentTenantId = tenantId;
+    if (_currentTenantId.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 
   Future<DocumentReference?> getTenantReference() async {
     try {
@@ -59,7 +68,6 @@ class TenantDB {
 
       if (firstValidation == secondValidation) {
         _currentTenantId = firstValidation;
-
         return true;
       } else {
         return false;

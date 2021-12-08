@@ -1,6 +1,9 @@
+import 'package:bid/local/tenant_cache_box.dart';
+import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/bids/product_selection_screen.dart';
 import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateBidScreen extends StatefulWidget {
   static const routeName = '/create_new_bid';
@@ -12,6 +15,12 @@ class CreateBidScreen extends StatefulWidget {
 class _CreateBidScreenState extends State<CreateBidScreen> {
   @override
   Widget build(BuildContext context) {
+    //
+    if (TenantCacheBox.tenantCashBox!.isEmpty) {
+      final tenantProvider = Provider.of<TenantProvider>(context);
+      tenantProvider.setTenantIdInLocalCache();
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.8,

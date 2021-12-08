@@ -13,7 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseSevice {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String tenant = TenantDB().currentTenantId;
+  final String tenant = TenantDB.currentTenantId;
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');
@@ -66,7 +66,7 @@ class DatabaseSevice {
 
   Future<bool> isAdmin() async {
     String uid = await AuthenticationService().getCurrentUserUID;
-    String tenantId = TenantProvider().tenantId;
+    String tenantId = TenantProvider.tenantId;
 
     final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
     final CollectionReference<Map<String, dynamic>> userList =
