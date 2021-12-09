@@ -31,6 +31,7 @@ class UserConfig extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () async {
+                  await tenantProvider.removeTenantIdFromLocalCache();
                   await _auth.signOut();
                   Navigator.pushNamed(context, LoginScreen.routeName);
                 },

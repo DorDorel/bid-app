@@ -25,6 +25,7 @@ class ReminderListTile extends StatelessWidget {
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(reminder.note),
             Text(reminder.bidId),

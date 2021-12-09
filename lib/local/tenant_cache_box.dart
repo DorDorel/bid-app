@@ -28,6 +28,11 @@ class TenantCacheBox {
     }
   }
 
+  static removeTenantId() async {
+    await _tenantCasheBox!.delete("tenantId");
+    print(_tenantCasheBox!.keys);
+  }
+
   static void closeBox() {
     _tenantCasheBox!.close();
     openBoxFlag = false;

@@ -48,4 +48,9 @@ class TenantProvider with ChangeNotifier {
   void closeLocalTenantValidationBox() {
     TenantCacheBox.closeBox();
   }
+
+  removeTenantIdFromLocalCache() async {
+    await TenantCacheBox.removeTenantId();
+    notifyListeners();
+  }
 }
