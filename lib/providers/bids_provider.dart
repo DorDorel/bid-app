@@ -22,4 +22,8 @@ class BidsProvider with ChangeNotifier {
     _allUserBids = [];
     notifyListeners();
   }
+
+  Future<void> updateBidFlag(String bidId) async {
+    await BidsDb().closeBidFlag(bidId);
+  }
 }

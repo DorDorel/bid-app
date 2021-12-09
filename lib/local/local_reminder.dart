@@ -7,12 +7,10 @@ class LocalReminder {
   Bid bid;
   LocalReminder({required this.note, required this.bid});
 
-  static Box? remindersBox;
+  static Box? _remindersBox;
   static Future<void> openbidRemindersBox() async {
     try {
-      // Directory document = await getApplicationDocumentsDirectory();
-      // Hive.init(document.path);
-      remindersBox = await Hive.openBox<String>('remindersBox');
+      _remindersBox = await Hive.openBox<String>('remindersBox');
     } catch (err) {
       print(err);
     }
@@ -21,7 +19,7 @@ class LocalReminder {
   static List<Reminder> getAllReminders() {
     List<Reminder> remindersList = [];
 
-    final Map<dynamic, dynamic> reminderBoxMapObj = remindersBox!.toMap();
+    final Map<dynamic, dynamic> reminderBoxMapObj = _remindersBox!.toMap();
     reminderBoxMapObj.forEach((key, value) {
       Reminder reminder = Reminder(bidId: key, note: value);
       remindersList.add(reminder);
@@ -30,9 +28,9 @@ class LocalReminder {
     return remindersList;
   }
 
-  static void removeAllReminders() {
+  static removeAllReminders() async {
     try {
-      remindersBox!.clear();
+      await _remindersBox!.clear();
     } catch (error) {
       print(error);
     }
@@ -40,17 +38,17 @@ class LocalReminder {
 
   void setBidReminder() {
     try {
-      if (!remindersBox!.keys.contains(bid.bidId)) {
-        remindersBox!.put(bid.bidId, note);
+      if (!_remindersBox!.keys.contains(bid.bidId)) {
+        _remindersBox!.put(bid.bidId, note);
       }
     } catch (err) {
       print(err);
     }
   }
 
-  void removeReminder() {
+  static removeReminder(String bidId) async {
     try {
-      remindersBox!.delete(bid.bidId);
+      await _remindersBox!.delete(bidId);
     } catch (err) {
       print(err);
     }

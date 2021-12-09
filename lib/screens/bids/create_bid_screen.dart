@@ -15,7 +15,13 @@ class CreateBidScreen extends StatefulWidget {
 class _CreateBidScreenState extends State<CreateBidScreen> {
   @override
   Widget build(BuildContext context) {
-    //
+    /*
+     this if condition check if its a first time user login in current divice
+     if it is - the tennant id insert to the local db.
+     this location selected becuse new user want to use with app and he try
+     to CREATE NEW BID :)
+    */
+
     if (TenantCacheBox.tenantCashBox!.isEmpty) {
       final tenantProvider = Provider.of<TenantProvider>(context);
       tenantProvider.setTenantIdInLocalCache();

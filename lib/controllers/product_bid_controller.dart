@@ -1,9 +1,12 @@
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/providers/new_bids_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-bool addProductToCurrentBid(Product product, int quantity, double pricePerUnit,
-    int discount, int warrantyMonths, String remark) {
+bool addProductToCurrentBid(BuildContext context, Product product, int quantity,
+    double pricePerUnit, int discount, int warrantyMonths, String remark) {
+  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
   try {
     final SelectedProducts currentProduct = SelectedProducts(
         product: product,
@@ -12,7 +15,7 @@ bool addProductToCurrentBid(Product product, int quantity, double pricePerUnit,
         warrantyMonths: warrantyMonths,
         finalPricePerUnit: pricePerUnit,
         remark: remark);
-    NewBidsProvider().addProductToList(currentProduct);
+    newBidsProvider.addProductToList(currentProduct);
     return true;
   } catch (exp) {
     print(exp);
@@ -20,9 +23,10 @@ bool addProductToCurrentBid(Product product, int quantity, double pricePerUnit,
   }
 }
 
-bool removeProductFromCurrentBid(String productId) {
+bool removeProductFromCurrentBid(BuildContext context, String productId) {
+  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
   try {
-    NewBidsProvider().removeProductFromBid(productId);
+    newBidsProvider.removeProductFromBid(productId);
     return true;
   } catch (exp) {
     print(exp);
@@ -30,8 +34,9 @@ bool removeProductFromCurrentBid(String productId) {
   }
 }
 
-void removeBidDraft() {
-  NewBidsProvider().clearAllCurrentBid();
+void removeBidDraft(BuildContext context) {
+  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
+  newBidsProvider.clearAllCurrentBid();
 }
 
 SelectedProducts? findCurrentProductDataInProductsBidList(String productId) {
@@ -46,9 +51,11 @@ SelectedProducts? findCurrentProductDataInProductsBidList(String productId) {
   }
 }
 
-bool findCurrentProductDataInProductsBidListBoll(String productId) {
+bool findCurrentProductDataInProductsBidListBoll(
+    BuildContext context, String productId) {
+  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
   final List<SelectedProducts> productBidList =
-      NewBidsProvider().getCurrentBidProduct;
+      newBidsProvider.getCurrentBidProduct;
   try {
     productBidList.firstWhere((p) => p.product.productId == productId);
 
@@ -59,7 +66,8 @@ bool findCurrentProductDataInProductsBidListBoll(String productId) {
 }
 
 bool updateCurrentProductDataInBidList(
-    {required String productId,
+    {required BuildContext context,
+    required String productId,
     required Product product,
     required int quantity,
     required double pricePerUnit,
@@ -67,9 +75,11 @@ bool updateCurrentProductDataInBidList(
     required int warrantyMonths,
     required String remark}) {
   try {
-    NewBidsProvider().removeProductFromBid(productId);
-    addProductToCurrentBid(
-        product, quantity, pricePerUnit, discount, warrantyMonths, remark);
+    final newBidsProvider =
+        Provider.of<NewBidsProvider>(context, listen: false);
+    newBidsProvider.removeProductFromBid(productId);
+    addProductToCurrentBid(context, product, quantity, pricePerUnit, discount,
+        warrantyMonths, remark);
     return true;
   } catch (exp) {
     print(exp);
@@ -91,9 +101,11 @@ double calculateDiscount(double originalPrice, double newPrice) {
   return discountValue;
 }
 
-double calculateTotalBidSum() {
+double calculateTotalBidSum(BuildContext context) {
+  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
+
   double totalSum = 0;
-  NewBidsProvider().getCurrentBidProduct.forEach((element) {
+  newBidsProvider.getCurrentBidProduct.forEach((element) {
     int singleProductUnit = element.quantity;
     double priceForAllProductUnits =
         singleProductUnit * element.finalPricePerUnit;

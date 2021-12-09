@@ -69,7 +69,7 @@ class _MainDashboardState extends State<MainDashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          removeBidDraft();
+          removeBidDraft(context);
           Navigator.pushNamed(context, CreateBidScreen.routeName);
         },
         child: Icon(

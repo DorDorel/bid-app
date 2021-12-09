@@ -14,4 +14,22 @@ class ReminderProvider with ChangeNotifier {
       print(err);
     }
   }
+
+  void removeAllReminders() async {
+    try {
+      await LocalReminder.removeAllReminders();
+      updateReminders();
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  void removeReminder(String bidId) async {
+    try {
+      await LocalReminder.removeReminder(bidId);
+      updateReminders();
+    } catch (err) {
+      print(err);
+    }
+  }
 }

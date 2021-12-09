@@ -26,7 +26,7 @@ class TenantProvider with ChangeNotifier {
           TenantCacheBox.tenantCashBox!.get("tenantId");
       bool validate =
           TenantDB().setTenantIdFromLocalCache(tenantIdFromLocalCache);
-      // TenantCacheBox.closeBox();
+
       print("*🐛 DEBUG LOG* : SET TENANT ID FROM LOCAL DB");
       await _checkAdminAsync();
 
@@ -44,4 +44,8 @@ class TenantProvider with ChangeNotifier {
 
   void setTenantIdInLocalCache() =>
       TenantCacheBox(tenantId: tenantId).setTenantIdInCache();
+
+  void closeLocalTenantValidationBox() {
+    TenantCacheBox.closeBox();
+  }
 }

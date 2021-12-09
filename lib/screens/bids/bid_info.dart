@@ -1,5 +1,6 @@
 import 'package:bid/local/local_reminder.dart';
 import 'package:bid/models/bid.dart';
+import 'package:bid/providers/reminder_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,7 @@ class BidInfo extends StatelessWidget {
   }
 
   Widget setReminderButton(BuildContext context) {
+    final reminderData = Provider.of<ReminderProvider>(context);
     String noteInput = "";
     return TextButton(
         onPressed: () {
@@ -79,6 +81,8 @@ class BidInfo extends StatelessWidget {
                         onPressed: () {
                           LocalReminder(bid: bid, note: noteInput)
                               .setBidReminder();
+                          reminderData.updateReminders();
+                          Navigator.pop(context);
                         },
                         child: Text("Set Reminder")),
                   ),

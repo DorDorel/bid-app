@@ -81,7 +81,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         date: DateTime.now(),
         clientName: widget.name,
         clientMail: widget.email,
-        finalPrice: calculateTotalBidSum(),
+        finalPrice: calculateTotalBidSum(context),
         selectedProducts: NewBidsProvider().getCurrentBidProduct);
 
     final startBidFlow = await CreateBidController(

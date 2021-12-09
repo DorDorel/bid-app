@@ -36,7 +36,7 @@ class _ProductListTileState extends State<ProductListTile> {
   @override
   Widget build(BuildContext context) {
     final bool isSelected =
-        findCurrentProductDataInProductsBidListBoll(widget.productId);
+        findCurrentProductDataInProductsBidListBoll(context, widget.productId);
     final SelectedProducts? productSelectedData =
         findCurrentProductDataInProductsBidList(widget.productId);
 
@@ -98,7 +98,7 @@ class PopupOptions extends StatelessWidget {
         edit
             ? IconButton(
                 onPressed: () {
-                  removeProductFromCurrentBid(widget.productId);
+                  removeProductFromCurrentBid(context, widget.productId);
                 },
                 icon: Icon(
                   Icons.remove_circle_outline,
@@ -201,7 +201,7 @@ class _OptionsFormState extends State<OptionsForm> {
             ),
             Column(
               children: [
-                buildAddButton(),
+                buildAddButton(context),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -343,7 +343,7 @@ class _OptionsFormState extends State<OptionsForm> {
         ),
       );
 
-  Widget buildAddButton() => ConstrainedBox(
+  Widget buildAddButton(BuildContext context) => ConstrainedBox(
       constraints: BoxConstraints.tightFor(width: 360, height: 36),
       child: NextButton(
         title: 'ADD',
@@ -356,6 +356,7 @@ class _OptionsFormState extends State<OptionsForm> {
           late bool editFlag = widget.edit;
           if (editFlag) {
             updateCurrentProductDataInBidList(
+                context: context,
                 productId: widget.product.productId,
                 product: widget.product,
                 quantity: quantity,
@@ -365,8 +366,8 @@ class _OptionsFormState extends State<OptionsForm> {
                 remark: remark);
             Navigator.pop(context);
           } else {
-            addProductToCurrentBid(widget.product, quantity, price, discount,
-                warrantyMonths, remark);
+            addProductToCurrentBid(context, widget.product, quantity, price,
+                discount, warrantyMonths, remark);
             Navigator.pop(context);
           }
         },

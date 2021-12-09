@@ -1,4 +1,3 @@
-import 'package:bid/controllers/open_bids_controller.dart';
 import 'package:bid/providers/bids_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +34,7 @@ class OpenTileMenu extends StatelessWidget {
           ),
           IconButton(
               onPressed: () async {
-                await OpenBidController(bidId: bidId).updateBidFlag();
+                await bidsData.updateBidFlag(bidId);
                 bidsData.eraseAllUserBid();
               },
               icon: Icon(

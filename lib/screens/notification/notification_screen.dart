@@ -8,9 +8,6 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final notificationData = Provider.of<NotificationProvider>(context);
-    // notificationData.initRelevantNotificationBid();
-
     final reminderData = Provider.of<ReminderProvider>(context);
 
     return Scaffold(
@@ -26,7 +23,13 @@ class NotificationsScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.delete))],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  reminderData.removeAllReminders();
+                },
+                icon: Icon(Icons.delete))
+          ],
         ),
         body: ListView.builder(
             shrinkWrap: true,
