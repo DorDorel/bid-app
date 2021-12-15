@@ -8,7 +8,7 @@ class LocalReminder {
   LocalReminder({required this.note, required this.bid});
 
   static Box? _remindersBox;
-  static Future<void> openbidRemindersBox() async {
+  static Future<void> openBidRemindersBox() async {
     try {
       _remindersBox = await Hive.openBox<String>('remindersBox');
     } catch (err) {

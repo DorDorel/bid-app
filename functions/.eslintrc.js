@@ -5,14 +5,14 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    "ecmaVersion": 8,
-    "sourceType": "module",
+    ecmaVersion: 8,
+    sourceType: "module",
   },
   extends: [
-    "eslint:recommended",
-    "google",
+    // "eslint:recommended",
+    // "google",
   ],
   rules: {
-    quotes: ["error", "double"],
+    // quotes: ["error", "double"],
   },
 };

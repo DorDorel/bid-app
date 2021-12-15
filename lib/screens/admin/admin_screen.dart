@@ -1,10 +1,7 @@
-import 'package:bid/db/bids_db.dart';
 import 'package:bid/db/database.dart';
 import 'package:bid/db/db_test_conection.dart';
-import 'package:bid/local/tenant_cache_box.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
 import 'package:bid/widgets/admin_button_textStyle.dart';
-
 import 'package:flutter/material.dart';
 
 import 'create_new_user.dart';
@@ -104,9 +101,7 @@ class AdminScreen extends StatelessWidget {
                 width: 350,
                 height: 80,
                 child: TextButton(
-                    onPressed: () {
-                      print(TenantCacheBox.tenantCashBox!.get("tenantId"));
-                    },
+                    onPressed: () {},
                     child: Text(
                       'Test Button',
                       style: textStyleDefault,

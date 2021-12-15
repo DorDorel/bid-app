@@ -2,14 +2,14 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-const cors = require("cors")({origin: true});
+const cors = require("cors")({ origin: true });
 admin.initializeApp();
 const db = admin.firestore();
 
 // dev functions
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
+  functions.logger.info("Hello logs!", { structuredData: true });
   response.send("Hello from Firebase!");
 });
 
@@ -22,9 +22,21 @@ exports.testConection = functions.https.onCall((data, context) => {
 exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
   const tenant = req.query.tenant;
   const bidId = req.query.bid;
+  const creator = req.query.creator;
 
-  const bidDocRef = await db.collection("companies").doc(tenant).collection("bids").doc(bidId).get();
+  const bidDocRef = await db
+    .collection("companies")
+    .doc(tenant)
+    .collection("bids")
+    .doc(bidId)
+    .get();
   const tenantInfo = await db.collection("companies").doc(tenant).get();
+  const creatorDocRef = await db
+    .collection("companies")
+    .doc(tenant)
+    .collection("users")
+    .doc(creator)
+    .get();
   cors(req, res, () => {
     if (req.method !== "POST") {
       return res.status(500).send("<h1> Your access has been denied</h1> ");
@@ -35,9 +47,11 @@ exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
       // fullTenantDetals: tenantDeatls,
 
       companyName: tenantInfo["_fieldsProto"]["companyName"]["stringValue"],
-      companyAddress: tenantInfo["_fieldsProto"]["companyAddress"]["stringValue"],
+      companyAddress:
+        tenantInfo["_fieldsProto"]["companyAddress"]["stringValue"],
       companyMail: tenantInfo["_fieldsProto"]["companyMail"]["stringValue"],
-      companyWebsite: tenantInfo["_fieldsProto"]["companyWebsite"]["stringValue"],
+      companyWebsite:
+        tenantInfo["_fieldsProto"]["companyWebsite"]["stringValue"],
       companyLogo: tenantInfo["_fieldsProto"]["logoImageUrl"]["stringValue"],
       // userLimet: tenantInfo["_fieldsProto"]["usersLimit"]["integerValue"],
       companyPhone: tenantInfo["_fieldsProto"]["companyPhone"]["stringValue"],
@@ -47,8 +61,11 @@ exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
       clientName: bidDocRef["_fieldsProto"]["clientName"]["stringValue"],
       finalPrice: bidDocRef["_fieldsProto"]["finalPrice"]["doubleValue"],
       dateCreated: bidDocRef["_fieldsProto"]["date"]["timestampValue"],
-      selectedProduct: bidDocRef["_fieldsProto"]["selectedProducts"]["arrayValue"],
-
+      selectedProduct:
+        bidDocRef["_fieldsProto"]["selectedProducts"]["arrayValue"],
+      creatorName: creatorDocRef["_fieldsProto"]["name"]["stringValue"],
+      creatorPhone: creatorDocRef["_fieldsProto"]["phoneNumber"]["stringValue"],
+      creatorMail: creatorDocRef["_fieldsProto"]["email"]["stringValue"],
     });
   });
 });

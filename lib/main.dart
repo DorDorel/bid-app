@@ -27,7 +27,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await TenantCacheBox.openLocalTenantValidationBox();
-  await LocalReminder.openbidRemindersBox();
+  await LocalReminder.openBidRemindersBox();
 
   runApp(MyApp());
 }

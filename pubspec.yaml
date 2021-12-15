@@ -28,6 +28,10 @@ dependencies:
   # hive for local database 
   hive: ^2.0.4
   hive_flutter: ^1.1.0
+  # pdf
+  pdf: ^3.6.5
+  # open document
+  open_document: ^1.0.3+1
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +46,8 @@ flutter:
   assets:
     - assets/fonts/VarelaRound-Regular.ttf
     - assets/fonts/ArialUnicodeMS.ttf
+    - assets/fonts/OpenSans-Bold.ttf
+    - assets/fonts/OpenSans-Regular.ttf
   
 
   # fonts:
