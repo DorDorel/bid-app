@@ -19,6 +19,8 @@ exports.testConection = functions.https.onCall((data, context) => {
 
 // functions
 
+// exports.sendBidInEmail = functions.https
+
 exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
   const tenant = req.query.tenant;
   const bidId = req.query.bid;

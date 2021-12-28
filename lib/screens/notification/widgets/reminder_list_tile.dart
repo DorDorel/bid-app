@@ -1,5 +1,8 @@
+import 'package:bid/models/bid.dart';
 import 'package:bid/models/reminder.dart';
+import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/reminder_provider.dart';
+import 'package:bid/screens/bids/bid_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,29 +17,59 @@ class ReminderListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reminderData = Provider.of<ReminderProvider>(context);
-    return Container(
-        child: GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //           builder: (BuildContext context) => BidInfo(bid: bid)));
-      // },
-      child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(reminder.note),
-            Text(reminder.bidId),
-            TextButton(
-                onPressed: () {
-                  reminderData.removeReminder(reminder.bidId);
+    final Bid currentBid = getBidObjectFromReminderObject(context, reminder);
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => BidInfo(bid: currentBid)));
+        },
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black45, width: 0.2),
+          ),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Bid ID: " + reminder.bidId,
+                    style: TextStyle(fontSize: 20)),
+                Text(reminder.note,
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+              ],
+            ),
+            IconButton(
+                onPressed: () async {
+                  await reminderData.favoriteListManger(reminder.bidId);
                 },
-                child: Text("remove"))
-          ],
-        ),
-      ),
-    ));
+                icon: Icon(
+                  reminderData.getFavorites.contains(reminder.bidId)
+                      ? Icons.star
+                      : Icons.star_outline,
+                  color: reminderData.getFavorites.contains(reminder.bidId)
+                      ? Colors.yellow[800]
+                      : Colors.black,
+                )),
+          ]),
+        ));
   }
+}
+
+// helper methods
+Bid getBidObjectFromReminderObject(BuildContext context, Reminder reminder) {
+  final bidsData = Provider.of<BidsProvider>(context);
+  final String bidId = reminder.bidId;
+  dynamic bid;
+  bidsData.allBids.forEach((element) {
+    if (element.bidId == bidId) {
+      bid = element;
+    }
+  });
+
+  return bid;
 }

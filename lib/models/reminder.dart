@@ -1,5 +1,8 @@
 class Reminder {
-  String note;
-  String bidId;
-  Reminder({required this.note, required this.bidId});
+  final String note;
+  final String bidId;
+  Reminder({
+    required this.note,
+    required this.bidId,
+  });
 }

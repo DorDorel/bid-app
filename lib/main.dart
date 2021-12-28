@@ -104,6 +104,7 @@ class AuthenticationWrapper extends StatelessWidget {
 
     if (firebaseUser != null) {
       tenantProvider.tenantValidation();
+
       //auth info log
       print(
           '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${TenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');

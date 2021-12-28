@@ -1,6 +1,7 @@
 import 'package:bid/providers/bids_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cool_alert/cool_alert.dart';
 
 class OpenTileMenu extends StatelessWidget {
   final String bidId;
@@ -34,8 +35,22 @@ class OpenTileMenu extends StatelessWidget {
           ),
           IconButton(
               onPressed: () async {
-                await bidsData.updateBidFlag(bidId);
-                bidsData.eraseAllUserBid();
+                CoolAlert.show(
+                  context: context,
+                  type: CoolAlertType.confirm,
+                  text: "Move $bidId to Archive?",
+                  confirmBtnText: 'Yes',
+                  cancelBtnText: 'No',
+                  confirmBtnColor: Colors.black,
+                  backgroundColor: Colors.black,
+                  loopAnimation: true,
+                  borderRadius: 20.0,
+                  onConfirmBtnTap: () async {
+                    await bidsData.updateBidFlag(bidId);
+                    bidsData.eraseAllUserBid();
+                    Navigator.pop(context);
+                  },
+                );
               },
               icon: Icon(
                 Icons.archive,

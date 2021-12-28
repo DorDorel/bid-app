@@ -4,7 +4,6 @@ import 'package:bid/screens/bids/open_bids_screen.dart';
 import 'package:bid/screens/home/widgets/home_card.dart';
 import 'package:bid/screens/home/widgets/reminders_preview.dart';
 import 'package:bid/screens/notification/notification_screen.dart';
-
 import 'package:bid/screens/user/user_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +63,7 @@ class _MainDashboardState extends State<MainDashboard> {
           SizedBox(
             height: 50,
           ),
-          remindersPrivew(context)
+          remindersPreview(context)
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -2,7 +2,6 @@ import 'package:bid/models/product.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/storage/storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class AddNewProductScreen extends StatefulWidget {
@@ -13,7 +12,7 @@ class AddNewProductScreen extends StatefulWidget {
 }
 
 class _AddNewProductScreenState extends State<AddNewProductScreen> {
-  var _editProduct = Product(
+  Product _editProduct = Product(
       productId: '', productName: '', price: 0, imageUrl: '', description: '');
   final _form = GlobalKey<FormState>();
 

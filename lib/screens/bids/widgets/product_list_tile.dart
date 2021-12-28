@@ -3,7 +3,6 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ProductListTile extends StatefulWidget {
   final String productId;

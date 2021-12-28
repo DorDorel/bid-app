@@ -1,4 +1,3 @@
-import 'package:bid/local/tenant_cache_box.dart';
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

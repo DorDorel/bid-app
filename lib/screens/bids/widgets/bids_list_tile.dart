@@ -1,7 +1,6 @@
 import 'package:bid/models/bid.dart';
 import 'package:bid/screens/bids/bid_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'open_bid_card_menu.dart';
 
@@ -27,7 +26,7 @@ class BidTile extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           archiveScreen
-              ? {}
+              ? SizedBox.shrink()
               : Navigator.push(
                   context,
                   MaterialPageRoute(

@@ -1,5 +1,3 @@
-import 'package:bid/db/database.dart';
-import 'package:bid/db/db_test_conection.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
 import 'package:bid/widgets/admin_button_textStyle.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +24,8 @@ class AdminScreen extends StatelessWidget {
               height: 20.0,
             ),
             Card(
-              color: Colors.yellow[100],
               child: Container(
+                color: Colors.grey[300],
                 width: 350,
                 height: 80,
                 child: TextButton(
@@ -41,7 +39,7 @@ class AdminScreen extends StatelessWidget {
             ),
             spaceDefault,
             Card(
-              color: Colors.green[100],
+              color: Colors.grey[300],
               child: Container(
                 width: 350,
                 height: 80,
@@ -57,57 +55,57 @@ class AdminScreen extends StatelessWidget {
               ),
             ),
             spaceDefault,
-            Card(
-              color: Colors.blue[100],
-              child: Container(
-                width: 350,
-                height: 80,
-                child: TextButton(
-                    onPressed: () {
-                      DbTestConnection().getFunctionsTestConnection();
-                    },
-                    child: Text(
-                      'Connection Test',
-                      style: textStyleDefault,
-                    )),
-              ),
-            ),
-            spaceDefault,
-            Card(
-              color: Colors.red[100],
-              child: Container(
-                width: 350,
-                height: 80,
-                child: TextButton(
-                    onPressed: () async {
-                      print(await DatabaseSevice().isAdmin());
-                    },
-                    child: Text(
-                      'Check Admin ',
-                      style: textStyleDefault,
-                    )),
-              ),
-            ),
-            spaceDefault,
-            spaceDefault,
-            spaceDefault,
-            spaceDefault,
-            spaceDefault,
-            spaceDefault,
-            spaceDefault,
-            Card(
-              color: Colors.red[100],
-              child: Container(
-                width: 350,
-                height: 80,
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Test Button',
-                      style: textStyleDefault,
-                    )),
-              ),
-            ),
+            // Card(
+            //   color: Colors.blue[100],
+            //   child: Container(
+            //     width: 350,
+            //     height: 80,
+            //     child: TextButton(
+            //         onPressed: () {
+            //           DbTestConnection().getFunctionsTestConnection();
+            //         },
+            //         child: Text(
+            //           'Connection Test',
+            //           style: textStyleDefault,
+            //         )),
+            //   ),
+            // ),
+            // spaceDefault,
+            // Card(
+            //   color: Colors.red[100],
+            //   child: Container(
+            //     width: 350,
+            //     height: 80,
+            //     child: TextButton(
+            //         onPressed: () async {
+            //           print(await DatabaseSevice().isAdmin());
+            //         },
+            //         child: Text(
+            //           'Check Admin ',
+            //           style: textStyleDefault,
+            //         )),
+            //   ),
+            // ),
+            // // spaceDefault,
+            // spaceDefault,
+            // spaceDefault,
+            // spaceDefault,
+            // spaceDefault,
+            // spaceDefault,
+            // spaceDefault,
+            // Card(
+            //   color: Colors.red[100],
+            //   child: Container(
+            //     width: 350,
+            //     height: 80,
+            //     child: TextButton(
+            //         onPressed: () {},
+            //         child: Text(
+            //           'Test Button',
+            //           style: textStyleDefault,
+            //         )),
+            //   ),
+            // ),
           ],
         ),
       ),

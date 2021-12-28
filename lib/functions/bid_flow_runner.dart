@@ -1,31 +1,24 @@
-import 'package:bid/providers/tenant_provider.dart';
-import 'package:cloud_functions/cloud_functions.dart';
+import 'package:bid/services/email_service.dart';
 
 class BidFlowRunner {
+  String tenantId;
   String bidDocId;
   String customerEmail;
   String customerPhone;
+  String creator;
   BidFlowRunner(
-      {required this.bidDocId,
+      {required this.tenantId,
+      required this.bidDocId,
       required this.customerEmail,
-      required this.customerPhone});
-
-  FirebaseFunctions functions = FirebaseFunctions.instance;
+      required this.customerPhone,
+      required this.creator});
 
   Future<void> runner() async {
-    final String tenant = TenantProvider.tenantId;
-
-    print('Here cloud function running');
-
-    // try {
-    //   HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
-    //   await callable({
-    //     "tenantId": tenant,
-    //     "clientMail": customerEmail,
-    //     "ClientPhone": customerPhone,
-    //   });
-    // } catch (err) {
-    //   print(err);
-    // }
+    try {
+      final EmailService es = new EmailService(to: customerEmail);
+      es.sendBidInMail(tenantId, bidDocId, creator);
+    } catch (err) {
+      print(err);
+    }
   }
 }

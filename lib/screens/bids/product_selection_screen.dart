@@ -8,6 +8,7 @@ import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/widgets/next_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -66,13 +67,14 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
                 title: 'CREATE BID',
                 onPressed: () async {
                   _createBid();
-                  // eraseAllUserBid becuse we want to re-reading from Bidsdb
+                  // eraseAllUserBid because we want to re-reading from BidsDb
                   await bidsData.eraseAllUserBid();
                 })));
   }
 
   void _createBid() async {
-    int currentBidNumber = await SharedDb().getCurrentBidId();
+    final firebaseUser = Provider.of<User?>(context, listen: false);
+    int currentBidNumber = await SharedDb.getCurrentBidId();
 
     final bid = Bid(
         openFlag: true,
@@ -85,7 +87,9 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         selectedProducts: NewBidsProvider().getCurrentBidProduct);
 
     final startBidFlow = await CreateBidController(
-            phoneNumber: widget.phoneNumber, currentBid: bid)
+            phoneNumber: widget.phoneNumber,
+            currentBid: bid,
+            creator: firebaseUser!.uid.toString())
         .startNewBidFlow();
 
     Navigator.pushNamed(context, MainDashboard.routeName);

@@ -2,7 +2,7 @@ import 'package:bid/db/tenant_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SharedDb {
-  Future<int> getCurrentBidId() async {
+  static Future<int> getCurrentBidId() async {
     int currentBidId = 0;
 
     final DocumentReference<Object?>? tenantRef =
