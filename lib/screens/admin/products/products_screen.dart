@@ -28,14 +28,22 @@ class _ProductsScreenState extends State<ProductsScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, AddNewProductScreen.routeName);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => AddNewProductScreen(
+                              isEdit: false,
+                            )));
               },
-              icon: Icon(Icons.add))
+              icon: Icon(
+                Icons.add,
+                size: 30,
+              ))
         ],
       ),
       body: Padding(
         padding: EdgeInsets.all(8),
-        child: productsData.products.length == 0
+        child: productsData.products.isEmpty
             ? Center(
                 child: CircularProgressIndicator(
                 color: Colors.black,

@@ -28,7 +28,7 @@ class ReminderListTile extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black45, width: 0.2),
+            border: Border.all(color: Colors.black45, width: 0.1),
           ),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

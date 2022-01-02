@@ -66,7 +66,7 @@ class ProductsDb {
     }
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>?> findFirestoreDocumentId(
+  Future<QuerySnapshot<Map<String, dynamic>>?> _findFirestoreDocumentId(
       String productId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
@@ -95,7 +95,7 @@ class ProductsDb {
           "*🐛 DEBUG LOG* : Database Query - removeProduct from ProductsDb reading");
 
       QuerySnapshot<Map<String, dynamic>>? currentProduct =
-          await findFirestoreDocumentId(productId);
+          await _findFirestoreDocumentId(productId);
       final String documentId = currentProduct!.docs.first.data()['documentId'];
 
       try {
@@ -103,6 +103,22 @@ class ProductsDb {
       } catch (err) {
         print(err);
       }
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  Future<void> editProduct(String productId, Product product) async {
+    final DocumentReference<Object?>? tenantRef =
+        await TenantDB().getTenantReference();
+    QuerySnapshot<Map<String, dynamic>>? currentProduct =
+        await _findFirestoreDocumentId(productId);
+    final String documentId = currentProduct!.docs.first.data()['documentId'];
+    try {
+      await tenantRef!
+          .collection('products')
+          .doc(documentId)
+          .update(product.toMap());
     } catch (err) {
       print(err);
     }

@@ -31,6 +31,7 @@ class ReminderProvider with ChangeNotifier {
   void removeAllReminders() async {
     try {
       await LocalReminder.removeAllReminders();
+      await LocalReminder.removeAllFavoriteList();
       updateReminders();
     } catch (err) {
       print(err);

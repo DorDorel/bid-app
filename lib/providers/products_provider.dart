@@ -3,32 +3,52 @@ import 'package:bid/models/product.dart';
 import 'package:flutter/foundation.dart';
 
 class ProductProvider with ChangeNotifier {
-  List<Product> _productsList = [];
-  List<Product> get products => [..._productsList];
+  List<Product> _products = [];
+  List<Product> get products => [..._products];
 
   Future<void> fetchData() async {
-    await getProducts();
+    await _getProducts();
   }
 
-  Future<void> getProducts() async {
-    if (_productsList.isEmpty) {
+  Future<void> _getProducts() async {
+    if (_products.isEmpty) {
       final List<Product>? products = await ProductsDb().getAllProducts();
       if (products!.isEmpty) {
-        _productsList = [];
+        _products = [];
       } else {
-        _productsList = products;
+        _products = products;
         notifyListeners();
       }
     }
   }
 
   Future<void> addNewProduct(Product product) async {
-    await ProductsDb().addNewProduct(product);
-    notifyListeners();
+    try {
+      await ProductsDb().addNewProduct(product);
+      _products = [];
+      fetchData();
+    } catch (err) {
+      print(err);
+    }
   }
 
   Future<void> deleteProduct(String productId) async {
-    await ProductsDb().removeProduct(productId);
-    notifyListeners();
+    try {
+      await ProductsDb().removeProduct(productId);
+      _products = [];
+      fetchData();
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  Future<void> editProduct(String productId, Product product) async {
+    try {
+      await ProductsDb().editProduct(productId, product);
+      _products = [];
+      fetchData();
+    } catch (err) {
+      print(err);
+    }
   }
 }

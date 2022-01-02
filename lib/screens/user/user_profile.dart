@@ -65,7 +65,7 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 26,
           ),
-          ProfilePicture(),
+          // ProfilePicture(),
           SizedBox(
             height: 20,
           ),

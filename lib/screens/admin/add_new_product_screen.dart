@@ -6,6 +6,22 @@ import 'package:provider/provider.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   static const routeName = '/add_new_product_screen';
+  final bool? isEdit;
+  final String? productId;
+  final String? productName;
+  final double? price;
+  final String? imageUrl;
+  final String? description;
+
+  const AddNewProductScreen(
+      {Key? key,
+      this.isEdit,
+      this.productId,
+      this.productName,
+      this.price,
+      this.imageUrl,
+      this.description})
+      : super(key: key);
 
   @override
   _AddNewProductScreenState createState() => _AddNewProductScreenState();
@@ -31,10 +47,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<ProductProvider>(context);
+    if (widget.isEdit!) {
+      _editProduct = new Product(
+          productId: widget.productId!,
+          productName: widget.productName!,
+          price: widget.price!,
+          imageUrl: widget.imageUrl!,
+          description: widget.description!);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add',
+          widget.isEdit! ? "Edit ${widget.productName}" : "ADD",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -43,9 +67,16 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 Icons.save,
               ),
               onPressed: () {
-                _saveForm()
-                    ? productsData.addNewProduct(_editProduct)
-                    : print('error');
+                if (widget.isEdit!) {
+                  _saveForm()
+                      ? productsData.editProduct(
+                          _editProduct.productId, _editProduct)
+                      : print("error");
+                } else {
+                  _saveForm()
+                      ? productsData.addNewProduct(_editProduct)
+                      : print("error ");
+                }
                 Navigator.pop(context);
               })
         ],
@@ -58,6 +89,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
             children: [
               TextFormField(
                 decoration: InputDecoration(labelText: 'ID'),
+                initialValue: widget.isEdit! ? _editProduct.productId : "",
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -77,6 +109,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Product Name'),
+                initialValue: widget.isEdit! ? _editProduct.productName : "",
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -96,6 +129,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Price'),
+                initialValue:
+                    widget.isEdit! ? _editProduct.price.toString() : "",
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -122,6 +157,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Description'),
+                initialValue: widget.isEdit! ? _editProduct.description : "",
                 textInputAction: TextInputAction.next,
                 maxLines: 3,
                 keyboardType: TextInputType.multiline,
