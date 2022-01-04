@@ -1,6 +1,7 @@
 import 'package:bid/models/product.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/storage/storage_service.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +55,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           price: widget.price!,
           imageUrl: widget.imageUrl!,
           description: widget.description!);
+      imageURL = _editProduct.imageUrl;
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -71,11 +74,11 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   _saveForm()
                       ? productsData.editProduct(
                           _editProduct.productId, _editProduct)
-                      : print("error");
+                      : print("error in isEdit: true _saveForm");
                 } else {
                   _saveForm()
                       ? productsData.addNewProduct(_editProduct)
-                      : print("error ");
+                      : print("error in isEdit: false _saveForm");
                 }
                 Navigator.pop(context);
               })
@@ -135,13 +138,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Plese enter a price';
+                    return 'Please enter a price';
                   }
                   if (double.tryParse(value) == null) {
-                    return 'Plese Enter a VALID number ';
+                    return 'Please Enter a VALID number ';
                   }
                   if (double.parse(value) <= 0) {
-                    return 'Plese enter a number GREATER then Zero';
+                    return 'Please enter a number GREATER then Zero';
                   }
 
                   return null;
@@ -163,7 +166,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Plese enter a Discription';
+                    return 'Please enter a Description';
                   }
                   if (value.length < 10) {
                     return 'Should be at least 10 characters long';
@@ -184,35 +187,90 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 height: 30.0,
               ),
               imageURL == ''
-                  ? IconButton(
+                  ? TextButton(
                       onPressed: () async {
-                        print('click');
-                        String imageInBucket = await StorageService()
-                            .uploadProductImage(imageName);
-                        setState(() {
-                          imageURL = imageInBucket;
-                          _editProduct = new Product(
-                              productId: _editProduct.productId,
-                              productName: _editProduct.productName,
-                              price: _editProduct.price,
-                              imageUrl: imageInBucket,
-                              description: _editProduct.description);
-                        });
+                        try {
+                          String imageInBucket = await new StorageService()
+                              .uploadProductImage(imageName);
+                          if (imageInBucket == "ERROR" ||
+                              imageInBucket == "Failed") {
+                            return _uploadImageErrorManger(
+                                context, imageInBucket);
+                          } else {
+                            print(imageInBucket);
+                            setState(() {
+                              imageURL = imageInBucket;
+                            });
+                            _editProduct = new Product(
+                                productId: _editProduct.productId,
+                                productName: _editProduct.productName,
+                                price: _editProduct.price,
+                                imageUrl: imageInBucket,
+                                description: _editProduct.description);
+                          }
+                        } catch (err) {
+                          print(err);
+                        }
                       },
-                      icon: Icon(
-                        Icons.image_not_supported_outlined,
-                        size: 30,
-                        color: Colors.red[200],
-                      ))
-                  : Image.network(
-                      imageURL,
-                      height: 200,
-                      width: 100,
+                      child: Text(
+                        "Upload product image",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        print("yes");
+                      },
+                      child: Image.network(
+                        imageURL,
+                        height: 200,
+                        width: 100,
+                      ),
                     ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+Future<void> _uploadImageManger() async {}
+
+Future<dynamic>? _uploadImageErrorManger(
+    BuildContext context, String errorMessage) {
+  final CoolAlertType type = CoolAlertType.error;
+  final Color color = Colors.black;
+  final double border = 20.0;
+  final bool loop = true;
+
+  switch (errorMessage) {
+    case "ERROR":
+      {
+        return CoolAlert.show(
+          context: context,
+          type: type,
+          backgroundColor: color,
+          confirmBtnColor: color,
+          borderRadius: border,
+          loopAnimation: loop,
+          text: "Grant Permissions and try again",
+        );
+      }
+    case "Failed":
+      {
+        return CoolAlert.show(
+          context: context,
+          type: type,
+          backgroundColor: color,
+          confirmBtnColor: color,
+          borderRadius: border,
+          loopAnimation: loop,
+          text:
+              "Operation failed. We will contact you as soon as possible to deal with the fault.",
+        );
+      }
   }
 }

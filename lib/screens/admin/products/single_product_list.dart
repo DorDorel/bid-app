@@ -21,7 +21,6 @@ class SingleProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // data manangment
     final productsData = Provider.of<ProductProvider>(context, listen: false);
 
     return ListTile(

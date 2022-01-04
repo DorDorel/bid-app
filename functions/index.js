@@ -13,7 +13,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
   response.send("Hello from Firebase!");
 });
 
-exports.testConection = functions.https.onCall((data, context) => {
+exports.testConnection = functions.https.onCall((data, context) => {
   return "Connection is OK";
 });
 
@@ -46,7 +46,7 @@ exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
 
     res.status(200).json({
       // fullBidData: bidDocRef,
-      // fullTenantDetals: tenantDeatls,
+      // fullTenantDetails: tenantDetails,
 
       companyName: tenantInfo["_fieldsProto"]["companyName"]["stringValue"],
       companyAddress:
@@ -55,7 +55,7 @@ exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
       companyWebsite:
         tenantInfo["_fieldsProto"]["companyWebsite"]["stringValue"],
       companyLogo: tenantInfo["_fieldsProto"]["logoImageUrl"]["stringValue"],
-      // userLimet: tenantInfo["_fieldsProto"]["usersLimit"]["integerValue"],
+      // userLimit: tenantInfo["_fieldsProto"]["usersLimit"]["integerValue"],
       companyPhone: tenantInfo["_fieldsProto"]["companyPhone"]["stringValue"],
       bidId: bidDocRef["_fieldsProto"]["bidId"]["stringValue"],
       createdBy: bidDocRef["_fieldsProto"]["createdBy"]["stringValue"],

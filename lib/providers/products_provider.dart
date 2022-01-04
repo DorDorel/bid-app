@@ -28,7 +28,7 @@ class ProductProvider with ChangeNotifier {
       _products = [];
       fetchData();
     } catch (err) {
-      print(err);
+      print("error from addNewProduct in productsProvider");
     }
   }
 

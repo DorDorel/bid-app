@@ -17,28 +17,31 @@ class StorageService {
   Future<String> uploadProductImage(String productName) async {
     final String? _currentTenant = await _getCurrentTenantFolder();
     final _picker = ImagePicker();
+    final bucketPath = "$_currentTenant/product_photos/$productName";
+
     XFile? image;
 
     await Permission.photos.request();
     var permissionStatus = await Permission.photos.status;
 
     if (permissionStatus.isGranted) {
-      image = (await _picker.pickImage(source: ImageSource.gallery))!;
-      File file = File(image.path);
-      if (image != null) {
-        var snapshot = await _storage
-            .ref()
-            .child('$_currentTenant/product_photos/$productName')
-            .putFile(file);
+      try {
+        image = (await _picker.pickImage(source: ImageSource.gallery))!;
+        File file = File(image.path);
+        print(image.path);
+
+        var snapshot = await _storage.ref().child(bucketPath).putFile(file);
         String downloadURL = await snapshot.ref.getDownloadURL();
 
         return downloadURL;
+      } catch (err) {
+        print(err);
       }
     } else {
       print('Grant Permissions and try again');
       return 'ERROR';
     }
-    return 'Faild';
+    return 'Failed';
   }
 
   Future<void> deleteProductImage({required String productImageURL}) async {
