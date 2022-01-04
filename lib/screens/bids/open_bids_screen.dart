@@ -19,15 +19,16 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
 
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: Colors.black,
           elevation: 0.8,
           title: Text(
             'Open Bids',
             style: TextStyle(
-                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           )),
       body: Padding(
         padding: EdgeInsets.all(2),
-        child: bidsData.allBids.length == 0
+        child: bidsData.allBids.isEmpty
             ? Center(
                 child: CircularProgressIndicator(
                   color: Colors.black,

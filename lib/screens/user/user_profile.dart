@@ -17,13 +17,14 @@ class UserConfig extends StatelessWidget {
     final tenantProvider = Provider.of<TenantProvider>(context);
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           elevation: 0.8,
           title: Transform(
             transform: Matrix4.translationValues(0.0, 0.0, 0.0),
             child: Text(
               'Profile',
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),

@@ -17,8 +17,8 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
   Widget build(BuildContext context) {
     /*
      this if condition check if its a first time user login in current divice
-     if it is - the tennant id insert to the local db.
-     this location selected becuse new user want to use with app and he try
+     if it is - the tenant id insert to the local db.
+     this location selected because new user want to use with app and he try
      to CREATE NEW BID :)
     */
 
@@ -29,6 +29,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         elevation: 0.8,
         // automaticallyImplyLeading: false,
         title: Transform(
@@ -36,7 +37,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
           child: Text(
             'New Bid',
             style: TextStyle(
-                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
       ),

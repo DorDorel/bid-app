@@ -1,12 +1,18 @@
 import 'package:bid/providers/bids_provider.dart';
+import 'package:bid/services/call_service.dart';
+import 'package:bid/services/email_service.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cool_alert/cool_alert.dart';
 
 class OpenTileMenu extends StatelessWidget {
   final String bidId;
+  final String clientMail;
+  final String phoneNumber;
   const OpenTileMenu({
     required this.bidId,
+    required this.clientMail,
+    required this.phoneNumber,
     Key? key,
   }) : super(key: key);
 
@@ -19,13 +25,20 @@ class OpenTileMenu extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                CallService callService =
+                    new CallService(phoneNumber: phoneNumber);
+                await callService.callNow();
+              },
               icon: Icon(
                 Icons.phone,
                 color: Colors.green,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                EmailService emailService = new EmailService(to: clientMail);
+                await emailService.openDefaultMainAppWithAddressClient();
+              },
               icon: Icon(
                 Icons.email,
                 color: Colors.blueAccent,

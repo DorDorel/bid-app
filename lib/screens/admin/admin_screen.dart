@@ -11,10 +11,11 @@ class AdminScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black54,
         title: Text(
           'Admin Panel',
           style: TextStyle(
-              color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
       body: Center(

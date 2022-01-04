@@ -15,13 +15,14 @@ class NotificationsScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           elevation: 0.8,
           title: Transform(
             transform: Matrix4.translationValues(-0.0, 0.0, 0.0),
             child: Text(
               'Notification',
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),

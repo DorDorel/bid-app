@@ -21,6 +21,7 @@ class _MainDashboardState extends State<MainDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
         elevation: 0.8,
         actions: [
@@ -28,19 +29,21 @@ class _MainDashboardState extends State<MainDashboard> {
               onPressed: () {
                 Navigator.pushNamed(context, UserConfig.routeName);
               },
-              icon: Icon(Icons.account_circle_outlined)),
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.white,
+              )),
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(NotificationsScreen.routeName);
               },
-              icon: Icon(
-                Icons.notifications_active_outlined,
-              )),
+              icon: Icon(Icons.notifications_active_outlined,
+                  color: Colors.white)),
         ],
         title: Text(
           ' Activity',
           style: TextStyle(
-              color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(

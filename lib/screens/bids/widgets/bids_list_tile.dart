@@ -1,5 +1,6 @@
 import 'package:bid/models/bid.dart';
 import 'package:bid/screens/bids/bid_info.dart';
+import 'package:bid/services/email_service.dart';
 import 'package:flutter/material.dart';
 
 import 'open_bid_card_menu.dart';
@@ -46,13 +47,19 @@ class BidTile extends StatelessWidget {
                 subtitle: Text("Bid ID: " + bidId),
                 trailing: archiveScreen
                     ? IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          EmailService emailService =
+                              new EmailService(to: bid.clientMail);
+                          emailService.openDefaultMainAppWithAddressClient();
+                        },
                         icon: Icon(
                           Icons.email,
                           color: Colors.blueGrey,
                         ))
                     : OpenTileMenu(
                         bidId: bidId,
+                        clientMail: bid.clientMail,
+                        phoneNumber: bid.clientPhone,
                       ),
               ),
             ],

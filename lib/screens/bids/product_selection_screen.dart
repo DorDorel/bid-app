@@ -29,10 +29,11 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final bidsData = Provider.of<BidsProvider>(context);
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           elevation: 0.8,
           title: Text(
             'Select Products',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
           actions: [
             IconButton(
@@ -74,6 +75,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
 
   void _createBid() async {
     final firebaseUser = Provider.of<User?>(context, listen: false);
+    final newBidsData = Provider.of<NewBidsProvider>(context, listen: false);
     int currentBidNumber = await SharedDb.getCurrentBidId();
 
     final bid = Bid(
@@ -83,8 +85,9 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         date: DateTime.now(),
         clientName: widget.name,
         clientMail: widget.email,
+        clientPhone: widget.phoneNumber,
         finalPrice: calculateTotalBidSum(context),
-        selectedProducts: NewBidsProvider().getCurrentBidProduct);
+        selectedProducts: newBidsData.getCurrentBidProduct);
 
     final startBidFlow = await CreateBidController(
             phoneNumber: widget.phoneNumber,

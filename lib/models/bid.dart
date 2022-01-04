@@ -7,6 +7,7 @@ class Bid {
   final DateTime date;
   final String clientMail;
   final String clientName;
+  final String clientPhone;
   final double finalPrice;
   List<SelectedProducts> selectedProducts = [];
 
@@ -18,6 +19,7 @@ class Bid {
     required this.clientName,
     required this.clientMail,
     required this.finalPrice,
+    required this.clientPhone,
     required this.selectedProducts,
   });
 
@@ -28,6 +30,7 @@ class Bid {
         'date': this.date,
         'clientName': this.clientName,
         'clientMail': this.clientMail,
+        'clientPhone': this.clientPhone,
         'finalPrice': this.finalPrice,
         'selectedProducts': convertSelectedProduct(this.selectedProducts),
       };
@@ -45,6 +48,7 @@ class Bid {
       date: DateTime.now(),
       clientName: firestoreObj['clientName'],
       clientMail: firestoreObj['clientMail'],
+      clientPhone: firestoreObj['clientPhone'],
       finalPrice: firestoreObj['finalPrice'],
       selectedProducts: parserSelectedProduct(firestoreObj),
     );

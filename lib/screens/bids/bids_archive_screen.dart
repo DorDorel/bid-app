@@ -20,11 +20,12 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
             elevation: 0.8,
             title: Text(
               'Bids Archive',
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             )),

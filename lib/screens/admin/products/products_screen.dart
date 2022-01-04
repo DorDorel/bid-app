@@ -1,7 +1,6 @@
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/screens/admin/add_new_product_screen.dart';
 import 'package:bid/screens/admin/products/single_product_list.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +19,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black54,
         title: Text(
           'Products',
           style: TextStyle(
-              color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(

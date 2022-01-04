@@ -19,9 +19,10 @@ class BidInfo extends StatelessWidget {
     final reminderData = Provider.of<ReminderProvider>(context);
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           title: Text(
             "Bid ${bid.bidId}",
-            style: TextStyle(color: Theme.of(context).primaryColor),
+            style: TextStyle(color: Colors.white),
           ),
         ),
         body: Center(

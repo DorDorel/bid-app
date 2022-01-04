@@ -1,7 +1,8 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmailService {
-  String to;
+  final String to;
   EmailService({required this.to});
 
   void sendBidInMail(String tenant, String bidDocId, String creator) async {
@@ -17,6 +18,15 @@ class EmailService {
       });
     } catch (err) {
       print(err);
+    }
+  }
+
+  Future<void> openDefaultMainAppWithAddressClient() async {
+    final _url = 'mailto:$to';
+    if (!await launch(_url)) {
+      throw 'Could not launch $_url';
+    } else {
+      await launch(_url);
     }
   }
 }

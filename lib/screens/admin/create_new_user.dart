@@ -44,10 +44,11 @@ class _CreateNewUserState extends State<CreateNewUser> {
     final _form = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black54,
         elevation: 0.8,
         title: Text(
           'New User',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
