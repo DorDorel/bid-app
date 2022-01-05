@@ -23,7 +23,6 @@ class _MainDashboardState extends State<MainDashboard> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
-        elevation: 0.8,
         actions: [
           IconButton(
               onPressed: () {

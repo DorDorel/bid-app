@@ -62,8 +62,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black54,
         title: Text(
-          widget.isEdit! ? "Edit ${widget.productName}" : "ADD",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          widget.isEdit! ? "Edit ${widget.productName}" : " New Product",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
         ),
         actions: [
           IconButton(

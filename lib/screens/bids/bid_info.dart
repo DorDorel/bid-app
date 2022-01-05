@@ -1,5 +1,6 @@
 import 'package:bid/models/bid.dart';
 import 'package:bid/providers/reminder_provider.dart';
+import 'package:bid/screens/bids/widgets/bids_info_table.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +11,9 @@ class BidInfo extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final TextStyle regularTextStyle = TextStyle(fontSize: 20);
+  final TextStyle regularTextStyle = TextStyle(
+    fontSize: 20,
+  );
   final TextStyle boldTextStyle =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
@@ -36,9 +39,15 @@ class BidInfo extends StatelessWidget {
                 bid.date.toIso8601String(),
                 style: regularTextStyle,
               ),
-              Text("Final Price: " + bid.finalPrice.toString(),
-                  style: regularTextStyle),
+              Text(
+                "Final Price: " + bid.finalPrice.toStringAsFixed(2),
+                style: regularTextStyle,
+              ),
               Text(bid.clientMail),
+              SizedBox(
+                height: 10,
+              ),
+              bidsInfoTable(context, bid)
             ],
           ),
         ),

@@ -48,7 +48,8 @@ class _CreateNewUserState extends State<CreateNewUser> {
         elevation: 0.8,
         title: Text(
           'New User',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
         ),
         actions: [
           IconButton(

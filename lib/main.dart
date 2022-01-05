@@ -6,7 +6,6 @@ import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/providers/products_provider.dart';
 import 'package:bid/providers/reminder_provider.dart';
 import 'package:bid/providers/tenant_provider.dart';
-import 'package:bid/screens/admin/add_new_product_screen.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
@@ -80,7 +79,6 @@ class MyApp extends StatelessWidget {
               UserConfig.routeName: (context) => UserConfig(),
               CreateBidScreen.routeName: (context) => CreateBidScreen(),
               NotificationsScreen.routeName: (context) => NotificationsScreen(),
-              AddNewProductScreen.routeName: (context) => AddNewProductScreen(),
               AdminScreen.routeName: (context) => AdminScreen(),
               ProductsScreen.routeName: (context) => ProductsScreen(),
               OpenBidScreen.routeName: (context) => OpenBidScreen(),
