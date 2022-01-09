@@ -67,18 +67,18 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             child: NextButton(
                 title: 'CREATE BID',
                 onPressed: () async {
-                  _createBid();
+                  await _createBid();
                   // eraseAllUserBid because we want to re-reading from BidsDb
                   await bidsData.eraseAllUserBid();
                 })));
   }
 
-  void _createBid() async {
+  Future<void> _createBid() async {
     final firebaseUser = Provider.of<User?>(context, listen: false);
     final newBidsData = Provider.of<NewBidsProvider>(context, listen: false);
     int currentBidNumber = await SharedDb.getCurrentBidId();
 
-    final bid = Bid(
+    final Bid bid = Bid(
         openFlag: true,
         bidId: currentBidNumber.toString(),
         createdBy: await AuthenticationService().getCurrentUserUID,
@@ -89,12 +89,12 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         finalPrice: calculateTotalBidSum(context),
         selectedProducts: newBidsData.getCurrentBidProduct);
 
-    final startBidFlow = await CreateBidController(
+    final bool bidFlow = await CreateBidController(
             phoneNumber: widget.phoneNumber,
             currentBid: bid,
             creator: firebaseUser!.uid.toString())
         .startNewBidFlow();
-
-    Navigator.pushNamed(context, MainDashboard.routeName);
+    bidFlow ? print("yes") : print("no");
+    // Navigator.pushNamed(context, MainDashboard.routeName);
   }
 }

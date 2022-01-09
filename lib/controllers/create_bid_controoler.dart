@@ -14,7 +14,7 @@ class CreateBidController {
       required this.phoneNumber,
       required this.creator});
 
-  Future<void> startNewBidFlow() async {
+  Future<bool> startNewBidFlow() async {
     try {
       /*
       setBidInDB getting the current bid doc id.
@@ -33,9 +33,11 @@ class CreateBidController {
             creator: creator);
 
         await newRunner.runner();
+        return true;
       }
     } catch (err) {
       print(err);
     }
+    return false;
   }
 }

@@ -7,18 +7,18 @@ class EmailService {
 
   void sendBidInMail(String tenant, String bidDocId, String creator) async {
     FirebaseFunctions functions = FirebaseFunctions.instance;
-    // try {
-    //   HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
-    //   await callable({
-    //     "clientMail": to,
-    //     "tenantId": tenant,
-    //     "bidDocId": bidDocId,
-    //     "creator": creator
-    //     // "ClientPhone": customerPhone,
-    //   });
-    // } catch (err) {
-    //   print(err);
-    // }
+    try {
+      // HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
+      // await callable({
+      //   "clientMail": to,
+      //   "tenantId": tenant,
+      //   "bidDocId": bidDocId,
+      //   "creator": creator
+      //   // "ClientPhone": customerPhone,
+      // });
+    } catch (err) {
+      print(err);
+    }
   }
 
   Future<void> openDefaultMainAppWithAddressClient() async {

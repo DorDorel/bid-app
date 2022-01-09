@@ -2,6 +2,7 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/providers/reminder_provider.dart';
 import 'package:bid/screens/bids/widgets/bids_info_table.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class BidInfo extends StatelessWidget {
@@ -11,15 +12,12 @@ class BidInfo extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final TextStyle regularTextStyle = TextStyle(
-    fontSize: 20,
-  );
-  final TextStyle boldTextStyle =
-      TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-
   @override
   Widget build(BuildContext context) {
-    final reminderData = Provider.of<ReminderProvider>(context);
+    var dateFormat = DateFormat.yMd();
+    var date = dateFormat.format(bid.date);
+    TextStyle infoFontSize = TextStyle(fontSize: 16);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -31,33 +29,46 @@ class BidInfo extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              Text(
-                "Client name: " + bid.clientName,
-                style: boldTextStyle,
-              ),
-              Text(
-                bid.date.toIso8601String(),
-                style: regularTextStyle,
-              ),
-              Text(
-                "Final Price: " + bid.finalPrice.toStringAsFixed(2),
-                style: regularTextStyle,
-              ),
-              Text(bid.clientMail),
               SizedBox(
                 height: 10,
               ),
-              bidsInfoTable(context, bid)
+              Text(
+                "Client name: " + bid.clientName,
+                style: TextStyle(fontSize: 26),
+              ),
+              Text(
+                date,
+                style: infoFontSize,
+              ),
+              Text(
+                bid.clientMail,
+                style: infoFontSize,
+              ),
+              Text(
+                bid.clientPhone,
+                style: infoFontSize,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              bidsInfoTable(context, bid),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Final Price: " + bid.finalPrice.toStringAsFixed(2),
+                style: TextStyle(fontSize: 20),
+              ),
             ],
           ),
         ),
         // Continue the conditional rendering ->THU 16 DEC <-
-        bottomNavigationBar: checkReminder(context, bid.bidId)
-            ? cancelReminder(context)
-            : setReminderButton(context));
+        bottomNavigationBar: _checkReminder(context, bid.bidId)
+            ? _cancelReminder(context)
+            : _setReminderButton(context));
   }
 
-  Widget cancelReminder(BuildContext context) {
+  Widget _cancelReminder(BuildContext context) {
     final reminderData = Provider.of<ReminderProvider>(context);
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 6.0),
@@ -78,7 +89,7 @@ class BidInfo extends StatelessWidget {
         ));
   }
 
-  Widget setReminderButton(BuildContext context) {
+  Widget _setReminderButton(BuildContext context) {
     final reminderData = Provider.of<ReminderProvider>(context);
     String noteInput = "";
     return Padding(
@@ -121,7 +132,7 @@ class BidInfo extends StatelessWidget {
 }
 
 // helper methods
-bool checkReminder(BuildContext context, String bidId) {
+bool _checkReminder(BuildContext context, String bidId) {
   bool r = false;
   final reminderData = Provider.of<ReminderProvider>(context, listen: false);
   reminderData.getReminders.forEach((element) {

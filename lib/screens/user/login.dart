@@ -29,6 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 child: Column(
                   children: [
@@ -39,6 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(fontSize: 24),
                           decoration: InputDecoration(
                               labelText: 'EMAIL',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16.0))),
                               labelStyle: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontWeight: FontWeight.bold,
@@ -50,6 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 2.0,
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       width: 400,
                       height: 60,
@@ -58,6 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold, fontSize: 24),
                         decoration: InputDecoration(
                             labelText: 'PASSWORD ',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16.0))),
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
