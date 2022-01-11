@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 class TenantProvider with ChangeNotifier {
   static bool checkAdmin = false;
   static String get tenantId => TenantDB.currentTenantId;
+  static String get tenantName => TenantDB.tenantName;
 
   Future<void> tenantValidation() async {
     if (!TenantCacheBox.tenantCashBox!.containsKey("tenantId")) {

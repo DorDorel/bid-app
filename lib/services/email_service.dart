@@ -5,17 +5,19 @@ class EmailService {
   final String to;
   EmailService({required this.to});
 
-  void sendBidInMail(String tenant, String bidDocId, String creator) async {
+  Future<void> sendBidInMail(
+      String tenant, String tenantName, String bidDocId, String creator) async {
     FirebaseFunctions functions = FirebaseFunctions.instance;
     try {
-      // HttpsCallable callable = functions.httpsCallable('getCurrentBidData');
-      // await callable({
-      //   "clientMail": to,
-      //   "tenantId": tenant,
-      //   "bidDocId": bidDocId,
-      //   "creator": creator
-      //   // "ClientPhone": customerPhone,
-      // });
+      HttpsCallable callable = functions.httpsCallable('sendBidInEmail');
+      await callable({
+        "clientMail": to,
+        "tenantId": tenant,
+        "tenantName": tenantName,
+        "bidDocId": bidDocId,
+        "creator": creator
+        // "ClientPhone": customerPhone,
+      });
     } catch (err) {
       print(err);
     }

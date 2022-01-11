@@ -10,6 +10,9 @@ class TenantDB {
   static String _currentTenantId = '';
   static String get currentTenantId => _currentTenantId;
 
+  static String _tenantName = '';
+  static String get tenantName => _tenantName;
+
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');
@@ -67,6 +70,9 @@ class TenantDB {
 
       if (firstValidation == secondValidation) {
         _currentTenantId = firstValidation;
+        final tenantInfo = await companiesCollection.doc(firstValidation).get();
+        _tenantName = tenantInfo['companyName'];
+
         return true;
       } else {
         return false;

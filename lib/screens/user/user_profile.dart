@@ -1,4 +1,5 @@
 import 'package:bid/auth/auth_service.dart';
+import 'package:bid/db/tenant_db.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/home/widgets/home_card.dart';
@@ -66,6 +67,7 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 26,
           ),
+          Text(TenantDB.tenantName),
           // ProfilePicture(),
           SizedBox(
             height: 20,

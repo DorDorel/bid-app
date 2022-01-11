@@ -137,7 +137,6 @@ bool _checkReminder(BuildContext context, String bidId) {
   final reminderData = Provider.of<ReminderProvider>(context, listen: false);
   reminderData.getReminders.forEach((element) {
     if (element.bidId == bidId) {
-      print(element.note);
       r = true;
     }
   });

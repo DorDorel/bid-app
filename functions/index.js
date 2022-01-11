@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-
 const cors = require("cors")({ origin: true });
+
 admin.initializeApp();
 const db = admin.firestore();
 
@@ -19,7 +19,37 @@ exports.testConnection = functions.https.onCall((data, context) => {
 
 // functions
 
-//  exports.sendBidInEmail = functions.https
+exports.sendBidInEmail = functions.https.onCall(async (data, context) => {
+  const clientMail = data.clientMail;
+  const tenantId = data.tenantId;
+  const tenantName = data.tenantName;
+  const bidDocId = data.bidDocId;
+  const creator = data.creator;
+
+  const sgMail = require("@sendgrid/mail");
+  const secret = require("./secret");
+  const webAppUrl = secret.WEB_APP_URL;
+
+  sgMail.setApiKey(secret.SENDGRID_API_KEY);
+  const msg = {
+    to: clientMail,
+    from: "dor.appdev@gmail.com", // Change to your verified send grid sender
+    subject: `הצעת מחיר מחברת ${tenantName}`,
+    text: "שלום, ממתינה לך הצעת מחיר חדשה:",
+    html: `<strong> ${webAppUrl}/?tenant=${tenantId}&bid=${bidDocId}&creator=${creator}</strong>`,
+  };
+  try {
+    await sgMail.send(msg);
+    console.log("email sent");
+  } catch (err) {
+    console.error(err);
+  }
+
+  //logger
+  console.log(
+    `Send bid: ${bidDocId} to: ${clientMail} by:${creator} from tenant: ${tenantId}/ ${tenantName}`
+  );
+});
 
 exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
   const tenant = req.query.tenant;
