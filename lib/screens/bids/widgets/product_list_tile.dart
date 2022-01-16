@@ -3,6 +3,7 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
 import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProductListTile extends StatefulWidget {
   final String productId;
@@ -116,6 +117,7 @@ class OptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final oCcy = new NumberFormat("#,##0.00", "en_US");
     return Scaffold(
         body: Column(
       children: [
@@ -132,7 +134,7 @@ class OptionsScreen extends StatelessWidget {
               )),
         )),
         Text(widget.productName, style: TextStyle(fontSize: 20.0)),
-        Text('Price: ' + widget.price.toString(),
+        Text('Price: ' + oCcy.format(widget.price),
             style: TextStyle(fontSize: 14.0)),
         SizedBox(
           height: 10,

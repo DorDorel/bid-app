@@ -89,7 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthenticationService.sendResetPasswordMail(
+                            email: email);
+                      },
                       child: Text(
                         "Support",
                         style: TextStyle(

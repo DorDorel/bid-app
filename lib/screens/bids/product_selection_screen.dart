@@ -6,6 +6,7 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/providers/bids_provider.dart';
 import 'package:bid/providers/new_bids_provider.dart';
 import 'package:bid/screens/bids/widgets/product_list.dart';
+import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/widgets/next_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,6 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
         .startNewBidFlow();
 
     bidFlow ? print("yes") : print("no");
-    // Navigator.pushNamed(context, MainDashboard.routeName);
+    Navigator.pushNamed(context, MainDashboard.routeName);
   }
 }

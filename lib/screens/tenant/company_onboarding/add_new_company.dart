@@ -39,7 +39,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
       logoImageUrl: '',
     );
 
-    final companyId = await DatabaseSevice().addNewCompany(newCompany);
+    final companyId = await DatabaseService().addNewCompany(newCompany);
     // ignore: unnecessary_null_comparison
     if (companyId == null) {
       CircularProgressIndicator();

@@ -3,7 +3,7 @@ import 'package:bid/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   Future<User?> get getCurrentUser async => _firebaseAuth.currentUser;
@@ -45,9 +45,17 @@ class AuthenticationService {
     // HttpsCallable setNewUserTenantId =
     //     FirebaseFunctions.instance.httpsCallable('setNewUserTenantId');
     // await setNewUserTenantId(user.toMap()).then((value) => print(value));
-    await DatabaseSevice().addUserToUserCollection(user);
-    await DatabaseSevice().addUserToCompanyUserList(user.tenantId, user);
+    await DatabaseService().addUserToUserCollection(user);
+    await DatabaseService().addUserToCompanyUserList(user.tenantId, user);
 
     return userId;
+  }
+
+  static Future<void> sendResetPasswordMail({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  static Future<void> blockUser({required String email}) async {
+    //await _firebaseAuth.
   }
 }

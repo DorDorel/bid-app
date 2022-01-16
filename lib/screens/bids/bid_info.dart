@@ -17,6 +17,7 @@ class BidInfo extends StatelessWidget {
     var dateFormat = DateFormat.yMd();
     var date = dateFormat.format(bid.date);
     TextStyle infoFontSize = TextStyle(fontSize: 16);
+    final oCcy = new NumberFormat("#,##0.00", "en_US");
 
     return Scaffold(
         appBar: AppBar(
@@ -56,7 +57,7 @@ class BidInfo extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                "Final Price: " + bid.finalPrice.toStringAsFixed(2),
+                "Final Price: " + oCcy.format(bid.finalPrice) + " ₪",
                 style: TextStyle(fontSize: 20),
               ),
             ],

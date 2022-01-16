@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
   Spacfic documention here: https://firebase.flutter.dev/docs/firestore/usage/
 */
 
-class DatabaseSevice {
+class DatabaseService {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   final String tenant = TenantDB.currentTenantId;
 // Collections reference

@@ -39,7 +39,7 @@ class TenantProvider with ChangeNotifier {
   }
 
   Future<bool> _checkAdminAsync() async {
-    checkAdmin = await DatabaseSevice().isAdmin();
+    checkAdmin = await DatabaseService().isAdmin();
     return checkAdmin;
   }
 
