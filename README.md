@@ -1,4 +1,4 @@
-# bid
+# BidApp
 
 A new way to send an interactive bid to your customers.
 <br><br>
