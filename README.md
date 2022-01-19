@@ -13,5 +13,9 @@ ADMIN PANEL DEMO:
 
 
 The link that will be sent to the customer: <a href="https://lproject-a1460.web.app/?tenant=XMqoQLgYxIi1u9Bfwh6U&bid=l9MURjFO95gRSTONymmi&creator=lhDqqZZPHMUExcOa5YfQCEtg70p2">here</a>
+<br>
+^^^^ 
+<br>
+This flutter web project source code: <a href = "https://github.com/DorDorel/bid-client"> BidClient</a>
 
 
