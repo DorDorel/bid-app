@@ -42,11 +42,10 @@ class AuthenticationService {
         email: user.email, password: user.password);
     final userId = newUser.user!.uid;
     user.uid = userId;
-    // HttpsCallable setNewUserTenantId =
-    //     FirebaseFunctions.instance.httpsCallable('setNewUserTenantId');
-    // await setNewUserTenantId(user.toMap()).then((value) => print(value));
-    await DatabaseService().addUserToUserCollection(user);
-    await DatabaseService().addUserToCompanyUserList(user.tenantId, user);
+
+    await DatabaseService().addUserToUserCollection(user: user);
+    await DatabaseService()
+        .addUserToCompanyUserList(cid: user.tenantId, user: user);
 
     return userId;
   }

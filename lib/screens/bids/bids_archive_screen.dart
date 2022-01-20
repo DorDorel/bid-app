@@ -20,7 +20,7 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+            backgroundColor: Colors.black,
             elevation: 0.8,
             title: Text(
               'Bids Archive',
@@ -31,7 +31,7 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
             )),
         body: Padding(
           padding: EdgeInsets.all(2),
-          child: bidsData.allBids.length == 0
+          child: bidsData.allBids.isEmpty
               ? Center(
                   child: CircularProgressIndicator(
                     color: Colors.black,

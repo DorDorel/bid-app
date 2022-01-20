@@ -18,7 +18,7 @@ class _ProductsScreenState extends State<ProductList> {
 
     return Padding(
       padding: EdgeInsets.all(2),
-      child: productsData.products.length == 0
+      child: productsData.products.isEmpty
           ? Center(
               child: CircularProgressIndicator(
               color: Colors.black,

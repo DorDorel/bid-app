@@ -6,9 +6,9 @@ import 'package:bid/providers/tenant_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /*
-  This libary (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
+  This library (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
   Read More here: https://pub.dev/packages/cloud_firestore .
-  Spacfic documention here: https://firebase.flutter.dev/docs/firestore/usage/
+  Specific documentation here: https://firebase.flutter.dev/docs/firestore/usage/
 */
 
 class DatabaseService {
@@ -35,21 +35,22 @@ class DatabaseService {
     return companyRef;
   }
 
-  Future<DocumentReference<Object?>> findUserbyUid(String uid) async {
+  Future<DocumentReference<Object?>> findUserByUid(String uid) async {
     DocumentReference<Object?> userRef = usersCollection.doc(uid);
     return userRef;
   }
 
-  Future<void> addUserToUserCollection(CustomUser user) async {
+  Future<void> addUserToUserCollection({required CustomUser user}) async {
     await usersCollection.add(user.toMap());
   }
 
-  Future<void> addUserToCompanyUserList(String cid, CustomUser user) async {
+  Future<void> addUserToCompanyUserList(
+      {required String cid, required CustomUser user}) async {
     final docRef = await findCompanyByCid(cid);
     await docRef.collection('users').doc(user.uid).set(user.toMap());
   }
 
-  Future<Object?> findUserinCompaniyCollectionbyUid(
+  Future<Object?> findUserInCompanyCollectionByUid(
       String uid, String tenantId) async {
     final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
     final CollectionReference<Map<String, dynamic>> userList =

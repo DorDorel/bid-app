@@ -28,11 +28,10 @@ void main() async {
   await TenantCacheBox.openLocalTenantValidationBox();
   await LocalReminder.openBidRemindersBox();
 
-  runApp(MyApp());
+  runApp(BidAppV1Root());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class BidAppV1Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
