@@ -11,11 +11,6 @@ class AuthenticationService {
   Future<String?> get getCurrentUserName async =>
       _firebaseAuth.currentUser!.displayName;
 
-  Future<String?> getCurrentUserTenantId() async {
-    print(_firebaseAuth.currentUser!.tenantId);
-    return _firebaseAuth.currentUser!.tenantId;
-  }
-
   Future<bool> signIn({required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
