@@ -1,6 +1,7 @@
 # BidApp
 
-A new way to send an interactive bid to your customers.
+<h3>A new way to send an interactive bid to your customers.</h3>
+
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
@@ -18,4 +19,16 @@ The link that will be sent to the customer: <a href="https://lproject-a1460.web.
 <br>
 This flutter web project source code: <a href = "https://github.com/DorDorel/bid-client"> BidClient</a>
 
+
+<strong> This project using: </strong> <br>
+Authentcation and Storage with Firebase.
+<br>
+Sreveless with Firebase Cloud Function (node.js v14).
+<br>
+Remote Database(nosql): Firebase Firestore.
+<br>
+Local Database(nosql): Hive.
+<br>
+State architecture : Provider(v 6.0)
+<br>
 
