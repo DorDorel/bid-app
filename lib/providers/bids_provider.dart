@@ -13,7 +13,7 @@ class BidsProvider with ChangeNotifier {
   }
 
   Future<void> getBids() async {
-    final List<Bid> bids = await BidsDb().getAllUserBids();
+    final List<Bid> bids = await BidsDb.getAllUserBids();
     if (bids.isEmpty) {
       _allUserBids = [];
     } else {
@@ -28,6 +28,6 @@ class BidsProvider with ChangeNotifier {
   }
 
   Future<void> updateBidFlag(String bidId) async {
-    await BidsDb().closeBidFlag(bidId);
+    await BidsDb.closeBidFlag(bidId);
   }
 }

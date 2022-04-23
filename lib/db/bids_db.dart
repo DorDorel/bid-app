@@ -4,7 +4,7 @@ import 'package:bid/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BidsDb {
-  Future<String> addBidToBidCollection(Bid bid) async {
+  static Future<String> addBidToBidCollection(Bid bid) async {
     String bidDocId = 'null';
     try {
       final DocumentReference<Object?>? tenantRef =
@@ -20,7 +20,7 @@ class BidsDb {
     return bidDocId;
   }
 
-  Future<List<Bid>> getAllUserBids() async {
+  static Future<List<Bid>> getAllUserBids() async {
     List<Bid> allBids = [];
     final String uID = await AuthenticationService().getCurrentUserUID;
     final DocumentReference<Object?>? tenantRef =
@@ -48,7 +48,7 @@ class BidsDb {
     return allBids;
   }
 
-  Future<Bid?> findBidByBidId(String bidId) async {
+  static Future<Bid?> findBidByBidId(String bidId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
 
@@ -69,7 +69,7 @@ class BidsDb {
     }
   }
 
-  Future<String?> findBidDocByBidId(String bidId) async {
+  static Future<String?> findBidDocByBidId(String bidId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
 
@@ -90,7 +90,7 @@ class BidsDb {
     }
   }
 
-  Future<void> closeBidFlag(String bidId) async {
+  static Future<void> closeBidFlag(String bidId) async {
     Bid? currentBid = await findBidByBidId(bidId);
     if (currentBid != null) {
       final DocumentReference<Object?>? tenantRef =

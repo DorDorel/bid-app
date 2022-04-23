@@ -12,7 +12,7 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> _getProducts() async {
     if (_products.isEmpty) {
-      final List<Product>? products = await ProductsDb().getAllProducts();
+      final List<Product>? products = await ProductsDb.getAllProducts();
       if (products!.isEmpty) {
         _products = [];
       } else {
@@ -24,7 +24,7 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> addNewProduct(Product product) async {
     try {
-      await ProductsDb().addNewProduct(product);
+      await ProductsDb.addNewProduct(product);
       _products = [];
       fetchData();
     } catch (err) {
@@ -34,7 +34,7 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> deleteProduct(String productId) async {
     try {
-      await ProductsDb().removeProduct(productId);
+      await ProductsDb.removeProduct(productId);
       _products = [];
       fetchData();
     } catch (err) {
@@ -44,7 +44,7 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> editProduct(String productId, Product product) async {
     try {
-      await ProductsDb().editProduct(productId, product);
+      await ProductsDb.editProduct(productId, product);
       _products = [];
       fetchData();
     } catch (err) {

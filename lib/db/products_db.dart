@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
     tenantRef: Reference to specific company(tenant) collection of current user
  */
 class ProductsDb {
-  Future<String> addNewProduct(Product product) async {
+  static Future<String> addNewProduct(Product product) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
@@ -26,7 +26,7 @@ class ProductsDb {
     }
   }
 
-  Future<List<Product>?> getAllProducts() async {
+  static Future<List<Product>?> getAllProducts() async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     List<Product> productList = [];
@@ -47,7 +47,7 @@ class ProductsDb {
     return productList;
   }
 
-  Future<Product?> findProductByProductId(String productId) async {
+  static Future<Product?> findProductByProductId(String productId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
@@ -66,7 +66,7 @@ class ProductsDb {
     }
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>?> _findFirestoreDocumentId(
+  static Future<QuerySnapshot<Map<String, dynamic>>?> _findFirestoreDocumentId(
       String productId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
@@ -86,7 +86,7 @@ class ProductsDb {
     }
   }
 
-  Future<void> removeProduct(String productId) async {
+  static Future<void> removeProduct(String productId) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     try {
@@ -108,7 +108,7 @@ class ProductsDb {
     }
   }
 
-  Future<void> editProduct(String productId, Product product) async {
+  static Future<void> editProduct(String productId, Product product) async {
     final DocumentReference<Object?>? tenantRef =
         await TenantDB().getTenantReference();
     QuerySnapshot<Map<String, dynamic>>? currentProduct =

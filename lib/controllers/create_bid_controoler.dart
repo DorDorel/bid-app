@@ -19,7 +19,7 @@ class CreateBidController {
       /*
       setBidInDB getting the current bid doc id.
       */
-      String setBidInDB = await BidsDb().addBidToBidCollection(currentBid);
+      String setBidInDB = await BidsDb.addBidToBidCollection(currentBid);
 
       if (setBidInDB != 'null') {
         SharedDb().updateBidId();
