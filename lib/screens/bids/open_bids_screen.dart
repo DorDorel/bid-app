@@ -24,7 +24,10 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
           title: Text(
             'Open Bids',
             style: TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           )),
       body: Padding(
         padding: EdgeInsets.all(2),
@@ -38,15 +41,16 @@ class _OpenBidScreenState extends State<OpenBidScreen> {
                 shrinkWrap: true,
                 itemCount: bidsData.allBids.length,
                 itemBuilder: (_, index) => Column(
-                      children: [
-                        bidsData.allBids[index].openFlag!
-                            ? BidTile(
-                                archiveScreen: false,
-                                bid: bidsData.allBids[index],
-                              )
-                            : SizedBox.shrink()
-                      ],
-                    )),
+                  children: [
+                    bidsData.allBids[index].openFlag!
+                        ? BidTile(
+                            archiveScreen: false,
+                            bid: bidsData.allBids[index],
+                          )
+                        : SizedBox.shrink()
+                  ],
+                ),
+              ),
       ),
     );
   }

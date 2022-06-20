@@ -41,30 +41,37 @@ class _ProductListTileState extends State<ProductListTile> {
         findCurrentProductDataInProductsBidList(widget.productId);
 
     return ListTile(
-        tileColor: isSelected ? Colors.green[100] : Colors.white,
-        title: Text(
-          widget.productName,
-          style: TextStyle(
-            fontSize: 20,
-          ),
+      tileColor: isSelected ? Colors.green[100] : Colors.white,
+      title: Text(
+        widget.productName,
+        style: TextStyle(
+          fontSize: 20,
         ),
-        subtitle: isSelected
-            ? Text(
-                'Quantity: ' +
-                    productSelectedData!.quantity.toString() +
-                    ' Price/Unit: ' +
-                    productSelectedData.finalPricePerUnit.toStringAsFixed(2) +
-                    ' Remarks: ' +
-                    productSelectedData.remark,
-                style: TextStyle(
-                    color: Colors.black87, fontWeight: FontWeight.bold),
-              )
-            : Text(''),
-        leading: CircleAvatar(backgroundImage: NetworkImage(widget.imageUrl)),
-        trailing: PopupOptions(
-          widget: widget,
-          edit: isSelected,
-        ));
+      ),
+      subtitle: isSelected
+          ? Text(
+              'Quantity: ' +
+                  productSelectedData!.quantity.toString() +
+                  ' Price/Unit: ' +
+                  productSelectedData.finalPricePerUnit.toStringAsFixed(2) +
+                  ' Remarks: ' +
+                  productSelectedData.remark,
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          : Text(''),
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(
+          widget.imageUrl,
+        ),
+      ),
+      trailing: PopupOptions(
+        widget: widget,
+        edit: isSelected,
+      ),
+    );
   }
 }
 
@@ -81,31 +88,45 @@ class PopupOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100,
-      child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => OptionsScreen(
-                          widget: widget,
-                          edit: edit,
-                        )));
-          },
-          icon: edit ? Icon(Icons.edit) : Icon(Icons.add),
-          color: Theme.of(context).primaryColor,
-        ),
-        edit
-            ? IconButton(
-                onPressed: () {
-                  removeProductFromCurrentBid(context, widget.productId);
-                },
-                icon: Icon(
-                  Icons.remove_circle_outline,
-                  color: Colors.red[400],
-                ))
-            : Text('')
-      ]),
+                  builder: (BuildContext context) => OptionsScreen(
+                    widget: widget,
+                    edit: edit,
+                  ),
+                ),
+              );
+            },
+            icon: edit
+                ? Icon(
+                    Icons.edit,
+                  )
+                : Icon(
+                    Icons.add,
+                  ),
+            color: Theme.of(context).primaryColor,
+          ),
+          edit
+              ? IconButton(
+                  onPressed: () {
+                    removeProductFromCurrentBid(context, widget.productId);
+                  },
+                  icon: Icon(
+                    Icons.remove_circle_outline,
+                    color: Colors.red[400],
+                  ),
+                )
+              : Text(
+                  '',
+                ),
+        ],
+      ),
     );
   }
 }
@@ -125,17 +146,29 @@ class OptionsScreen extends StatelessWidget {
           height: 80.0,
         ),
         Center(
-            child: Container(
-          width: 60.0,
-          child: Hero(
+          child: Container(
+            width: 60.0,
+            child: Hero(
               tag: '${widget.productId}',
               child: Image.network(
                 widget.imageUrl,
-              )),
-        )),
-        Text(widget.productName, style: TextStyle(fontSize: 20.0)),
-        Text('Price: ' + oCcy.format(widget.price),
-            style: TextStyle(fontSize: 14.0)),
+              ),
+            ),
+          ),
+        ),
+        Text(
+          widget.productName,
+          style: TextStyle(fontSize: 20.0),
+        ),
+        Text(
+          'Price: ' +
+              oCcy.format(
+                widget.price,
+              ),
+          style: TextStyle(
+            fontSize: 14.0,
+          ),
+        ),
         SizedBox(
           height: 10,
         ),
@@ -188,30 +221,37 @@ class _OptionsFormState extends State<OptionsForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _optionsForm,
-        child: Expanded(
-            child: SingleChildScrollView(
-          child: Column(children: [
-            buildQuantityCard(),
-            buildDiscountCard(),
-            buildCustomPrice(),
-            buildWarrantyCard(),
-            buildRemark(),
-            SizedBox(
-              height: 20.0,
-            ),
-            Column(
-              children: [
-                buildAddButton(context),
-                TextButton(
+      key: _optionsForm,
+      child: Expanded(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              buildQuantityCard(),
+              buildDiscountCard(),
+              buildCustomPrice(),
+              buildWarrantyCard(),
+              buildRemark(),
+              SizedBox(
+                height: 20.0,
+              ),
+              Column(
+                children: [
+                  buildAddButton(context),
+                  TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Cancel'))
-              ],
-            ),
-          ]),
-        )));
+                    child: Text(
+                      'Cancel',
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildQuantityCard() => Card(
@@ -219,22 +259,22 @@ class _OptionsFormState extends State<OptionsForm> {
             leading: Checkbox(
               value: quantityEnabled,
               onChanged: (bool? value) {
-                setState(() {
-                  quantityEnabled = value!;
-                });
+                setState(() => quantityEnabled = value!);
               },
             ),
             title: Text(
               'Quantity',
               style: TextStyle(fontSize: 18),
             ),
-            subtitle: Text('Enter a Round Number'),
+            subtitle: Text(
+              'Enter a Round Number',
+            ),
             trailing: Container(
               width: 80,
               height: 40,
               child: TextField(
                 enabled: quantityEnabled ? true : false,
-                onChanged: (value) => {quantity = int.parse(value)},
+                onChanged: (value) => quantity = int.parse(value),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: '$quantity',
@@ -258,7 +298,9 @@ class _OptionsFormState extends State<OptionsForm> {
               'Discount',
               style: TextStyle(fontSize: 18),
             ),
-            subtitle: Text('Enter a number without % symbol'),
+            subtitle: Text(
+              'Enter a number without % symbol',
+            ),
             trailing: Container(
               width: 80,
               height: 40,
@@ -291,13 +333,15 @@ class _OptionsFormState extends State<OptionsForm> {
               'Warranty Months',
               style: TextStyle(fontSize: 18),
             ),
-            subtitle: Text('Enter a Round Number'),
+            subtitle: Text(
+              'Enter a Round Number',
+            ),
             trailing: Container(
               width: 80,
               height: 40,
               child: TextField(
                 enabled: warrantyEnabled ? true : false,
-                onChanged: (value) => {warrantyMonths = int.parse(value)},
+                onChanged: (value) => warrantyMonths = int.parse(value),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: '$warrantyMonths',
@@ -312,14 +356,14 @@ class _OptionsFormState extends State<OptionsForm> {
             leading: Checkbox(
               value: customPriceEnabled,
               onChanged: (bool? value) {
-                setState(() {
-                  customPriceEnabled = value!;
-                });
+                setState(() => customPriceEnabled = value!);
               },
             ),
             title: Text(
               'Custom Price',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(
+                fontSize: 18,
+              ),
             ),
             trailing: Container(
               width: 80,
@@ -338,25 +382,30 @@ class _OptionsFormState extends State<OptionsForm> {
 
   Widget buildRemark() => Card(
         child: TextField(
-          decoration: InputDecoration(hintText: 'Remark'),
+          decoration: InputDecoration(
+            hintText: 'Remark',
+          ),
           maxLines: 3,
           onChanged: (value) => remark = value,
         ),
       );
 
   Widget buildAddButton(BuildContext context) => ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: 360, height: 36),
-      child: NextButton(
-        title: 'ADD',
-        onPressed: () {
-          customPriceEnabled
-              ? discount =
-                  calculateDiscount(widget.product.price, price).toInt()
-              : discount = discount;
+        constraints: BoxConstraints.tightFor(
+          width: 360,
+          height: 36,
+        ),
+        child: NextButton(
+          title: 'ADD',
+          onPressed: () {
+            customPriceEnabled
+                ? discount =
+                    calculateDiscount(widget.product.price, price).toInt()
+                : discount = discount;
 
-          late bool editFlag = widget.edit;
-          if (editFlag) {
-            updateCurrentProductDataInBidList(
+            late bool editFlag = widget.edit;
+            if (editFlag) {
+              updateCurrentProductDataInBidList(
                 context: context,
                 productId: widget.product.productId,
                 product: widget.product,
@@ -364,13 +413,22 @@ class _OptionsFormState extends State<OptionsForm> {
                 pricePerUnit: price,
                 discount: discount,
                 warrantyMonths: warrantyMonths,
-                remark: remark);
-            Navigator.pop(context);
-          } else {
-            addProductToCurrentBid(context, widget.product, quantity, price,
-                discount, warrantyMonths, remark);
-            Navigator.pop(context);
-          }
-        },
-      ));
+                remark: remark,
+              );
+              Navigator.pop(context);
+            } else {
+              addProductToCurrentBid(
+                context,
+                widget.product,
+                quantity,
+                price,
+                discount,
+                warrantyMonths,
+                remark,
+              );
+              Navigator.pop(context);
+            }
+          },
+        ),
+      );
 }

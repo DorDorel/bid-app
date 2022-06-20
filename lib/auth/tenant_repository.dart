@@ -1,10 +1,22 @@
 import 'package:bid/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
-class TenantDB {
+@immutable
+abstract class TenantRepository {
+  Future<String> get getCurrentUserUID;
+  bool setTenantIdFromLocalCache(String tenantId);
+  Future<Object?> getTenantReference();
+  Future<bool> tenantAuthorization();
+}
+
+@immutable
+class TenantRepositoryImpl with TenantRepository {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  @override
   Future<String> get getCurrentUserUID async => _firebaseAuth.currentUser!.uid;
 
   static String _currentTenantId = '';
@@ -21,6 +33,7 @@ class TenantDB {
   final CollectionReference<Map<String, dynamic>> usersCollectionMap =
       _db.collection('users');
 
+  @override
   bool setTenantIdFromLocalCache(String tenantId) {
     _currentTenantId = tenantId;
     if (_currentTenantId.isNotEmpty) {
@@ -29,6 +42,7 @@ class TenantDB {
     return false;
   }
 
+  @override
   Future<DocumentReference?> getTenantReference() async {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
@@ -38,12 +52,13 @@ class TenantDB {
       final DocumentReference tenantReference =
           companiesCollection.doc(currentTenantId);
       return tenantReference;
-    } catch (err) {
-      print(err);
+    } catch (exp) {
+      print(exp.toString());
       return null;
     }
   }
 
+  @override
   Future<bool> tenantAuthorization() async {
     try {
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
@@ -51,18 +66,28 @@ class TenantDB {
           "*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
 
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
-          .where('uid', isEqualTo: await getCurrentUserUID)
+          .where(
+            'uid',
+            isEqualTo: await getCurrentUserUID,
+          )
           .get();
       // get tenantId from user collection
       final String firstValidation =
           CustomUser.fromMap(currentUser.docs.first.data()).tenantId;
 
-      final DocumentReference tenantDoc =
-          companiesCollection.doc(firstValidation);
+      final DocumentReference tenantDoc = companiesCollection.doc(
+        firstValidation,
+      );
       final CollectionReference<Map<String, dynamic>> userList =
-          tenantDoc.collection('users');
-      QuerySnapshot<Map<String, dynamic>> userUid =
-          await userList.where('uid', isEqualTo: await getCurrentUserUID).get();
+          tenantDoc.collection(
+        'users',
+      );
+      QuerySnapshot<Map<String, dynamic>> userUid = await userList
+          .where(
+            'uid',
+            isEqualTo: await getCurrentUserUID,
+          )
+          .get();
 
       // get tenantId from tenant collection
       final String secondValidation =
@@ -70,15 +95,19 @@ class TenantDB {
 
       if (firstValidation == secondValidation) {
         _currentTenantId = firstValidation;
-        final tenantInfo = await companiesCollection.doc(firstValidation).get();
+        final tenantInfo = await companiesCollection
+            .doc(
+              firstValidation,
+            )
+            .get();
         _tenantName = tenantInfo['companyName'];
 
         return true;
       } else {
         return false;
       }
-    } catch (err) {
-      print(err);
+    } catch (exp) {
+      print(exp.toString());
       return false;
     }
   }

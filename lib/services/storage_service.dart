@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+@immutable
 class StorageService {
   final _storage = FirebaseStorage.instance;
   final String tenantId = TenantProvider.tenantId;
@@ -34,8 +36,8 @@ class StorageService {
         String downloadURL = await snapshot.ref.getDownloadURL();
 
         return downloadURL;
-      } catch (err) {
-        print(err);
+      } catch (exp) {
+        print(exp.toString());
       }
     } else {
       print('Grant Permissions and try again');
@@ -47,7 +49,11 @@ class StorageService {
   Future<void> deleteProductImage({required String productImageURL}) async {
     await TenantProvider().tenantValidation();
     try {
-      await _storage.refFromURL(productImageURL).delete();
+      await _storage
+          .refFromURL(
+            productImageURL,
+          )
+          .delete();
     } catch (err) {
       print('file not removed');
     }

@@ -1,6 +1,8 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:url_launcher/url_launcher.dart';
 
+@immutable
 class EmailService {
   final String to;
   EmailService({required this.to});
@@ -10,16 +12,18 @@ class EmailService {
     FirebaseFunctions functions = FirebaseFunctions.instance;
     try {
       HttpsCallable callable = functions.httpsCallable('sendBidInEmail');
-      await callable({
-        "clientMail": to,
-        "tenantId": tenant,
-        "tenantName": tenantName,
-        "bidDocId": bidDocId,
-        "creator": creator
-        // "ClientPhone": customerPhone,
-      });
-    } catch (err) {
-      print(err);
+      await callable(
+        {
+          "clientMail": to,
+          "tenantId": tenant,
+          "tenantName": tenantName,
+          "bidDocId": bidDocId,
+          "creator": creator,
+          // "ClientPhone": customerPhone,
+        },
+      );
+    } catch (exp) {
+      print(exp.toString());
     }
   }
 

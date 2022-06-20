@@ -1,16 +1,16 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/db/tenant_db.dart';
+import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart' show immutable;
 
+@immutable
 class BidsDb {
-  static Future<String> addBidToBidCollection(
-    Bid bid,
-  ) async {
+  static Future<String> addBidToBidCollection(Bid bid) async {
     String bidDocId = 'null';
     try {
       final DocumentReference<Object?>? tenantRef =
-          await TenantDB().getTenantReference();
+          await TenantRepositoryImpl().getTenantReference();
       final CollectionReference<Map<String, dynamic>> bidsCollection =
           tenantRef!.collection('bids');
       await bidsCollection
@@ -18,15 +18,10 @@ class BidsDb {
             bid.toMap(),
           )
           .then(
-            (
-              value,
-            ) =>
-                bidDocId = value.id,
+            (value) => bidDocId = value.id,
           );
     } catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
     }
     return bidDocId;
   }
@@ -35,7 +30,7 @@ class BidsDb {
     List<Bid> allBids = [];
     final String uID = AuthenticationRepositoryImpl.getCurrentUserUID;
     final DocumentReference<Object?>? tenantRef =
-        await TenantDB().getTenantReference();
+        await TenantRepositoryImpl().getTenantReference();
 
     try {
       QuerySnapshot<Map<String, dynamic>> bidsCollection = await tenantRef!
@@ -45,20 +40,14 @@ class BidsDb {
           .get();
 
       bidsCollection.docs.forEach((bid) {
-        final bidObject = Bid.fromMap(
-          bid.data(),
-        );
+        final bidObject = Bid.fromMap(bid.data());
         if (bidObject.createdBy == uID) {
-          allBids.add(
-            bidObject,
-          );
+          allBids.add(bidObject);
         }
         // allBids.add(Bid.fromMap(bid.data()));
       });
     } catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
     }
     //DEBUG LOG - CLEAR BEFORE PRODUCTION
     print(
@@ -72,7 +61,7 @@ class BidsDb {
 
   static Future<Bid?> findBidByBidId(String bidId) async {
     final DocumentReference<Object?>? tenantRef =
-        await TenantDB().getTenantReference();
+        await TenantRepositoryImpl().getTenantReference();
 
     try {
       QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
@@ -98,12 +87,17 @@ class BidsDb {
 
   static Future<String?> findBidDocByBidId(String bidId) async {
     final DocumentReference<Object?>? tenantRef =
-        await TenantDB().getTenantReference();
+        await TenantRepositoryImpl().getTenantReference();
 
     try {
       QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
-          .collection('bids')
-          .where('bidId', isEqualTo: bidId)
+          .collection(
+            'bids',
+          )
+          .where(
+            'bidId',
+            isEqualTo: bidId,
+          )
           .get();
 
       //DEBUG LOG - CLEAR BEFORE PRODUCTION
@@ -111,8 +105,8 @@ class BidsDb {
           "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
 
       return currentBid.docs.first.id;
-    } catch (err) {
-      print('err');
+    } catch (exp) {
+      print('exp'.toString());
       return null;
     }
   }
@@ -123,16 +117,14 @@ class BidsDb {
     );
     if (currentBid != null) {
       final DocumentReference<Object?>? tenantRef =
-          await TenantDB().getTenantReference();
+          await TenantRepositoryImpl().getTenantReference();
 
       try {
         final CollectionReference<Map<String, dynamic>> bidsList =
             tenantRef!.collection(
           'bids',
         );
-        final bidDocId = await findBidDocByBidId(
-          bidId,
-        );
+        final bidDocId = await findBidDocByBidId(bidId);
         final DocumentReference updateOpenBidFlagDbObject = bidsList.doc(
           bidDocId,
         );
@@ -144,9 +136,7 @@ class BidsDb {
         print(
             "🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
       } catch (exp) {
-        print(
-          exp.toString(),
-        );
+        print(exp.toString());
       }
     }
   }

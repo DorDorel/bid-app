@@ -4,17 +4,29 @@ import 'package:intl/intl.dart';
 
 Widget bidsInfoTable(BuildContext context, Bid bid) {
   return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(columns: [
+    scrollDirection: Axis.horizontal,
+    child: DataTable(
+      columns: [
         DataColumn(
             label: Text(
           "Item",
         )),
-        DataColumn(label: Text("quantity")),
-        DataColumn(label: Text("warranty month")),
-        DataColumn(label: Text("Price peer unit")),
-        DataColumn(label: Text("Final Price"))
-      ], rows: _getTableRows(bid)));
+        DataColumn(
+          label: Text("quantity"),
+        ),
+        DataColumn(
+          label: Text("warranty month"),
+        ),
+        DataColumn(
+          label: Text("Price peer unit"),
+        ),
+        DataColumn(
+          label: Text("Final Price"),
+        )
+      ],
+      rows: _getTableRows(bid),
+    ),
+  );
 }
 
 List<DataRow> _getTableRows(Bid bid) {
@@ -23,11 +35,31 @@ List<DataRow> _getTableRows(Bid bid) {
   List<DataRow> products = [];
   bid.selectedProducts.forEach((element) {
     final DataRow dataRow = DataRow(cells: [
-      DataCell(Text(element.product.productName)),
-      DataCell(Text(element.quantity.toString())),
-      DataCell(Text(element.warrantyMonths.toString())),
-      DataCell(Text(oCcy.format(element.product.price))),
-      DataCell(Text(oCcy.format((element.product.price * element.quantity))))
+      DataCell(
+        Text(element.product.productName),
+      ),
+      DataCell(
+        Text(
+          element.quantity.toString(),
+        ),
+      ),
+      DataCell(
+        Text(
+          element.warrantyMonths.toString(),
+        ),
+      ),
+      DataCell(
+        Text(
+          oCcy.format(element.product.price),
+        ),
+      ),
+      DataCell(
+        Text(
+          oCcy.format(
+            (element.product.price * element.quantity),
+          ),
+        ),
+      )
     ]);
     products.add(dataRow);
   });

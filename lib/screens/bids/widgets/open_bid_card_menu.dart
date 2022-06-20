@@ -26,8 +26,9 @@ class OpenTileMenu extends StatelessWidget {
         children: [
           IconButton(
               onPressed: () async {
-                CallService callService =
-                    new CallService(phoneNumber: phoneNumber);
+                CallService callService = new CallService(
+                  phoneNumber: phoneNumber,
+                );
                 await callService.callNow();
               },
               icon: Icon(
@@ -35,40 +36,44 @@ class OpenTileMenu extends StatelessWidget {
                 color: Colors.green,
               )),
           IconButton(
-              onPressed: () async {
-                EmailService emailService = new EmailService(to: clientMail);
-                await emailService.openDefaultMainAppWithAddressClient();
-              },
-              icon: Icon(
-                Icons.email,
-                color: Colors.blueAccent,
-              )),
+            onPressed: () async {
+              EmailService emailService = new EmailService(
+                to: clientMail,
+              );
+              await emailService.openDefaultMainAppWithAddressClient();
+            },
+            icon: Icon(
+              Icons.email,
+              color: Colors.blueAccent,
+            ),
+          ),
           SizedBox(
             width: 21,
           ),
           IconButton(
-              onPressed: () async {
-                CoolAlert.show(
-                  context: context,
-                  type: CoolAlertType.confirm,
-                  text: "Move $bidId to Archive?",
-                  confirmBtnText: 'Yes',
-                  cancelBtnText: 'No',
-                  confirmBtnColor: Colors.black,
-                  backgroundColor: Colors.black,
-                  loopAnimation: true,
-                  borderRadius: 20.0,
-                  onConfirmBtnTap: () async {
-                    await bidsData.updateBidFlag(bidId);
-                    bidsData.eraseAllUserBid();
-                    Navigator.pop(context);
-                  },
-                );
-              },
-              icon: Icon(
-                Icons.archive,
-                color: Colors.deepPurpleAccent,
-              )),
+            onPressed: () async {
+              CoolAlert.show(
+                context: context,
+                type: CoolAlertType.confirm,
+                text: "Move $bidId to Archive?",
+                confirmBtnText: 'Yes',
+                cancelBtnText: 'No',
+                confirmBtnColor: Colors.black,
+                backgroundColor: Colors.black,
+                loopAnimation: true,
+                borderRadius: 20.0,
+                onConfirmBtnTap: () async {
+                  await bidsData.updateBidFlag(bidId);
+                  bidsData.eraseAllUserBid();
+                  Navigator.pop(context);
+                },
+              );
+            },
+            icon: Icon(
+              Icons.archive,
+              color: Colors.deepPurpleAccent,
+            ),
+          ),
         ],
       ),
     );

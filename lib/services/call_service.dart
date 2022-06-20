@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:url_launcher/url_launcher.dart';
 
+@immutable
 class CallService {
   final phoneNumber;
   CallService({required this.phoneNumber});

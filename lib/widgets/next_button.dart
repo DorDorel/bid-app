@@ -8,13 +8,17 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      onPressed: onPressed,
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
         ),
-        style: ElevatedButton.styleFrom(
-          primary: Colors.black,
-        ));
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black,
+      ),
+    );
   }
 }

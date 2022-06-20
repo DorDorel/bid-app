@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:bid/models/product.dart';
+import 'package:flutter/foundation.dart';
 
 class Bid {
   bool? openFlag;

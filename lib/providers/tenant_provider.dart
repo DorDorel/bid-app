@@ -1,18 +1,18 @@
 import 'package:bid/auth/auth_repository.dart';
+import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/db/database.dart';
-import 'package:bid/db/tenant_db.dart';
 import 'package:bid/local/tenant_cache_box.dart';
 import 'package:flutter/foundation.dart';
 
 class TenantProvider with ChangeNotifier {
   static bool checkAdmin = false;
-  static String get tenantId => TenantDB.currentTenantId;
-  static String get tenantName => TenantDB.tenantName;
+  static String get tenantId => TenantRepositoryImpl.currentTenantId;
+  static String get tenantName => TenantRepositoryImpl.tenantName;
 
   Future<void> tenantValidation() async {
     if (!TenantCacheBox.tenantCashBox!.containsKey("tenantId")) {
       try {
-        bool validate = await TenantDB().tenantAuthorization();
+        bool validate = await TenantRepositoryImpl().tenantAuthorization();
         print("*🐛 DEBUG LOG* :  SET TENANT ID FROM REMOTE DB");
         if (!validate) {
           print('not validate SIGNING OUT!');
@@ -25,8 +25,8 @@ class TenantProvider with ChangeNotifier {
     } else {
       final String tenantIdFromLocalCache =
           TenantCacheBox.tenantCashBox!.get("tenantId");
-      bool validate =
-          TenantDB().setTenantIdFromLocalCache(tenantIdFromLocalCache);
+      bool validate = TenantRepositoryImpl()
+          .setTenantIdFromLocalCache(tenantIdFromLocalCache);
 
       print("*🐛 DEBUG LOG* : SET TENANT ID FROM LOCAL DB");
       await _checkAdminAsync();

@@ -21,22 +21,25 @@ class _ProductsScreenState extends State<ProductList> {
       child: productsData.products.isEmpty
           ? Center(
               child: CircularProgressIndicator(
-              color: Colors.black,
-            ))
+                color: Colors.black,
+              ),
+            )
           : ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: productsData.products.length,
               itemBuilder: (_, index) => Column(
-                    children: [
-                      ProductListTile(
-                          productId: productsData.products[index].productId,
-                          productName: productsData.products[index].productName,
-                          price: productsData.products[index].price,
-                          imageUrl: productsData.products[index].imageUrl,
-                          description: productsData.products[index].description)
-                    ],
-                  )),
+                children: [
+                  ProductListTile(
+                    productId: productsData.products[index].productId,
+                    productName: productsData.products[index].productName,
+                    price: productsData.products[index].price,
+                    imageUrl: productsData.products[index].imageUrl,
+                    description: productsData.products[index].description,
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }

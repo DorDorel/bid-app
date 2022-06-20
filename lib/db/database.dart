@@ -1,33 +1,30 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/db/tenant_db.dart';
+import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/models/company.dart';
 import 'package:bid/models/user.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart' show immutable;
 
 /*
   This library (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
   Read More here: https://pub.dev/packages/cloud_firestore .
   Specific documentation here: https://firebase.flutter.dev/docs/firestore/usage/
 */
-
+@immutable
 class DatabaseService {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String tenant = TenantDB.currentTenantId;
+  final String tenant = TenantRepositoryImpl.currentTenantId;
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');
 
   Future<String> addNewCompany(Company company) async {
     try {
-      final newCompanyDbObject = await companiesCollection.add(
-        company.toMap(),
-      );
+      final newCompanyDbObject = await companiesCollection.add(company.toMap());
       return newCompanyDbObject.id;
     } catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
       return exp.toString();
     }
   }
@@ -41,18 +38,14 @@ class DatabaseService {
     return companyRef;
   }
 
-  Future<DocumentReference<Object?>> findUserByUid(
-    String uid,
-  ) async {
+  Future<DocumentReference<Object?>> findUserByUid(String uid) async {
     DocumentReference<Object?> userRef = usersCollection.doc(
       uid,
     );
     return userRef;
   }
 
-  Future<void> addUserToUserCollection({
-    required CustomUser user,
-  }) async {
+  Future<void> addUserToUserCollection({required CustomUser user}) async {
     try {
       await usersCollection.add(
         user.toMap(),
@@ -62,10 +55,8 @@ class DatabaseService {
     }
   }
 
-  Future<void> addUserToCompanyUserList({
-    required String cid,
-    required CustomUser user,
-  }) async {
+  Future<void> addUserToCompanyUserList(
+      {required String cid, required CustomUser user}) async {
     try {
       final docRef = await findCompanyByCid(cid);
       await docRef
@@ -89,9 +80,13 @@ class DatabaseService {
     String uid,
     String tenantId,
   ) async {
-    final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
+    final DocumentReference tenantDoc = companiesCollection.doc(
+      tenantId,
+    );
     final CollectionReference<Map<String, dynamic>> userList =
-        tenantDoc.collection('users');
+        tenantDoc.collection(
+      'users',
+    );
     try {
       QuerySnapshot<Map<String, dynamic>> userUid = await userList
           .where(
@@ -101,9 +96,7 @@ class DatabaseService {
           .get();
       return userUid.docs.first.data()['uid'];
     } catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
       return null;
     }
   }
@@ -112,9 +105,13 @@ class DatabaseService {
     String uid = AuthenticationRepositoryImpl.getCurrentUserUID;
     String tenantId = TenantProvider.tenantId;
 
-    final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
+    final DocumentReference tenantDoc = companiesCollection.doc(
+      tenantId,
+    );
     final CollectionReference<Map<String, dynamic>> userList =
-        tenantDoc.collection('users');
+        tenantDoc.collection(
+      'users',
+    );
     try {
       QuerySnapshot<Map<String, dynamic>> userUid = await userList
           .where(
@@ -125,8 +122,8 @@ class DatabaseService {
       bool isAdmin = await userUid.docs.first.data()['isAdmin'];
 
       return isAdmin;
-    } catch (err) {
-      print(err);
+    } catch (exp) {
+      print(exp.toString());
     }
     return false;
   }

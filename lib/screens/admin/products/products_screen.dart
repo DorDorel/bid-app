@@ -23,7 +23,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
         title: Text(
           'Products',
           style: TextStyle(
-              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: [
           IconButton(

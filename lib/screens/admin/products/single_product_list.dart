@@ -45,7 +45,9 @@ class SingleProductList extends StatelessWidget {
                               description: description,
                             )));
               },
-              icon: Icon(Icons.edit),
+              icon: Icon(
+                Icons.edit,
+              ),
               color: Theme.of(context).primaryColor,
             ),
             // delete button

@@ -31,31 +31,41 @@ class BidTile extends StatelessWidget {
               : Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => BidInfo(bid: bid)));
+                    builder: (BuildContext context) => BidInfo(bid: bid),
+                  ),
+                );
         },
         child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(Icons.adjust_outlined,
-                    color: isOpen! ? Colors.greenAccent[400] : Colors.grey),
+                leading: Icon(
+                  Icons.adjust_outlined,
+                  color: isOpen! ? Colors.greenAccent[400] : Colors.grey,
+                ),
                 title: Text(
                   clientName,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                subtitle: Text("Bid ID: " + bidId),
+                subtitle: Text(
+                  "Bid ID: " + bidId,
+                ),
                 trailing: archiveScreen
                     ? IconButton(
                         onPressed: () async {
-                          EmailService emailService =
-                              new EmailService(to: bid.clientMail);
+                          EmailService emailService = new EmailService(
+                            to: bid.clientMail,
+                          );
                           emailService.openDefaultMainAppWithAddressClient();
                         },
                         icon: Icon(
                           Icons.email,
                           color: Colors.blueGrey,
-                        ))
+                        ),
+                      )
                     : OpenTileMenu(
                         bidId: bidId,
                         clientMail: bid.clientMail,

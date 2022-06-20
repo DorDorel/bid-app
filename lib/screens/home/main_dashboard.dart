@@ -36,18 +36,24 @@ class _MainDashboardState extends State<MainDashboard> {
                 color: Colors.white,
               )),
           IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(
-                  NotificationsScreen.routeName,
-                );
-              },
-              icon: Icon(Icons.notifications_active_outlined,
-                  color: Colors.white)),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                NotificationsScreen.routeName,
+              );
+            },
+            icon: Icon(
+              Icons.notifications_active_outlined,
+              color: Colors.white,
+            ),
+          ),
         ],
         title: Text(
           ' Activity',
           style: TextStyle(
-              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Column(
@@ -55,17 +61,19 @@ class _MainDashboardState extends State<MainDashboard> {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, OpenBidScreen.routeName),
             child: const HomeCard(
-                imagePatch: "",
-                title: "Open Bids",
-                subtitle: "Unmarked bids are closed"),
+              imagePatch: "",
+              title: "Open Bids",
+              subtitle: "Unmarked bids are closed",
+            ),
           ),
           GestureDetector(
             onTap: () =>
                 Navigator.pushNamed(context, BidsArchiveScreen.routeName),
             child: const HomeCard(
-                imagePatch: "",
-                title: "Bids Archive",
-                subtitle: "The bid history you submitted"),
+              imagePatch: "",
+              title: "Bids Archive",
+              subtitle: "The bid history you submitted",
+            ),
           ),
           SizedBox(
             height: 50,
@@ -76,10 +84,7 @@ class _MainDashboardState extends State<MainDashboard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           removeBidDraft(context);
-          Navigator.pushNamed(
-            context,
-            CreateBidScreen.routeName,
-          );
+          Navigator.pushNamed(context, CreateBidScreen.routeName);
         },
         child: Icon(
           Icons.add,

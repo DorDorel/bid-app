@@ -24,7 +24,11 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+  } on FirebaseException catch (exp) {
+    print(exp.toString());
+  }
   await TenantCacheBox.openLocalTenantValidationBox();
   await LocalReminder.openBidRemindersBox();
 
@@ -35,55 +39,65 @@ class BidAppV1Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          Provider<AuthenticationRepositoryImpl>(
-            create: (_) => AuthenticationRepositoryImpl(),
+      providers: [
+        Provider<AuthenticationRepositoryImpl>(
+          create: (_) => AuthenticationRepositoryImpl(),
+        ),
+        StreamProvider(
+          create: (context) => Provider.of<AuthenticationRepositoryImpl>(
+            context,
+            listen: false,
+          ).authStateChanges,
+          initialData: null,
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider<TenantProvider>(
+          create: (context) => TenantProvider(),
+        ),
+        ChangeNotifierProvider<BidsProvider>(
+          create: (context) => BidsProvider(),
+        ),
+        ChangeNotifierProvider<NewBidsProvider>(
+          create: (context) => NewBidsProvider(),
+        ),
+        ChangeNotifierProvider<ReminderProvider>(
+          create: (context) => ReminderProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.white,
+            ),
+            elevation: 0.0,
           ),
-          StreamProvider(
-            create: (context) => Provider.of<AuthenticationRepositoryImpl>(
-                    context,
-                    listen: false)
-                .authStateChanges,
-            initialData: null,
+          primaryColor: Colors.black,
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: Colors.black87,
           ),
-          ChangeNotifierProvider(create: (context) => ProductProvider()),
-          ChangeNotifierProvider<TenantProvider>(
-            create: (context) => TenantProvider(),
-          ),
-          ChangeNotifierProvider<BidsProvider>(
-              create: (context) => BidsProvider()),
-          ChangeNotifierProvider<NewBidsProvider>(
-              create: (context) => NewBidsProvider()),
-          ChangeNotifierProvider<ReminderProvider>(
-              create: (context) => ReminderProvider()),
-        ],
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: ' Bid App',
-            theme: ThemeData(
-                appBarTheme: AppBarTheme(
-                  color: Colors.white,
-                  iconTheme: IconThemeData(color: Colors.white),
-                  elevation: 0.0,
-                ),
-                primaryColor: Colors.black,
-                scaffoldBackgroundColor: Colors.white,
-                colorScheme: ColorScheme.fromSwatch()
-                    .copyWith(secondary: Colors.black87)),
-            home: AuthenticationWrapper(),
-            routes: {
-              LoginScreen.routeName: (context) => LoginScreen(),
-              AddNewCompany.routeName: (context) => AddNewCompany(),
-              CreateNewUser.routeName: (context) => CreateNewUser(),
-              MainDashboard.routeName: (context) => MainDashboard(),
-              UserConfig.routeName: (context) => UserConfig(),
-              CreateBidScreen.routeName: (context) => CreateBidScreen(),
-              NotificationsScreen.routeName: (context) => NotificationsScreen(),
-              AdminScreen.routeName: (context) => AdminScreen(),
-              ProductsScreen.routeName: (context) => ProductsScreen(),
-              OpenBidScreen.routeName: (context) => OpenBidScreen(),
-              BidsArchiveScreen.routeName: (context) => BidsArchiveScreen(),
-            }));
+        ),
+        home: AuthenticationWrapper(),
+        routes: {
+          LoginScreen.routeName: (context) => LoginScreen(),
+          AddNewCompany.routeName: (context) => AddNewCompany(),
+          CreateNewUser.routeName: (context) => CreateNewUser(),
+          MainDashboard.routeName: (context) => MainDashboard(),
+          UserConfig.routeName: (context) => UserConfig(),
+          CreateBidScreen.routeName: (context) => CreateBidScreen(),
+          NotificationsScreen.routeName: (context) => NotificationsScreen(),
+          AdminScreen.routeName: (context) => AdminScreen(),
+          ProductsScreen.routeName: (context) => ProductsScreen(),
+          OpenBidScreen.routeName: (context) => OpenBidScreen(),
+          BidsArchiveScreen.routeName: (context) => BidsArchiveScreen(),
+        },
+      ),
+    );
   }
 }
 

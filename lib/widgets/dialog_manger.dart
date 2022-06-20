@@ -13,17 +13,17 @@ class DialogManger extends StatelessWidget {
   final Function? onTap2;
   final Function? onTap3;
 
-  const DialogManger(
-      {Key? key,
-      required this.dialogType,
-      required this.infoText,
-      this.btn1,
-      this.btn2,
-      this.btn3,
-      this.onTap1,
-      this.onTap2,
-      this.onTap3})
-      : super(key: key);
+  const DialogManger({
+    Key? key,
+    required this.dialogType,
+    required this.infoText,
+    this.btn1,
+    this.btn2,
+    this.btn3,
+    this.onTap1,
+    this.onTap2,
+    this.onTap3,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

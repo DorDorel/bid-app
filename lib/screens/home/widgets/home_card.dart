@@ -22,12 +22,18 @@ class HomeCard extends StatelessWidget {
           children: [
             ListTile(
               // leading: Image(image: AssetImage(imagePatch)),
-              title: Text(title,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+              title: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                ),
+              ),
               subtitle: Text(
                 subtitle,
-                style: TextStyle(fontSize: 14.0),
+                style: TextStyle(
+                  fontSize: 14.0,
+                ),
               ),
             )
           ],

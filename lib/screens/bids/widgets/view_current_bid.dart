@@ -23,7 +23,9 @@ class _ViewCurrentBidState extends State<ViewCurrentBid> {
       itemCount: currentBidData.getCurrentBidProduct.length,
       itemBuilder: (_, index) => Column(
         children: [
-          Text(currentBidData.getCurrentBidProduct[index].product.productName)
+          Text(
+            currentBidData.getCurrentBidProduct[index].product.productName,
+          )
         ],
       ),
     );

@@ -50,11 +50,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     final productsData = Provider.of<ProductProvider>(context);
     if (widget.isEdit!) {
       _editProduct = new Product(
-          productId: widget.productId!,
-          productName: widget.productName!,
-          price: widget.price!,
-          imageUrl: widget.imageUrl!,
-          description: widget.description!);
+        productId: widget.productId!,
+        productName: widget.productName!,
+        price: widget.price!,
+        imageUrl: widget.imageUrl!,
+        description: widget.description!,
+      );
       imageURL = _editProduct.imageUrl;
     }
 
@@ -64,7 +65,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         title: Text(
           widget.isEdit! ? "Edit ${widget.productName}" : " New Product",
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
         ),
         actions: [
           IconButton(
@@ -76,24 +80,32 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   _saveForm()
                       ? productsData.editProduct(
                           _editProduct.productId, _editProduct)
-                      : print("error in isEdit: true _saveForm");
+                      : print(
+                          "error in isEdit: true _saveForm",
+                        );
                 } else {
                   _saveForm()
                       ? productsData.addNewProduct(_editProduct)
-                      : print("error in isEdit: false _saveForm");
+                      : print(
+                          "error in isEdit: false _saveForm",
+                        );
                 }
                 Navigator.pop(context);
               })
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(
+          16,
+        ),
         child: Form(
           key: _form,
           child: ListView(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'ID'),
+                decoration: InputDecoration(
+                  labelText: 'ID',
+                ),
                 initialValue: widget.isEdit! ? _editProduct.productId : "",
                 textInputAction: TextInputAction.next,
                 validator: (value) {
@@ -125,15 +137,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
                 onSaved: (value) => {
                   _editProduct = new Product(
-                      productId: _editProduct.productId,
-                      productName: value!,
-                      price: _editProduct.price,
-                      imageUrl: _editProduct.imageUrl,
-                      description: _editProduct.description),
+                    productId: _editProduct.productId,
+                    productName: value!,
+                    price: _editProduct.price,
+                    imageUrl: _editProduct.imageUrl,
+                    description: _editProduct.description,
+                  ),
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Price'),
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                ),
                 initialValue:
                     widget.isEdit! ? _editProduct.price.toString() : "",
                 textInputAction: TextInputAction.next,
@@ -153,15 +168,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
                 onSaved: (value) => {
                   _editProduct = new Product(
-                      productId: _editProduct.productId,
-                      productName: _editProduct.productName,
-                      price: double.parse(value!),
-                      imageUrl: _editProduct.imageUrl,
-                      description: _editProduct.description),
+                    productId: _editProduct.productId,
+                    productName: _editProduct.productName,
+                    price: double.parse(value!),
+                    imageUrl: _editProduct.imageUrl,
+                    description: _editProduct.description,
+                  ),
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                ),
                 initialValue: widget.isEdit! ? _editProduct.description : "",
                 textInputAction: TextInputAction.next,
                 maxLines: 3,
@@ -178,11 +196,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
                 onSaved: (value) => {
                   _editProduct = new Product(
-                      productId: _editProduct.productId,
-                      productName: _editProduct.productName,
-                      price: _editProduct.price,
-                      imageUrl: _editProduct.imageUrl,
-                      description: value!),
+                    productId: _editProduct.productId,
+                    productName: _editProduct.productName,
+                    price: _editProduct.price,
+                    imageUrl: _editProduct.imageUrl,
+                    description: value!,
+                  ),
                 },
               ),
               SizedBox(
@@ -197,21 +216,24 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                           if (imageInBucket == "ERROR" ||
                               imageInBucket == "Failed") {
                             return _uploadImageErrorManger(
-                                context, imageInBucket);
+                              context,
+                              imageInBucket,
+                            );
                           } else {
                             print(imageInBucket);
-                            setState(() {
-                              imageURL = imageInBucket;
-                            });
+                            setState(
+                              () => imageURL = imageInBucket,
+                            );
                             _editProduct = new Product(
-                                productId: _editProduct.productId,
-                                productName: _editProduct.productName,
-                                price: _editProduct.price,
-                                imageUrl: imageInBucket,
-                                description: _editProduct.description);
+                              productId: _editProduct.productId,
+                              productName: _editProduct.productName,
+                              price: _editProduct.price,
+                              imageUrl: imageInBucket,
+                              description: _editProduct.description,
+                            );
                           }
-                        } catch (err) {
-                          print(err);
+                        } catch (exp) {
+                          print(exp.toString());
                         }
                       },
                       child: Text(
@@ -222,9 +244,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                       ),
                     )
                   : GestureDetector(
-                      onTap: () {
-                        print("yes");
-                      },
+                      onTap: () => print(
+                        "yes",
+                      ),
                       child: Image.network(
                         imageURL,
                         height: 200,
@@ -275,4 +297,5 @@ Future<dynamic>? _uploadImageErrorManger(
         );
       }
   }
+  return null;
 }

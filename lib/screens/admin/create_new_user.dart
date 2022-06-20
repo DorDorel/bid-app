@@ -3,7 +3,6 @@ import 'package:bid/models/user.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/user/login.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CreateNewUser extends StatefulWidget {
   static const routeName = '/create_new_user';
@@ -41,9 +40,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
       }
       return newUser;
     } catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
       return exp.toString();
     }
   }

@@ -15,7 +15,10 @@ class AdminScreen extends StatelessWidget {
         title: Text(
           'Admin Panel',
           style: TextStyle(
-              color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Center(
@@ -30,12 +33,13 @@ class AdminScreen extends StatelessWidget {
                 width: 350,
                 height: 80,
                 child: TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, ProductsScreen.routeName),
-                    child: Text(
-                      'Manage your products',
-                      style: textStyleDefault,
-                    )),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, ProductsScreen.routeName),
+                  child: Text(
+                    'Manage your products',
+                    style: textStyleDefault,
+                  ),
+                ),
               ),
             ),
             spaceDefault,

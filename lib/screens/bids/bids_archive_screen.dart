@@ -25,9 +25,10 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
             title: Text(
               'Bids Archive',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             )),
         body: Padding(
           padding: EdgeInsets.all(2),

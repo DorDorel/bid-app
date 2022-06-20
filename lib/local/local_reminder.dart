@@ -1,11 +1,13 @@
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/reminder.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:hive/hive.dart';
 
 // this is a cache
+@immutable
 class LocalReminder {
-  String note;
-  Bid bid;
+  final String note;
+  final Bid bid;
   LocalReminder({required this.note, required this.bid});
 
   static Box? _remindersBox;

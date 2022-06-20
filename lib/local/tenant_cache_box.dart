@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
+@immutable
 class TenantCacheBox {
-  String tenantId;
+  final String tenantId;
   TenantCacheBox({required this.tenantId});
 
   static Box? _tenantCacheBox;
@@ -16,19 +18,24 @@ class TenantCacheBox {
       Directory document = await getApplicationDocumentsDirectory();
       Hive.init(document.path);
       _tenantCacheBox = await Hive.openBox<String>('tenantBox');
-    } catch (err) {
-      print(err);
+    } catch (exp) {
+      print(exp.toString());
     }
   }
 
   void setTenantIdInCache() {
     if (_tenantCacheBox!.isEmpty) {
-      _tenantCacheBox!.put("tenantId", tenantId);
+      _tenantCacheBox!.put(
+        "tenantId",
+        tenantId,
+      );
     }
   }
 
   static removeTenantId() async {
-    await _tenantCacheBox!.delete("tenantId");
+    await _tenantCacheBox!.delete(
+      "tenantId",
+    );
     print(_tenantCacheBox!.keys);
   }
 

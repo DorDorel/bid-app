@@ -5,4 +5,7 @@ final spaceDefault = const SizedBox(
 );
 
 final TextStyle textStyleDefault = const TextStyle(
-    color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold);
+  color: Colors.black,
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+);

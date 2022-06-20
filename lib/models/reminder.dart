@@ -1,5 +1,7 @@
 // class for local caching data
+import 'package:flutter/foundation.dart' show immutable;
 
+@immutable
 class Reminder {
   final String note;
   final String bidId;

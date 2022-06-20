@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart' show immutable;
+
+@immutable
 class Product {
   final String productId;
   final String productName;

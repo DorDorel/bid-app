@@ -1,7 +1,9 @@
 import 'package:bid/db/database.dart';
 import 'package:bid/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 abstract class AuthenticationRepository {
   Stream<User?> get authStateChanges;
   User? get getCurrentUser;
@@ -12,6 +14,7 @@ abstract class AuthenticationRepository {
   Future<void> blockUser({required String email});
 }
 
+@immutable
 class AuthenticationRepositoryImpl with AuthenticationRepository {
   static String get getCurrentUserUID => FirebaseAuth.instance.currentUser!.uid;
 
@@ -26,18 +29,13 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
   User? get getCurrentUser => FirebaseAuth.instance.currentUser;
 
   @override
-  Future<bool> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> signIn({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       return true;
-    } on FirebaseAuthException catch (err) {
-      print(err.message);
+    } on FirebaseAuthException catch (exp) {
+      print(exp.message);
       return false;
     }
   }
@@ -48,9 +46,7 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
       await FirebaseAuth.instance.signOut();
       print('sign out');
     } catch (e) {
-      print(
-        e.toString(),
-      );
+      print(e.toString());
       return null;
     }
   }
@@ -60,34 +56,26 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
     required CustomUser user,
   }) async {
     try {
-      final newUser =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: user.email,
-        password: user.password,
-      );
+      final newUser = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: user.email, password: user.password);
       final userId = newUser.user!.uid;
       user.uid = userId;
       await DatabaseService().addUserToUserCollection(
         user: user,
       );
-      await DatabaseService().addUserToCompanyUserList(
-        cid: user.tenantId,
-        user: user,
-      );
+      await DatabaseService()
+          .addUserToCompanyUserList(cid: user.tenantId, user: user);
 
       return userId;
     } on FirebaseAuthException catch (exp) {
-      print(
-        exp.toString(),
-      );
+      print(exp.toString());
       return '';
     }
   }
 
   @override
-  Future<void> sendResetPasswordMail({
-    required String email,
-  }) async {
+  Future<void> sendResetPasswordMail({required String email}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: email,
