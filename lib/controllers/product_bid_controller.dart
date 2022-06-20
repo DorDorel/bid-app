@@ -65,24 +65,38 @@ bool findCurrentProductDataInProductsBidListBoll(
   }
 }
 
-bool updateCurrentProductDataInBidList(
-    {required BuildContext context,
-    required String productId,
-    required Product product,
-    required int quantity,
-    required double pricePerUnit,
-    required int discount,
-    required int warrantyMonths,
-    required String remark}) {
+bool updateCurrentProductDataInBidList({
+  required BuildContext context,
+  required String productId,
+  required Product product,
+  required int quantity,
+  required double pricePerUnit,
+  required int discount,
+  required int warrantyMonths,
+  required String remark,
+}) {
   try {
-    final newBidsProvider =
-        Provider.of<NewBidsProvider>(context, listen: false);
-    newBidsProvider.removeProductFromBid(productId);
-    addProductToCurrentBid(context, product, quantity, pricePerUnit, discount,
-        warrantyMonths, remark);
+    final newBidsProvider = Provider.of<NewBidsProvider>(
+      context,
+      listen: false,
+    );
+    newBidsProvider.removeProductFromBid(
+      productId,
+    );
+    addProductToCurrentBid(
+      context,
+      product,
+      quantity,
+      pricePerUnit,
+      discount,
+      warrantyMonths,
+      remark,
+    );
     return true;
   } catch (exp) {
-    print(exp);
+    print(
+      exp.toString(),
+    );
     return false;
   }
 }
@@ -102,7 +116,10 @@ double calculateDiscount(double originalPrice, double newPrice) {
 }
 
 double calculateTotalBidSum(BuildContext context) {
-  final newBidsProvider = Provider.of<NewBidsProvider>(context, listen: false);
+  final newBidsProvider = Provider.of<NewBidsProvider>(
+    context,
+    listen: false,
+  );
 
   double totalSum = 0;
   newBidsProvider.getCurrentBidProduct.forEach((element) {

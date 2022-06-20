@@ -1,4 +1,4 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/controllers/create_bid_controoler.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
 import 'package:bid/db/shared_db.dart';
@@ -81,7 +81,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final Bid bid = Bid(
         openFlag: true,
         bidId: currentBidNumber.toString(),
-        createdBy: await AuthenticationService().getCurrentUserUID,
+        createdBy: await AuthenticationRepositoryImpl.getCurrentUserUID,
         date: DateTime.now(),
         clientName: widget.name,
         clientMail: widget.email,

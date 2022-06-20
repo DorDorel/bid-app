@@ -1,4 +1,4 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/db/tenant_db.dart';
 import 'package:bid/models/company.dart';
 import 'package:bid/models/user.dart';
@@ -20,61 +20,108 @@ class DatabaseService {
 
   Future<String> addNewCompany(Company company) async {
     try {
-      final newCompanyDbObject = await companiesCollection.add(company.toMap());
+      final newCompanyDbObject = await companiesCollection.add(
+        company.toMap(),
+      );
       return newCompanyDbObject.id;
-    } catch (e) {
-      print(e.toString());
-      return e.toString();
+    } catch (exp) {
+      print(
+        exp.toString(),
+      );
+      return exp.toString();
     }
   }
 
   // cid is a companyId (String)
   // docRef is a reference to firestore document Object
   Future<DocumentReference<Object?>> findCompanyByCid(String cid) async {
-    DocumentReference<Object?> companyRef = companiesCollection.doc(cid);
+    DocumentReference<Object?> companyRef = companiesCollection.doc(
+      cid,
+    );
     return companyRef;
   }
 
-  Future<DocumentReference<Object?>> findUserByUid(String uid) async {
-    DocumentReference<Object?> userRef = usersCollection.doc(uid);
+  Future<DocumentReference<Object?>> findUserByUid(
+    String uid,
+  ) async {
+    DocumentReference<Object?> userRef = usersCollection.doc(
+      uid,
+    );
     return userRef;
   }
 
-  Future<void> addUserToUserCollection({required CustomUser user}) async {
-    await usersCollection.add(user.toMap());
+  Future<void> addUserToUserCollection({
+    required CustomUser user,
+  }) async {
+    try {
+      await usersCollection.add(
+        user.toMap(),
+      );
+    } catch (exp) {
+      print(exp.toString());
+    }
   }
 
-  Future<void> addUserToCompanyUserList(
-      {required String cid, required CustomUser user}) async {
-    final docRef = await findCompanyByCid(cid);
-    await docRef.collection('users').doc(user.uid).set(user.toMap());
+  Future<void> addUserToCompanyUserList({
+    required String cid,
+    required CustomUser user,
+  }) async {
+    try {
+      final docRef = await findCompanyByCid(cid);
+      await docRef
+          .collection(
+            'users',
+          )
+          .doc(
+            user.uid,
+          )
+          .set(
+            user.toMap(),
+          );
+    } catch (exp) {
+      print(
+        exp.toString(),
+      );
+    }
   }
 
   Future<Object?> findUserInCompanyCollectionByUid(
-      String uid, String tenantId) async {
+    String uid,
+    String tenantId,
+  ) async {
     final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
     final CollectionReference<Map<String, dynamic>> userList =
         tenantDoc.collection('users');
     try {
-      QuerySnapshot<Map<String, dynamic>> userUid =
-          await userList.where('uid', isEqualTo: uid).get();
+      QuerySnapshot<Map<String, dynamic>> userUid = await userList
+          .where(
+            'uid',
+            isEqualTo: uid,
+          )
+          .get();
       return userUid.docs.first.data()['uid'];
-    } catch (e) {
-      print(e.toString());
+    } catch (exp) {
+      print(
+        exp.toString(),
+      );
       return null;
     }
   }
 
   Future<bool> isAdmin() async {
-    String uid = await AuthenticationService().getCurrentUserUID;
+    String uid = AuthenticationRepositoryImpl.getCurrentUserUID;
     String tenantId = TenantProvider.tenantId;
 
     final DocumentReference tenantDoc = companiesCollection.doc(tenantId);
     final CollectionReference<Map<String, dynamic>> userList =
         tenantDoc.collection('users');
     try {
-      QuerySnapshot<Map<String, dynamic>> userUid =
-          await userList.where('uid', isEqualTo: uid).get();
+      QuerySnapshot<Map<String, dynamic>> userUid = await userList
+          .where(
+            'uid',
+            isEqualTo: uid,
+          )
+          .get();
       bool isAdmin = await userUid.docs.first.data()['isAdmin'];
 
       return isAdmin;

@@ -1,4 +1,4 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/db/database.dart';
 import 'package:bid/db/tenant_db.dart';
 import 'package:bid/local/tenant_cache_box.dart';
@@ -16,7 +16,7 @@ class TenantProvider with ChangeNotifier {
         print("*🐛 DEBUG LOG* :  SET TENANT ID FROM REMOTE DB");
         if (!validate) {
           print('not validate SIGNING OUT!');
-          await AuthenticationService().signOut();
+          await AuthenticationRepositoryImpl().signOut();
         }
         await _checkAdminAsync();
       } catch (err) {
@@ -33,7 +33,7 @@ class TenantProvider with ChangeNotifier {
 
       if (!validate) {
         print('not validate SIGNING OUT!');
-        await AuthenticationService().signOut();
+        await AuthenticationRepositoryImpl().signOut();
       }
     }
   }

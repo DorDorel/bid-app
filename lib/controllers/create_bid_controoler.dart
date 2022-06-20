@@ -26,18 +26,21 @@ class CreateBidController {
 
         // cloud function to send email and sms with link
         BidFlowRunner newRunner = BidFlowRunner(
-            tenantId: TenantProvider.tenantId,
-            tenantName: TenantProvider.tenantName,
-            bidDocId: setBidInDB,
-            customerEmail: currentBid.clientMail,
-            customerPhone: phoneNumber,
-            creator: creator);
+          tenantId: TenantProvider.tenantId,
+          tenantName: TenantProvider.tenantName,
+          bidDocId: setBidInDB,
+          customerEmail: currentBid.clientMail,
+          customerPhone: phoneNumber,
+          creator: creator,
+        );
 
         await newRunner.runner();
         return true;
       }
-    } catch (err) {
-      print(err);
+    } catch (exp) {
+      print(
+        exp.toString(),
+      );
     }
     return false;
   }

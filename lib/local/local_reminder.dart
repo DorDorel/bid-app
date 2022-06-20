@@ -2,6 +2,7 @@ import 'package:bid/models/bid.dart';
 import 'package:bid/models/reminder.dart';
 import 'package:hive/hive.dart';
 
+// this is a cache
 class LocalReminder {
   String note;
   Bid bid;

@@ -1,4 +1,4 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/local/local_reminder.dart';
 import 'package:bid/local/tenant_cache_box.dart';
 import 'package:bid/providers/bids_provider.dart';
@@ -36,13 +36,14 @@ class BidAppV1Root extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          Provider<AuthenticationService>(
-            create: (_) => AuthenticationService(),
+          Provider<AuthenticationRepositoryImpl>(
+            create: (_) => AuthenticationRepositoryImpl(),
           ),
           StreamProvider(
-            create: (context) =>
-                Provider.of<AuthenticationService>(context, listen: false)
-                    .authStateChanges,
+            create: (context) => Provider.of<AuthenticationRepositoryImpl>(
+                    context,
+                    listen: false)
+                .authStateChanges,
             initialData: null,
           ),
           ChangeNotifierProvider(create: (context) => ProductProvider()),
@@ -104,7 +105,8 @@ class AuthenticationWrapper extends StatelessWidget {
 
       //auth info log
       print(
-          '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${TenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}');
+        '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${TenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}',
+      );
       return MainDashboard();
     }
     return LoginScreen();

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:bid/models/product.dart';
 
 class Bid {
@@ -36,12 +38,7 @@ class Bid {
       };
 
   factory Bid.fromMap(Map<String, dynamic> firestoreObj) {
-    // String convertFromTimestampToDateTime(int timeStamp) {
-    //   var date = DateTime.fromMillisecondsSinceEpoch(timeStamp).toString();
-    //   return date;
-    // }
-
-    Bid bidObj = Bid(
+    return Bid(
       openFlag: firestoreObj["openFlag"],
       bidId: firestoreObj['bidId'],
       createdBy: firestoreObj['createdBy'],
@@ -53,7 +50,64 @@ class Bid {
       selectedProducts: parserSelectedProduct(firestoreObj),
     );
 // parserSelectedProduct(firestoreObj)
-    return bidObj;
+  }
+
+  Bid copyWith({
+    bool? openFlag,
+    String? bidId,
+    String? createdBy,
+    DateTime? date,
+    String? clientMail,
+    String? clientName,
+    String? clientPhone,
+    double? finalPrice,
+    List<SelectedProducts>? selectedProducts,
+  }) {
+    return Bid(
+      openFlag: openFlag ?? this.openFlag,
+      bidId: bidId ?? this.bidId,
+      createdBy: createdBy ?? this.createdBy,
+      date: date ?? this.date,
+      clientMail: clientMail ?? this.clientMail,
+      clientName: clientName ?? this.clientName,
+      clientPhone: clientPhone ?? this.clientPhone,
+      finalPrice: finalPrice ?? this.finalPrice,
+      selectedProducts: selectedProducts ?? this.selectedProducts,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Bid(openFlag: $openFlag, bidId: $bidId, createdBy: $createdBy, date: $date, clientMail: $clientMail, clientName: $clientName, clientPhone: $clientPhone, finalPrice: $finalPrice, selectedProducts: $selectedProducts,)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Bid &&
+        other.openFlag == openFlag &&
+        other.bidId == bidId &&
+        other.createdBy == createdBy &&
+        other.date == date &&
+        other.clientMail == clientMail &&
+        other.clientName == clientName &&
+        other.clientPhone == clientPhone &&
+        other.finalPrice == finalPrice &&
+        listEquals(other.selectedProducts, selectedProducts);
+  }
+
+  @override
+  int get hashCode {
+    return openFlag.hashCode ^
+        bidId.hashCode ^
+        createdBy.hashCode ^
+        date.hashCode ^
+        clientMail.hashCode ^
+        clientName.hashCode ^
+        clientPhone.hashCode ^
+        finalPrice.hashCode ^
+        selectedProducts.hashCode;
   }
 }
 
@@ -88,15 +142,13 @@ class SelectedProducts {
 
   factory SelectedProducts.fromMap(Map<String, dynamic> firestoreObj) {
     // final jsonShortcut = firestoreObj["mapValue"]["fields"];
-    SelectedProducts selectedProducts = SelectedProducts(
+    return SelectedProducts(
         product: Product.fromMap(firestoreObj["product"]),
         quantity: firestoreObj["quantity"],
         discount: firestoreObj["discount"],
         finalPricePerUnit: firestoreObj["finalPricePerUnit"],
         warrantyMonths: firestoreObj["warrantyMonths"],
         remark: firestoreObj["remark"]);
-
-    return selectedProducts;
   }
 }
 //############################################################

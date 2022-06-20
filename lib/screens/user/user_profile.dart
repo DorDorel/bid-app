@@ -1,4 +1,4 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/db/tenant_db.dart';
 import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class UserConfig extends StatelessWidget {
   static const routeName = '/user_profile';
-  final AuthenticationService _auth = AuthenticationService();
+  final AuthenticationRepository _auth = AuthenticationRepositoryImpl();
 
   @override
   Widget build(BuildContext context) {

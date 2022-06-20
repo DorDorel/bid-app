@@ -29,11 +29,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => AddNewProductScreen(
-                              isEdit: false,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => AddNewProductScreen(
+                      isEdit: false,
+                    ),
+                  ),
+                );
               },
               icon: Icon(
                 Icons.add,

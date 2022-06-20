@@ -1,6 +1,9 @@
-import 'package:bid/auth/auth_service.dart';
+import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/models/user.dart';
+import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/screens/user/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateNewUser extends StatefulWidget {
   static const routeName = '/create_new_user';
@@ -11,7 +14,7 @@ class CreateNewUser extends StatefulWidget {
 
 class _CreateNewUserState extends State<CreateNewUser> {
   // tenantId is a ref to company id if db
-  String tenantId = 'xvK2sXGx2QlHDq7OWvdN';
+  String tenantId = TenantProvider.tenantId;
   String email = '';
   String password = '';
   String name = '';
@@ -21,21 +24,27 @@ class _CreateNewUserState extends State<CreateNewUser> {
 
   Future<String> _createUser() async {
     try {
-      final authInstance = AuthenticationService();
+      final _authInstance = AuthenticationRepositoryImpl();
       CustomUser user = new CustomUser(
-          tenantId: tenantId,
-          email: email,
-          password: password,
-          name: name,
-          phoneNumber: phoneNumber);
-      final newUser = await authInstance.createUser(user: user);
+        tenantId: tenantId,
+        email: email,
+        password: password,
+        name: name,
+        phoneNumber: phoneNumber,
+      );
+      final newUser = await _authInstance.createUser(
+        user: user,
+      );
       if (newUser.isNotEmpty) {
         _newUserFlag = true;
+        _authInstance.signOut();
       }
       return newUser;
-    } catch (e) {
-      print(e.toString());
-      return e.toString();
+    } catch (exp) {
+      print(
+        exp.toString(),
+      );
+      return exp.toString();
     }
   }
 
@@ -49,19 +58,24 @@ class _CreateNewUserState extends State<CreateNewUser> {
         title: Text(
           'New User',
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
         ),
         actions: [
           IconButton(
-              icon: Icon(Icons.check),
-              onPressed: () {
-                _createUser();
-                // if (_newUserFlag) {
-                //   context
-                //       .read<AuthenticationService>()
-                //       .signIn(email: email, password: password);
-                // }
-              })
+            icon: Icon(Icons.check),
+            onPressed: () {
+              _createUser();
+              // ignore: todo
+              //TODO: This is a temp solution for the login a new user after he's created.
+              Navigator.pushNamed(
+                context,
+                LoginScreen.routeName,
+              );
+            },
+          ),
         ],
       ),
       body: Padding(
@@ -71,27 +85,35 @@ class _CreateNewUserState extends State<CreateNewUser> {
           child: ListView(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
                 keyboardType: TextInputType.name,
                 onChanged: (value) {
                   name = value;
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
                 onChanged: (value) {
                   password = value;
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Phone Number'),
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                ),
                 keyboardType: TextInputType.phone,
                 onChanged: (value) {
                   phoneNumber = value;

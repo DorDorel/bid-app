@@ -26,7 +26,10 @@ class _MainDashboardState extends State<MainDashboard> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, UserConfig.routeName);
+                Navigator.pushNamed(
+                  context,
+                  UserConfig.routeName,
+                );
               },
               icon: Icon(
                 Icons.account_circle_outlined,
@@ -34,7 +37,9 @@ class _MainDashboardState extends State<MainDashboard> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(NotificationsScreen.routeName);
+                Navigator.of(context).pushNamed(
+                  NotificationsScreen.routeName,
+                );
               },
               icon: Icon(Icons.notifications_active_outlined,
                   color: Colors.white)),
@@ -71,7 +76,10 @@ class _MainDashboardState extends State<MainDashboard> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           removeBidDraft(context);
-          Navigator.pushNamed(context, CreateBidScreen.routeName);
+          Navigator.pushNamed(
+            context,
+            CreateBidScreen.routeName,
+          );
         },
         child: Icon(
           Icons.add,
