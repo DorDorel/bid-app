@@ -1,10 +1,11 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/controllers/create_bid_controoler.dart';
 import 'package:bid/controllers/product_bid_controller.dart';
-import 'package:bid/db/shared_db.dart';
+import 'package:bid/data/db/shared_db.dart';
+import 'package:bid/data/providers/bids_provider.dart';
+import 'package:bid/data/providers/new_bids_provider.dart';
 import 'package:bid/models/bid.dart';
-import 'package:bid/providers/bids_provider.dart';
-import 'package:bid/providers/new_bids_provider.dart';
+
 import 'package:bid/screens/bids/widgets/product_list.dart';
 import 'package:bid/screens/home/main_dashboard.dart';
 import 'package:bid/widgets/next_button.dart';

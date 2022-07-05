@@ -1,7 +1,8 @@
+import 'package:bid/data/providers/bids_provider.dart';
+import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/reminder.dart';
-import 'package:bid/providers/bids_provider.dart';
-import 'package:bid/providers/reminder_provider.dart';
+
 import 'package:bid/screens/bids/bid_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
+import 'package:bid/data/providers/new_bids_provider.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/product.dart';
-import 'package:bid/providers/new_bids_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:image_picker/image_picker.dart';

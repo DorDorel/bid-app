@@ -1,4 +1,4 @@
-import 'package:bid/providers/reminder_provider.dart';
+import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

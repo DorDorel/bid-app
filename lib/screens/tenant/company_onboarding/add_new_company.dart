@@ -1,4 +1,4 @@
-import 'package:bid/db/database.dart';
+import 'package:bid/data/db/database.dart';
 import 'package:bid/models/company.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:flutter/material.dart';

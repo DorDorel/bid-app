@@ -1,5 +1,5 @@
-import 'package:bid/local/tenant_cache_box.dart';
-import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/data/local/tenant_cache_box.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/screens/bids/product_selection_screen.dart';
 import 'package:bid/widgets/next_button.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
   @override
   Widget build(BuildContext context) {
     /*
-     this if condition check if its a first time user login in current divice
+     this if condition check if its a first time user login in current device
      if it is - the tenant id insert to the local db.
      this location selected because new user want to use with app and he try
      to CREATE NEW BID :)

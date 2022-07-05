@@ -1,6 +1,6 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/home/widgets/home_card.dart';
 import 'package:bid/screens/user/login.dart';

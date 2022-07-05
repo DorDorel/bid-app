@@ -1,7 +1,8 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/db/database.dart';
-import 'package:bid/local/tenant_cache_box.dart';
+import 'package:bid/data/db/database.dart';
+import 'package:bid/data/local/tenant_cache_box.dart';
+
 import 'package:flutter/foundation.dart';
 
 class TenantProvider with ChangeNotifier {

@@ -1,4 +1,4 @@
-import 'package:bid/providers/products_provider.dart';
+import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/screens/admin/add_new_product_screen.dart';
 import 'package:bid/screens/admin/products/single_product_list.dart';
 import 'package:flutter/material.dart';

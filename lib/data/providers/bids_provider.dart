@@ -1,4 +1,4 @@
-import 'package:bid/db/bids_db.dart';
+import 'package:bid/data/db/bids_db.dart';
 import 'package:bid/models/bid.dart';
 import 'package:flutter/foundation.dart';
 

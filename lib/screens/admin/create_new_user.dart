@@ -1,6 +1,6 @@
 import 'package:bid/auth/auth_repository.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/models/user.dart';
-import 'package:bid/providers/tenant_provider.dart';
 import 'package:bid/screens/user/login.dart';
 import 'package:flutter/material.dart';
 

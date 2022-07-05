@@ -1,4 +1,4 @@
-import 'package:bid/local/local_reminder.dart';
+import 'package:bid/data/local/local_reminder.dart';
 import 'package:bid/models/bid.dart';
 import 'package:bid/models/reminder.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,5 +1,5 @@
-import 'package:bid/providers/bids_provider.dart';
-import 'package:bid/providers/reminder_provider.dart';
+import 'package:bid/data/providers/bids_provider.dart';
+import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/screens/notification/widgets/reminder_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

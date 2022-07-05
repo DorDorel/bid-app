@@ -1,4 +1,4 @@
-import 'package:bid/providers/bids_provider.dart';
+import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/services/call_service.dart';
 import 'package:bid/services/email_service.dart';
 import 'package:cool_alert/cool_alert.dart';

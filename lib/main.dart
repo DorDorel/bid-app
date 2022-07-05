@@ -1,11 +1,12 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/local/local_reminder.dart';
-import 'package:bid/local/tenant_cache_box.dart';
-import 'package:bid/providers/bids_provider.dart';
-import 'package:bid/providers/new_bids_provider.dart';
-import 'package:bid/providers/products_provider.dart';
-import 'package:bid/providers/reminder_provider.dart';
-import 'package:bid/providers/tenant_provider.dart';
+import 'package:bid/data/local/local_reminder.dart';
+import 'package:bid/data/local/tenant_cache_box.dart';
+import 'package:bid/data/providers/bids_provider.dart';
+import 'package:bid/data/providers/new_bids_provider.dart';
+import 'package:bid/data/providers/products_provider.dart';
+import 'package:bid/data/providers/reminder_provider.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
+
 import 'package:bid/screens/admin/admin_screen.dart';
 import 'package:bid/screens/admin/create_new_user.dart';
 import 'package:bid/screens/admin/products/products_screen.dart';
