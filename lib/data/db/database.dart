@@ -1,8 +1,9 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
+import 'package:bid/data/models/company.dart';
+import 'package:bid/data/models/user.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/models/company.dart';
-import 'package:bid/models/user.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
 

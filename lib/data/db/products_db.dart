@@ -1,5 +1,5 @@
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/models/product.dart';
+import 'package:bid/data/models/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
 

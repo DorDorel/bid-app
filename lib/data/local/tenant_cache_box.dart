@@ -25,17 +25,12 @@ class TenantCacheBox {
 
   void setTenantIdInCache() {
     if (_tenantCacheBox!.isEmpty) {
-      _tenantCacheBox!.put(
-        "tenantId",
-        tenantId,
-      );
+      _tenantCacheBox!.put("tenantId", tenantId);
     }
   }
 
   static removeTenantId() async {
-    await _tenantCacheBox!.delete(
-      "tenantId",
-    );
+    await _tenantCacheBox!.delete("tenantId");
     print(_tenantCacheBox!.keys);
   }
 

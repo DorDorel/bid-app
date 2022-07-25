@@ -1,6 +1,7 @@
 import 'package:bid/data/local/local_reminder.dart';
-import 'package:bid/models/bid.dart';
-import 'package:bid/models/reminder.dart';
+import 'package:bid/data/models/bid.dart';
+import 'package:bid/data/models/reminder.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class ReminderProvider with ChangeNotifier {

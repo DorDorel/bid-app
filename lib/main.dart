@@ -6,22 +6,23 @@ import 'package:bid/data/providers/new_bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
+import 'package:bid/presentation/screens/admin/create_new_user.dart';
+import 'package:bid/presentation/screens/admin/products/products_screen.dart';
+import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
+import 'package:bid/presentation/screens/bids/create_bid_screen.dart';
+import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
+import 'package:bid/presentation/screens/home/main_dashboard.dart';
+import 'package:bid/presentation/screens/notification/notification_screen.dart';
+import 'package:bid/presentation/screens/tenant/company_onboarding/add_new_company.dart';
+import 'package:bid/presentation/screens/user/login.dart';
+import 'package:bid/presentation/screens/user/user_profile.dart';
 
-import 'package:bid/screens/admin/admin_screen.dart';
-import 'package:bid/screens/admin/create_new_user.dart';
-import 'package:bid/screens/admin/products/products_screen.dart';
-import 'package:bid/screens/bids/bids_archive_screen.dart';
-import 'package:bid/screens/bids/create_bid_screen.dart';
-import 'package:bid/screens/bids/open_bids_screen.dart';
-import 'package:bid/screens/home/main_dashboard.dart';
-import 'package:bid/screens/notification/notification_screen.dart';
-import 'package:bid/screens/tenant/company_onboarding/add_new_company.dart';
-import 'package:bid/screens/user/login.dart';
-import 'package:bid/screens/user/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'presentation/screens/admin/admin_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +71,7 @@ class BidAppV1Root extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
             color: Colors.white,
             iconTheme: IconThemeData(
               color: Colors.white,

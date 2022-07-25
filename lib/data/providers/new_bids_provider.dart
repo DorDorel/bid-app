@@ -1,4 +1,4 @@
-import 'package:bid/models/bid.dart';
+import 'package:bid/data/models/bid.dart';
 import 'package:flutter/material.dart';
 
 class NewBidsProvider with ChangeNotifier {
