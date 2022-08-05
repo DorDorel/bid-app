@@ -29,6 +29,6 @@ Remote Database(nosql): Firebase Firestore.
 <br>
 Local Database(nosql): Hive.
 <br>
-State architecture : Provider(v 6.0).
+State architecture and di : Provider(v 6.0).
 <br>
 
