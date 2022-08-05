@@ -29,7 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
               onPressed: () {
                 Navigator.push(

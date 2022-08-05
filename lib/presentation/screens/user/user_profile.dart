@@ -31,7 +31,7 @@ class UserConfig extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          actions: [
+          actions: <IconButton>[
             IconButton(
                 onPressed: () async {
                   await tenantProvider.removeTenantIdFromLocalCache();

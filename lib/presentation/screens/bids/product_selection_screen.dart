@@ -42,7 +42,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             color: Colors.white,
           ),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
             onPressed: () {
               currentBidData.clearAllCurrentBid();

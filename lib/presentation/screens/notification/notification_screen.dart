@@ -28,7 +28,7 @@ class NotificationsScreen extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
             onPressed: () {
               reminderData.removeAllReminders();

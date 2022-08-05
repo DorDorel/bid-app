@@ -27,14 +27,18 @@ class _MainDashboardState extends State<MainDashboard> {
         automaticallyImplyLeading: false,
         actions: <IconButton>[
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, UserConfig.routeName),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              UserConfig.routeName,
+            ),
             icon: Icon(
               Icons.account_circle_outlined,
               color: Colors.white,
             ),
           ),
           IconButton(
-            onPressed: () => Navigator.of(context).pushNamed(
+            onPressed: () => Navigator.pushNamed(
+              context,
               NotificationsScreen.routeName,
             ),
             icon: Icon(

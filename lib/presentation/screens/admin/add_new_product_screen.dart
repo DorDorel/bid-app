@@ -70,7 +70,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
             fontSize: 30,
           ),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
               icon: Icon(
                 Icons.save,

@@ -56,7 +56,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
           'Add New',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
               icon: Icon(Icons.check),
               onPressed: () {

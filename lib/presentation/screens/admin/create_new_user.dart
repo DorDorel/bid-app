@@ -60,7 +60,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
             fontSize: 30,
           ),
         ),
-        actions: [
+        actions: <IconButton>[
           IconButton(
             icon: Icon(Icons.check),
             onPressed: () {
