@@ -1,0 +1,21 @@
+/Users/dor/bid-app/ios/Pods/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh
+/Users/dor/bid-app/ios/build/Debug-iphoneos/BoringSSL-GRPC/openssl_grpc.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseAuth/FirebaseAuth.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseCore/FirebaseCore.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseFirestore/FirebaseFirestore.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseFunctions/FirebaseFunctions.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/FirebaseStorage/FirebaseStorage.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/GoogleDataTransport/GoogleDataTransport.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/GoogleUtilities/GoogleUtilities.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/Libuv-gRPC/uv.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/PromisesObjC/FBLPromises.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/abseil/absl.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/gRPC-C++/grpcpp.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/gRPC-Core/grpc.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/image_picker_ios/image_picker_ios.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/leveldb-library/leveldb.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/nanopb/nanopb.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/path_provider_ios/path_provider_ios.framework
+/Users/dor/bid-app/ios/build/Debug-iphoneos/url_launcher_ios/url_launcher_ios.framework
