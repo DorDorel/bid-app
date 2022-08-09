@@ -1,5 +1,6 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
+import 'package:bid/presentation/screens/user/user_profile.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
@@ -165,9 +166,16 @@ class _LoginScreenState extends State<LoginScreen> {
               email: email,
               password: password,
             );
-            result
-                ? Navigator.pushNamed(context, MainDashboard.routeName)
-                : print('!!!AUTHENTICATION ERROR!!!');
+
+            if (result) {
+              wipeAllFirestoreDataFromCache(context);
+              Navigator.pushNamed(
+                context,
+                MainDashboard.routeName,
+              );
+            } else {
+              print('!!!AUTHENTICATION ERROR!!!');
+            }
           },
         ),
       ),

@@ -12,6 +12,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+void wipeAllFirestoreDataFromCache(BuildContext context) {
+  final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
+  final productProvider = Provider.of<ProductProvider>(context, listen: false);
+  final bidsProvider = Provider.of<BidsProvider>(context, listen: false);
+  final reminderProvider =
+      Provider.of<ReminderProvider>(context, listen: false);
+
+  try {
+    reminderProvider.removeAllReminders();
+    productProvider.removeAllProducts();
+    bidsProvider.eraseAllUserBid();
+    tenantProvider.removeTenantIdFromLocalCache();
+  } catch (err) {
+    print(err.toString());
+  }
+}
+
 class UserConfig extends StatelessWidget {
   static const routeName = '/user_profile';
   final AuthenticationRepository _auth = AuthenticationRepositoryImpl();
@@ -19,47 +36,39 @@ class UserConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
-    final tenantProvider = Provider.of<TenantProvider>(context);
-    final productProvider = Provider.of<ProductProvider>(context);
-    final bidsProvider = Provider.of<BidsProvider>(context);
-    final reminderProvider = Provider.of<ReminderProvider>(context);
+    final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          elevation: 0.8,
-          title: Transform(
-            transform: Matrix4.translationValues(0.0, 0.0, 0.0),
-            child: Text(
-              'Profile',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0.8,
+        title: Transform(
+          transform: Matrix4.translationValues(0.0, 0.0, 0.0),
+          child: Text(
+            'Profile',
+            style: TextStyle(
+                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          actions: <IconButton>[
-            IconButton(
-                onPressed: () async {
-                  // clear all user caching from device storage
-                  reminderProvider.removeAllReminders();
-                  productProvider.removeAllProducts();
-                  bidsProvider.eraseAllUserBid();
-                  await tenantProvider.removeTenantIdFromLocalCache();
-                  await _auth.signOut();
-
-                  Navigator.pushNamed(context, LoginScreen.routeName);
-                },
-                icon: Icon(Icons.logout_rounded))
-          ],
         ),
-        body: firebaseUser != null
-            ? ProfileBody(
-                userProfileMail: firebaseUser.email.toString(),
-                uid: firebaseUser.uid.toString(),
-                tenantId: TenantProvider.tenantId,
-              )
-            : CircularProgressIndicator());
+        actions: <IconButton>[
+          IconButton(
+              onPressed: () async {
+                // clear all user caching from device storage
+                wipeAllFirestoreDataFromCache(context);
+                await _auth.signOut();
+                Navigator.pushNamed(context, LoginScreen.routeName);
+              },
+              icon: Icon(Icons.logout_rounded))
+        ],
+      ),
+      body: firebaseUser != null
+          ? ProfileBody(
+              userProfileMail: firebaseUser.email.toString(),
+              uid: firebaseUser.uid.toString(),
+              tenantId: TenantProvider.tenantId,
+            )
+          : CircularProgressIndicator(),
+    );
   }
 }
 
