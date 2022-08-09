@@ -31,14 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
       body: Stack(
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: new AssetImage("assets/images/login_wallpaper.jpeg"),
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
           SingleChildScrollView(
             child: Column(
               children: [

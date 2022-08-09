@@ -19,6 +19,7 @@ import 'package:bid/presentation/screens/user/user_profile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,11 +27,9 @@ import 'presentation/screens/admin/admin_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await Firebase.initializeApp();
-  } on FirebaseException catch (exp) {
-    print(exp.toString());
-  }
+
+  await Firebase.initializeApp();
+  //
   await TenantCacheBox.openLocalTenantValidationBox();
   await LocalReminder.openBidRemindersBox();
 
