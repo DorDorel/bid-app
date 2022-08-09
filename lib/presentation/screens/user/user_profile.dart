@@ -1,5 +1,8 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
+import 'package:bid/data/providers/bids_provider.dart';
+import 'package:bid/data/providers/products_provider.dart';
+import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/presentation/screens/admin/admin_screen.dart';
 import 'package:bid/presentation/screens/home/widgets/home_card.dart';
@@ -17,6 +20,10 @@ class UserConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
     final tenantProvider = Provider.of<TenantProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
+    final bidsProvider = Provider.of<BidsProvider>(context);
+    final reminderProvider = Provider.of<ReminderProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -34,8 +41,13 @@ class UserConfig extends StatelessWidget {
           actions: <IconButton>[
             IconButton(
                 onPressed: () async {
+                  // clear all user caching from device storage
+                  reminderProvider.removeAllReminders();
+                  productProvider.removeAllProducts();
+                  bidsProvider.eraseAllUserBid();
                   await tenantProvider.removeTenantIdFromLocalCache();
                   await _auth.signOut();
+
                   Navigator.pushNamed(context, LoginScreen.routeName);
                 },
                 icon: Icon(Icons.logout_rounded))
@@ -68,14 +80,19 @@ class ProfileBody extends StatelessWidget {
           SizedBox(
             height: 26,
           ),
-          Text(TenantRepositoryImpl.tenantName),
+          Text(
+            TenantRepositoryImpl.tenantName,
+          ),
           // ProfilePicture(),
           SizedBox(
             height: 20,
           ),
           Text(
             'Email: $userProfileMail',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(
             height: 6.0,
@@ -84,7 +101,9 @@ class ProfileBody extends StatelessWidget {
             'User Id: $uid',
             style: TextStyle(fontSize: 14.0),
           ),
-          Text('Tenant Id: $tenantId'),
+          Text(
+            'Tenant Id: $tenantId',
+          ),
           SizedBox(
             height: 80,
           ),

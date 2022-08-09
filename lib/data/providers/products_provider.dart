@@ -51,4 +51,7 @@ class ProductProvider with ChangeNotifier {
       print(err);
     }
   }
+
+  // only for sign out method
+  void removeAllProducts() => _products = [];
 }

@@ -22,7 +22,7 @@ class BidsProvider with ChangeNotifier {
     }
   }
 
-  Future<void> eraseAllUserBid() async {
+  void eraseAllUserBid() {
     _allUserBids = [];
     notifyListeners();
   }
