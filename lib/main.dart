@@ -16,6 +16,7 @@ import 'package:bid/presentation/screens/notification/notification_screen.dart';
 import 'package:bid/presentation/screens/tenant/company_onboarding/add_new_company.dart';
 import 'package:bid/presentation/screens/user/login.dart';
 import 'package:bid/presentation/screens/user/user_profile.dart';
+import 'presentation/screens/admin/admin_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,13 +24,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'presentation/screens/admin/admin_screen.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
-  //
   await TenantCacheBox.openLocalTenantValidationBox();
   await LocalReminder.openBidRemindersBox();
 
@@ -70,7 +67,8 @@ class BidAppV1Root extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.grey[300],
+          appBarTheme: AppBarTheme(
             color: Colors.white,
             iconTheme: IconThemeData(
               color: Colors.white,
@@ -110,18 +108,39 @@ class BidAppV1Root extends StatelessWidget {
 //########################################################################
 
 class AuthenticationWrapper extends StatelessWidget {
+  static Map<String, String> userInfo = {};
+
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
-    final tenantProvider = Provider.of<TenantProvider>(context);
+    final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
+
+    void checkAndSetAuthorized() async {
+      await tenantProvider.tenantValidation();
+
+      /*
+     This if condition check if its a first time user login in current device
+     if it is - the tenant id insert to the local db.
+    */
+      if (TenantCacheBox.tenantCashBox!.isEmpty) {
+        tenantProvider.setTenantIdInLocalCache();
+      }
+
+      userInfo = {
+        "user": firebaseUser!.email!,
+        "uid": firebaseUser.uid,
+        "tenant": TenantProvider.tenantId,
+      };
+      //auth info log
+      userInfo.forEach(
+        (key, value) {
+          print(key + ':' + " " + value);
+        },
+      );
+    }
 
     if (firebaseUser != null) {
-      tenantProvider.tenantValidation();
-
-      //auth info log
-      print(
-        '🚀  user: ${firebaseUser.email}, uid: ${firebaseUser.uid}, tenant: ${TenantProvider.tenantId} admin: ${TenantProvider.checkAdmin.toString()}',
-      );
+      checkAndSetAuthorized();
       return MainDashboard();
     }
     return LoginScreen();

@@ -1,7 +1,10 @@
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/presentation/screens/bids/widgets/bids_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import '../../widgets/const_widgets/background_color.dart';
 
 class BidsArchiveScreen extends StatefulWidget {
   static const routeName = '/bids_archive';
@@ -19,17 +22,17 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
     bidsData.fetchData();
 
     return Scaffold(
+        backgroundColor: backgroundColor,
         appBar: AppBar(
-            backgroundColor: Colors.black,
-            elevation: 0.8,
-            title: Text(
-              'Bids Archive',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
+          backgroundColor: Colors.black,
+          elevation: 0.8,
+          title: Text(
+            'Bids Archive',
+            style: GoogleFonts.bebasNeue(
+              fontSize: 36,
+            ),
+          ),
+        ),
         body: Padding(
           padding: EdgeInsets.all(2),
           child: bidsData.allBids.isEmpty

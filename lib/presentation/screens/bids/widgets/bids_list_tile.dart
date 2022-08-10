@@ -36,6 +36,7 @@ class BidTile extends StatelessWidget {
                 );
         },
         child: Card(
+          color: Colors.grey[200],
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

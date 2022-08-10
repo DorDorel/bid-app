@@ -17,6 +17,7 @@ class HomeCard extends StatelessWidget {
       width: double.infinity,
       height: 80,
       child: Card(
+        color: Colors.grey[200],
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

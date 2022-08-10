@@ -8,10 +8,13 @@ import 'package:bid/logic/create_bid_logic.dart';
 import 'package:bid/logic/product_bid_logic.dart';
 import 'package:bid/presentation/screens/bids/widgets/product_list.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
+import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
+import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProductSelectionScreen extends StatefulWidget {
@@ -33,14 +36,13 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final currentBidData = Provider.of<NewBidsProvider>(context);
     final bidsData = Provider.of<BidsProvider>(context);
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0.8,
         title: Text(
           'Select Products',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: appBarTitleStyle,
         ),
         actions: <IconButton>[
           IconButton(
@@ -63,8 +65,8 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
             ),
             Text(
               '${widget.name} bid:',
-              style: TextStyle(
-                fontSize: 18.0,
+              style: GoogleFonts.bebasNeue(
+                fontSize: 22.0,
               ),
             ),
             SizedBox(

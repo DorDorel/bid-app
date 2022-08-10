@@ -1,6 +1,8 @@
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/models/product.dart';
 import 'package:bid/logic/product_bid_logic.dart';
+import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
+import 'package:bid/presentation/widgets/const_widgets/card_tile_color.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
@@ -42,7 +44,7 @@ class _ProductListTileState extends State<ProductListTile> {
         findCurrentProductDataInProductsBidList(widget.productId);
 
     return ListTile(
-      tileColor: isSelected ? Colors.green[100] : Colors.white,
+      tileColor: isSelected ? Colors.green[100] : cardTileColor,
       title: Text(
         widget.productName,
         style: TextStyle(
@@ -116,7 +118,10 @@ class PopupOptions extends StatelessWidget {
           edit
               ? IconButton(
                   onPressed: () {
-                    removeProductFromCurrentBid(context, widget.productId);
+                    removeProductFromCurrentBid(
+                      context,
+                      widget.productId,
+                    );
                   },
                   icon: Icon(
                     Icons.remove_circle_outline,
@@ -141,44 +146,45 @@ class OptionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final oCcy = new NumberFormat("#,##0.00", "en_US");
     return Scaffold(
+        backgroundColor: backgroundColor,
         body: Column(
-      children: [
-        SizedBox(
-          height: 80.0,
-        ),
-        Center(
-          child: Container(
-            width: 60.0,
-            child: Hero(
-              tag: '${widget.productId}',
-              child: Image.network(
-                widget.imageUrl,
+          children: [
+            SizedBox(
+              height: 80.0,
+            ),
+            Center(
+              child: Container(
+                width: 60.0,
+                child: Hero(
+                  tag: '${widget.productId}',
+                  child: Image.network(
+                    widget.imageUrl,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        Text(
-          widget.productName,
-          style: TextStyle(fontSize: 20.0),
-        ),
-        Text(
-          'Price: ' +
-              oCcy.format(
-                widget.price,
+            Text(
+              widget.productName,
+              style: TextStyle(fontSize: 20.0),
+            ),
+            Text(
+              'Price: ' +
+                  oCcy.format(
+                    widget.price,
+                  ),
+              style: TextStyle(
+                fontSize: 14.0,
               ),
-          style: TextStyle(
-            fontSize: 14.0,
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        OptionsForm(
-          edit: edit,
-          product: widget._currentProductInProductObject(),
-        ),
-      ],
-    ));
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            OptionsForm(
+              edit: edit,
+              product: widget._currentProductInProductObject(),
+            ),
+          ],
+        ));
   }
 }
 
@@ -256,6 +262,7 @@ class _OptionsFormState extends State<OptionsForm> {
   }
 
   Widget buildQuantityCard() => Card(
+        color: cardTileColor,
         child: ListTile(
             leading: Checkbox(
               value: quantityEnabled,
@@ -286,6 +293,7 @@ class _OptionsFormState extends State<OptionsForm> {
       );
 
   Widget buildDiscountCard() => Card(
+        color: cardTileColor,
         child: ListTile(
             leading: Checkbox(
               value: discountEnabled,
@@ -321,6 +329,7 @@ class _OptionsFormState extends State<OptionsForm> {
       );
 
   Widget buildWarrantyCard() => Card(
+        color: cardTileColor,
         child: ListTile(
             leading: Checkbox(
               value: warrantyEnabled,
@@ -353,6 +362,7 @@ class _OptionsFormState extends State<OptionsForm> {
       );
 
   Widget buildCustomPrice() => Card(
+        color: cardTileColor,
         child: ListTile(
             leading: Checkbox(
               value: customPriceEnabled,
@@ -382,6 +392,7 @@ class _OptionsFormState extends State<OptionsForm> {
       );
 
   Widget buildRemark() => Card(
+        color: Colors.yellowAccent[100],
         child: TextField(
           decoration: InputDecoration(
             hintText: 'Remark',

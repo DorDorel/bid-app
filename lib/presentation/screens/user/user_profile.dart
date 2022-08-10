@@ -7,9 +7,12 @@ import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/presentation/screens/admin/admin_screen.dart';
 import 'package:bid/presentation/screens/home/widgets/home_card.dart';
 import 'package:bid/presentation/screens/user/login.dart';
+import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
+import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void wipeAllFirestoreDataFromCache(BuildContext context) {
@@ -36,19 +39,15 @@ class UserConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
-    final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0.8,
         title: Transform(
           transform: Matrix4.translationValues(0.0, 0.0, 0.0),
-          child: Text(
-            'Profile',
-            style: TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
-          ),
+          child: Text('Profile', style: appBarTitleStyle),
         ),
         actions: <IconButton>[
           IconButton(
@@ -108,14 +107,35 @@ class ProfileBody extends StatelessWidget {
           ),
           Text(
             'User Id: $uid',
-            style: TextStyle(fontSize: 14.0),
+            style: GoogleFonts.gelasio(
+              fontSize: 14,
+            ),
           ),
           Text(
             'Tenant Id: $tenantId',
+            style: GoogleFonts.gelasio(
+              fontSize: 14,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            onLongPress: () {
+              print("f");
+            },
+            child: Text(
+              "Send Details",
+              style: GoogleFonts.patrickHand(
+                color: Colors.black54,
+                fontSize: 16.0,
+              ),
+            ),
           ),
           SizedBox(
             height: 80,
           ),
+
           TenantProvider.checkAdmin ? AdminButton() : Text(''),
         ],
       ),
@@ -143,7 +163,10 @@ class AdminButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(context, AdminScreen.routeName),
+        onTap: () => Navigator.pushNamed(
+          context,
+          AdminScreen.routeName,
+        ),
         child: HomeCard(
             imagePatch: "",
             title: "Admin Panel",

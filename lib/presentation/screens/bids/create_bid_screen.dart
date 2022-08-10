@@ -1,10 +1,10 @@
-import 'package:bid/data/local/tenant_cache_box.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/presentation/screens/bids/product_selection_screen.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import '../../widgets/const_widgets/app_bar_title_style.dart';
+import '../../widgets/const_widgets/background_color.dart';
 
 class CreateBidScreen extends StatefulWidget {
   static const routeName = '/create_new_bid';
@@ -16,19 +16,8 @@ class CreateBidScreen extends StatefulWidget {
 class _CreateBidScreenState extends State<CreateBidScreen> {
   @override
   Widget build(BuildContext context) {
-    /*
-     this if condition check if its a first time user login in current device
-     if it is - the tenant id insert to the local db.
-     this location selected because new user want to use with app and he try
-     to CREATE NEW BID :)
-    */
-
-    if (TenantCacheBox.tenantCashBox!.isEmpty) {
-      final tenantProvider = Provider.of<TenantProvider>(context);
-      tenantProvider.setTenantIdInLocalCache();
-    }
-
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0.8,
@@ -37,8 +26,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
           transform: Matrix4.translationValues(0.0, 0.0, 0.0),
           child: Text(
             'New Bid',
-            style: TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+            style: appBarTitleStyle,
           ),
         ),
       ),

@@ -1,9 +1,10 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/presentation/screens/home/main_dashboard.dart';
 import 'package:bid/presentation/screens/user/user_profile.dart';
-import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../home/main_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
@@ -19,156 +20,149 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Welcome',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 40,
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                "Welcome back!",
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 52,
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      Container(
-                          width: 400,
-                          height: 60,
-                          child: TextField(
-                            style: TextStyle(
-                              fontSize: 24,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'EMAIL',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  16.0,
-                                ),
-                              )),
-                              labelStyle: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.green,
-                                ),
-                              ),
-                            ),
-                            onChanged: (value) => {
-                              email = value,
-                            },
-                          )),
-                      SizedBox(
-                        height: 2.0,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                " You have been messed :(",
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25.0,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Your organization email',
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 400,
-                        height: 60,
-                        child: TextField(
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                          decoration: InputDecoration(
-                            labelText: 'PASSWORD ',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  16.0,
-                                ),
-                              ),
-                            ),
-                            labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.green,
-                              ),
-                            ),
-                          ),
-                          obscureText: true,
-                          onChanged: (value) => {
-                            password = value,
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4.0,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Forgot your password?",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          _auth.sendResetPasswordMail(
-                            email: email,
-                          );
-                        },
-                        child: Text(
-                          "Support",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                      onChanged: (value) => email = value,
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 40.0,
-          horizontal: 6.0,
-        ),
-        child: NextButton(
-          title: "Sign In",
-          onPressed: () async {
-            bool result = await _auth.signIn(
-              email: email,
-              password: password,
-            );
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25.0,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      12.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 20.0,
+                    ),
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Password',
+                      ),
+                      onChanged: (value) => password = value,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              InkWell(
+                onTap: () async {
+                  bool result = await _auth.signIn(
+                    email: email,
+                    password: password,
+                  );
 
-            if (result) {
-              wipeAllFirestoreDataFromCache(context);
-              Navigator.pushNamed(
-                context,
-                MainDashboard.routeName,
-              );
-            } else {
-              print('!!!AUTHENTICATION ERROR!!!');
-            }
-          },
+                  if (result) {
+                    wipeAllFirestoreDataFromCache(context);
+                    Navigator.pushNamed(
+                      context,
+                      MainDashboard.routeName,
+                    );
+                  } else {
+                    print('!!!AUTHENTICATION ERROR!!!');
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25.0,
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.black,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Forgot your password? "),
+                  Text(
+                    "Restore here",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

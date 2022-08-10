@@ -1,6 +1,8 @@
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/presentation/screens/bids/widgets/bids_info_table.dart';
+import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
+import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -20,14 +22,10 @@ class BidInfo extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          "Bid ${bid.bidId}",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        title: Text("Bid ${bid.bidId}", style: appBarTitleStyle),
       ),
       body: Center(
         child: Column(

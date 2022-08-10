@@ -7,6 +7,7 @@ import 'package:bid/presentation/screens/notification/notification_screen.dart';
 import 'package:bid/presentation/screens/user/user_profile.dart';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../bids/create_bid_screen.dart';
 
@@ -21,6 +22,7 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         toolbarHeight: 100.0,
         backgroundColor: Colors.black,
@@ -49,17 +51,18 @@ class _MainDashboardState extends State<MainDashboard> {
         ],
         title: Text(
           ' Activity',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 38,
-            fontWeight: FontWeight.bold,
+          style: GoogleFonts.bebasNeue(
+            fontSize: 42,
           ),
         ),
       ),
       body: Column(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, OpenBidScreen.routeName),
+            onTap: () => Navigator.pushNamed(
+              context,
+              OpenBidScreen.routeName,
+            ),
             child: const HomeCard(
               imagePatch: "",
               title: "Open Bids",
@@ -67,8 +70,10 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
           ),
           GestureDetector(
-            onTap: () =>
-                Navigator.pushNamed(context, BidsArchiveScreen.routeName),
+            onTap: () => Navigator.pushNamed(
+              context,
+              BidsArchiveScreen.routeName,
+            ),
             child: const HomeCard(
               imagePatch: "",
               title: "Bids Archive",
