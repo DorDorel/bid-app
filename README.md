@@ -1,6 +1,13 @@
+
+
+
+
 # BidApp
 
 <h3>A new way to send an interactive bid to your customers.</h3>
+UPDATE : Version 1.0 in October: 
+<br><br>
+<img src="https://postimg.cc/xJpLWkVQ">
 
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
