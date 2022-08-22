@@ -7,7 +7,7 @@
 <h3>A new way to send an interactive bid to your customers.</h3>
 UPDATE : Version 1.0 in October: 
 <br><br>
-![alt text](https://mega.nz/file/tpsmFRba#S4ouSUFfHYEjPhBWG8g39R6Cwdw4Flfz_u_MpGU7p8Q)
+<img src="https://mega.nz/file/tpsmFRba#S4ouSUFfHYEjPhBWG8g39R6Cwdw4Flfz_u_MpGU7p8Q">
 
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
