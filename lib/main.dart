@@ -6,6 +6,7 @@ import 'package:bid/data/providers/new_bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
+import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/screens/admin/create_new_user.dart';
 import 'package:bid/presentation/screens/admin/products/products_screen.dart';
 import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
@@ -63,6 +64,9 @@ class BidAppV1Root extends StatelessWidget {
         ChangeNotifierProvider<ReminderProvider>(
           create: (context) => ReminderProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => FilterProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -125,9 +129,11 @@ class AuthenticationWrapper extends StatelessWidget {
       if (TenantCacheBox.tenantCashBox!.isEmpty) {
         tenantProvider.setTenantIdInLocalCache();
       }
+    }
 
+    if (firebaseUser != null) {
       userInfo = {
-        "user": firebaseUser!.email!,
+        "user": firebaseUser.email!,
         "uid": firebaseUser.uid,
         "tenant": TenantProvider.tenantId,
       };
@@ -137,9 +143,6 @@ class AuthenticationWrapper extends StatelessWidget {
           print(key + ':' + " " + value);
         },
       );
-    }
-
-    if (firebaseUser != null) {
       checkAndSetAuthorized();
       return MainDashboard();
     }

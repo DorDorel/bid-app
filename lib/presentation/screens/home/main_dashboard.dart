@@ -1,14 +1,14 @@
 import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
-import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
-import 'package:bid/presentation/screens/home/widgets/home_card.dart';
+import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/screens/home/widgets/reminders_preview.dart';
-import 'package:bid/presentation/screens/notification/notification_screen.dart';
-import 'package:bid/presentation/screens/user/user_profile.dart';
+import 'package:bid/presentation/widgets/filter_menu.dart';
+import 'package:bid/presentation/widgets/home_widget_selector.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../data/providers/bids_provider.dart';
 import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -21,70 +21,40 @@ class MainDashboard extends StatefulWidget {
 class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
+    final bidsData = Provider.of<BidsProvider>(context);
+    bidsData.fetchData();
+    final filterProvider = Provider.of<FilterProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        toolbarHeight: 100.0,
-        backgroundColor: Colors.black,
-        automaticallyImplyLeading: false,
-        actions: <IconButton>[
-          IconButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              UserConfig.routeName,
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 45,
             ),
-            icon: Icon(
-              Icons.account_circle_outlined,
-              color: Colors.white,
+            Stack(
+              children: [
+                Container(
+                  height: 90.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 6,
+                    ),
+                    child: Text(
+                      "User Dashboard",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 52,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              NotificationsScreen.routeName,
-            ),
-            icon: Icon(
-              Icons.notifications_active_outlined,
-              color: Colors.white,
-            ),
-          ),
-        ],
-        title: Text(
-          ' Activity',
-          style: GoogleFonts.bebasNeue(
-            fontSize: 42,
-          ),
+            FilterMenu(),
+            HomeWidgetSelector(),
+            remindersPreview(context)
+          ],
         ),
-      ),
-      body: Column(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(
-              context,
-              OpenBidScreen.routeName,
-            ),
-            child: const HomeCard(
-              imagePatch: "",
-              title: "Open Bids",
-              subtitle: "Unmarked bids are closed",
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(
-              context,
-              BidsArchiveScreen.routeName,
-            ),
-            child: const HomeCard(
-              imagePatch: "",
-              title: "Bids Archive",
-              subtitle: "The bid history you submitted",
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          remindersPreview(context)
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

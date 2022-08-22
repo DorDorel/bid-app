@@ -32,8 +32,15 @@ class StorageService {
         File file = File(image.path);
         print(image.path);
 
-        var snapshot = await _storage.ref().child(bucketPath).putFile(file);
-        String downloadURL = await snapshot.ref.getDownloadURL();
+        final snapshot = await _storage
+            .ref()
+            .child(
+              bucketPath,
+            )
+            .putFile(
+              file,
+            );
+        final String downloadURL = await snapshot.ref.getDownloadURL();
 
         return downloadURL;
       } catch (exp) {

@@ -4,11 +4,10 @@ import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
+import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/screens/admin/admin_screen.dart';
 import 'package:bid/presentation/screens/home/widgets/home_card.dart';
 import 'package:bid/presentation/screens/user/login.dart';
-import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
-import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,7 @@ void wipeAllFirestoreDataFromCache(BuildContext context) {
   final bidsProvider = Provider.of<BidsProvider>(context, listen: false);
   final reminderProvider =
       Provider.of<ReminderProvider>(context, listen: false);
+  final filterProvider = Provider.of<FilterProvider>(context, listen: false);
 
   try {
     reminderProvider.removeAllReminders();
@@ -34,40 +34,18 @@ void wipeAllFirestoreDataFromCache(BuildContext context) {
 
 class UserConfig extends StatelessWidget {
   static const routeName = '/user_profile';
-  final AuthenticationRepository _auth = AuthenticationRepositoryImpl();
 
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0.8,
-        title: Transform(
-          transform: Matrix4.translationValues(0.0, 0.0, 0.0),
-          child: Text('Profile', style: appBarTitleStyle),
-        ),
-        actions: <IconButton>[
-          IconButton(
-              onPressed: () async {
-                // clear all user caching from device storage
-                wipeAllFirestoreDataFromCache(context);
-                await _auth.signOut();
-                Navigator.pushNamed(context, LoginScreen.routeName);
-              },
-              icon: Icon(Icons.logout_rounded))
-        ],
-      ),
-      body: firebaseUser != null
-          ? ProfileBody(
-              userProfileMail: firebaseUser.email.toString(),
-              uid: firebaseUser.uid.toString(),
-              tenantId: TenantProvider.tenantId,
-            )
-          : CircularProgressIndicator(),
-    );
+    return firebaseUser != null
+        ? ProfileBody(
+            userProfileMail: firebaseUser.email.toString(),
+            uid: firebaseUser.uid.toString(),
+            tenantId: TenantProvider.tenantId,
+          )
+        : CircularProgressIndicator();
   }
 }
 
@@ -75,70 +53,82 @@ class ProfileBody extends StatelessWidget {
   final String userProfileMail;
   final String uid;
   final String tenantId;
-  ProfileBody(
-      {required this.userProfileMail,
-      required this.uid,
-      required this.tenantId});
+  ProfileBody({
+    required this.userProfileMail,
+    required this.uid,
+    required this.tenantId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 26,
+      child: Column(children: [
+        SizedBox(
+          height: 26,
+        ),
+        Text(
+          TenantRepositoryImpl.tenantName,
+        ),
+        // ProfilePicture(),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          'Email: $userProfileMail',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
           ),
-          Text(
-            TenantRepositoryImpl.tenantName,
+        ),
+        SizedBox(
+          height: 6.0,
+        ),
+        Text(
+          'User Id: $uid',
+          style: GoogleFonts.gelasio(
+            fontSize: 14,
           ),
-          // ProfilePicture(),
-          SizedBox(
-            height: 20,
+        ),
+        Text(
+          'Tenant Id: $tenantId',
+          style: GoogleFonts.gelasio(
+            fontSize: 14,
           ),
-          Text(
-            'Email: $userProfileMail',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        InkWell(
+          onLongPress: () {
+            print("f");
+          },
+          child: Text(
+            "Send Logs",
+            style: GoogleFonts.patrickHand(
+              color: Colors.blue[600],
+              fontSize: 16.0,
             ),
           ),
-          SizedBox(
-            height: 6.0,
-          ),
-          Text(
-            'User Id: $uid',
-            style: GoogleFonts.gelasio(
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            'Tenant Id: $tenantId',
-            style: GoogleFonts.gelasio(
-              fontSize: 14,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          InkWell(
-            onLongPress: () {
-              print("f");
-            },
-            child: Text(
-              "Send Details",
-              style: GoogleFonts.patrickHand(
-                color: Colors.black54,
-                fontSize: 16.0,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 80,
-          ),
+        ),
+        SizedBox(
+          height: 80,
+        ),
 
-          TenantProvider.checkAdmin ? AdminButton() : Text(''),
-        ],
-      ),
+        TenantProvider.checkAdmin ? AdminButton() : Text(''),
+
+        TextButton(
+            onPressed: () async {
+              final AuthenticationRepository _auth =
+                  AuthenticationRepositoryImpl();
+
+              // clear all user caching from device storage
+              wipeAllFirestoreDataFromCache(context);
+
+              await _auth.signOut();
+              Navigator.pushNamed(context, LoginScreen.routeName);
+            },
+            child: Text("Logout"))
+      ]),
     );
   }
 }
@@ -168,9 +158,10 @@ class AdminButton extends StatelessWidget {
           AdminScreen.routeName,
         ),
         child: HomeCard(
-            imagePatch: "",
-            title: "Admin Panel",
-            subtitle: "Mange your Bids system"),
+          imagePatch: "",
+          title: "Admin Panel",
+          subtitle: "Mange your Bids system",
+        ),
       ),
     );
   }
