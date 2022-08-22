@@ -5,9 +5,11 @@
 # BidApp
 
 <h3>A new way to send an interactive bid to your customers.</h3>
-UPDATE : Version 1.0 in October: 
-<br><br>
-<img src="https://postimg.cc/xJpLWkVQ">
+<p>UPDATE : Version 1.0 in October: </p>
+<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.25.43.png?raw=true">view here</a> 
+
+<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.26.46.png?raw=true">and here</a> 
+
 
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
