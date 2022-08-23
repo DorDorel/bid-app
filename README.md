@@ -6,7 +6,11 @@
 
 <h3>A new way to send an interactive bid to your customers.</h3>
 <p>UPDATE : Version 1.0 in October: </p>
-<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.25.43.png?raw=true">view here</a> 
+- New design<br>
+- IOS : Transfer from objective c to swfit<br>
+- Android : Transfer from java to Kotlin<br>
+
+<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.25.43.png?raw=true">v1.0 New disign demo here</a> 
 
 <a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.26.46.png?raw=true">and here</a> 
 
