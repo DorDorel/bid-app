@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
-options: "4c4adfd81bf326d80b16df2c71ae3d9b71436c15654422b6ef68ccb55491ff26"
-build_start_time: [1659948530, 542587041]
-build_end_time: [1659948533, 705027103]
-inputs:
-  "/Users/dor/bid-app/ios/Runner/AppDelegate.swift": [1628622430, 873289108]

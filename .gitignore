@@ -54,3 +54,6 @@ ios/build/Runner.build/Release-iphoneos/Runner.build/dgph
 /functions/secret.js
 
 .firebaserc
+
+#ios
+ios/build/**
