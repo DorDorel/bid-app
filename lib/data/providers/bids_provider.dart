@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class BidsProvider with ChangeNotifier {
   List<Bid> _allUserBids = [];
   List<Bid> get allBids => [..._allUserBids];
+  int openBidsCounter = 0;
 
   Future<void> fetchData() async {
     if (_allUserBids.isEmpty) {
@@ -18,6 +19,7 @@ class BidsProvider with ChangeNotifier {
       _allUserBids = [];
     } else {
       _allUserBids = bids;
+      updateOpenBidsCounter();
       notifyListeners();
     }
   }
@@ -29,5 +31,14 @@ class BidsProvider with ChangeNotifier {
 
   Future<void> updateBidFlag(String bidId) async {
     await BidsDb.closeBidFlag(bidId);
+  }
+
+  void updateOpenBidsCounter() {
+    openBidsCounter = 0;
+    allBids.forEach((element) {
+      if (element.openFlag!) {
+        openBidsCounter++;
+      }
+    });
   }
 }

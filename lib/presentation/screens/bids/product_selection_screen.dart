@@ -1,5 +1,3 @@
-import 'package:bid/auth/auth_repository.dart';
-
 import 'package:bid/data/db/shared_db.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/providers/bids_provider.dart';
@@ -104,7 +102,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final Bid bid = Bid(
       openFlag: true,
       bidId: currentBidNumber.toString(),
-      createdBy: AuthenticationRepositoryImpl.getCurrentUserUID,
+      createdBy: firebaseUser!.uid.toString(),
       date: DateTime.now(),
       clientName: widget.name,
       clientMail: widget.email,
@@ -116,7 +114,7 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     final bool bidFlow = await CreateBid(
       phoneNumber: widget.phoneNumber,
       currentBid: bid,
-      creator: firebaseUser!.uid.toString(),
+      creator: firebaseUser.uid.toString(),
     ).startNewBidFlow();
 
     bidFlow ? print("yes") : print("no");

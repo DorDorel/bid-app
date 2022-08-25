@@ -1,3 +1,4 @@
+import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,6 +41,8 @@ class _FilterMenuState extends State<FilterMenu> {
   @override
   Widget build(BuildContext context) {
     final _filterProvider = Provider.of<FilterProvider>(context);
+    final bidsData = Provider.of<BidsProvider>(context, listen: false);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -58,7 +61,7 @@ class _FilterMenuState extends State<FilterMenu> {
             },
             style: _activateBidsFlag ? activeButtonStyle : notActiveButtonStyle,
             child: Text(
-              "Activities Bids(20)",
+              "Activities Bids (${bidsData.openBidsCounter.toString()})",
               style: GoogleFonts.cuprum(
                 color: _activateBidsFlag
                     ? activateButtonTextColor
@@ -165,22 +168,3 @@ class _FilterMenuState extends State<FilterMenu> {
     );
   }
 }
-
-// class FilterSingleButton extends StatelessWidget {
-//   Function callback;
-//   bool currentScreen;
-
-//   FilterSingleButton({
-//     Key? key,
-//     required this.callback,
-//     required this.currentScreen,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: callback(),
-//       child: Text("catalog"),
-//     );
-//   }
-// }

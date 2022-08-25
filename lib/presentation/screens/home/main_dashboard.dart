@@ -1,8 +1,6 @@
 import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
-import 'package:bid/presentation/screens/home/widgets/reminders_preview.dart';
 import 'package:bid/presentation/widgets/filter_menu.dart';
-import 'package:bid/presentation/widgets/home_widget_selector.dart';
+import 'package:bid/presentation/screens/home/widgets/home_widget_selector.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +21,6 @@ class _MainDashboardState extends State<MainDashboard> {
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
     bidsData.fetchData();
-    final filterProvider = Provider.of<FilterProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -41,7 +38,7 @@ class _MainDashboardState extends State<MainDashboard> {
                       left: 6,
                     ),
                     child: Text(
-                      "User Dashboard",
+                      "Live Dashboard",
                       style: GoogleFonts.bebasNeue(
                         fontSize: 52,
                       ),
@@ -52,7 +49,6 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
             FilterMenu(),
             HomeWidgetSelector(),
-            remindersPreview(context)
           ],
         ),
       ),
