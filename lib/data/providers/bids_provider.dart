@@ -9,11 +9,11 @@ class BidsProvider with ChangeNotifier {
 
   Future<void> fetchData() async {
     if (_allUserBids.isEmpty) {
-      await getBids();
+      await _getBids();
     }
   }
 
-  Future<void> getBids() async {
+  Future<void> _getBids() async {
     final List<Bid> bids = await BidsDb.getAllUserBids();
     if (bids.isEmpty) {
       _allUserBids = [];

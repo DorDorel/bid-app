@@ -1,3 +1,4 @@
+import 'package:bid/data/providers/user_info_provider.dart';
 import 'package:bid/logic/product_bid_logic.dart';
 import 'package:bid/presentation/widgets/filter_menu.dart';
 import 'package:bid/presentation/screens/home/widgets/home_widget_selector.dart';
@@ -20,7 +21,9 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
+    final userData = Provider.of<UserInfoProvider>(context);
     bidsData.fetchData();
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -29,24 +32,28 @@ class _MainDashboardState extends State<MainDashboard> {
             SizedBox(
               height: 45,
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 90.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 6,
-                    ),
-                    child: Text(
-                      "Live Dashboard",
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 52,
+            userData.userData == null
+                ? CircularProgressIndicator(
+                    color: Colors.black,
+                  )
+                : Stack(
+                    children: [
+                      Container(
+                        height: 90.0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 6,
+                          ),
+                          child: Text(
+                            "${userData.userData!.name} Live Dashboard",
+                            style: GoogleFonts.bebasNeue(
+                              fontSize: 40,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
             FilterMenu(),
             HomeWidgetSelector(),
           ],

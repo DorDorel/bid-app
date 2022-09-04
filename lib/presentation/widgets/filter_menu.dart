@@ -108,7 +108,7 @@ class _FilterMenuState extends State<FilterMenu> {
             style:
                 _notificationsFlag ? activeButtonStyle : notActiveButtonStyle,
             child: Text(
-              "Notification",
+              "Reminders",
               style: GoogleFonts.cuprum(
                 color: _notificationsFlag
                     ? activateButtonTextColor

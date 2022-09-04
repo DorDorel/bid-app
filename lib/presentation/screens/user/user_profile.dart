@@ -4,9 +4,9 @@ import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
+import 'package:bid/data/providers/user_info_provider.dart';
 import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/screens/admin/admin_screen.dart';
-import 'package:bid/presentation/screens/home/widgets/home_card.dart';
 import 'package:bid/presentation/screens/user/login.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,12 +21,15 @@ void wipeAllFirestoreDataFromCache(BuildContext context) {
   final reminderProvider =
       Provider.of<ReminderProvider>(context, listen: false);
   final filterProvider = Provider.of<FilterProvider>(context, listen: false);
+  final userInfoProvider =
+      Provider.of<UserInfoProvider>(context, listen: false);
 
   try {
     reminderProvider.removeAllReminders();
     productProvider.removeAllProducts();
     bidsProvider.eraseAllUserBid();
     tenantProvider.removeTenantIdFromLocalCache();
+    userInfoProvider.clearUserDataFromMemory();
   } catch (err) {
     print(err.toString());
   }
@@ -114,18 +117,28 @@ class ProfileBody extends StatelessWidget {
           height: 80,
         ),
 
-        TenantProvider.checkAdmin ? AdminButton() : Text(''),
+        TenantProvider.checkAdmin
+            ? TextButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, AdminScreen.routeName),
+                child: Text("Admin Panel"))
+            : Text(''),
+
+        // TextButton(
+        //     onPressed: () {
+        //       DatabaseService().findUserInUserCollectionByUid(uid);
+        //     },
+        //     child: Text("click")),
 
         TextButton(
             onPressed: () async {
               final AuthenticationRepository _auth =
                   AuthenticationRepositoryImpl();
 
-              // clear all user caching from device storage
-              wipeAllFirestoreDataFromCache(context);
-
               await _auth.signOut();
               Navigator.pushNamed(context, LoginScreen.routeName);
+              // clear all user caching from device storage
+              wipeAllFirestoreDataFromCache(context);
             },
             child: Text("Logout"))
       ]),
@@ -144,25 +157,6 @@ class ProfilePicture extends StatelessWidget {
       height: 115,
       width: 115,
       child: CircleAvatar(),
-    );
-  }
-}
-
-class AdminButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        onTap: () => Navigator.pushNamed(
-          context,
-          AdminScreen.routeName,
-        ),
-        child: HomeCard(
-          imagePatch: "",
-          title: "Admin Panel",
-          subtitle: "Mange your Bids system",
-        ),
-      ),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/models/company.dart';
 import 'package:bid/data/models/user.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
 /*
@@ -16,35 +16,36 @@ import 'package:flutter/foundation.dart' show immutable;
 class DatabaseService {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   final String tenant = TenantRepositoryImpl.currentTenantId;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 // Collections reference
   final CollectionReference companiesCollection = _db.collection('companies');
   final CollectionReference usersCollection = _db.collection('users');
 
-  Future<String> addNewCompany(Company company) async {
-    try {
-      final newCompanyDbObject = await companiesCollection.add(company.toMap());
-      return newCompanyDbObject.id;
-    } catch (exp) {
-      print(exp.toString());
-      return exp.toString();
-    }
-  }
-
   // cid is a companyId (String)
   // docRef is a reference to firestore document Object
   Future<DocumentReference<Object?>> findCompanyByCid(String cid) async {
-    DocumentReference<Object?> companyRef = companiesCollection.doc(
-      cid,
-    );
+    DocumentReference<Object?> companyRef = companiesCollection.doc(cid);
     return companyRef;
   }
 
-  Future<DocumentReference<Object?>> findUserByUid(String uid) async {
-    DocumentReference<Object?> userRef = usersCollection.doc(
-      uid,
-    );
-    return userRef;
+  Future<CustomUser?> getUserDataFromUserCollection() async {
+    print(
+        "🐛  *DEBUG LOG* : Database Query - getUserDataFromUserCollection from DatabaseService reading");
+    try {
+      final QuerySnapshot<dynamic> userRef =
+          await usersCollection.snapshots().first;
+      final currentUser =
+          userRef.docs.where((element) => element['uid'] == uid);
+
+      return CustomUser.fromMap(currentUser.first.data());
+    } catch (err) {
+      print(err.toString());
+    }
+    return null;
   }
+
+  //   final y = userRef.docs.where((element) => element['uid'] == uid);
+  // print(y.first['name']);
 
   Future<void> addUserToUserCollection({required CustomUser user}) async {
     try {
@@ -128,4 +129,15 @@ class DatabaseService {
     }
     return false;
   }
+
+  // Future<String> addNewCompany(Company company) async {
+  //   try {
+  //     final newCompanyDbObject = await companiesCollection.add(company.toMap());
+  //     return newCompanyDbObject.id;
+  //   } catch (exp) {
+  //     print(exp.toString());
+  //     return exp.toString();
+  //   }
+  // }
+
 }

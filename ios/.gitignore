@@ -1,5 +1,4 @@
-**/build/
-/build
+
 
 *.mode1v3
 *.mode2v3
@@ -13,6 +12,7 @@
 **/DerivedData/
 Icon?
 **/Pods/
+**/build/
 **/.symlinks/
 profile
 xcuserdata

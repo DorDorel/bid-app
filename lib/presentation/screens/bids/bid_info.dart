@@ -9,14 +9,20 @@ import 'package:provider/provider.dart';
 
 class BidInfo extends StatelessWidget {
   final Bid bid;
-  BidInfo({required this.bid, Key? key}) : super(key: key);
+  BidInfo({
+    required this.bid,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var dateFormat = DateFormat.yMd();
     var date = dateFormat.format(bid.date);
-    TextStyle infoFontSize = TextStyle(fontSize: 16);
-    final oCcy = new NumberFormat(
+    TextStyle infoFontSize = TextStyle(
+      fontSize: 18,
+      color: Colors.white,
+    );
+    final oCcy = NumberFormat(
       "#,##0.00",
       "en_US",
     );
@@ -25,31 +31,37 @@ class BidInfo extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("Bid ${bid.bidId}", style: appBarTitleStyle),
+        title: Text(
+          "Bid ${bid.bidId}",
+          style: appBarTitleStyle,
+        ),
       ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Client name: " + bid.clientName,
-              style: TextStyle(
-                fontSize: 26,
+            Container(
+              width: double.infinity,
+              color: Colors.black,
+              height: 150,
+              child: Column(
+                children: [
+                  Text(
+                    "👤  " + bid.clientName,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    " ✍️  $date",
+                    style: infoFontSize,
+                  ),
+                  Text(
+                    "📧 " + bid.clientMail,
+                    style: infoFontSize,
+                  ),
+                ],
               ),
-            ),
-            Text(
-              date,
-              style: infoFontSize,
-            ),
-            Text(
-              bid.clientMail,
-              style: infoFontSize,
-            ),
-            Text(
-              bid.clientPhone,
-              style: infoFontSize,
             ),
             SizedBox(
               height: 10,
@@ -58,9 +70,12 @@ class BidInfo extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text(
-              "Final Price: " + oCcy.format(bid.finalPrice) + " ₪",
-              style: TextStyle(fontSize: 20),
+            Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                " Final Price: " + oCcy.format(bid.finalPrice) + " ₪",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ],
         ),
@@ -75,29 +90,30 @@ class BidInfo extends StatelessWidget {
   Widget _cancelReminder(BuildContext context) {
     final reminderData = Provider.of<ReminderProvider>(context);
     return Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 40.0,
-          horizontal: 6.0,
+      padding: EdgeInsets.symmetric(
+        vertical: 40.0,
+        horizontal: 6.0,
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.green,
         ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.green,
-          ),
-          onPressed: () {
-            String bidId = '';
-            reminderData.getReminders.forEach(
-              (element) {
-                if (element.bidId == bid.bidId) {
-                  bidId = element.bidId;
-                }
-              },
-            );
-            reminderData.removeReminder(bidId);
-          },
-          child: Text(
-            "Cancel Reminder",
-          ),
-        ));
+        onPressed: () {
+          String bidId = '';
+          reminderData.getReminders.forEach(
+            (element) {
+              if (element.bidId == bid.bidId) {
+                bidId = element.bidId;
+              }
+            },
+          );
+          reminderData.removeReminder(bidId);
+        },
+        child: Text(
+          "Cancel Reminder",
+        ),
+      ),
+    );
   }
 
   Widget _setReminderButton(BuildContext context) {

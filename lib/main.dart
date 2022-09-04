@@ -6,17 +6,13 @@ import 'package:bid/data/providers/new_bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
+import 'package:bid/data/providers/user_info_provider.dart';
 import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/screens/admin/create_new_user.dart';
 import 'package:bid/presentation/screens/admin/products/products_screen.dart';
-import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
 import 'package:bid/presentation/screens/bids/create_bid_screen.dart';
-import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
-import 'package:bid/presentation/screens/notification/notification_screen.dart';
-import 'package:bid/presentation/screens/tenant/company_onboarding/add_new_company.dart';
 import 'package:bid/presentation/screens/user/login.dart';
-import 'package:bid/presentation/screens/user/user_profile.dart';
 import 'presentation/screens/admin/admin_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,6 +62,9 @@ class BidAppV1Root extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => FilterProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserInfoProvider(),
         )
       ],
       child: MaterialApp(
@@ -88,16 +87,11 @@ class BidAppV1Root extends StatelessWidget {
         home: AuthenticationWrapper(),
         routes: {
           LoginScreen.routeName: (context) => LoginScreen(),
-          AddNewCompany.routeName: (context) => AddNewCompany(),
           CreateNewUser.routeName: (context) => CreateNewUser(),
           MainDashboard.routeName: (context) => MainDashboard(),
-          UserConfig.routeName: (context) => UserConfig(),
           CreateBidScreen.routeName: (context) => CreateBidScreen(),
-          NotificationsScreen.routeName: (context) => NotificationsScreen(),
           AdminScreen.routeName: (context) => AdminScreen(),
           ProductsScreen.routeName: (context) => ProductsScreen(),
-          OpenBidScreen.routeName: (context) => OpenBidScreen(),
-          BidsArchiveScreen.routeName: (context) => BidsArchiveScreen(),
         },
       ),
     );
@@ -118,9 +112,11 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
     final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
+    final userInfoProvider = Provider.of<UserInfoProvider>(context);
 
     void checkAndSetAuthorized() async {
       await tenantProvider.tenantValidation();
+      await userInfoProvider.fetchUserData();
 
       /*
      This if condition check if its a first time user login in current device

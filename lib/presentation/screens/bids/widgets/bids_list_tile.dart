@@ -36,7 +36,10 @@ class BidTile extends StatelessWidget {
                 );
         },
         child: Card(
-          color: Colors.grey[200],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          color: Colors.grey[100],
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
