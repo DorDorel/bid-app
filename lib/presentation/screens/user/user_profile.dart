@@ -1,5 +1,4 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
@@ -11,7 +10,6 @@ import 'package:bid/presentation/screens/user/login.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void wipeAllFirestoreDataFromCache(BuildContext context) {
@@ -41,80 +39,24 @@ class UserConfig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User?>(context);
-
-    return firebaseUser != null
-        ? ProfileBody(
-            userProfileMail: firebaseUser.email.toString(),
-            uid: firebaseUser.uid.toString(),
-            tenantId: TenantProvider.tenantId,
-          )
-        : CircularProgressIndicator();
+    return firebaseUser != null ? ProfileBody() : CircularProgressIndicator();
   }
 }
 
 class ProfileBody extends StatelessWidget {
-  final String userProfileMail;
-  final String uid;
-  final String tenantId;
-  ProfileBody({
-    required this.userProfileMail,
-    required this.uid,
-    required this.tenantId,
-  });
-
   @override
   Widget build(BuildContext context) {
+    final userDataProvider =
+        Provider.of<UserInfoProvider>(context, listen: false);
+
     return Center(
       child: Column(children: [
-        SizedBox(
-          height: 26,
-        ),
-        Text(
-          TenantRepositoryImpl.tenantName,
-        ),
-        // ProfilePicture(),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          'Email: $userProfileMail',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          height: 6.0,
-        ),
-        Text(
-          'User Id: $uid',
-          style: GoogleFonts.gelasio(
-            fontSize: 14,
-          ),
-        ),
-        Text(
-          'Tenant Id: $tenantId',
-          style: GoogleFonts.gelasio(
-            fontSize: 14,
-          ),
-        ),
+        Text("TID: " + userDataProvider.userData!.tenantId),
+        Text("UID: " + userDataProvider.userData!.uid!),
+        Text("User Email: " + userDataProvider.userData!.email),
+
         SizedBox(
           height: 10,
-        ),
-        InkWell(
-          onLongPress: () {
-            print("f");
-          },
-          child: Text(
-            "Send Logs",
-            style: GoogleFonts.patrickHand(
-              color: Colors.blue[600],
-              fontSize: 16.0,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 80,
         ),
 
         TenantProvider.checkAdmin

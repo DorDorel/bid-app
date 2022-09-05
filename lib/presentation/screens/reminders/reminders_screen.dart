@@ -1,12 +1,12 @@
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
-import 'package:bid/presentation/screens/notification/widgets/reminder_list_tile.dart';
+import 'package:bid/presentation/screens/reminders/widgets/reminder_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  static const routeName = '/notifications';
+class RemindersScreen extends StatelessWidget {
+  static const routeName = '/reminders';
 
   @override
   Widget build(BuildContext context) {

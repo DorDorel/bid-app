@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/filter_provider.dart';
 import '../../bids/bids_archive_screen.dart';
-import '../../notification/notification_screen.dart';
+import '../../reminders/reminders_screen.dart';
 import '../../user/user_profile.dart';
 
 class HomeWidgetSelector extends StatelessWidget {
@@ -20,7 +20,7 @@ class HomeWidgetSelector extends StatelessWidget {
       case 1:
         return BidsArchiveScreen();
       case 2:
-        return NotificationsScreen();
+        return RemindersScreen();
       case 3:
         return Catalog();
       case 4:

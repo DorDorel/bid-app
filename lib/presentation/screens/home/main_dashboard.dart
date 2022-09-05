@@ -1,4 +1,4 @@
-import 'package:bid/data/providers/user_info_provider.dart';
+import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/logic/product_bid_logic.dart';
 import 'package:bid/presentation/widgets/filter_menu.dart';
 import 'package:bid/presentation/screens/home/widgets/home_widget_selector.dart';
@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/providers/bids_provider.dart';
+import '../../../data/providers/user_info_provider.dart';
+import '../admin/admin_screen.dart';
 import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -21,7 +23,7 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
-    final userData = Provider.of<UserInfoProvider>(context);
+
     bidsData.fetchData();
 
     return Scaffold(
@@ -29,33 +31,10 @@ class _MainDashboardState extends State<MainDashboard> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
-              height: 45,
-            ),
-            userData.userData == null
-                ? CircularProgressIndicator(
-                    color: Colors.black,
-                  )
-                : Stack(
-                    children: [
-                      Container(
-                        height: 90.0,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 6,
-                          ),
-                          child: Text(
-                            "${userData.userData!.name} Live Dashboard",
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 40,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-            FilterMenu(),
-            HomeWidgetSelector(),
+            const HomeTitle(),
+            const SizedBox(height: 30),
+            const FilterMenu(),
+            const HomeWidgetSelector(),
           ],
         ),
       ),
@@ -70,5 +49,74 @@ class _MainDashboardState extends State<MainDashboard> {
         ),
       ),
     );
+  }
+}
+
+class HomeTitle extends StatelessWidget {
+  const HomeTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final userData = Provider.of<UserInfoProvider>(context, listen: false);
+
+    return userData.userData == null
+        ? CircularProgressIndicator(
+            color: Colors.black,
+          )
+        : Container(
+            height: 180,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(40),
+              ),
+              color: Colors.grey[900],
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 60,
+                  left: 0,
+                  child: Container(
+                    height: 80,
+                    width: 360,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 80,
+                  left: 10,
+                  child: Text(
+                    "${userData.userData!.name} Live Dashboard",
+                    style: GoogleFonts.bebasNeue(
+                      color: Colors.black87,
+                      fontSize: 38,
+                    ),
+                  ),
+                ),
+                TenantProvider.checkAdmin
+                    ? Positioned(
+                        top: 3,
+                        right: 0.5,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.admin_panel_settings_sharp,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, AdminScreen.routeName);
+                          },
+                        ),
+                      )
+                    : Text('')
+              ],
+            ),
+          );
   }
 }
