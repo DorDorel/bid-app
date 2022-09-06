@@ -10,15 +10,10 @@
 - IOS : Transfer from objective c to swfit<br>
 - Android : Transfer from java to Kotlin<br>
 
-<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.25.43.png?raw=true">v1.0 New disign demo here</a> 
-
-<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.26.46.png?raw=true">and here</a> 
-
-
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/snMxltLmehE/0.jpg)](http://www.youtube.com/watch?v=snMxltLmehE "BidApp create new bid demo")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/snMxltLmehE/0.jpg)](https://youtu.be/Z_tD7wl4Bvc "BidApp create new bid demo")
 <br>
 ADMIN PANEL DEMO:
 <br>
