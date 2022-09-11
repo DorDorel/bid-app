@@ -1,7 +1,4 @@
 
-
-
-
 # BidApp
 
 <h3>A new way to send an interactive bid to your customers.</h3>
@@ -9,11 +6,10 @@
 - New design<br>
 - IOS : Transfer from objective c to swfit<br>
 - Android : Transfer from java to Kotlin<br>
-snMxltLmehE
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/Z_tD7wl4Bvc/0.jpg)](https://youtu.be/Z_tD7wl4Bvc "BidApp create new bid demo")
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Z_tD7wl4Bvc0.jpg)](https://www.youtube.com/watch?v=Z_tD7wl4Bvc)
 <br>
 ADMIN PANEL DEMO:
 <br>
