@@ -9,12 +9,10 @@
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/Z_tD7wl4Bvc/0.jpg)](http://www.youtube.com/watch?v=Z_tD7wl4Bvc "Bid App")
-
+Send Bid Demo: https://www.youtube.com/watch?v=Z_tD7wl4Bvc
 <br>
-ADMIN PANEL DEMO:
+ADMIN PANEL DEMO: https://www.youtube.com/watch?v=0zgNTF5M7XM
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/0zgNTF5M7XM/0.jpg)](https://www.youtube.com/watch?v=0zgNTF5M7XM "BidApp Admib panel demo")
 
 
 
