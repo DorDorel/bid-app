@@ -9,7 +9,8 @@
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Z_tD7wl4Bvc0.jpg)](https://www.youtube.com/watch?v=Z_tD7wl4Bvc)
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/Z_tD7wl4Bvc/0.jpg)](http://www.youtube.com/watch?v=Z_tD7wl4Bvc "Bid App")
+
 <br>
 ADMIN PANEL DEMO:
 <br>
