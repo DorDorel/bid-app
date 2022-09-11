@@ -9,11 +9,11 @@
 - New design<br>
 - IOS : Transfer from objective c to swfit<br>
 - Android : Transfer from java to Kotlin<br>
-
+snMxltLmehE
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/snMxltLmehE/0.jpg)](https://youtu.be/Z_tD7wl4Bvc "BidApp create new bid demo")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/Z_tD7wl4Bvc/0.jpg)](https://youtu.be/Z_tD7wl4Bvc "BidApp create new bid demo")
 <br>
 ADMIN PANEL DEMO:
 <br>
