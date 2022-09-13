@@ -7,13 +7,14 @@ class BidFlowRunner {
   String customerEmail;
   String customerPhone;
   String creator;
-  BidFlowRunner(
-      {required this.tenantId,
-      required this.tenantName,
-      required this.bidDocId,
-      required this.customerEmail,
-      required this.customerPhone,
-      required this.creator});
+  BidFlowRunner({
+    required this.tenantId,
+    required this.tenantName,
+    required this.bidDocId,
+    required this.customerEmail,
+    required this.customerPhone,
+    required this.creator,
+  });
 
   Future<void> runner() async {
     try {

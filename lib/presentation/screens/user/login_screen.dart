@@ -1,5 +1,5 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/presentation/screens/user/user_profile.dart';
+import 'package:bid/presentation/screens/user/account_info_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

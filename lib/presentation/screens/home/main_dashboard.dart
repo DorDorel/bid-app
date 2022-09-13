@@ -31,9 +31,9 @@ class _MainDashboardState extends State<MainDashboard> {
       body: SafeArea(
         child: Column(
           children: [
-            const HomeTitle(),
-            const SizedBox(height: 30),
-            const FilterMenu(),
+            HomeTitle(),
+            const SizedBox(height: 18),
+            FilterMenu(),
             const HomeWidgetSelector(),
           ],
         ),
@@ -69,8 +69,8 @@ class HomeTitle extends StatelessWidget {
             height: 180,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(40),
-              ),
+                  bottomRight: Radius.circular(20),
+                  topRight: Radius.circular(20)),
               color: Colors.grey[900],
             ),
             child: Stack(
@@ -84,8 +84,9 @@ class HomeTitle extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
+                        topRight: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
                     ),
                   ),
                 ),

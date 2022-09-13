@@ -9,10 +9,11 @@ class CreateBid {
   final String phoneNumber;
   final String creator;
 
-  CreateBid(
-      {required this.currentBid,
-      required this.phoneNumber,
-      required this.creator});
+  CreateBid({
+    required this.currentBid,
+    required this.phoneNumber,
+    required this.creator,
+  });
 
   Future<bool> startNewBidFlow() async {
     try {

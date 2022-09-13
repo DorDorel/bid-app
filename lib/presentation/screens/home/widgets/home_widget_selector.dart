@@ -1,12 +1,12 @@
 import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
 import 'package:bid/presentation/screens/catalog/catalog.dart';
+import 'package:bid/presentation/screens/user/account_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/filter_provider.dart';
 import '../../bids/bids_archive_screen.dart';
 import '../../reminders/reminders_screen.dart';
-import '../../user/user_profile.dart';
 
 class HomeWidgetSelector extends StatelessWidget {
   const HomeWidgetSelector({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class HomeWidgetSelector extends StatelessWidget {
       case 3:
         return Catalog();
       case 4:
-        return UserConfig();
+        return AccountInfoScreen();
 
       default:
         return OpenBidScreen();

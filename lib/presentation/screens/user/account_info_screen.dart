@@ -1,16 +1,17 @@
-import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/data/providers/user_info_provider.dart';
 import 'package:bid/presentation/providers/filter_provider.dart';
-import 'package:bid/presentation/screens/admin/admin_screen.dart';
-import 'package:bid/presentation/screens/user/login.dart';
+import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../auth/auth_repository.dart';
+import 'login_screen.dart';
 
 void wipeAllFirestoreDataFromCache(BuildContext context) {
   final tenantProvider = Provider.of<TenantProvider>(context, listen: false);
@@ -33,7 +34,7 @@ void wipeAllFirestoreDataFromCache(BuildContext context) {
   }
 }
 
-class UserConfig extends StatelessWidget {
+class AccountInfoScreen extends StatelessWidget {
   static const routeName = '/user_profile';
 
   @override
@@ -50,30 +51,17 @@ class ProfileBody extends StatelessWidget {
         Provider.of<UserInfoProvider>(context, listen: false);
 
     return Center(
-      child: Column(children: [
-        Text("TID: " + userDataProvider.userData!.tenantId),
-        Text("UID: " + userDataProvider.userData!.uid!),
-        Text("User Email: " + userDataProvider.userData!.email),
-
-        SizedBox(
-          height: 10,
-        ),
-
-        TenantProvider.checkAdmin
-            ? TextButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, AdminScreen.routeName),
-                child: Text("Admin Panel"))
-            : Text(''),
-
-        // TextButton(
-        //     onPressed: () {
-        //       DatabaseService().findUserInUserCollectionByUid(uid);
-        //     },
-        //     child: Text("click")),
-
-        TextButton(
-            onPressed: () async {
+      child: Column(
+        children: [
+          Text("TID: " + userDataProvider.userData!.tenantId),
+          Text("UID: " + userDataProvider.userData!.uid!),
+          Text("User Email: " + userDataProvider.userData!.email),
+          SizedBox(
+            height: 10,
+          ),
+          NextButton(
+            title: "Sign out ",
+            onPressed: (() async {
               final AuthenticationRepository _auth =
                   AuthenticationRepositoryImpl();
 
@@ -81,9 +69,10 @@ class ProfileBody extends StatelessWidget {
               Navigator.pushNamed(context, LoginScreen.routeName);
               // clear all user caching from device storage
               wipeAllFirestoreDataFromCache(context);
-            },
-            child: Text("Logout"))
-      ]),
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

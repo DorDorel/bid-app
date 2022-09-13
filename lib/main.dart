@@ -12,7 +12,7 @@ import 'package:bid/presentation/screens/admin/create_new_user.dart';
 import 'package:bid/presentation/screens/admin/products/products_screen.dart';
 import 'package:bid/presentation/screens/bids/create_bid_screen.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
-import 'package:bid/presentation/screens/user/login.dart';
+import 'package:bid/presentation/screens/user/login_screen.dart';
 import 'presentation/screens/admin/admin_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';

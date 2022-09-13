@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class NextButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
-  NextButton({required this.title, required this.onPressed});
+  NextButton({
+    required this.title,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class NextButton extends StatelessWidget {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: Colors.black,
+        backgroundColor: Colors.black,
       ),
     );
   }

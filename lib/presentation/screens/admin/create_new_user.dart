@@ -1,7 +1,7 @@
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/data/models/user.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/presentation/screens/user/login.dart';
+import 'package:bid/presentation/screens/user/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class CreateNewUser extends StatefulWidget {
