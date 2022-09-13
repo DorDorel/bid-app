@@ -1,7 +1,4 @@
 
-
-
-
 # BidApp
 
 <h3>A new way to send an interactive bid to your customers.</h3>
@@ -9,20 +6,13 @@
 - New design<br>
 - IOS : Transfer from objective c to swfit<br>
 - Android : Transfer from java to Kotlin<br>
-
-<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.25.43.png?raw=true">v1.0 New disign demo here</a> 
-
-<a href="https://github.com/DorDorel/bid-app/blob/main/screenshots/Screen%20Shot%202022-08-22%20at%2013.26.46.png?raw=true">and here</a> 
-
-
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/snMxltLmehE/0.jpg)](http://www.youtube.com/watch?v=snMxltLmehE "BidApp create new bid demo")
+Send Bid Live Demo: https://www.youtube.com/watch?v=Z_tD7wl4Bvc
 <br>
-ADMIN PANEL DEMO:
+ADMIN PANEL DEMO: https://www.youtube.com/watch?v=0zgNTF5M7XM
 <br>
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/0zgNTF5M7XM/0.jpg)](https://www.youtube.com/watch?v=0zgNTF5M7XM "BidApp Admib panel demo")
 
 
 
