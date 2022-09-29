@@ -1,12 +1,14 @@
 import 'package:bid/services/email_service.dart';
+import 'package:flutter/cupertino.dart';
 
+@immutable
 class BidFlowRunner {
-  String tenantId;
-  String tenantName;
-  String bidDocId;
-  String customerEmail;
-  String customerPhone;
-  String creator;
+  final String tenantId;
+  final String tenantName;
+  final String bidDocId;
+  final String customerEmail;
+  final String customerPhone;
+  final String creator;
   BidFlowRunner({
     required this.tenantId,
     required this.tenantName,

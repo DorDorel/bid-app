@@ -99,8 +99,9 @@ class _NewBidFormState extends State<NewBidForm> {
             borderRadius: BorderRadius.all(Radius.circular(16.0)),
           )),
       validator: (value) {
-        final pattern = r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
-        final regExp = RegExp(pattern);
+        const String pattern =
+            r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
+        final RegExp regExp = RegExp(pattern);
 
         if (value!.isEmpty) {
           return 'Enter an email';

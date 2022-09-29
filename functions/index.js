@@ -70,7 +70,7 @@ exports.getCurrentBidData = functions.https.onRequest(async (req, res) => {
     .doc(creator)
     .get();
   cors(req, res, () => {
-    if (req.method !== "POST") {
+    if (req.method !== "GET") {
       return res.status(500).send("<h1> Your access has been denied</h1> ");
     }
 

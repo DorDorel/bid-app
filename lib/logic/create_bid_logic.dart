@@ -3,7 +3,9 @@ import 'package:bid/data/db/shared_db.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/logic/bid_flow_runner.dart';
+import 'package:flutter/material.dart';
 
+@immutable
 class CreateBid {
   final Bid currentBid;
   final String phoneNumber;

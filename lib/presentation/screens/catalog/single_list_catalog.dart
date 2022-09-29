@@ -22,18 +22,20 @@ class SingleListCatalog extends StatelessWidget {
         ),
         margin: EdgeInsets.all(5),
         padding: EdgeInsets.all(5),
-        child: Stack(children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Image.network(
-                  product.imageUrl,
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: Image.network(
+                    product.imageUrl,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ]),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
