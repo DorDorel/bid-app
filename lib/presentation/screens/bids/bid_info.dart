@@ -96,7 +96,7 @@ class BidInfo extends StatelessWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.green,
+          backgroundColor: Colors.green,
         ),
         onPressed: () {
           String bidId = '';
@@ -126,7 +126,7 @@ class BidInfo extends StatelessWidget {
       ),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.black,
+            backgroundColor: Colors.black,
           ),
           onPressed: () {
             showModalBottomSheet(
@@ -144,7 +144,7 @@ class BidInfo extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                         ),
                         onPressed: () {
                           reminderData.setBidReminder(bid, noteInput);

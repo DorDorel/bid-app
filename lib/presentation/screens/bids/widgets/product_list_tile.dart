@@ -216,15 +216,6 @@ class _OptionsFormState extends State<OptionsForm> {
 
   final _optionsForm = GlobalKey<FormState>();
 
-  bool _saveForm() {
-    final isValid = _optionsForm.currentState!.validate();
-    if (!isValid) {
-      return false;
-    }
-    _optionsForm.currentState!.save();
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(

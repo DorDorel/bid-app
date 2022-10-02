@@ -19,6 +19,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
   String name = '';
   String phoneNumber = "";
 
+  // ignore: unused_field
   bool _newUserFlag = false;
 
   Future<String> _createUser() async {

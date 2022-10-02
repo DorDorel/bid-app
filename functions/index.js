@@ -5,7 +5,6 @@ const cors = require("cors")({ origin: true });
 
 admin.initializeApp();
 const db = admin.firestore();
-
 // dev functions
 
 exports.helloWorld = functions.https.onRequest((request, response) => {

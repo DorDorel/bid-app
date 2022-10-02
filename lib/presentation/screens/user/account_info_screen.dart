@@ -3,7 +3,6 @@ import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/data/providers/user_info_provider.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +18,6 @@ void wipeAllFirestoreDataFromCache(BuildContext context) {
   final bidsProvider = Provider.of<BidsProvider>(context, listen: false);
   final reminderProvider =
       Provider.of<ReminderProvider>(context, listen: false);
-  final filterProvider = Provider.of<FilterProvider>(context, listen: false);
   final userInfoProvider =
       Provider.of<UserInfoProvider>(context, listen: false);
 

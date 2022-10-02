@@ -1,6 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 @immutable
 class EmailService {
@@ -29,10 +29,10 @@ class EmailService {
 
   Future<void> openDefaultMainAppWithAddressClient() async {
     final _url = 'mailto:$to';
-    if (!await launch(_url)) {
+    if (!await launchUrlString(_url)) {
       throw 'Could not launch $_url';
     } else {
-      await launch(_url);
+      await launchUrlString(_url);
     }
   }
 }

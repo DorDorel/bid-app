@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 @immutable
 class CallService {
@@ -8,10 +8,10 @@ class CallService {
 
   Future<void> callNow() async {
     final _tel = 'tel$phoneNumber';
-    if (!await launch(_tel)) {
+    if (!await launchUrlString(_tel)) {
       throw 'Could not launch $_tel';
     } else {
-      launch(_tel);
+      launchUrlString(_tel);
     }
   }
 }

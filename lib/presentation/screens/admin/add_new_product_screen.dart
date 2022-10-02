@@ -261,8 +261,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   }
 }
 
-Future<void> _uploadImageManger() async {}
-
 Future<dynamic>? _uploadImageErrorManger(
     BuildContext context, String errorMessage) {
   final CoolAlertType type = CoolAlertType.error;
