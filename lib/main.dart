@@ -13,6 +13,7 @@ import 'package:bid/presentation/screens/admin/products/products_screen.dart';
 import 'package:bid/presentation/screens/bids/create_bid_screen.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
 import 'package:bid/presentation/screens/user/login_screen.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'presentation/screens/admin/admin_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -134,11 +135,14 @@ class AuthenticationWrapper extends StatelessWidget {
         "tenant": TenantProvider.tenantId,
       };
       //auth info log
-      userInfo.forEach(
-        (key, value) {
-          print(key + ':' + " " + value);
-        },
-      );
+      if (kDebugMode) {
+        userInfo.forEach(
+          (key, value) {
+            print(key + ':' + " " + value);
+          },
+        );
+      }
+
       checkAndSetAuthorized();
       return MainDashboard();
     }

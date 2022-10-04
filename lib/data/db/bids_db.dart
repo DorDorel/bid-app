@@ -2,7 +2,7 @@ import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter/foundation.dart' show immutable, kDebugMode;
 
 @immutable
 class BidsDb {
@@ -49,10 +49,10 @@ class BidsDb {
     } catch (exp) {
       print(exp.toString());
     }
-    //DEBUG LOG - CLEAR BEFORE PRODUCTION
-
-    print(
-        "🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+    if (kDebugMode) {
+      print(
+          "🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+    }
 
     allBids.sort(
       (a, b) => a.bidId.compareTo(b.bidId),
@@ -75,9 +75,10 @@ class BidsDb {
           )
           .get();
 
-      //DEBUG LOG - CLEAR BEFORE PRODUCTION
-      print(
-          "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+      if (kDebugMode) {
+        print(
+            "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+      }
 
       return Bid.fromMap(currentBid.docs.first.data());
     } catch (err) {
@@ -101,9 +102,10 @@ class BidsDb {
           )
           .get();
 
-      //DEBUG LOG - CLEAR BEFORE PRODUCTION
-      print(
-          "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+      if (kDebugMode) {
+        print(
+            "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+      }
 
       return currentBid.docs.first.id;
     } catch (exp) {
@@ -133,9 +135,10 @@ class BidsDb {
           {"openFlag": false},
         );
 
-        //DEBUG LOG - CLEAR BEFORE PRODUCTION
-        print(
-            "🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
+        if (kDebugMode) {
+          print(
+              "🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
+        }
       } catch (exp) {
         print(exp.toString());
       }

@@ -45,9 +45,10 @@ class TenantRepositoryImpl with TenantRepository {
   @override
   Future<DocumentReference?> getTenantReference() async {
     try {
-      //DEBUG LOG - CLEAR BEFORE PRODUCTION
-      print(
-          "🐛  *DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
+      if (kDebugMode) {
+        print(
+            "🐛  *DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
+      }
 
       final DocumentReference tenantReference =
           companiesCollection.doc(currentTenantId);
@@ -61,9 +62,10 @@ class TenantRepositoryImpl with TenantRepository {
   @override
   Future<bool> tenantAuthorization() async {
     try {
-      //DEBUG LOG - CLEAR BEFORE PRODUCTION
-      print(
-          "*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
+      if (kDebugMode) {
+        print(
+            "*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
+      }
 
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
           .where(

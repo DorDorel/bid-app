@@ -5,7 +5,7 @@ import 'package:bid/data/providers/tenant_provider.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter/foundation.dart' show immutable, kDebugMode;
 
 /*
   This library (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
@@ -29,8 +29,10 @@ class DatabaseService {
   }
 
   Future<CustomUser?> getUserDataFromUserCollection() async {
-    print(
-        "🐛  *DEBUG LOG* : Database Query - getUserDataFromUserCollection from DatabaseService reading");
+    if (kDebugMode) {
+      print(
+          "🐛  *DEBUG LOG* : Database Query - getUserDataFromUserCollection from DatabaseService reading");
+    }
     try {
       final QuerySnapshot<dynamic> userRef =
           await usersCollection.snapshots().first;
