@@ -30,10 +30,10 @@ Widget bidsInfoTable(BuildContext context, Bid bid) {
 }
 
 List<DataRow> _getTableRows(Bid bid) {
-  final oCcy = new NumberFormat("#,##0.00", "en_US");
+  final oCcy = NumberFormat("#,##0.00", "en_US");
 
   List<DataRow> products = [];
-  bid.selectedProducts.forEach((element) {
+  for (final element in bid.selectedProducts) {
     final DataRow dataRow = DataRow(cells: [
       DataCell(
         Text(element.product.productName),
@@ -62,7 +62,7 @@ List<DataRow> _getTableRows(Bid bid) {
       )
     ]);
     products.add(dataRow);
-  });
+  }
 
   return products;
 }

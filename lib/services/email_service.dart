@@ -28,11 +28,11 @@ class EmailService {
   }
 
   Future<void> openDefaultMainAppWithAddressClient() async {
-    final _url = 'mailto:$to';
-    if (!await launchUrlString(_url)) {
-      throw 'Could not launch $_url';
+    final url = 'mailto:$to';
+    if (!await launchUrlString(url)) {
+      throw 'Could not launch $url';
     } else {
-      await launchUrlString(_url);
+      await launchUrlString(url);
     }
   }
 }

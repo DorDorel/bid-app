@@ -4,7 +4,7 @@ enum Status {
   activity,
   stopped,
   paused,
-  not_completed,
+  notCompleted,
 }
 
 class Company {
@@ -30,14 +30,14 @@ class Company {
 
   Map<String, dynamic> toMap() => {
         //    'status': this.status,
-        'companyName': this.companyName,
-        'logoImageUrl': this.logoImageUrl,
-        'companyMail': this.companyMail,
-        'companyPhone': this.companyPhone,
-        'companyAddress': this.companyAddress,
-        'companyWebsite': this.companyWebsite,
+        'companyName': companyName,
+        'logoImageUrl': logoImageUrl,
+        'companyMail': companyMail,
+        'companyPhone': companyPhone,
+        'companyAddress': companyAddress,
+        'companyWebsite': companyWebsite,
         // 'adminUser': this.adminUser,
-        'usersLimit': this.usersLimit
+        'usersLimit': usersLimit
       };
 
   Company copyWith({

@@ -17,11 +17,11 @@ class Product {
   });
 
   Map<String, dynamic> toMap() => {
-        'productId': this.productId,
-        'productName': this.productName,
-        'price': this.price,
-        'imageUrl': this.imageUrl,
-        'description': this.description
+        'productId': productId,
+        'productName': productName,
+        'price': price,
+        'imageUrl': imageUrl,
+        'description': description
       };
 
   factory Product.fromMap(Map<String, dynamic> firestoreObj) {

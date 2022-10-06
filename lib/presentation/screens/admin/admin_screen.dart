@@ -1,6 +1,6 @@
 import 'package:bid/presentation/screens/admin/products/products_screen.dart';
 
-import 'package:bid/presentation/widgets/admin_button_textStyle.dart';
+import 'package:bid/presentation/widgets/admin_button_text_style.dart';
 import 'package:flutter/material.dart';
 
 import 'create_new_user.dart';

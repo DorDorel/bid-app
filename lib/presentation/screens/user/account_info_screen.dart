@@ -51,19 +51,19 @@ class ProfileBody extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text("TID: " + userDataProvider.userData!.tenantId),
-          Text("UID: " + userDataProvider.userData!.uid!),
-          Text("User Email: " + userDataProvider.userData!.email),
+          Text("TID: ${userDataProvider.userData!.tenantId}"),
+          Text("UID: ${userDataProvider.userData!.uid!}"),
+          Text("User Email: ${userDataProvider.userData!.email}"),
           SizedBox(
             height: 10,
           ),
           NextButton(
             title: "Sign out ",
             onPressed: (() async {
-              final AuthenticationRepository _auth =
+              final AuthenticationRepository auth =
                   AuthenticationRepositoryImpl();
 
-              await _auth.signOut();
+              await auth.signOut();
               Navigator.pushNamed(context, LoginScreen.routeName);
               // clear all user caching from device storage
               wipeAllFirestoreDataFromCache(context);

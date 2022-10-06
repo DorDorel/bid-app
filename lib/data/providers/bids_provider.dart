@@ -35,10 +35,10 @@ class BidsProvider with ChangeNotifier {
 
   void updateOpenBidsCounter() {
     openBidsCounter = 0;
-    allBids.forEach((element) {
+    for (final element in allBids) {
       if (element.openFlag!) {
         openBidsCounter++;
       }
-    });
+    }
   }
 }

@@ -138,7 +138,7 @@ class AuthenticationWrapper extends StatelessWidget {
       if (kDebugMode) {
         userInfo.forEach(
           (key, value) {
-            print(key + ':' + " " + value);
+            print('$key' ':' ' ' '$value');
           },
         );
       }

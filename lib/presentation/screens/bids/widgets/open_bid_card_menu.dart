@@ -26,7 +26,7 @@ class OpenTileMenu extends StatelessWidget {
         children: [
           IconButton(
               onPressed: () async {
-                CallService callService = new CallService(
+                final CallService callService = CallService(
                   phoneNumber: phoneNumber,
                 );
                 await callService.callNow();
@@ -37,7 +37,7 @@ class OpenTileMenu extends StatelessWidget {
               )),
           IconButton(
             onPressed: () async {
-              EmailService emailService = new EmailService(
+              EmailService emailService = EmailService(
                 to: clientMail,
               );
               await emailService.openDefaultMainAppWithAddressClient();

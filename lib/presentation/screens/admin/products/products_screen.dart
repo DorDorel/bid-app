@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/presentation/screens/admin/add_new_product_screen.dart';
 import 'package:bid/presentation/screens/admin/products/single_product_list.dart';
@@ -6,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductsScreen extends StatefulWidget {
-  static const routeName = '/procuts_screen';
+  static const routeName = '/products_screen';
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
 }
@@ -31,20 +33,21 @@ class _ProductsScreenState extends State<ProductsScreen> {
         ),
         actions: <IconButton>[
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => AddNewProductScreen(
-                      isEdit: false,
-                    ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => AddNewProductScreen(
+                    isEdit: false,
                   ),
-                );
-              },
-              icon: Icon(
-                Icons.add,
-                size: 30,
-              ))
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.add,
+              size: 30,
+            ),
+          )
         ],
       ),
       body: Padding(
@@ -57,17 +60,16 @@ class _ProductsScreenState extends State<ProductsScreen> {
             : ListView.builder(
                 itemCount: productsData.products.length,
                 itemBuilder: (_, index) => Column(
-                      children: [
-                        SingleProductList(
-                            productId: productsData.products[index].productId,
-                            productName:
-                                productsData.products[index].productName,
-                            price: productsData.products[index].price,
-                            imageUrl: productsData.products[index].imageUrl,
-                            description:
-                                productsData.products[index].description)
-                      ],
-                    )),
+                  children: [
+                    SingleProductList(
+                        productId: productsData.products[index].productId,
+                        productName: productsData.products[index].productName,
+                        price: productsData.products[index].price,
+                        imageUrl: productsData.products[index].imageUrl,
+                        description: productsData.products[index].description)
+                  ],
+                ),
+              ),
       ),
     );
   }

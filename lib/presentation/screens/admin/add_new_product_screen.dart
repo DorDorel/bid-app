@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bid/data/models/product.dart';
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/services/storage_service.dart';
@@ -49,7 +51,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   Widget build(BuildContext context) {
     final productsData = Provider.of<ProductProvider>(context);
     if (widget.isEdit!) {
-      _editProduct = new Product(
+      _editProduct = Product(
         productId: widget.productId!,
         productName: widget.productName!,
         price: widget.price!,
@@ -116,7 +118,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
                 onChanged: (value) => {imageName = value},
                 onSaved: (value) => {
-                  _editProduct = new Product(
+                  _editProduct = Product(
                       productId: value!,
                       productName: _editProduct.productName,
                       price: _editProduct.price,
@@ -136,7 +138,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   return null;
                 },
                 onSaved: (value) => {
-                  _editProduct = new Product(
+                  _editProduct = Product(
                     productId: _editProduct.productId,
                     productName: value!,
                     price: _editProduct.price,
@@ -167,7 +169,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   return null;
                 },
                 onSaved: (value) => {
-                  _editProduct = new Product(
+                  _editProduct = Product(
                     productId: _editProduct.productId,
                     productName: _editProduct.productName,
                     price: double.parse(value!),
@@ -195,7 +197,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   return null;
                 },
                 onSaved: (value) => {
-                  _editProduct = new Product(
+                  _editProduct = Product(
                     productId: _editProduct.productId,
                     productName: _editProduct.productName,
                     price: _editProduct.price,
@@ -211,7 +213,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   ? TextButton(
                       onPressed: () async {
                         try {
-                          String imageInBucket = await new StorageService()
+                          String imageInBucket = await StorageService()
                               .uploadProductImage(imageName);
                           if (imageInBucket == "ERROR" ||
                               imageInBucket == "Failed") {
@@ -224,7 +226,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                             setState(
                               () => imageURL = imageInBucket,
                             );
-                            _editProduct = new Product(
+                            _editProduct = Product(
                               productId: _editProduct.productId,
                               productName: _editProduct.productName,
                               price: _editProduct.price,

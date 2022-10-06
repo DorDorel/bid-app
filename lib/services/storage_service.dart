@@ -17,9 +17,9 @@ class StorageService {
   }
 
   Future<String> uploadProductImage(String productName) async {
-    final String? _currentTenant = await _getCurrentTenantFolder();
-    final _picker = ImagePicker();
-    final bucketPath = "$_currentTenant/product_photos/$productName";
+    final String currentTenant = await _getCurrentTenantFolder();
+    final picker = ImagePicker();
+    final bucketPath = "$currentTenant/product_photos/$productName";
 
     XFile? image;
 
@@ -28,7 +28,7 @@ class StorageService {
 
     if (permissionStatus.isGranted) {
       try {
-        image = (await _picker.pickImage(source: ImageSource.gallery))!;
+        image = (await picker.pickImage(source: ImageSource.gallery))!;
         File file = File(image.path);
         print(image.path);
 

@@ -46,7 +46,7 @@ class BidInfo extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "👤  " + bid.clientName,
+                    "👤  ${bid.clientName}",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -57,7 +57,7 @@ class BidInfo extends StatelessWidget {
                     style: infoFontSize,
                   ),
                   Text(
-                    "📧 " + bid.clientMail,
+                    "📧 ${bid.clientMail}",
                     style: infoFontSize,
                   ),
                 ],
@@ -73,7 +73,7 @@ class BidInfo extends StatelessWidget {
             Container(
               alignment: Alignment.topLeft,
               child: Text(
-                " Final Price: " + oCcy.format(bid.finalPrice) + " ₪",
+                " Final Price: ${oCcy.format(bid.finalPrice)} ₪",
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -100,13 +100,11 @@ class BidInfo extends StatelessWidget {
         ),
         onPressed: () {
           String bidId = '';
-          reminderData.getReminders.forEach(
-            (element) {
-              if (element.bidId == bid.bidId) {
-                bidId = element.bidId;
-              }
-            },
-          );
+          for (final element in reminderData.getReminders) {
+            if (element.bidId == bid.bidId) {
+              bidId = element.bidId;
+            }
+          }
           reminderData.removeReminder(bidId);
         },
         child: Text(
@@ -173,11 +171,11 @@ class BidInfo extends StatelessWidget {
 bool _checkReminder(BuildContext context, String bidId) {
   bool r = false;
   final reminderData = Provider.of<ReminderProvider>(context, listen: false);
-  reminderData.getReminders.forEach((element) {
+  for (var element in reminderData.getReminders) {
     if (element.bidId == bidId) {
       r = true;
     }
-  });
+  }
 
   return r;
 }

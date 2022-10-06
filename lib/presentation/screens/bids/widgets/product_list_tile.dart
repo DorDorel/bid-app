@@ -32,6 +32,7 @@ class ProductListTile extends StatefulWidget {
   }
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductListTileState createState() => _ProductListTileState();
 }
 
@@ -53,12 +54,7 @@ class _ProductListTileState extends State<ProductListTile> {
       ),
       subtitle: isSelected
           ? Text(
-              'Quantity: ' +
-                  productSelectedData!.quantity.toString() +
-                  ' Price/Unit: ' +
-                  productSelectedData.finalPricePerUnit.toStringAsFixed(2) +
-                  ' Remarks: ' +
-                  productSelectedData.remark,
+              'Quantity: ${productSelectedData!.quantity} Price/Unit: ${productSelectedData.finalPricePerUnit.toStringAsFixed(2)} Remarks: ${productSelectedData.remark}',
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -144,7 +140,7 @@ class OptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final oCcy = new NumberFormat("#,##0.00", "en_US");
+    final oCcy = NumberFormat("#,##0.00", "en_US");
     return Scaffold(
         backgroundColor: backgroundColor,
         body: Column(
@@ -156,7 +152,7 @@ class OptionsScreen extends StatelessWidget {
               child: Container(
                 width: 60.0,
                 child: Hero(
-                  tag: '${widget.productId}',
+                  tag: widget.productId,
                   child: Image.network(
                     widget.imageUrl,
                   ),
@@ -168,10 +164,9 @@ class OptionsScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20.0),
             ),
             Text(
-              'Price: ' +
-                  oCcy.format(
-                    widget.price,
-                  ),
+              'Price: ${oCcy.format(
+                widget.price,
+              )}',
               style: TextStyle(
                 fontSize: 14.0,
               ),
@@ -193,6 +188,7 @@ class OptionsForm extends StatefulWidget {
   final bool edit;
   OptionsForm({required this.product, required this.edit});
   @override
+  // ignore: library_private_types_in_public_api
   _OptionsFormState createState() => _OptionsFormState();
 }
 

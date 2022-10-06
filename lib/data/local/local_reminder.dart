@@ -73,12 +73,12 @@ class LocalReminder {
   static removeFavoriteReminder(String bidId) async {
     try {
       int valIndex = 0;
-      _favoriteReminders!.values.forEach((element) {
+      for (final element in _favoriteReminders!.values) {
         if (element == bidId) {
           _favoriteReminders!.deleteAt(valIndex);
         }
         valIndex++;
-      });
+      }
     } catch (err) {
       print(err);
     }

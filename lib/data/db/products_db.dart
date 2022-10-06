@@ -51,11 +51,11 @@ class ProductsDb {
             'products',
           )
           .get();
-      productsCollection.docs.forEach((product) {
+      for (final product in productsCollection.docs) {
         productList.add(
           Product.fromMap(product.data()),
         );
-      });
+      }
     } catch (exp) {
       print(exp.toString());
       return null;

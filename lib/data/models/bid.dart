@@ -25,15 +25,15 @@ class Bid {
   });
 
   Map<String, dynamic> toMap() => {
-        'openFlag': this.openFlag,
-        'bidId': this.bidId,
-        'createdBy': this.createdBy,
-        'date': this.date,
-        'clientName': this.clientName,
-        'clientMail': this.clientMail,
-        'clientPhone': this.clientPhone,
-        'finalPrice': this.finalPrice,
-        'selectedProducts': convertSelectedProduct(this.selectedProducts),
+        'openFlag': openFlag,
+        'bidId': bidId,
+        'createdBy': createdBy,
+        'date': date,
+        'clientName': clientName,
+        'clientMail': clientMail,
+        'clientPhone': clientPhone,
+        'finalPrice': finalPrice,
+        'selectedProducts': convertSelectedProduct(selectedProducts),
       };
 
   factory Bid.fromMap(Map<String, dynamic> firestoreObj) {
@@ -131,12 +131,12 @@ class SelectedProducts {
       required this.remark});
 
   Map<String, dynamic> toMap() => {
-        'product': this.product.toMap(),
-        'quantity': this.quantity,
-        'discount': this.discount,
-        'finalPricePerUnit': this.finalPricePerUnit,
-        'warrantyMonths': this.warrantyMonths,
-        'remark': this.remark
+        'product': product.toMap(),
+        'quantity': quantity,
+        'discount': discount,
+        'finalPricePerUnit': finalPricePerUnit,
+        'warrantyMonths': warrantyMonths,
+        'remark': remark
       };
 
   factory SelectedProducts.fromMap(Map<String, dynamic> firestoreObj) {
@@ -169,10 +169,10 @@ List<SelectedProducts> parserSelectedProduct(
 List<Map<String, dynamic>> convertSelectedProduct(
     List<SelectedProducts> spList) {
   List<Map<String, dynamic>> spListConverted = [];
-  spList.forEach((product) {
+  for (final product in spList) {
     final Map<String, dynamic> productConverted = product.toMap();
     spListConverted.add(productConverted);
-  });
+  }
 
   return spListConverted;
 }

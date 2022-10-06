@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart' show immutable, kDebugMode;
 */
 @immutable
 class DatabaseService {
-  static FirebaseFirestore _db = FirebaseFirestore.instance;
+  static final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String tenant = TenantRepositoryImpl.currentTenantId;
   final uid = FirebaseAuth.instance.currentUser!.uid;
 // Collections reference

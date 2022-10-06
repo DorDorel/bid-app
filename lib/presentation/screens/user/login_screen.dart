@@ -9,6 +9,7 @@ import '../home/main_dashboard.dart';
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login_screen';
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 

@@ -130,11 +130,11 @@ double calculateTotalBidSum(BuildContext context) {
   );
 
   double totalSum = 0;
-  newBidsProvider.getCurrentBidProduct.forEach((element) {
+  for (final element in newBidsProvider.getCurrentBidProduct) {
     int singleProductUnit = element.quantity;
     double priceForAllProductUnits =
         singleProductUnit * element.finalPricePerUnit;
     totalSum += priceForAllProductUnits;
-  });
+  }
   return totalSum;
 }

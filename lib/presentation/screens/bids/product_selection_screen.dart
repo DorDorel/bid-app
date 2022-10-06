@@ -25,6 +25,7 @@ class ProductSelectionScreen extends StatefulWidget {
     required this.phoneNumber,
   });
   @override
+  // ignore: library_private_types_in_public_api
   _ProductSelectionScreenState createState() => _ProductSelectionScreenState();
 }
 

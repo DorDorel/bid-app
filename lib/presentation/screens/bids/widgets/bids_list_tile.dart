@@ -58,12 +58,12 @@ class BidTile extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "Bid ID: " + bidId,
+                  "Bid ID: $bidId",
                 ),
                 trailing: archiveScreen
                     ? IconButton(
                         onPressed: () async {
-                          EmailService emailService = new EmailService(
+                          EmailService emailService = EmailService(
                             to: bid.clientMail,
                           );
                           emailService.openDefaultMainAppWithAddressClient();

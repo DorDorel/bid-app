@@ -6,10 +6,10 @@ class NewBidsProvider with ChangeNotifier {
   List<SelectedProducts> get getCurrentBidProduct => [..._currentBidProduct];
 
   void testPrintBid() {
-    _currentBidProduct.forEach((element) {
+    for (final element in _currentBidProduct) {
       print(
           '[name: ${element.product.productName}, quantity:  ${element.quantity}, discount: ${element.discount}, price/unit: ${element.finalPricePerUnit}]');
-    });
+    }
     print('---');
   }
 

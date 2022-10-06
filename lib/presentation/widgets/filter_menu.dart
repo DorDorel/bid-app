@@ -40,7 +40,7 @@ class _FilterMenuState extends State<FilterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final _filterProvider = Provider.of<FilterProvider>(context);
+    final filterProvider = Provider.of<FilterProvider>(context);
     final bidsData = Provider.of<BidsProvider>(context, listen: false);
 
     return SingleChildScrollView(
@@ -51,7 +51,7 @@ class _FilterMenuState extends State<FilterMenu> {
           OutlinedButton(
             onPressed: () {
               setState(() {
-                _filterProvider.updateFilterIndex(newIndex: 0);
+                filterProvider.updateFilterIndex(newIndex: 0);
                 _activateBidsFlag = true;
                 _archiveFlag = false;
                 _notificationsFlag = false;
@@ -73,7 +73,7 @@ class _FilterMenuState extends State<FilterMenu> {
           OutlinedButton(
             onPressed: () {
               setState(() {
-                _filterProvider.updateFilterIndex(newIndex: 1);
+                filterProvider.updateFilterIndex(newIndex: 1);
 
                 _activateBidsFlag = false;
                 _archiveFlag = true;
@@ -96,7 +96,7 @@ class _FilterMenuState extends State<FilterMenu> {
           OutlinedButton(
             onPressed: () {
               setState(() {
-                _filterProvider.updateFilterIndex(newIndex: 2);
+                filterProvider.updateFilterIndex(newIndex: 2);
 
                 _activateBidsFlag = false;
                 _archiveFlag = false;
@@ -120,7 +120,7 @@ class _FilterMenuState extends State<FilterMenu> {
           OutlinedButton(
             onPressed: () {
               setState(() {
-                _filterProvider.updateFilterIndex(newIndex: 3);
+                filterProvider.updateFilterIndex(newIndex: 3);
 
                 _activateBidsFlag = false;
                 _archiveFlag = false;
@@ -143,7 +143,7 @@ class _FilterMenuState extends State<FilterMenu> {
           OutlinedButton(
             onPressed: () {
               setState(() {
-                _filterProvider.updateFilterIndex(newIndex: 4);
+                filterProvider.updateFilterIndex(newIndex: 4);
 
                 _activateBidsFlag = false;
                 _archiveFlag = false;

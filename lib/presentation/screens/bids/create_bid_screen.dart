@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bid/presentation/screens/bids/product_selection_screen.dart';
 import 'package:bid/presentation/widgets/next_button.dart';
 

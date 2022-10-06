@@ -43,7 +43,7 @@ class ReminderListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Bid ID: " + reminder.bidId,
+                  "Bid ID: ${reminder.bidId}",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -81,11 +81,11 @@ Bid getBidObjectFromReminderObject(BuildContext context, Reminder reminder) {
   final bidsData = Provider.of<BidsProvider>(context);
   final String bidId = reminder.bidId;
   dynamic bid;
-  bidsData.allBids.forEach((element) {
+  for (var element in bidsData.allBids) {
     if (element.bidId == bidId) {
       bid = element;
     }
-  });
+  }
 
   return bid;
 }

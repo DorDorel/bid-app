@@ -20,7 +20,7 @@ class BidFlowRunner {
 
   Future<void> runner() async {
     try {
-      final EmailService es = new EmailService(to: customerEmail);
+      final EmailService es = EmailService(to: customerEmail);
       es.sendBidInMail(tenantId, tenantName, bidDocId, creator);
     } catch (err) {
       print(err);

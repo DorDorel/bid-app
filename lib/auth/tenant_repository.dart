@@ -13,7 +13,7 @@ abstract class TenantRepository {
 
 @immutable
 class TenantRepositoryImpl with TenantRepository {
-  static FirebaseFirestore _db = FirebaseFirestore.instance;
+  static final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   @override

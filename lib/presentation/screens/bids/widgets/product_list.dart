@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 class ProductList extends StatefulWidget {
   static const routeName = '/products_screen';
   @override
+  // ignore: library_private_types_in_public_api
   _ProductsScreenState createState() => _ProductsScreenState();
 }
 

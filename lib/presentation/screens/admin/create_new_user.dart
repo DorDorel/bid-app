@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/data/models/user.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
@@ -24,20 +26,20 @@ class _CreateNewUserState extends State<CreateNewUser> {
 
   Future<String> _createUser() async {
     try {
-      final _authInstance = AuthenticationRepositoryImpl();
-      CustomUser user = new CustomUser(
+      final authInstance = AuthenticationRepositoryImpl();
+      CustomUser user = CustomUser(
         tenantId: tenantId,
         email: email,
         password: password,
         name: name,
         phoneNumber: phoneNumber,
       );
-      final newUser = await _authInstance.createUser(
+      final newUser = await authInstance.createUser(
         user: user,
       );
       if (newUser.isNotEmpty) {
         _newUserFlag = true;
-        _authInstance.signOut();
+        authInstance.signOut();
       }
       return newUser;
     } catch (exp) {
@@ -48,7 +50,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
 
   @override
   Widget build(BuildContext context) {
-    final _form = GlobalKey<FormState>();
+    final form = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black54,
@@ -79,7 +81,7 @@ class _CreateNewUserState extends State<CreateNewUser> {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Form(
-          key: _form,
+          key: form,
           child: ListView(
             children: [
               TextFormField(

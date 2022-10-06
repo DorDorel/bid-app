@@ -39,13 +39,13 @@ class BidsDb {
           )
           .get();
 
-      bidsCollection.docs.forEach((bid) {
+      for (final bid in bidsCollection.docs) {
         final bidObject = Bid.fromMap(bid.data());
         if (bidObject.createdBy == uID) {
           allBids.add(bidObject);
         }
         // allBids.add(Bid.fromMap(bid.data()));
-      });
+      }
     } catch (exp) {
       print(exp.toString());
     }
