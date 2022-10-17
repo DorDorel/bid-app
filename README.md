@@ -3,7 +3,7 @@
 
 
 
-- New design<br>
+- UPDATE (V1.0): New design<br>
 
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
