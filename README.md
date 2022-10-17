@@ -1,11 +1,10 @@
 
 # BidApp
 
-<h3>A new way to send an interactive bid to your customers.</h3>
-<p>UPDATE : Version 1.0 in October: </p>
+
+
 - New design<br>
-- IOS : Transfer from objective c to swfit<br>
-- Android : Transfer from java to Kotlin<br>
+
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
