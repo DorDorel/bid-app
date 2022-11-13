@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bid/auth/auth_firestore_const.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -26,12 +29,14 @@ class TenantRepositoryImpl with TenantRepository {
   static String get tenantName => _tenantName;
 
 // Collections reference
-  final CollectionReference companiesCollection = _db.collection('companies');
-  final CollectionReference usersCollection = _db.collection('users');
+  final CollectionReference companiesCollection =
+      _db.collection(AuthFirestoreConstants.tenantCollectionString);
+  final CollectionReference usersCollection =
+      _db.collection(AuthFirestoreConstants.usersCollectionString);
   final CollectionReference<Map<String, dynamic>> companiesCollectionMap =
-      _db.collection('companies');
+      _db.collection(AuthFirestoreConstants.tenantCollectionString);
   final CollectionReference<Map<String, dynamic>> usersCollectionMap =
-      _db.collection('users');
+      _db.collection(AuthFirestoreConstants.usersCollectionString);
 
   @override
   bool setTenantIdFromLocalCache(String tenantId) {
@@ -46,8 +51,7 @@ class TenantRepositoryImpl with TenantRepository {
   Future<DocumentReference?> getTenantReference() async {
     try {
       if (kDebugMode) {
-        print(
-            "🐛  *DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
+        log("🐛  *DEBUG LOG* : Database Query - getTenantReference from TenantDB reading");
       }
 
       final DocumentReference tenantReference =
@@ -63,13 +67,12 @@ class TenantRepositoryImpl with TenantRepository {
   Future<bool> tenantAuthorization() async {
     try {
       if (kDebugMode) {
-        print(
-            "*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
+        log("*🐛 DEBUG LOG* : Database Query - tenantAuthorization from TenantDB reading");
       }
 
       QuerySnapshot<Map<String, dynamic>> currentUser = await usersCollectionMap
           .where(
-            'uid',
+            AuthFirestoreConstants.userIdString,
             isEqualTo: await getCurrentUserUID,
           )
           .get();
@@ -82,18 +85,18 @@ class TenantRepositoryImpl with TenantRepository {
       );
       final CollectionReference<Map<String, dynamic>> userList =
           tenantDoc.collection(
-        'users',
+        AuthFirestoreConstants.usersCollectionString,
       );
       QuerySnapshot<Map<String, dynamic>> userUid = await userList
           .where(
-            'uid',
+            AuthFirestoreConstants.userIdString,
             isEqualTo: await getCurrentUserUID,
           )
           .get();
 
       // get tenantId from tenant collection
-      final String secondValidation =
-          await userUid.docs.first.data()['tenantId'];
+      final String secondValidation = await userUid.docs.first
+          .data()[AuthFirestoreConstants.tenantIdString];
 
       if (firstValidation == secondValidation) {
         _currentTenantId = firstValidation;
@@ -102,7 +105,7 @@ class TenantRepositoryImpl with TenantRepository {
               firstValidation,
             )
             .get();
-        _tenantName = tenantInfo['companyName'];
+        _tenantName = tenantInfo[AuthFirestoreConstants.tenantNameString];
 
         return true;
       } else {

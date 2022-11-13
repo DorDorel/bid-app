@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bid/auth/auth_firestore_const.dart';
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/data/models/user.dart';
@@ -18,8 +21,10 @@ class DatabaseService {
   final String tenant = TenantRepositoryImpl.currentTenantId;
   final uid = FirebaseAuth.instance.currentUser!.uid;
 // Collections reference
-  final CollectionReference companiesCollection = _db.collection('companies');
-  final CollectionReference usersCollection = _db.collection('users');
+  final CollectionReference companiesCollection =
+      _db.collection(AuthFirestoreConstants.tenantCollectionString);
+  final CollectionReference usersCollection =
+      _db.collection(AuthFirestoreConstants.usersCollectionString);
 
   // cid is a companyId (String)
   // docRef is a reference to firestore document Object
@@ -30,14 +35,13 @@ class DatabaseService {
 
   Future<CustomUser?> getUserDataFromUserCollection() async {
     if (kDebugMode) {
-      print(
-          "🐛  *DEBUG LOG* : Database Query - getUserDataFromUserCollection from DatabaseService reading");
+      log("🐛  *DEBUG LOG* : Database Query - getUserDataFromUserCollection from DatabaseService reading");
     }
     try {
       final QuerySnapshot<dynamic> userRef =
           await usersCollection.snapshots().first;
-      final currentUser =
-          userRef.docs.where((element) => element['uid'] == uid);
+      final currentUser = userRef.docs.where(
+          (element) => element[AuthFirestoreConstants.userIdString] == uid);
 
       return CustomUser.fromMap(currentUser.first.data());
     } catch (err) {
@@ -65,7 +69,7 @@ class DatabaseService {
       final docRef = await findCompanyByCid(cid);
       await docRef
           .collection(
-            'users',
+            AuthFirestoreConstants.usersCollectionString,
           )
           .doc(
             user.uid,
@@ -89,16 +93,16 @@ class DatabaseService {
     );
     final CollectionReference<Map<String, dynamic>> userList =
         tenantDoc.collection(
-      'users',
+      AuthFirestoreConstants.usersCollectionString,
     );
     try {
       QuerySnapshot<Map<String, dynamic>> userUid = await userList
           .where(
-            'uid',
+            AuthFirestoreConstants.userIdString,
             isEqualTo: uid,
           )
           .get();
-      return userUid.docs.first.data()['uid'];
+      return userUid.docs.first.data()[AuthFirestoreConstants.userIdString];
     } catch (exp) {
       print(exp.toString());
       return null;
@@ -114,16 +118,17 @@ class DatabaseService {
     );
     final CollectionReference<Map<String, dynamic>> userList =
         tenantDoc.collection(
-      'users',
+      AuthFirestoreConstants.usersCollectionString,
     );
     try {
       QuerySnapshot<Map<String, dynamic>> userUid = await userList
           .where(
-            'uid',
+            AuthFirestoreConstants.userIdString,
             isEqualTo: uid,
           )
           .get();
-      bool isAdmin = await userUid.docs.first.data()['isAdmin'];
+      bool isAdmin =
+          await userUid.docs.first.data()[AuthFirestoreConstants.isAdminString];
 
       return isAdmin;
     } catch (exp) {

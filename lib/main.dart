@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/data/local/local_reminder.dart';
 import 'package:bid/data/local/tenant_cache_box.dart';
@@ -138,7 +140,7 @@ class AuthenticationWrapper extends StatelessWidget {
       if (kDebugMode) {
         userInfo.forEach(
           (key, value) {
-            print('$key' ':' ' ' '$value');
+            log('$key' ':' ' ' '$value');
           },
         );
       }

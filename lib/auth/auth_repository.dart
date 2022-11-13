@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bid/data/db/database.dart';
 import 'package:bid/data/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,7 +50,7 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
       await FirebaseFirestore.instance.terminate();
       await FirebaseFirestore.instance.clearPersistence();
 
-      print('sign out');
+      log('sign out');
     } catch (e) {
       print(e.toString());
       return null;

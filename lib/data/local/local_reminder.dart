@@ -1,4 +1,6 @@
 // this is a cache
+import 'dart:developer';
+
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/models/reminder.dart';
 import 'package:flutter/foundation.dart' show immutable;
@@ -8,7 +10,11 @@ import 'package:hive/hive.dart';
 class LocalReminder {
   final String note;
   final Bid bid;
-  LocalReminder({required this.note, required this.bid});
+
+  LocalReminder({
+    required this.note,
+    required this.bid,
+  });
 
   static Box? _remindersBox;
   static Box? _favoriteReminders;
@@ -17,7 +23,9 @@ class LocalReminder {
       _remindersBox = await Hive.openBox<String>('remindersBox');
       _favoriteReminders = await Hive.openBox<String>('favoriteReminders');
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -26,10 +34,7 @@ class LocalReminder {
 
     final Map<dynamic, dynamic> reminderBoxMapObj = _remindersBox!.toMap();
     reminderBoxMapObj.forEach((key, value) {
-      Reminder reminder = Reminder(
-        bidId: key,
-        note: value,
-      );
+      Reminder reminder = Reminder(bidId: key, note: value);
       remindersList.add(reminder);
     });
 
@@ -39,8 +44,10 @@ class LocalReminder {
   static removeAllReminders() async {
     try {
       await _remindersBox!.clear();
-    } catch (error) {
-      print(error);
+    } catch (err) {
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -50,7 +57,9 @@ class LocalReminder {
         _remindersBox!.put(bid.bidId, note);
       }
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -58,7 +67,9 @@ class LocalReminder {
     try {
       await _remindersBox!.delete(bidId);
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -66,7 +77,9 @@ class LocalReminder {
     try {
       await _favoriteReminders!.add(bidId);
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -80,7 +93,9 @@ class LocalReminder {
         valIndex++;
       }
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 
@@ -93,7 +108,9 @@ class LocalReminder {
         favoriteList.add(bidId);
       }
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
     print(favoriteList);
     return favoriteList;

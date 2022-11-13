@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart' show immutable;
@@ -19,7 +20,7 @@ class TenantCacheBox {
       Hive.init(document.path);
       _tenantCacheBox = await Hive.openBox<String>('tenantBox');
     } catch (exp) {
-      print(exp.toString());
+      log(exp.toString());
     }
   }
 
@@ -37,6 +38,6 @@ class TenantCacheBox {
   static void closeBox() {
     _tenantCacheBox!.close();
     openBoxFlag = false;
-    print("DEBUG: THE BOX IS CLOSED");
+    log("DEBUG: THE BOX IS CLOSED");
   }
 }

@@ -1,4 +1,5 @@
 import 'package:bid/auth/tenant_repository.dart';
+import 'package:bid/data/db/constants/shared_firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
@@ -12,19 +13,19 @@ class SharedDb {
 
     final CollectionReference<Map<String, dynamic>> sharedCollection =
         tenantRef!.collection(
-      'shared',
+      SharedFirestoreConstants.sharedCollectionString,
     );
 
     final DocumentReference<Map<String, dynamic>> bidConfigDoc =
         sharedCollection.doc(
-      "bidConfig",
+      SharedFirestoreConstants.bidConfigDocString,
     );
 
     final bidConfigDocObj = await bidConfigDoc.get();
 
     bidConfigDocObj.data()!.forEach(
       (key, value) {
-        if (key == "currentBidId") {
+        if (key == SharedFirestoreConstants.currentBidIdString) {
           currentBidId = value;
         }
       },
@@ -38,17 +39,18 @@ class SharedDb {
 
     final CollectionReference<Map<String, dynamic>> sharedCollection =
         tenantRef!.collection(
-      'shared',
+      SharedFirestoreConstants.sharedCollectionString,
     );
 
     final DocumentReference<Map<String, dynamic>> bidConfigDoc =
         sharedCollection.doc(
-      "bidConfig",
+      SharedFirestoreConstants.bidConfigDocString,
     );
 
     try {
       Map<String, int> updated = {
-        "currentBidId": await getCurrentBidId() + 1,
+        SharedFirestoreConstants.currentBidIdString:
+            await getCurrentBidId() + 1,
       };
       bidConfigDoc.update(
         updated,

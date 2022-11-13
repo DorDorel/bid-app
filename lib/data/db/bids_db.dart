@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
+import 'package:bid/data/db/constants/bids_firestore_constants.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;
@@ -12,7 +15,7 @@ class BidsDb {
       final DocumentReference<Object?>? tenantRef =
           await TenantRepositoryImpl().getTenantReference();
       final CollectionReference<Map<String, dynamic>> bidsCollection =
-          tenantRef!.collection('bids');
+          tenantRef!.collection(BidsFirestoreConstants.bidsCollectionString);
       await bidsCollection
           .add(
             bid.toMap(),
@@ -35,7 +38,7 @@ class BidsDb {
     try {
       QuerySnapshot<Map<String, dynamic>> bidsCollection = await tenantRef!
           .collection(
-            'bids',
+            BidsFirestoreConstants.bidsCollectionString,
           )
           .get();
 
@@ -50,8 +53,7 @@ class BidsDb {
       print(exp.toString());
     }
     if (kDebugMode) {
-      print(
-          "🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+      log("🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
     }
 
     allBids.sort(
@@ -67,17 +69,16 @@ class BidsDb {
     try {
       QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
           .collection(
-            'bids',
+            BidsFirestoreConstants.bidsCollectionString,
           )
           .where(
-            'bidId',
+            BidsFirestoreConstants.bidIdString,
             isEqualTo: bidId,
           )
           .get();
 
       if (kDebugMode) {
-        print(
-            "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+        log("*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
       }
 
       return Bid.fromMap(currentBid.docs.first.data());
@@ -94,17 +95,16 @@ class BidsDb {
     try {
       QuerySnapshot<Map<String, dynamic>> currentBid = await tenantRef!
           .collection(
-            'bids',
+            BidsFirestoreConstants.bidsCollectionString,
           )
           .where(
-            'bidId',
+            BidsFirestoreConstants.bidIdString,
             isEqualTo: bidId,
           )
           .get();
 
       if (kDebugMode) {
-        print(
-            "*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
+        log("*🐛 DEBUG LOG* : Database Query - findBidByBidId from BidsDb reading");
       }
 
       return currentBid.docs.first.id;
@@ -125,19 +125,20 @@ class BidsDb {
       try {
         final CollectionReference<Map<String, dynamic>> bidsList =
             tenantRef!.collection(
-          'bids',
+          BidsFirestoreConstants.bidsCollectionString,
         );
         final bidDocId = await findBidDocByBidId(bidId);
         final DocumentReference updateOpenBidFlagDbObject = bidsList.doc(
           bidDocId,
         );
         updateOpenBidFlagDbObject.update(
-          {"openFlag": false},
+          {
+            BidsFirestoreConstants.openFlagString: false,
+          },
         );
 
         if (kDebugMode) {
-          print(
-              "🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
+          log("🐛 *DEBUG LOG* : Database Query - closeBidFlag from BidsDb reading");
         }
       } catch (exp) {
         print(exp.toString());

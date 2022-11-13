@@ -47,6 +47,20 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   String imageName = '';
   String imageURL = '';
 
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    idController.dispose();
+    nameController.dispose();
+    priceController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<ProductProvider>(context);
@@ -105,6 +119,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           child: ListView(
             children: [
               TextFormField(
+                controller: idController,
                 decoration: InputDecoration(
                   labelText: 'ID',
                 ),
@@ -127,6 +142,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
+                controller: nameController,
                 decoration: InputDecoration(labelText: 'Product Name'),
                 initialValue: widget.isEdit! ? _editProduct.productName : "",
                 textInputAction: TextInputAction.next,
@@ -148,6 +164,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
+                controller: priceController,
                 decoration: InputDecoration(
                   labelText: 'Price',
                 ),
@@ -179,6 +196,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
+                controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Description',
                 ),

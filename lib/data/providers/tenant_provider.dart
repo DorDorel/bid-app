@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/data/db/database.dart';
@@ -14,9 +16,9 @@ class TenantProvider with ChangeNotifier {
     if (!TenantCacheBox.tenantCashBox!.containsKey("tenantId")) {
       try {
         bool validate = await TenantRepositoryImpl().tenantAuthorization();
-        print("*🐛 DEBUG LOG* :  SET TENANT ID FROM REMOTE DB");
+        log("*🐛 DEBUG LOG* :  SET TENANT ID FROM REMOTE DB");
         if (!validate) {
-          print('not validate SIGNING OUT!');
+          log('not validate SIGNING OUT!');
           await AuthenticationRepositoryImpl().signOut();
         }
         await _checkAdminAsync();
@@ -29,11 +31,11 @@ class TenantProvider with ChangeNotifier {
       bool validate = TenantRepositoryImpl()
           .setTenantIdFromLocalCache(tenantIdFromLocalCache);
 
-      print("*🐛 DEBUG LOG* : SET TENANT ID FROM LOCAL DB");
+      log("*🐛 DEBUG LOG* : SET TENANT ID FROM LOCAL DB");
       await _checkAdminAsync();
 
       if (!validate) {
-        print('not validate SIGNING OUT!');
+        log('not validate SIGNING OUT!');
         await AuthenticationRepositoryImpl().signOut();
       }
     }
