@@ -8,10 +8,14 @@ class EmailService {
   EmailService({required this.to});
 
   Future<void> sendBidInMail(
-      String tenant, String tenantName, String bidDocId, String creator) async {
-    FirebaseFunctions functions = FirebaseFunctions.instance;
+    String tenant,
+    String tenantName,
+    String bidDocId,
+    String creator,
+  ) async {
+    final FirebaseFunctions functions = FirebaseFunctions.instance;
     try {
-      HttpsCallable callable = functions.httpsCallable('sendBidInEmail');
+      final HttpsCallable callable = functions.httpsCallable('sendBidInEmail');
       await callable(
         {
           "clientMail": to,

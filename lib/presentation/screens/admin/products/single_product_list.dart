@@ -1,5 +1,6 @@
 import 'package:bid/data/providers/products_provider.dart';
 import 'package:bid/presentation/screens/admin/add_new_product_screen.dart';
+import 'package:bid/presentation/screens/constants/strings.dart';
 import 'package:bid/services/storage_service.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +13,20 @@ class SingleProductList extends StatelessWidget {
   final String imageUrl;
   final String description;
 
-  SingleProductList(
-      {required this.productId,
-      required this.productName,
-      required this.price,
-      required this.imageUrl,
-      required this.description});
+  SingleProductList({
+    required this.productId,
+    required this.productName,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<ProductProvider>(context, listen: false);
+    final productsData = Provider.of<ProductProvider>(
+      context,
+      listen: false,
+    );
 
     return ListTile(
       title: Text(productName),
@@ -34,16 +39,18 @@ class SingleProductList extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => AddNewProductScreen(
-                              isEdit: true,
-                              productId: productId,
-                              productName: productName,
-                              price: price,
-                              imageUrl: imageUrl,
-                              description: description,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => AddNewProductScreen(
+                      isEdit: true,
+                      productId: productId,
+                      productName: productName,
+                      price: price,
+                      imageUrl: imageUrl,
+                      description: description,
+                    ),
+                  ),
+                );
               },
               icon: Icon(
                 Icons.edit,
@@ -57,18 +64,20 @@ class SingleProductList extends StatelessWidget {
                   context: context,
                   type: CoolAlertType.warning,
                   backgroundColor: Colors.black,
-                  text:
-                      "These changes will be saved in the database of this product, Approve it?",
-                  confirmBtnText: "Delete ",
+                  text: Strings.approveChangesInDb,
+                  confirmBtnText: Strings.approveChangesInDbConfirmBtnText,
                   confirmBtnColor: Colors.black,
-                  cancelBtnText: "No",
+                  cancelBtnText: Strings.approveChangesInDbCancelBtnText,
                   showCancelBtn: true,
                   loopAnimation: true,
                   borderRadius: 20.0,
                   onConfirmBtnTap: () async {
-                    await StorageService()
-                        .deleteProductImage(productImageURL: imageUrl);
-                    await productsData.deleteProduct(productId);
+                    await StorageService().deleteProductImage(
+                      productImageURL: imageUrl,
+                    );
+                    await productsData.deleteProduct(
+                      productId,
+                    );
                     Navigator.of(context).pop();
                   },
                 );

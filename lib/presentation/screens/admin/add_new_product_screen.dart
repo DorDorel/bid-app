@@ -1,7 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:developer';
+
 import 'package:bid/data/models/product.dart';
 import 'package:bid/data/providers/products_provider.dart';
+import 'package:bid/presentation/screens/constants/strings.dart';
 import 'package:bid/services/storage_service.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -96,13 +99,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   _saveForm()
                       ? productsData.editProduct(
                           _editProduct.productId, _editProduct)
-                      : print(
+                      : log(
                           "error in isEdit: true _saveForm",
                         );
                 } else {
                   _saveForm()
                       ? productsData.addNewProduct(_editProduct)
-                      : print(
+                      : log(
                           "error in isEdit: false _saveForm",
                         );
                 }
@@ -121,13 +124,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 controller: idController,
                 decoration: InputDecoration(
-                  labelText: 'ID',
+                  labelText: Strings.labelTextId,
                 ),
                 initialValue: widget.isEdit! ? _editProduct.productId : "",
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Id is a require tile';
+                    return Strings.requiredId;
                   }
                   return null;
                 },
@@ -143,12 +146,16 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               ),
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Product Name'),
-                initialValue: widget.isEdit! ? _editProduct.productName : "",
+                decoration: InputDecoration(
+                  labelText: Strings.labelTextProductName,
+                ),
+                initialValue: widget.isEdit!
+                    ? _editProduct.productName
+                    : Strings.emptyString,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Name is a require tile';
+                    return Strings.requiredName;
                   }
 
                   return null;
@@ -166,7 +173,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 controller: priceController,
                 decoration: InputDecoration(
-                  labelText: 'Price',
+                  labelText: Strings.labelTextPrice,
                 ),
                 initialValue:
                     widget.isEdit! ? _editProduct.price.toString() : "",
@@ -174,7 +181,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter a price';
+                    return Strings.requiredPrice;
                   }
                   if (double.tryParse(value) == null) {
                     return 'Please Enter a VALID number ';
