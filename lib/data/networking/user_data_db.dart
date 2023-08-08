@@ -5,18 +5,12 @@ import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
 import 'package:bid/data/models/user.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;
 
-/*
-  This library (db) is a manage service connection to firestore database by flutter cloud firestore SDK.
-  Read More here: https://pub.dev/packages/cloud_firestore .
-  Specific documentation here: https://firebase.flutter.dev/docs/firestore/usage/
-*/
 @immutable
-class DatabaseService {
+class UserDataService {
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String tenant = TenantRepositoryImpl.currentTenantId;
   final uid = FirebaseAuth.instance.currentUser!.uid;
@@ -136,15 +130,4 @@ class DatabaseService {
     }
     return false;
   }
-
-  // Future<String> addNewCompany(Company company) async {
-  //   try {
-  //     final newCompanyDbObject = await companiesCollection.add(company.toMap());
-  //     return newCompanyDbObject.id;
-  //   } catch (exp) {
-  //     print(exp.toString());
-  //     return exp.toString();
-  //   }
-  // }
-
 }

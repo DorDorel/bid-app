@@ -159,6 +159,7 @@ class BidInfo extends StatelessWidget {
           child: const Text(
             " Set Reminder 🔔 ",
             style: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 20.0,
             ),

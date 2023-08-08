@@ -2,9 +2,8 @@ import 'dart:developer';
 
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/db/database.dart';
 import 'package:bid/data/local/tenant_cache_box.dart';
-
+import 'package:bid/data/networking/user_data_db.dart';
 import 'package:flutter/foundation.dart';
 
 class TenantProvider with ChangeNotifier {
@@ -42,7 +41,7 @@ class TenantProvider with ChangeNotifier {
   }
 
   Future<bool> _checkAdminAsync() async {
-    checkAdmin = await DatabaseService().isAdmin();
+    checkAdmin = await UserDataService().isAdmin();
     return checkAdmin;
   }
 

@@ -1,6 +1,7 @@
 import 'package:bid/data/models/product.dart';
 import 'package:flutter/foundation.dart';
 
+
 class Bid {
   bool? openFlag;
   final String bidId;

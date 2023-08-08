@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:bid/auth/auth_repository.dart';
 import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/db/constants/bids_firestore_constants.dart';
+import 'package:bid/data/networking/constants/bids_firestore_constants.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;

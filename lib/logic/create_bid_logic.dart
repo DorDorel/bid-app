@@ -1,5 +1,5 @@
-import 'package:bid/data/db/bids_db.dart';
-import 'package:bid/data/db/shared_db.dart';
+import 'package:bid/data/networking/bids_db.dart';
+import 'package:bid/data/networking/shared_db.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/logic/bid_flow_runner.dart';

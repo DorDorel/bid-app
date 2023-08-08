@@ -50,19 +50,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   String imageName = '';
   String imageURL = '';
 
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  // final TextEditingController idController = TextEditingController();
+  // final TextEditingController nameController = TextEditingController();
+  // final TextEditingController priceController = TextEditingController();
+  // final TextEditingController descriptionController = TextEditingController();
 
-  @override
-  void dispose() {
-    idController.dispose();
-    nameController.dispose();
-    priceController.dispose();
-    descriptionController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   idController.dispose();
+  //   nameController.dispose();
+  //   priceController.dispose();
+  //   descriptionController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           child: ListView(
             children: [
               TextFormField(
-                controller: idController,
+                // controller: idController,
                 decoration: InputDecoration(
                   labelText: Strings.labelTextId,
                 ),
@@ -145,7 +145,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
-                controller: nameController,
+                // controller: nameController,
                 decoration: InputDecoration(
                   labelText: Strings.labelTextProductName,
                 ),
@@ -171,7 +171,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
-                controller: priceController,
+                // controller: priceController,
                 decoration: InputDecoration(
                   labelText: Strings.labelTextPrice,
                 ),
@@ -203,7 +203,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 },
               ),
               TextFormField(
-                controller: descriptionController,
+                // controller: descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Description',
                 ),

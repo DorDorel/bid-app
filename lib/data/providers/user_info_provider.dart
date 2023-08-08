@@ -1,5 +1,5 @@
-import 'package:bid/data/db/database.dart';
 import 'package:bid/data/models/user.dart';
+import 'package:bid/data/networking/user_data_db.dart';
 import 'package:flutter/foundation.dart';
 
 class UserInfoProvider with ChangeNotifier {
@@ -11,7 +11,7 @@ class UserInfoProvider with ChangeNotifier {
 
   Future<void> _getUserData() async {
     try {
-      final user = await DatabaseService().getUserDataFromUserCollection();
+      final user = await UserDataService().getUserDataFromUserCollection();
 
       if (user == null) {
         print("Problem with user model sync");

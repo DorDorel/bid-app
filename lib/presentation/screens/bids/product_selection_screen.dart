@@ -1,4 +1,4 @@
-import 'package:bid/data/db/shared_db.dart';
+import 'package:bid/data/networking/shared_db.dart';
 import 'package:bid/data/models/bid.dart';
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/new_bids_provider.dart';

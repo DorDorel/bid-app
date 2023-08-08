@@ -15,14 +15,13 @@ import 'package:bid/presentation/screens/admin/products/products_screen.dart';
 import 'package:bid/presentation/screens/bids/create_bid_screen.dart';
 import 'package:bid/presentation/screens/home/main_dashboard.dart';
 import 'package:bid/presentation/screens/user/login_screen.dart';
-import 'package:flutter/foundation.dart' show kDebugMode;
-import 'presentation/screens/admin/admin_screen.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'presentation/screens/admin/admin_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +47,7 @@ class BidAppV1Root extends StatelessWidget {
           ).authStateChanges,
           initialData: null,
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<ProductProvider>(
           create: (context) => ProductProvider(),
         ),
         ChangeNotifierProvider<TenantProvider>(
@@ -73,7 +72,7 @@ class BidAppV1Root extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          backgroundColor: Colors.grey[300],
+          //useMaterial3: true,
           appBarTheme: AppBarTheme(
             color: Colors.white,
             iconTheme: IconThemeData(
@@ -83,9 +82,11 @@ class BidAppV1Root extends StatelessWidget {
           ),
           primaryColor: Colors.black,
           scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Colors.black87,
-          ),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(
+                secondary: Colors.black87,
+              )
+              .copyWith(background: Colors.grey[300]),
         ),
         home: AuthenticationWrapper(),
         routes: {

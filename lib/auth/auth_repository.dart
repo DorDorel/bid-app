@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:bid/data/db/database.dart';
 import 'package:bid/data/models/user.dart';
+import 'package:bid/data/networking/user_data_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -67,10 +67,10 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
               email: user.email, password: user.password);
       final userId = newUser.user!.uid;
       user.uid = userId;
-      await DatabaseService().addUserToUserCollection(
+      await UserDataService().addUserToUserCollection(
         user: user,
       );
-      await DatabaseService()
+      await UserDataService()
           .addUserToCompanyUserList(cid: user.tenantId, user: user);
 
       return userId;
