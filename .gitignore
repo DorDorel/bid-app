@@ -58,4 +58,4 @@ ios/build/Runner.build/Release-iphoneos/Runner.build/dgph
 .firebaserc
 
 #ios
-ios/build/**
+ios/build/**!/android/app/google-services.json
