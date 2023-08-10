@@ -1,8 +1,8 @@
 import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/presentation/screens/user/account_info_screen.dart';
-
+import 'package:bid/data/providers/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../home/main_dashboard.dart';
 
@@ -109,13 +109,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               InkWell(
                 onTap: () async {
+                  context
+                      .read<UserInfoProvider>()
+                      .cleanUserMemory(context, false);
                   bool result = await _auth.signIn(
                     email: email,
                     password: password,
                   );
-
                   if (result) {
-                    wipeAllFirestoreDataFromCache(context);
                     Navigator.pushNamed(
                       context,
                       MainDashboard.routeName,

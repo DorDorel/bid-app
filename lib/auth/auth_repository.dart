@@ -50,7 +50,9 @@ class AuthenticationRepositoryImpl with AuthenticationRepository {
       await FirebaseFirestore.instance.terminate();
       await FirebaseFirestore.instance.clearPersistence();
 
-      log('sign out');
+      if (kDebugMode) {
+        log('🛑 sign out');
+      }
     } catch (e) {
       print(e.toString());
       return null;
