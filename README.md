@@ -33,4 +33,3 @@ Local Database(nosql): Hive.
 <br>
 State architecture and di : Provider(v 6.0).
 <br>
-
