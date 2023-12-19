@@ -3,7 +3,6 @@ import 'package:bid/data/models/reminder.dart';
 import 'package:bid/data/providers/bids_provider.dart';
 import 'package:bid/data/providers/reminder_provider.dart';
 import 'package:bid/presentation/screens/bids/bid_info.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +17,7 @@ class ReminderListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reminderData = Provider.of<ReminderProvider>(context);
-    final Bid currentBid = getBidObjectFromReminderObject(context, reminder);
+    final Bid currentBid = _getBidObjectFromReminderObject(context, reminder);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -76,12 +75,11 @@ class ReminderListTile extends StatelessWidget {
   }
 }
 
-// helper methods
-Bid getBidObjectFromReminderObject(BuildContext context, Reminder reminder) {
+Bid _getBidObjectFromReminderObject(BuildContext context, Reminder reminder) {
   final bidsData = Provider.of<BidsProvider>(context);
   final String bidId = reminder.bidId;
   dynamic bid;
-  for (var element in bidsData.allBids) {
+  for (final element in bidsData.allBids) {
     if (element.bidId == bidId) {
       bid = element;
     }

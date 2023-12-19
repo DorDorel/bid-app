@@ -1,7 +1,8 @@
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/screens/home/widgets/home_header.dart';
-import 'package:bid/presentation/screens/home/widgets/home_widget_selector.dart';
+import 'package:bid/presentation/providers/filter_provider.dart';
+import 'package:bid/presentation/screens/home/widgets/home_dashboard_header.dart';
+import 'package:bid/presentation/screens/home/widgets/home_dashboard_widget_selector.dart';
 import 'package:bid/presentation/widgets/filter_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,25 +35,28 @@ class _MainDashboardState extends State<MainDashboard> {
             SizedBox(
               height: 30,
             ),
-            HomeHeader(),
+            HomeDashboardHeader(),
             const SizedBox(height: 18),
             FilterMenu(),
             const HomeWidgetSelector(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () {
-          removeBidDraft(context);
-          Navigator.pushNamed(
-            context,
-            CreateBidScreen.routeName,
-          );
-        },
-        child: Icon(
-          Icons.add,
-          size: 30,
+      floatingActionButton: Visibility(
+        visible: context.read<FilterProvider>().getFilterIndex != 4,
+        child: FloatingActionButton(
+          backgroundColor: Colors.black,
+          onPressed: () {
+            removeBidDraft(context);
+            Navigator.pushNamed(
+              context,
+              CreateBidScreen.routeName,
+            );
+          },
+          child: Icon(
+            Icons.add,
+            size: 30,
+          ),
         ),
       ),
     );
@@ -66,10 +70,7 @@ class HomeTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = Provider.of<UserInfoProvider>(
-      context,
-      listen: false,
-    );
+    final userData = context.read<UserInfoProvider>();
     return userData.userData == null
         ? CircularProgressIndicator(
             color: Colors.black,

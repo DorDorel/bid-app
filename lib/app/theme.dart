@@ -2,7 +2,7 @@ import 'package:flutter/material.dart'
     show ThemeData, AppBarTheme, Colors, IconThemeData, ColorScheme;
 
 final ThemeData appTheme = ThemeData(
-  //useMaterial3: true,
+  useMaterial3: false,
   appBarTheme: AppBarTheme(
     color: Colors.white,
     iconTheme: IconThemeData(
@@ -16,5 +16,7 @@ final ThemeData appTheme = ThemeData(
       .copyWith(
         secondary: Colors.black87,
       )
-      .copyWith(background: Colors.grey[300]),
+      .copyWith(
+        background: Colors.grey[300],
+      ),
 );

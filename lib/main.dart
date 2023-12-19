@@ -60,8 +60,8 @@ class AuthenticationWrapper extends StatelessWidget {
       await userInfoProvider.fetchUserData();
 
       /*
-     This if condition check if its a first time user login in current device
-     if it is - the tenant id insert to the local db.
+      NOTE: This if condition check if its a first time user login in current device
+      if it is - the tenant id insert to the local db.
     */
       if (TenantCacheBox.tenantCashBox!.isEmpty) {
         tenantProvider.setTenantIdInLocalCache();

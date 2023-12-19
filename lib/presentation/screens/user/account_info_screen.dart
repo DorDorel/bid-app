@@ -25,22 +25,25 @@ class ProfileBody extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text("TID: ${userDataProvider.userData!.tenantId}"),
-          Text("UID: ${userDataProvider.userData!.uid!}"),
-          Text("User Email: ${userDataProvider.userData!.email}"),
+          InfoCard(text: "TID: ${userDataProvider.userData!.tenantId}"),
+          InfoCard(text: "UID: ${userDataProvider.userData!.uid!}"),
+          InfoCard(text: "User Email: ${userDataProvider.userData!.email}"),
           SizedBox(
-            height: 10,
+            height: 50,
           ),
-          NextButton(
-            title: "Sign out ",
-            onPressed: (() async {
-              context.read<UserInfoProvider>().cleanUserMemory(context, true);
-              Navigator.pushNamed(
-                context,
-                LoginScreen.routeName,
-              );
-              // clear all user caching from device storage
-            }),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(10.0),
+            child: NextButton(
+              title: "Sign out ",
+              onPressed: (() async {
+                context.read<UserInfoProvider>().cleanUserMemory(context, true);
+                Navigator.pushNamed(
+                  context,
+                  LoginScreen.routeName,
+                );
+              }),
+            ),
           ),
         ],
       ),
@@ -59,6 +62,35 @@ class ProfilePicture extends StatelessWidget {
       height: 115,
       width: 115,
       child: CircleAvatar(),
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  final String text;
+  const InfoCard({required this.text, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        right: 10,
+        left: 10,
+        bottom: 1,
+      ),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white10,
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.0),
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 18.0),
+        ),
+      ),
     );
   }
 }

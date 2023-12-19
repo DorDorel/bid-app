@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+class HomeDashboardHeader extends StatelessWidget {
+  const HomeDashboardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
