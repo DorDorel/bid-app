@@ -1,8 +1,12 @@
 import 'package:bid/data/providers/tenant_provider.dart';
 import 'package:bid/logic/product_bid_logic.dart';
 import 'package:bid/presentation/providers/filter_provider.dart';
+import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
+import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
+import 'package:bid/presentation/screens/catalog/catalog.dart';
 import 'package:bid/presentation/screens/home/widgets/home_dashboard_header.dart';
-import 'package:bid/presentation/screens/home/widgets/home_dashboard_widget_selector.dart';
+import 'package:bid/presentation/screens/reminders/reminders_screen.dart';
+import 'package:bid/presentation/screens/user/account_info_screen.dart';
 import 'package:bid/presentation/widgets/filter_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,35 +31,49 @@ class _MainDashboardState extends State<MainDashboard> {
 
     bidsData.fetchData();
 
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            HomeDashboardHeader(),
-            const SizedBox(height: 18),
-            FilterMenu(),
-            const HomeWidgetSelector(),
-          ],
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        backgroundColor: Colors.grey[300],
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              HomeDashboardHeader(),
+              const SizedBox(height: 18),
+              FilterMenu(),
+              // const HomeWidgetSelector(),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    OpenBidScreen(),
+                    BidsArchiveScreen(),
+                    RemindersScreen(),
+                    Catalog(),
+                    AccountInfoScreen(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: Visibility(
-        visible: context.read<FilterProvider>().getFilterIndex != 4,
-        child: FloatingActionButton(
-          backgroundColor: Colors.black,
-          onPressed: () {
-            removeBidDraft(context);
-            Navigator.pushNamed(
-              context,
-              CreateBidScreen.routeName,
-            );
-          },
-          child: Icon(
-            Icons.add,
-            size: 30,
+        floatingActionButton: Visibility(
+          visible: context.read<FilterProvider>().getFilterIndex != 4,
+          child: FloatingActionButton(
+            backgroundColor: Colors.black,
+            onPressed: () {
+              removeBidDraft(context);
+              Navigator.pushNamed(
+                context,
+                CreateBidScreen.routeName,
+              );
+            },
+            child: Icon(
+              Icons.add,
+              size: 30,
+            ),
           ),
         ),
       ),

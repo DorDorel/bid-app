@@ -1,169 +1,56 @@
 import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class FilterMenu extends StatefulWidget {
-  const FilterMenu({Key? key}) : super(key: key);
-
-  @override
-  State<FilterMenu> createState() => _FilterMenuState();
-}
-
-class _FilterMenuState extends State<FilterMenu> {
-  bool _activateBidsFlag = true;
-  bool _archiveFlag = false;
-  bool _notificationsFlag = false;
-  bool _catalogFlag = false;
-  bool _accountFlag = false;
-
-  final ButtonStyle activeButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(
-      Colors.black,
-    ),
-    shape: MaterialStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-    ),
-  );
-
-  final ButtonStyle notActiveButtonStyle = OutlinedButton.styleFrom(
-    side: BorderSide(
-      color: Colors.transparent,
-    ),
-  );
-
-  final Color activateButtonTextColor = Colors.white;
-  final Color notActivateButtonTextColor = Colors.black;
+class FilterMenu extends StatelessWidget {
+  const FilterMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final filterProvider = Provider.of<FilterProvider>(context);
-    final bidsData = Provider.of<BidsProvider>(context, listen: false);
+    final bidsData = Provider.of<BidsProvider>(context);
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <OutlinedButton>[
-          OutlinedButton(
-            onPressed: () {
-              setState(() {
-                filterProvider.updateFilterIndex(newIndex: 0);
-                _activateBidsFlag = true;
-                _archiveFlag = false;
-                _notificationsFlag = false;
-                _catalogFlag = false;
-                _accountFlag = false;
-              });
-            },
-            style: _activateBidsFlag ? activeButtonStyle : notActiveButtonStyle,
-            child: Text(
-              "Activities Bids (${bidsData.openBidsCounter.toString()})",
-              style: GoogleFonts.cuprum(
-                color: _activateBidsFlag
-                    ? activateButtonTextColor
-                    : notActivateButtonTextColor,
-                fontSize: 18.0,
-              ),
-            ),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              setState(() {
-                filterProvider.updateFilterIndex(newIndex: 1);
+    final TextStyle tabStyle = GoogleFonts.cuprum(
+      fontSize: 18.0,
+    );
 
-                _activateBidsFlag = false;
-                _archiveFlag = true;
-                _notificationsFlag = false;
-                _catalogFlag = false;
-                _accountFlag = false;
-              });
-            },
-            style: _archiveFlag ? activeButtonStyle : notActiveButtonStyle,
-            child: Text(
-              "Archive",
-              style: GoogleFonts.cuprum(
-                color: _archiveFlag
-                    ? activateButtonTextColor
-                    : notActivateButtonTextColor,
-                fontSize: 18.0,
-              ),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+      child: Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 3,
+        ),
+        child: TabBar(
+          isScrollable: true,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.black,
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              12,
             ),
+            color: Colors.black,
           ),
-          OutlinedButton(
-            onPressed: () {
-              setState(() {
-                filterProvider.updateFilterIndex(newIndex: 2);
-
-                _activateBidsFlag = false;
-                _archiveFlag = false;
-                _notificationsFlag = true;
-                _catalogFlag = false;
-                _accountFlag = false;
-              });
-            },
-            style:
-                _notificationsFlag ? activeButtonStyle : notActiveButtonStyle,
-            child: Text(
-              "Reminders",
-              style: GoogleFonts.cuprum(
-                color: _notificationsFlag
-                    ? activateButtonTextColor
-                    : notActivateButtonTextColor,
-                fontSize: 18.0,
-              ),
+          tabs: [
+            Tab(
+              child: Text("Activities (${bidsData.openBidsCounter.toString()})",
+                  style: tabStyle),
             ),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              setState(() {
-                filterProvider.updateFilterIndex(newIndex: 3);
-
-                _activateBidsFlag = false;
-                _archiveFlag = false;
-                _notificationsFlag = false;
-                _catalogFlag = true;
-                _accountFlag = false;
-              });
-            },
-            style: _catalogFlag ? activeButtonStyle : notActiveButtonStyle,
-            child: Text(
-              "Catalog",
-              style: GoogleFonts.cuprum(
-                color: _catalogFlag
-                    ? activateButtonTextColor
-                    : notActivateButtonTextColor,
-                fontSize: 18.0,
-              ),
+            Tab(
+              child: Text("Archive", style: tabStyle),
             ),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              setState(() {
-                filterProvider.updateFilterIndex(newIndex: 4);
-
-                _activateBidsFlag = false;
-                _archiveFlag = false;
-                _notificationsFlag = false;
-                _catalogFlag = false;
-                _accountFlag = true;
-              });
-            },
-            style: _accountFlag ? activeButtonStyle : notActiveButtonStyle,
-            child: Text(
-              "Account",
-              style: GoogleFonts.cuprum(
-                color: _accountFlag
-                    ? activateButtonTextColor
-                    : notActivateButtonTextColor,
-                fontSize: 18.0,
-              ),
+            Tab(
+              child: Text("Reminders", style: tabStyle),
             ),
-          ),
-        ],
+            Tab(
+              child: Text("Catalog", style: tabStyle),
+            ),
+            Tab(
+              child: Text("Account", style: tabStyle),
+            ),
+          ],
+        ),
       ),
     );
   }

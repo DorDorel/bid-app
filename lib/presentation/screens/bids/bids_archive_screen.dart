@@ -18,30 +18,28 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
     final bidsData = Provider.of<BidsProvider>(context);
     bidsData.fetchData();
 
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.all(2),
-        child: bidsData.allBids.isEmpty
-            ? Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              )
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: bidsData.allBids.length,
-                itemBuilder: (_, index) => Column(
-                  children: [
-                    !bidsData.allBids[index].openFlag!
-                        ? BidTile(
-                            archiveScreen: true,
-                            bid: bidsData.allBids[index],
-                          )
-                        : SizedBox.shrink()
-                  ],
-                ),
+    return Padding(
+      padding: EdgeInsets.all(2),
+      child: bidsData.allBids.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
               ),
-      ),
+            )
+          : ListView.builder(
+              shrinkWrap: true,
+              itemCount: bidsData.allBids.length,
+              itemBuilder: (_, index) => Column(
+                children: [
+                  !bidsData.allBids[index].openFlag!
+                      ? BidTile(
+                          archiveScreen: true,
+                          bid: bidsData.allBids[index],
+                        )
+                      : SizedBox.shrink()
+                ],
+              ),
+            ),
     );
   }
 }
