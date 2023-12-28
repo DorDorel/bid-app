@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bid/services/email_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,10 +22,19 @@ class BidFlowRunner {
 
   Future<void> runner() async {
     try {
-      final EmailService es = EmailService(to: customerEmail);
-      es.sendBidInMail(tenantId, tenantName, bidDocId, creator);
+      final EmailService emailService = EmailService(
+        to: customerEmail,
+      );
+      emailService.sendBidInMail(
+        tenantId,
+        tenantName,
+        bidDocId,
+        creator,
+      );
     } catch (err) {
-      print(err);
+      log(
+        err.toString(),
+      );
     }
   }
 }

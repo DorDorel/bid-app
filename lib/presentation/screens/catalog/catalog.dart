@@ -18,7 +18,7 @@ class Catalog extends StatelessWidget {
             ),
           )
         : Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
