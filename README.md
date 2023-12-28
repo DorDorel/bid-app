@@ -15,7 +15,7 @@ ADMIN PANEL DEMO: https://www.youtube.com/watch?v=0zgNTF5M7XM
 
 
 
-The link that will be sent to the customer: <a href="https://lproject-a1460.web.app/?tenant=XMqoQLgYxIi1u9Bfwh6U&bid=l9MURjFO95gRSTONymmi&creator=lhDqqZZPHMUExcOa5YfQCEtg70p2">here</a>
+The link that will be sent to the customer: <a href="http://localhost:49560/?tenant=XMqoQLgYxIi1u9Bfwh6U&bid=W4YF7XTn2ar9oqBROf2a&creator=lhDqqZZPHMUExcOa5YfQCEtg70p2">here</a>
 <br>
 ^^^^ 
 <br>
