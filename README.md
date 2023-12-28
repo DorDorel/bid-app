@@ -8,7 +8,7 @@
 <br><br>
 SEND BID IN EMAIL (OR SMS) DEMO:
 <br>
-Send Bid Live Demo: https://www.youtube.com/watch?v=Z_tD7wl4Bvc
+Send Bid Live Demo: [https://www.youtube.com/watch?v=Z_tD7wl4Bvc](https://youtu.be/jr72KhqlIyM)
 <br>
 ADMIN PANEL DEMO: https://www.youtube.com/watch?v=0zgNTF5M7XM
 <br>
