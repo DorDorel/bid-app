@@ -5,7 +5,7 @@
 BidApp is a Flutter Cross Platform project that allows users to send bids via email or SMS. It features a user-friendly admin panel, authentication, and cloud-based functionalities.
 
 ### Demos:
-- **Send Bid Live Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=Z_tD7wl4Bvc)
+- **Send Bid Live Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=jr72KhqlIyM)
 - **Admin Panel Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=0zgNTF5M7XM)
 
 ### Project Links:
