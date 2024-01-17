@@ -6,10 +6,12 @@ BidApp is a Flutter Cross Platform project that allows users to send bids via em
 
 ### Demos:
 ◉ **Send Bid Live Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=jr72KhqlIyM)
+
 ◉ **Admin Panel Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=0zgNTF5M7XM)
 
 ### Project Links:
 📱 **Customer Link Example:** [Demo Link](https://lproject-a1460.web.app/?tenant=XMqoQLgYxIi1u9Bfwh6U&bid=W4YF7XTn2ar9oqBROf2a&creator=lhDqqZZPHMUExcOa5YfQCEtg70p2)
+
 🧑‍💻 **Source Code:** [BidClient on GitHub](https://github.com/DorDorel/bid-client)
 
 ### Technologies Used:
