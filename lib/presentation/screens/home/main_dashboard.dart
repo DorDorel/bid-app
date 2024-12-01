@@ -1,13 +1,13 @@
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
-import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
-import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
-import 'package:bid/presentation/screens/catalog/catalog.dart';
-import 'package:bid/presentation/screens/home/widgets/home_dashboard_header.dart';
-import 'package:bid/presentation/screens/reminders/reminders_screen.dart';
-import 'package:bid/presentation/screens/user/account_info_screen.dart';
-import 'package:bid/presentation/widgets/filter_menu.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
+import 'package:QuoteApp/logic/product_bid_logic.dart';
+import 'package:QuoteApp/presentation/providers/filter_provider.dart';
+import 'package:QuoteApp/presentation/screens/bids/bids_archive_screen.dart';
+import 'package:QuoteApp/presentation/screens/bids/open_bids_screen.dart';
+import 'package:QuoteApp/presentation/screens/catalog/catalog.dart';
+import 'package:QuoteApp/presentation/screens/home/widgets/home_dashboard_header.dart';
+import 'package:QuoteApp/presentation/screens/reminders/reminders_screen.dart';
+import 'package:QuoteApp/presentation/screens/user/account_info_screen.dart';
+import 'package:QuoteApp/presentation/widgets/filter_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -61,18 +61,36 @@ class _MainDashboardState extends State<MainDashboard> {
         ),
         floatingActionButton: Visibility(
           visible: context.read<FilterProvider>().getFilterIndex != 4,
-          child: FloatingActionButton(
-            backgroundColor: Colors.black,
-            onPressed: () {
-              removeBidDraft(context);
-              Navigator.pushNamed(
-                context,
-                CreateBidScreen.routeName,
-              );
-            },
-            child: Icon(
-              Icons.add,
-              size: 30,
+          child: Container(
+            height: 65,
+            width: 65,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.6),
+                  spreadRadius: 4,
+                  blurRadius: 14,
+                  offset: Offset(3, 3),
+                ),
+              ],
+            ),
+            child: FloatingActionButton(
+              backgroundColor: Colors.black,
+              elevation:
+                  0, // Remove default elevation since we're using custom shadow
+              onPressed: () {
+                removeBidDraft(context);
+                Navigator.pushNamed(
+                  context,
+                  CreateBidScreen.routeName,
+                );
+              },
+              child: Icon(
+                Icons.add,
+                size: 30,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

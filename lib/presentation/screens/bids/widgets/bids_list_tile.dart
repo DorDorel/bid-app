@@ -1,6 +1,7 @@
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/presentation/screens/bids/bid_info.dart';
-import 'package:bid/services/email_service.dart';
+import 'package:QuoteApp/data/models/bid.dart';
+import 'package:QuoteApp/presentation/screens/bids/bid_info.dart';
+import 'package:QuoteApp/services/email_service.dart';
+
 import 'package:flutter/material.dart';
 
 import 'open_bid_card_menu.dart';
@@ -37,9 +38,8 @@ class BidTile extends StatelessWidget {
         },
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(20),
-              topRight: Radius.circular(20),
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
             ),
           ),
           color: Colors.grey[100],
@@ -48,7 +48,7 @@ class BidTile extends StatelessWidget {
             children: [
               ListTile(
                 leading: Icon(
-                  Icons.adjust_outlined,
+                  Icons.document_scanner,
                   color: isOpen! ? Colors.greenAccent[400] : Colors.grey,
                 ),
                 title: Text(
@@ -58,7 +58,7 @@ class BidTile extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "Bid ID: $bidId",
+                  "Quote: ${bidId}",
                 ),
                 trailing: archiveScreen
                     ? IconButton(

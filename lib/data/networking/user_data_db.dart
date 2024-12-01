@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:bid/auth/auth_firestore_const.dart';
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/models/user.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
+
+import 'package:QuoteApp/auth/auth_firestore_const.dart';
+import 'package:QuoteApp/auth/auth_repository.dart';
+import 'package:QuoteApp/auth/tenant_repository.dart';
+import 'package:QuoteApp/data/models/user.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;

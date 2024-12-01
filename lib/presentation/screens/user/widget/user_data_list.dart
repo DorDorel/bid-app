@@ -1,4 +1,4 @@
-import 'package:bid/presentation/widgets/const_widgets/card_tile_color.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/card_tile_color.dart';
 import 'package:flutter/material.dart';
 
 class UserDataList extends StatelessWidget {

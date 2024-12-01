@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import 'package:bid/app/providers.dart';
-import 'package:bid/app/routes.dart';
-import 'package:bid/app/theme.dart';
-import 'package:bid/data/local/local_reminder.dart';
-import 'package:bid/data/local/tenant_cache_box.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/data/providers/user_info_provider.dart';
-import 'package:bid/presentation/screens/home/main_dashboard.dart';
-import 'package:bid/presentation/screens/user/login_screen.dart';
+import 'package:QuoteApp/app/providers.dart';
+import 'package:QuoteApp/app/routes.dart';
+import 'package:QuoteApp/app/theme.dart';
+import 'package:QuoteApp/data/local/local_reminder.dart';
+import 'package:QuoteApp/data/local/tenant_cache_box.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
+import 'package:QuoteApp/data/providers/user_info_provider.dart';
+import 'package:QuoteApp/presentation/screens/home/main_dashboard.dart';
+import 'package:QuoteApp/presentation/screens/user/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -21,10 +21,10 @@ void main() async {
   await TenantCacheBox.openLocalTenantValidationBox();
   await LocalReminder.openBidRemindersBox();
 
-  runApp(BidAppV1Root());
+  runApp(QuoteAppV2Root());
 }
 
-class BidAppV1Root extends StatelessWidget {
+class QuoteAppV2Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

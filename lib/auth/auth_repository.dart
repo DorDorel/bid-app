@@ -1,10 +1,12 @@
 import 'dart:developer';
 
-import 'package:bid/data/models/user.dart';
-import 'package:bid/data/networking/user_data_db.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+
+import '../data/models/user.dart';
+import '../data/networking/user_data_db.dart';
 
 @immutable
 abstract class AuthenticationRepository {

@@ -1,6 +1,6 @@
-import 'package:bid/data/providers/user_info_provider.dart';
-import 'package:bid/presentation/screens/user/login_screen.dart';
-import 'package:bid/presentation/screens/user/widget/user_data_list.dart';
+import 'package:QuoteApp/data/providers/user_info_provider.dart';
+import 'package:QuoteApp/presentation/screens/user/login_screen.dart';
+import 'package:QuoteApp/presentation/screens/user/widget/user_data_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

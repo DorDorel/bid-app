@@ -1,9 +1,10 @@
-import 'package:bid/data/models/product.dart';
-import 'package:bid/data/providers/new_bids_provider.dart';
-import 'package:bid/data/models/bid.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../data/models/bid.dart';
+import '../data/models/product.dart';
+import '../data/providers/new_bids_provider.dart';
 
 bool addProductToCurrentBid(
   BuildContext context,

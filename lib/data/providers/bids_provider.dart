@@ -1,6 +1,7 @@
-import 'package:bid/data/networking/bids_db.dart';
-import 'package:bid/data/models/bid.dart';
+import 'package:QuoteApp/data/networking/bids_db.dart';
 import 'package:flutter/foundation.dart';
+
+import '../models/bid.dart';
 
 class BidsProvider with ChangeNotifier {
   List<Bid> _allUserBids = [];

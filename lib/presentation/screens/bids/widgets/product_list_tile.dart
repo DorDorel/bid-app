@@ -1,9 +1,9 @@
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/models/product.dart';
-import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
-import 'package:bid/presentation/widgets/const_widgets/card_tile_color.dart';
-import 'package:bid/presentation/widgets/next_button.dart';
+import 'package:QuoteApp/data/models/bid.dart';
+import 'package:QuoteApp/data/models/product.dart';
+import 'package:QuoteApp/logic/product_bid_logic.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/background_color.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/card_tile_color.dart';
+import 'package:QuoteApp/presentation/widgets/next_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

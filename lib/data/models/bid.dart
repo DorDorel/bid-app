@@ -1,4 +1,4 @@
-import 'package:bid/data/models/product.dart';
+import 'package:QuoteApp/data/models/product.dart';
 import 'package:flutter/foundation.dart';
 
 

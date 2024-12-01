@@ -1,4 +1,4 @@
-import 'package:bid/data/providers/new_bids_provider.dart';
+import 'package:QuoteApp/data/providers/new_bids_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

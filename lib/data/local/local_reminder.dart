@@ -1,10 +1,11 @@
 // this is a cache
 import 'dart:developer';
 
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/models/reminder.dart';
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:hive/hive.dart';
+
+import '../models/bid.dart';
+import '../models/reminder.dart';
 
 @immutable
 class LocalReminder {

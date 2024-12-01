@@ -1,4 +1,5 @@
-import 'package:bid/data/models/user.dart';
+
+import 'package:QuoteApp/data/models/user.dart';
 
 enum Status {
   activity,

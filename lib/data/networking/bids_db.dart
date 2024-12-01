@@ -1,11 +1,12 @@
 import 'dart:developer';
 
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/networking/constants/bids_firestore_constants.dart';
-import 'package:bid/data/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;
+
+import '../../auth/auth_repository.dart';
+import '../../auth/tenant_repository.dart';
+import '../models/bid.dart';
+import 'constants/bids_firestore_constants.dart';
 
 @immutable
 class BidsDb {

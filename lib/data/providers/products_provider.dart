@@ -1,6 +1,8 @@
-import 'package:bid/data/models/product.dart';
-import 'package:bid/data/networking/products_db.dart';
+
 import 'package:flutter/foundation.dart';
+
+import '../models/product.dart';
+import '../networking/products_db.dart';
 
 class ProductProvider with ChangeNotifier {
   List<Product> _products = [];

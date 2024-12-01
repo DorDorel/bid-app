@@ -1,4 +1,4 @@
-import 'package:bid/presentation/screens/catalog/single_list_catalog.dart';
+import 'package:QuoteApp/presentation/screens/catalog/single_list_catalog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

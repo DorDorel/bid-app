@@ -1,18 +1,18 @@
-name: bid
-description: easy bid
+name: QuoteApp
+description: easy quote
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 environment:
-  sdk: ">=2.18.0 <=3.16.2"
+  sdk: ">=2.18.0 <=4.0.1"
 dependencies:
   flutter:
     sdk: flutter
   # firebase services
-  firebase_auth: ^4.6.2
-  cloud_firestore: ^4.8.0
-  firebase_core: ^2.13.1
-  cloud_functions: ^4.3.2
-  firebase_storage: ^11.2.2
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.0
+  firebase_core: ^3.8.0
+  cloud_functions: ^5.1.5
+  firebase_storage: ^12.3.6
   # Cupertino Icons and font
   cupertino_icons: ^1.0.3
   # state
@@ -29,13 +29,12 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   # alert
-  cool_alert: ^1.1.0
+  cool_alert: ^2.0.1
   # url_launcher
   url_launcher: ^6.1.5
   # fonts
   google_fonts: ^4.0.0
-  # lottie animation
-  lottie: ^1.4.3
+
   # splash screen
   flutter_native_splash: ^2.3.8
 
@@ -48,7 +47,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image:  assets/images/splash.png
+  image: assets/images/splash.png
   android: true
   ios: true
 
@@ -67,4 +66,3 @@ flutter:
     - assets/animations/error.json
     - assets/animations/small_error.json
     - assets/images/
-

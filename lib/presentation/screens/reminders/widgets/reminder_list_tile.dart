@@ -1,8 +1,9 @@
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/models/reminder.dart';
-import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/data/providers/reminder_provider.dart';
-import 'package:bid/presentation/screens/bids/bid_info.dart';
+import 'package:QuoteApp/data/models/bid.dart';
+import 'package:QuoteApp/data/models/reminder.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
+import 'package:QuoteApp/data/providers/reminder_provider.dart';
+import 'package:QuoteApp/presentation/screens/bids/bid_info.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,48 +28,53 @@ class ReminderListTile extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black45,
-            width: 0.1,
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 250, 246, 203),
+            border: Border.all(
+              color: Colors.black,
+              width: 1.0,
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Bid ID: ${reminder.bidId}",
-                  style: TextStyle(
-                    fontSize: 20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Quote ID: ${reminder.bidId}",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                Text(
-                  reminder.note,
-                  style: TextStyle(
-                    fontSize: 18,
+                  SizedBox(
+                    height: 8.0,
                   ),
-                ),
-              ],
-            ),
-            IconButton(
-              onPressed: () async {
-                await reminderData.favoriteListManger(reminder.bidId);
-              },
-              icon: Icon(
-                reminderData.getFavorites.contains(reminder.bidId)
-                    ? Icons.star
-                    : Icons.star_outline,
-                color: reminderData.getFavorites.contains(reminder.bidId)
-                    ? Colors.yellow[800]
-                    : Colors.black,
+                  Text(
+                    reminder.note,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ),
-          ],
+              IconButton(
+                onPressed: () async {
+                  await reminderData.favoriteListManger(reminder.bidId);
+                },
+                icon: Icon(
+                  reminderData.getFavorites.contains(reminder.bidId)
+                      ? Icons.star
+                      : Icons.star_outline,
+                  color: reminderData.getFavorites.contains(reminder.bidId)
+                      ? Colors.yellow[800]
+                      : Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

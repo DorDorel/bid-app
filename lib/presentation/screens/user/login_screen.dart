@@ -1,5 +1,5 @@
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/data/providers/user_info_provider.dart';
+import 'package:QuoteApp/auth/auth_repository.dart';
+import 'package:QuoteApp/data/providers/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
