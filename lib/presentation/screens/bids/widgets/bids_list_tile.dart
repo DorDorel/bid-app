@@ -42,7 +42,7 @@ class BidTile extends StatelessWidget {
               Radius.circular(12),
             ),
           ),
-          color: Colors.grey[100],
+          color: Colors.white,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

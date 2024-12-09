@@ -19,10 +19,10 @@ class _OldFilterMenuState extends State<OldFilterMenu> {
   bool _accountFlag = false;
 
   final ButtonStyle activeButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(
       Colors.black,
     ),
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
           20.0,

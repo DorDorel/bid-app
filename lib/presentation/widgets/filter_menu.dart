@@ -28,7 +28,7 @@ class FilterMenu extends StatelessWidget {
           unselectedLabelColor: Colors.black,
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              12,
+              20,
             ),
             color: Colors.black,
           ),

@@ -8,6 +8,7 @@ import 'package:QuoteApp/presentation/screens/home/widgets/home_dashboard_header
 import 'package:QuoteApp/presentation/screens/reminders/reminders_screen.dart';
 import 'package:QuoteApp/presentation/screens/user/account_info_screen.dart';
 import 'package:QuoteApp/presentation/widgets/filter_menu.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -93,6 +94,26 @@ class _MainDashboardState extends State<MainDashboard> {
               ),
             ),
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: AnimatedBottomNavigationBar(
+          leftCornerRadius: 30,
+          rightCornerRadius: 30,
+          inactiveColor: Colors.black.withOpacity(.5),
+          gapLocation: GapLocation.center,
+          activeIndex: 0,
+          activeColor: Colors.black,
+          icons: [
+            Icons.library_books_outlined,
+            Icons.person_2_rounded,
+          ],
+          onTap: (index) {
+            setState(
+              () {
+                // bottomNavIndex = index;
+              },
+            );
+          },
         ),
       ),
     );
