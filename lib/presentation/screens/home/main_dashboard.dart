@@ -11,6 +11,7 @@ import 'package:QuoteApp/presentation/widgets/filter_menu.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/providers/bids_provider.dart';
@@ -26,6 +27,7 @@ class MainDashboard extends StatefulWidget {
 }
 
 class _MainDashboardState extends State<MainDashboard> {
+  int fabIndex = 0;
   @override
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
@@ -78,13 +80,18 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
             child: FloatingActionButton(
               backgroundColor: Colors.black,
-              elevation:
-                  0, // Remove default elevation since we're using custom shadow
+              elevation: 0,
               onPressed: () {
                 removeBidDraft(context);
-                Navigator.pushNamed(
+                Navigator.push(
                   context,
-                  CreateBidScreen.routeName,
+                  PageTransition(
+                    type: PageTransitionType.scale,
+                    duration: Duration(milliseconds: 500),
+                    reverseDuration: Duration(milliseconds: 400),
+                    alignment: Alignment.bottomCenter,
+                    child: CreateBidScreen(),
+                  ),
                 );
               },
               child: Icon(
@@ -96,25 +103,21 @@ class _MainDashboardState extends State<MainDashboard> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: AnimatedBottomNavigationBar(
-          leftCornerRadius: 30,
-          rightCornerRadius: 30,
-          inactiveColor: Colors.black.withOpacity(.5),
-          gapLocation: GapLocation.center,
-          activeIndex: 0,
-          activeColor: Colors.black,
-          icons: [
-            Icons.library_books_outlined,
-            Icons.person_2_rounded,
-          ],
-          onTap: (index) {
-            setState(
-              () {
-                // bottomNavIndex = index;
-              },
-            );
-          },
-        ),
+        // bottomNavigationBar: AnimatedBottomNavigationBar(
+        //   leftCornerRadius: 30,
+        //   rightCornerRadius: 30,
+        //   inactiveColor: Colors.white,
+        //   gapLocation: GapLocation.center,
+        //   activeIndex: 0,
+        //   activeColor: Colors.white,
+        //   icons: [
+        //     Icons.library_books_outlined,
+        //     Icons.person_2_rounded,
+        //   ],
+        //   onTap: (index) {
+        //     setState(() {});
+        //   },
+        // ),
       ),
     );
   }

@@ -2,8 +2,6 @@ import 'package:QuoteApp/data/models/bid.dart';
 import 'package:QuoteApp/data/models/reminder.dart';
 import 'package:QuoteApp/data/providers/bids_provider.dart';
 import 'package:QuoteApp/data/providers/reminder_provider.dart';
-import 'package:QuoteApp/extensions/last_digit_modulo_six.dart';
-import 'package:QuoteApp/extensions/note_random_color.dart';
 import 'package:QuoteApp/presentation/screens/bids/bid_info.dart';
 
 import 'package:flutter/material.dart';

@@ -29,7 +29,7 @@ class CreateBid {
         SharedDb().updateBidId();
 
         // cloud function to send email and sms with link
-        BidFlowRunner newRunner = BidFlowRunner(
+        final BidFlowRunner newRunner = BidFlowRunner(
           tenantId: TenantProvider.tenantId,
           tenantName: TenantProvider.tenantName,
           bidDocId: setBidInDB,

@@ -44,17 +44,18 @@ class BidsDb {
           .get();
 
       for (final bid in bidsCollection.docs) {
-        final bidObject = Bid.fromMap(bid.data());
-        if (bidObject.createdBy == uID) {
-          allBids.add(bidObject);
+        try {
+          final bidObject = Bid.fromMap(bid.data());
+          if (bidObject.createdBy == uID) {
+            allBids.add(bidObject);
+          }
+        } catch (e) {
+          print(
+              "ERROR parsing bid document: ${bid.id}, error: ${e.toString()}");
         }
-        // allBids.add(Bid.fromMap(bid.data()));
       }
     } catch (exp) {
-      print(exp.toString());
-    }
-    if (kDebugMode) {
-      log("🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+      print("ERROR FROM getAllUserBids: ${exp.toString()}");
     }
 
     allBids.sort(

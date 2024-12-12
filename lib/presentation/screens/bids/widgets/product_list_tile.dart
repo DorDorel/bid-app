@@ -200,7 +200,7 @@ class _OptionsFormState extends State<OptionsForm> {
   late int discount = widget.edit ? productSelectedData!.discount : 0;
   late int warrantyMonths =
       widget.edit ? productSelectedData!.warrantyMonths : 12;
-  late double price = widget.edit
+  late num price = widget.edit
       ? productSelectedData!.finalPricePerUnit
       : widget.product.price;
   late String remark = widget.edit ? productSelectedData!.remark : 'Empty';

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +9,7 @@ bool addProductToCurrentBid(
   BuildContext context,
   Product product,
   int quantity,
-  double pricePerUnit,
+  num pricePerUnit,
   int discount,
   int warrantyMonths,
   String remark,
@@ -79,7 +78,7 @@ bool updateCurrentProductDataInBidList({
   required String productId,
   required Product product,
   required int quantity,
-  required double pricePerUnit,
+  required num pricePerUnit,
   required int discount,
   required int warrantyMonths,
   required String remark,
@@ -110,16 +109,16 @@ bool updateCurrentProductDataInBidList({
   }
 }
 
-double setDiscount(double originalPrice, int discountPercentage) {
+double setDiscount(num originalPrice, num discountPercentage) {
   final priceAfterDiscount =
       originalPrice - ((originalPrice / 100) * discountPercentage);
 
   return priceAfterDiscount;
 }
 
-double calculateDiscount(double originalPrice, double newPrice) {
-  final double discountPrice = originalPrice - newPrice;
-  final double discountValue = (discountPrice / originalPrice) * 100;
+num calculateDiscount(num originalPrice, num newPrice) {
+  final num discountPrice = originalPrice - newPrice;
+  final num discountValue = (discountPrice / originalPrice) * 100;
 
   return discountValue;
 }
@@ -133,8 +132,7 @@ double calculateTotalBidSum(BuildContext context) {
   double totalSum = 0;
   for (final element in newBidsProvider.getCurrentBidProduct) {
     int singleProductUnit = element.quantity;
-    double priceForAllProductUnits =
-        singleProductUnit * element.finalPricePerUnit;
+    num priceForAllProductUnits = singleProductUnit * element.finalPricePerUnit;
     totalSum += priceForAllProductUnits;
   }
   return totalSum;

@@ -12,31 +12,36 @@ class UserDataList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: cardTileColor,
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 10.0,
+        right: 10.0,
       ),
-      width: double.infinity,
-      height: 80,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                100,
-              ),
-              color: Colors.black,
-            ),
-            child: icon,
+      child: Container(
+        decoration: BoxDecoration(
+          color: cardTileColor,
+          borderRadius: BorderRadius.all(
+            Radius.circular(12.0),
           ),
-          title: Text(text),
+        ),
+        width: double.infinity,
+        height: 80,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            leading: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  100,
+                ),
+                color: Colors.black,
+              ),
+              child: icon,
+            ),
+            title: Text(text),
+          ),
         ),
       ),
     );
