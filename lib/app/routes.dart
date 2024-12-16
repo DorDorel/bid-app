@@ -1,3 +1,4 @@
+import 'package:QuoteApp/presentation/screens/root/root.dart';
 import 'package:flutter/widgets.dart' show Widget, BuildContext;
 
 import '../presentation/screens/admin/admin_screen.dart';
@@ -14,4 +15,5 @@ Map<String, Widget Function(BuildContext)> appRoutes = {
   CreateBidScreen.routeName: (context) => CreateBidScreen(),
   AdminScreen.routeName: (context) => AdminScreen(),
   ProductsScreen.routeName: (context) => ProductsScreen(),
+  RootScreen.routeName: (context) => RootScreen(),
 };

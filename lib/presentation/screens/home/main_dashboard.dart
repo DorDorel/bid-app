@@ -1,23 +1,18 @@
 import 'package:QuoteApp/data/providers/tenant_provider.dart';
-import 'package:QuoteApp/logic/product_bid_logic.dart';
-import 'package:QuoteApp/presentation/providers/filter_provider.dart';
+
 import 'package:QuoteApp/presentation/screens/bids/bids_archive_screen.dart';
 import 'package:QuoteApp/presentation/screens/bids/open_bids_screen.dart';
-import 'package:QuoteApp/presentation/screens/catalog/catalog.dart';
 import 'package:QuoteApp/presentation/screens/home/widgets/home_dashboard_header.dart';
 import 'package:QuoteApp/presentation/screens/reminders/reminders_screen.dart';
-import 'package:QuoteApp/presentation/screens/user/account_info_screen.dart';
+
 import 'package:QuoteApp/presentation/widgets/filter_menu.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/providers/bids_provider.dart';
 import '../../../data/providers/user_info_provider.dart';
 import '../admin/admin_screen.dart';
-import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatefulWidget {
   static const routeName = '/main_dashboard';
@@ -35,7 +30,7 @@ class _MainDashboardState extends State<MainDashboard> {
     bidsData.fetchData();
 
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -54,70 +49,12 @@ class _MainDashboardState extends State<MainDashboard> {
                     OpenBidScreen(),
                     BidsArchiveScreen(),
                     RemindersScreen(),
-                    Catalog(),
-                    AccountInfoScreen(),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        floatingActionButton: Visibility(
-          visible: context.read<FilterProvider>().getFilterIndex != 4,
-          child: Container(
-            height: 65,
-            width: 65,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.6),
-                  spreadRadius: 4,
-                  blurRadius: 14,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: FloatingActionButton(
-              backgroundColor: Colors.black,
-              elevation: 0,
-              onPressed: () {
-                removeBidDraft(context);
-                Navigator.push(
-                  context,
-                  PageTransition(
-                    type: PageTransitionType.scale,
-                    duration: Duration(milliseconds: 500),
-                    reverseDuration: Duration(milliseconds: 400),
-                    alignment: Alignment.bottomCenter,
-                    child: CreateBidScreen(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.add,
-                size: 30,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar: AnimatedBottomNavigationBar(
-        //   leftCornerRadius: 30,
-        //   rightCornerRadius: 30,
-        //   inactiveColor: Colors.white,
-        //   gapLocation: GapLocation.center,
-        //   activeIndex: 0,
-        //   activeColor: Colors.white,
-        //   icons: [
-        //     Icons.library_books_outlined,
-        //     Icons.person_2_rounded,
-        //   ],
-        //   onTap: (index) {
-        //     setState(() {});
-        //   },
-        // ),
       ),
     );
   }

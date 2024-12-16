@@ -8,6 +8,7 @@ import 'package:QuoteApp/data/local/tenant_cache_box.dart';
 import 'package:QuoteApp/data/providers/tenant_provider.dart';
 import 'package:QuoteApp/data/providers/user_info_provider.dart';
 import 'package:QuoteApp/presentation/screens/home/main_dashboard.dart';
+import 'package:QuoteApp/presentation/screens/root/root.dart';
 import 'package:QuoteApp/presentation/screens/user/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -84,7 +85,7 @@ class AuthenticationWrapper extends StatelessWidget {
       }
 
       checkAndSetAuthorized();
-      return MainDashboard();
+      return RootScreen();
     }
     return LoginScreen();
   }

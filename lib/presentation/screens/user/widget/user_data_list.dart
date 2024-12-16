@@ -1,4 +1,3 @@
-import 'package:QuoteApp/presentation/widgets/const_widgets/card_tile_color.dart';
 import 'package:flutter/material.dart';
 
 class UserDataList extends StatelessWidget {
@@ -19,7 +18,7 @@ class UserDataList extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: cardTileColor,
+          color: Colors.white,
           borderRadius: BorderRadius.all(
             Radius.circular(12.0),
           ),

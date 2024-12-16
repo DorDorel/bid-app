@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../data/providers/products_provider.dart';
 import '../../../data/models/product.dart';
@@ -31,21 +32,44 @@ class _CatalogState extends State<Catalog> {
               color: Colors.black,
             ),
           )
-        : Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CardSwiper(
-              controller: controller,
-              cardsCount: productsData.products.length,
-              numberOfCardsDisplayed: 3,
-              backCardOffset: const Offset(30, 30),
-              padding: const EdgeInsets.all(10.0),
-              onSwipe: (previousIndex, currentIndex, direction) {
-                return true;
-              },
-              cardBuilder: (context, index, horizontalThresholdPercentage,
-                      verticalThresholdPercentage) =>
-                  ProductCard(
-                product: productsData.products[index],
+        : Scaffold(
+            backgroundColor: Colors.grey[200],
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Catalog",
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 32.0,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    Expanded(
+                      child: CardSwiper(
+                        controller: controller,
+                        cardsCount: productsData.products.length,
+                        numberOfCardsDisplayed: 3,
+                        backCardOffset: const Offset(30, 30),
+                        padding: const EdgeInsets.all(10.0),
+                        onSwipe: (previousIndex, currentIndex, direction) {
+                          return true;
+                        },
+                        cardBuilder: (context,
+                                index,
+                                horizontalThresholdPercentage,
+                                verticalThresholdPercentage) =>
+                            ProductCard(
+                          product: productsData.products[index],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -71,7 +95,9 @@ class ProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
-            image: NetworkImage(product.imageUrl),
+            image: NetworkImage(
+              product.imageUrl,
+            ),
             fit: BoxFit.cover,
           ),
         ),

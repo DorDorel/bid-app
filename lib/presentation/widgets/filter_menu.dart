@@ -43,12 +43,6 @@ class FilterMenu extends StatelessWidget {
             Tab(
               child: Text("Reminders", style: tabStyle),
             ),
-            Tab(
-              child: Text("Catalog", style: tabStyle),
-            ),
-            Tab(
-              child: Text("Account", style: tabStyle),
-            ),
           ],
         ),
       ),
