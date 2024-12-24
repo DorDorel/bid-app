@@ -10,7 +10,7 @@ class FilterMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
 
-    final TextStyle tabStyle = GoogleFonts.cuprum(
+    final TextStyle tabStyle = GoogleFonts.bebasNeue(
       fontSize: 18.0,
     );
 

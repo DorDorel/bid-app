@@ -8,7 +8,6 @@ class UserDataList extends StatelessWidget {
     required this.icon,
     required this.text,
   });
-
   @override
   Widget build(BuildContext context) {
     return Padding(

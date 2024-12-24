@@ -8,43 +8,44 @@ class Fab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-        height: 65,
-        width: 65,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.6),
-              spreadRadius: 4,
-              blurRadius: 14,
-              offset: Offset(3, 3),
+    return Container(
+      height: 65,
+      width: 65,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(
+              0.4,
             ),
-          ],
-        ),
-        child: FloatingActionButton(
-          backgroundColor: Colors.black,
-          elevation: 0,
-          onPressed: () {
-            removeBidDraft(context);
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.scale,
-                duration: Duration(milliseconds: 500),
-                reverseDuration: Duration(milliseconds: 400),
-                alignment: Alignment.bottomCenter,
-                child: CreateBidScreen(),
-              ),
-            );
-          },
-          child: Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.white,
+            spreadRadius: 4,
+            blurRadius: 14,
+            offset: Offset(3, 3),
           ),
+        ],
+      ),
+      child: FloatingActionButton(
+        backgroundColor: Colors.black,
+        elevation: 0,
+        onPressed: () {
+          removeBidDraft(context);
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.scale,
+              duration: Duration(milliseconds: 500),
+              reverseDuration: Duration(milliseconds: 400),
+              alignment: Alignment.bottomCenter,
+              child: CreateBidScreen(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.white,
         ),
-      
+      ),
     );
   }
 }

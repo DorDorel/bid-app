@@ -15,12 +15,13 @@ class ProductListTile extends StatefulWidget {
   final String imageUrl;
   final String description;
 
-  ProductListTile(
-      {required this.productId,
-      required this.productName,
-      required this.price,
-      required this.imageUrl,
-      required this.description});
+  ProductListTile({
+    required this.productId,
+    required this.productName,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
 
   Product _currentProductInProductObject() {
     return Product(
@@ -44,31 +45,43 @@ class _ProductListTileState extends State<ProductListTile> {
     final SelectedProducts? productSelectedData =
         findCurrentProductDataInProductsBidList(widget.productId);
 
-    return ListTile(
-      tileColor: isSelected ? Colors.green[100] : cardTileColor,
-      title: Text(
-        widget.productName,
-        style: TextStyle(
-          fontSize: 20,
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        right: 16.0,
+        top: 6.0,
       ),
-      subtitle: isSelected
-          ? Text(
-              'Quantity: ${productSelectedData!.quantity} Price/Unit: ${productSelectedData.finalPricePerUnit.toStringAsFixed(2)} Remarks: ${productSelectedData.remark}',
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: Material(
+          child: ListTile(
+            tileColor: isSelected ? Colors.green[100] : cardTileColor,
+            title: Text(
+              widget.productName,
               style: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-            )
-          : Text(''),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(
-          widget.imageUrl,
+            ),
+            subtitle: isSelected
+                ? Text(
+                    'Quantity: ${productSelectedData!.quantity} Price/Unit: ${productSelectedData.finalPricePerUnit.toStringAsFixed(2)} Remarks: ${productSelectedData.remark}',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                : Text(''),
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(
+                widget.imageUrl,
+              ),
+            ),
+            trailing: PopupOptions(
+              widget: widget,
+              edit: isSelected,
+            ),
+          ),
         ),
-      ),
-      trailing: PopupOptions(
-        widget: widget,
-        edit: isSelected,
       ),
     );
   }
@@ -237,8 +250,12 @@ class _OptionsFormState extends State<OptionsForm> {
                     },
                     child: Text(
                       'Cancel',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -392,7 +409,7 @@ class _OptionsFormState extends State<OptionsForm> {
   Widget buildAddButton(BuildContext context) => ConstrainedBox(
         constraints: BoxConstraints.tightFor(
           width: 360,
-          height: 36,
+          height: 60,
         ),
         child: NextButton(
           title: 'ADD',
