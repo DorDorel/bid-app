@@ -16,8 +16,6 @@ QuoteApp is a Flutter Cross Platform project that allows users to send Quote via
 ✅✅✅ **Update (31.12.2023):** Production Ready 🚀🚀🚀
 
 ### Demos:
-◉ **Send Bid Live Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=jr72KhqlIyM)
-
 ◉ **Admin Panel Demo:** [Watch on YouTube](https://www.youtube.com/watch?v=0zgNTF5M7XM)
 
 ### Project Links:
