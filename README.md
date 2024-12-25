@@ -1,6 +1,6 @@
 # QuoteApp (V3.0.0)
 
-BidApp is a Flutter Cross Platform project that allows users to send bids via email or SMS. It features a user-friendly admin panel, authentication, and cloud-based functionalities.
+QuoteApp is a Flutter Cross Platform project that allows users to Quote bids via email or SMS. It features a user-friendly admin panel, authentication, and cloud-based functionalities.
 
 
 ✅✅✅ **Update (25.12.2024):** new UI 🚀🚀🚀
