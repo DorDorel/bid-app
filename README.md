@@ -1,4 +1,12 @@
-# BidApp (V2.0.0)
+# QuoteApp (V3.0.0)
+
+✅✅✅ **Update (25.12.2024):** new UI 🚀🚀🚀
+
+![](/demo/a.gif)
+![](/demo/b.gif)
+![](/demo/c.gif)
+![](/demo/d.gif)
+# QuoteApp (V2.0.0)
 
 ✅✅✅ **Update (31.12.2023):** Production Ready 🚀🚀🚀
 
