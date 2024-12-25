@@ -17,6 +17,6 @@ final ThemeData appTheme = ThemeData(
         secondary: Colors.black87,
       )
       .copyWith(
-        background: Colors.grey[300],
+        surface: Colors.grey[300],
       ),
 );

@@ -1,5 +1,5 @@
-import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
+import 'package:QuoteApp/presentation/providers/filter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +19,10 @@ class _OldFilterMenuState extends State<OldFilterMenu> {
   bool _accountFlag = false;
 
   final ButtonStyle activeButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(
+    backgroundColor: WidgetStateProperty.all(
       Colors.black,
     ),
-    shape: MaterialStateProperty.all(
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
           20.0,

@@ -1,10 +1,12 @@
 import 'dart:developer';
 
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/local/tenant_cache_box.dart';
-import 'package:bid/data/networking/user_data_db.dart';
+
 import 'package:flutter/foundation.dart';
+
+import '../../auth/auth_repository.dart';
+import '../../auth/tenant_repository.dart';
+import '../local/tenant_cache_box.dart';
+import '../networking/user_data_db.dart';
 
 class TenantProvider with ChangeNotifier {
   static bool checkAdmin = false;

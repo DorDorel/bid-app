@@ -1,13 +1,11 @@
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/providers/filter_provider.dart';
-import 'package:bid/presentation/screens/bids/bids_archive_screen.dart';
-import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
-import 'package:bid/presentation/screens/catalog/catalog.dart';
-import 'package:bid/presentation/screens/home/widgets/home_dashboard_header.dart';
-import 'package:bid/presentation/screens/reminders/reminders_screen.dart';
-import 'package:bid/presentation/screens/user/account_info_screen.dart';
-import 'package:bid/presentation/widgets/filter_menu.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
+
+import 'package:QuoteApp/presentation/screens/bids/bids_archive_screen.dart';
+import 'package:QuoteApp/presentation/screens/bids/open_bids_screen.dart';
+import 'package:QuoteApp/presentation/screens/home/widgets/home_dashboard_header.dart';
+import 'package:QuoteApp/presentation/screens/reminders/reminders_screen.dart';
+
+import 'package:QuoteApp/presentation/widgets/filter_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +13,6 @@ import 'package:provider/provider.dart';
 import '../../../data/providers/bids_provider.dart';
 import '../../../data/providers/user_info_provider.dart';
 import '../admin/admin_screen.dart';
-import '../bids/create_bid_screen.dart';
 
 class MainDashboard extends StatefulWidget {
   static const routeName = '/main_dashboard';
@@ -25,6 +22,7 @@ class MainDashboard extends StatefulWidget {
 }
 
 class _MainDashboardState extends State<MainDashboard> {
+  int fabIndex = 0;
   @override
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
@@ -32,7 +30,7 @@ class _MainDashboardState extends State<MainDashboard> {
     bidsData.fetchData();
 
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -51,29 +49,10 @@ class _MainDashboardState extends State<MainDashboard> {
                     OpenBidScreen(),
                     BidsArchiveScreen(),
                     RemindersScreen(),
-                    Catalog(),
-                    AccountInfoScreen(),
                   ],
                 ),
               ),
             ],
-          ),
-        ),
-        floatingActionButton: Visibility(
-          visible: context.read<FilterProvider>().getFilterIndex != 4,
-          child: FloatingActionButton(
-            backgroundColor: Colors.black,
-            onPressed: () {
-              removeBidDraft(context);
-              Navigator.pushNamed(
-                context,
-                CreateBidScreen.routeName,
-              );
-            },
-            child: Icon(
-              Icons.add,
-              size: 30,
-            ),
           ),
         ),
       ),

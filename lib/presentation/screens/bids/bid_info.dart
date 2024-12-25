@@ -1,8 +1,8 @@
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/providers/reminder_provider.dart';
-import 'package:bid/presentation/screens/bids/widgets/bids_info_table.dart';
-import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
-import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
+import 'package:QuoteApp/data/models/bid.dart';
+import 'package:QuoteApp/data/providers/reminder_provider.dart';
+import 'package:QuoteApp/presentation/screens/bids/widgets/bids_info_table.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/app_bar_title_style.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +32,7 @@ class BidInfo extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text(
-          "Bid ${bid.bidId}",
+          "QUOTE ${bid.bidId}",
           style: appBarTitleStyle,
         ),
       ),
@@ -94,21 +94,27 @@ class BidInfo extends StatelessWidget {
         vertical: 40.0,
         horizontal: 6.0,
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green,
-        ),
-        onPressed: () {
-          String bidId = '';
-          for (final element in reminderData.getReminders) {
-            if (element.bidId == bid.bidId) {
-              bidId = element.bidId;
-            }
-          }
-          reminderData.removeReminder(bidId);
-        },
-        child: Text(
-          "Cancel Reminder",
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: 50,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+            ),
+            onPressed: () {
+              String bidId = '';
+              for (final element in reminderData.getReminders) {
+                if (element.bidId == bid.bidId) {
+                  bidId = element.bidId;
+                }
+              }
+              reminderData.removeReminder(bidId);
+            },
+            child: Text(
+              "Cancel Reminder",
+            ),
+          ),
         ),
       ),
     );
@@ -122,48 +128,86 @@ class BidInfo extends StatelessWidget {
         vertical: 40.0,
         horizontal: 6.0,
       ),
-      child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-          ),
-          onPressed: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Column(children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "Write a note",
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: 50,
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+              ),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled:
+                      true, // Allows the sheet to resize based on keyboard
+                  shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  builder: (context) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: 20.0,
+                        left: 20.0,
+                        right: 20.0,
+                        bottom: MediaQuery.of(context).viewInsets.bottom +
+                            20.0, // Handles keyboard padding
                       ),
-                      maxLines: 2,
-                      onChanged: (value) => noteInput = value,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                        ),
-                        onPressed: () {
-                          reminderData.setBidReminder(bid, noteInput);
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Set Reminder",
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize
+                            .min, // Makes the column wrap its content
+                        crossAxisAlignment: CrossAxisAlignment
+                            .stretch, // Stretches button to full width
+                        children: [
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              hintText: "Write a note",
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor:
+                                  const Color.fromARGB(255, 250, 246, 203),
+                            ),
+                            maxLines: 4,
+                            onChanged: (value) => noteInput = value,
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            onPressed: () {
+                              reminderData.setBidReminder(bid, noteInput);
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ]);
-                });
-          },
-          child: const Text(
-            " Set Reminder 🔔 ",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
-            ),
-          )),
+                    );
+                  },
+                );
+              },
+              child: const Text(
+                " Set Reminder 🔔 ",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                ),
+              )),
+        ),
+      ),
     );
   }
 }

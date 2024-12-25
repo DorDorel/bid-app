@@ -1,9 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/data/models/user.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/presentation/screens/user/login_screen.dart';
+import 'package:QuoteApp/auth/auth_repository.dart';
+import 'package:QuoteApp/data/models/user.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
+import 'package:QuoteApp/presentation/screens/user/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class CreateNewUser extends StatefulWidget {

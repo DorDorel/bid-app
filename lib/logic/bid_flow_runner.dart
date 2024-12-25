@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:bid/services/email_service.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../services/email_service.dart';
 
 @immutable
 class BidFlowRunner {

@@ -1,9 +1,10 @@
-import 'package:bid/data/networking/bids_db.dart';
-import 'package:bid/data/networking/shared_db.dart';
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/logic/bid_flow_runner.dart';
 import 'package:flutter/material.dart';
+
+import '../data/models/bid.dart';
+import '../data/networking/bids_db.dart';
+import '../data/networking/shared_db.dart';
+import '../data/providers/tenant_provider.dart';
+import 'bid_flow_runner.dart';
 
 @immutable
 class CreateBid {
@@ -28,7 +29,7 @@ class CreateBid {
         SharedDb().updateBidId();
 
         // cloud function to send email and sms with link
-        BidFlowRunner newRunner = BidFlowRunner(
+        final BidFlowRunner newRunner = BidFlowRunner(
           tenantId: TenantProvider.tenantId,
           tenantName: TenantProvider.tenantName,
           bidDocId: setBidInDB,

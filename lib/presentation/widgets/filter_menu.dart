@@ -1,4 +1,4 @@
-import 'package:bid/data/providers/bids_provider.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class FilterMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final bidsData = Provider.of<BidsProvider>(context);
 
-    final TextStyle tabStyle = GoogleFonts.cuprum(
+    final TextStyle tabStyle = GoogleFonts.bebasNeue(
       fontSize: 18.0,
     );
 
@@ -28,7 +28,7 @@ class FilterMenu extends StatelessWidget {
           unselectedLabelColor: Colors.black,
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              12,
+              20,
             ),
             color: Colors.black,
           ),
@@ -42,12 +42,6 @@ class FilterMenu extends StatelessWidget {
             ),
             Tab(
               child: Text("Reminders", style: tabStyle),
-            ),
-            Tab(
-              child: Text("Catalog", style: tabStyle),
-            ),
-            Tab(
-              child: Text("Account", style: tabStyle),
             ),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:bid/data/models/bid.dart';
+import 'package:QuoteApp/data/models/bid.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,6 +1,7 @@
-import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/services/call_service.dart';
-import 'package:bid/services/email_service.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
+import 'package:QuoteApp/services/call_service.dart';
+import 'package:QuoteApp/services/email_service.dart';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,8 +66,8 @@ class OpenTileMenu extends StatelessWidget {
                 onConfirmBtnTap: () async {
                   await bidsData.updateBidFlag(bidId);
                   bidsData.eraseAllUserBid();
-                  Navigator.pop(context);
                 },
+                closeOnConfirmBtnTap: true,
               );
             },
             icon: Icon(

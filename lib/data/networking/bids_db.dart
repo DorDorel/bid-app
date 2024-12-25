@@ -1,11 +1,12 @@
 import 'dart:developer';
 
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/auth/tenant_repository.dart';
-import 'package:bid/data/networking/constants/bids_firestore_constants.dart';
-import 'package:bid/data/models/bid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable, kDebugMode;
+
+import '../../auth/auth_repository.dart';
+import '../../auth/tenant_repository.dart';
+import '../models/bid.dart';
+import 'constants/bids_firestore_constants.dart';
 
 @immutable
 class BidsDb {
@@ -43,17 +44,18 @@ class BidsDb {
           .get();
 
       for (final bid in bidsCollection.docs) {
-        final bidObject = Bid.fromMap(bid.data());
-        if (bidObject.createdBy == uID) {
-          allBids.add(bidObject);
+        try {
+          final bidObject = Bid.fromMap(bid.data());
+          if (bidObject.createdBy == uID) {
+            allBids.add(bidObject);
+          }
+        } catch (e) {
+          print(
+              "ERROR parsing bid document: ${bid.id}, error: ${e.toString()}");
         }
-        // allBids.add(Bid.fromMap(bid.data()));
       }
     } catch (exp) {
-      print(exp.toString());
-    }
-    if (kDebugMode) {
-      log("🐛 *DEBUG LOG* : Database Query - getAllUserBids from BidsDb reading");
+      print("ERROR FROM getAllUserBids: ${exp.toString()}");
     }
 
     allBids.sort(

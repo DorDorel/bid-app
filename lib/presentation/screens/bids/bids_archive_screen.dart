@@ -1,5 +1,5 @@
-import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/presentation/screens/bids/widgets/bids_list_tile.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
+import 'package:QuoteApp/presentation/screens/bids/widgets/bids_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class _BidsArchiveScreenState extends State<BidsArchiveScreen> {
     bidsData.fetchData();
 
     return Padding(
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.all(14),
       child: bidsData.allBids.isEmpty
           ? Center(
               child: CircularProgressIndicator(

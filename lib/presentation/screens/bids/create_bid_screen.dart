@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:bid/presentation/screens/bids/product_selection_screen.dart';
-import 'package:bid/presentation/widgets/next_button.dart';
+import 'package:QuoteApp/presentation/screens/bids/product_selection_screen.dart';
+import 'package:QuoteApp/presentation/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/const_widgets/app_bar_title_style.dart';
@@ -26,7 +26,7 @@ class _CreateBidScreenState extends State<CreateBidScreen> {
         title: Transform(
           transform: Matrix4.translationValues(0.0, 0.0, 0.0),
           child: Text(
-            'New Bid',
+            'New Quote',
             style: appBarTitleStyle,
           ),
         ),

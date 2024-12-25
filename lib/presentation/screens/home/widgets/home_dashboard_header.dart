@@ -1,6 +1,7 @@
-import 'package:bid/data/providers/tenant_provider.dart';
-import 'package:bid/data/providers/user_info_provider.dart';
-import 'package:bid/presentation/screens/admin/admin_screen.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
+import 'package:QuoteApp/data/providers/user_info_provider.dart';
+import 'package:QuoteApp/presentation/screens/admin/admin_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

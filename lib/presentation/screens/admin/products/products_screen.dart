@@ -1,8 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:bid/data/providers/products_provider.dart';
-import 'package:bid/presentation/screens/admin/add_new_product_screen.dart';
-import 'package:bid/presentation/screens/admin/products/single_product_list.dart';
+import 'package:QuoteApp/data/providers/products_provider.dart';
+import 'package:QuoteApp/presentation/screens/admin/add_new_product_screen.dart';
+import 'package:QuoteApp/presentation/screens/admin/products/single_product_list.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

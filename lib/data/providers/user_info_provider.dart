@@ -1,12 +1,13 @@
-import 'package:bid/auth/auth_repository.dart';
-import 'package:bid/data/models/user.dart';
-import 'package:bid/data/networking/user_data_db.dart';
-import 'package:bid/data/providers/products_provider.dart';
-import 'package:bid/data/providers/reminder_provider.dart';
-import 'package:bid/data/providers/tenant_provider.dart';
+
+import 'package:QuoteApp/data/providers/products_provider.dart';
+import 'package:QuoteApp/data/providers/reminder_provider.dart';
+import 'package:QuoteApp/data/providers/tenant_provider.dart';
 import 'package:flutter/material.dart' show ChangeNotifier, BuildContext;
 import 'package:provider/provider.dart';
 
+import '../../auth/auth_repository.dart';
+import '../models/user.dart';
+import '../networking/user_data_db.dart';
 import 'bids_provider.dart';
 
 class UserInfoProvider with ChangeNotifier {

@@ -1,5 +1,6 @@
-import 'package:bid/data/models/bid.dart';
 import 'package:flutter/material.dart';
+
+import '../models/bid.dart';
 
 class NewBidsProvider with ChangeNotifier {
   static List<SelectedProducts> _currentBidProduct = [];

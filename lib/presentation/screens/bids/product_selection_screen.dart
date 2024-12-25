@@ -1,14 +1,15 @@
-import 'package:bid/data/networking/shared_db.dart';
-import 'package:bid/data/models/bid.dart';
-import 'package:bid/data/providers/bids_provider.dart';
-import 'package:bid/data/providers/new_bids_provider.dart';
-import 'package:bid/logic/create_bid_logic.dart';
-import 'package:bid/logic/product_bid_logic.dart';
-import 'package:bid/presentation/screens/bids/widgets/product_list.dart';
-import 'package:bid/presentation/screens/home/main_dashboard.dart';
-import 'package:bid/presentation/widgets/const_widgets/app_bar_title_style.dart';
-import 'package:bid/presentation/widgets/const_widgets/background_color.dart';
-import 'package:bid/presentation/widgets/next_button.dart';
+import 'package:QuoteApp/data/models/bid.dart';
+import 'package:QuoteApp/data/networking/shared_db.dart';
+import 'package:QuoteApp/data/providers/bids_provider.dart';
+import 'package:QuoteApp/data/providers/new_bids_provider.dart';
+import 'package:QuoteApp/logic/create_bid_logic.dart';
+import 'package:QuoteApp/logic/product_bid_logic.dart';
+import 'package:QuoteApp/presentation/screens/bids/widgets/product_list.dart';
+import 'package:QuoteApp/presentation/screens/home/main_dashboard.dart';
+import 'package:QuoteApp/presentation/screens/root/root.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/app_bar_title_style.dart';
+import 'package:QuoteApp/presentation/widgets/const_widgets/background_color.dart';
+import 'package:QuoteApp/presentation/widgets/next_button.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -119,6 +120,9 @@ class _ProductSelectionScreenState extends State<ProductSelectionScreen> {
     ).startNewBidFlow();
 
     bidFlow ? print("yes") : print("no");
-    Navigator.pushNamed(context, MainDashboard.routeName);
+    Navigator.pushNamed(
+      context,
+      RootScreen.routeName,
+    );
   }
 }

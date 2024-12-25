@@ -1,6 +1,7 @@
-import 'package:bid/presentation/screens/bids/open_bids_screen.dart';
-import 'package:bid/presentation/screens/catalog/catalog.dart';
-import 'package:bid/presentation/screens/user/account_info_screen.dart';
+
+import 'package:QuoteApp/presentation/screens/bids/open_bids_screen.dart';
+import 'package:QuoteApp/presentation/screens/catalog/catalog.dart';
+import 'package:QuoteApp/presentation/screens/user/account_info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

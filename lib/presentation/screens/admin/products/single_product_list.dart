@@ -1,7 +1,8 @@
-import 'package:bid/data/providers/products_provider.dart';
-import 'package:bid/presentation/screens/admin/add_new_product_screen.dart';
-import 'package:bid/presentation/screens/constants/strings.dart';
-import 'package:bid/services/storage_service.dart';
+
+import 'package:QuoteApp/data/providers/products_provider.dart';
+import 'package:QuoteApp/presentation/screens/admin/add_new_product_screen.dart';
+import 'package:QuoteApp/presentation/screens/constants/strings.dart';
+import 'package:QuoteApp/services/storage_service.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
