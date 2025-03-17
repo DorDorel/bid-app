@@ -1,9 +1,8 @@
-
 import 'package:QuoteApp/data/providers/products_provider.dart';
 import 'package:QuoteApp/presentation/screens/admin/add_new_product_screen.dart';
 import 'package:QuoteApp/presentation/screens/constants/strings.dart';
 import 'package:QuoteApp/services/storage_service.dart';
-import 'package:cool_alert/cool_alert.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,60 +60,26 @@ class SingleProductList extends StatelessWidget {
             // delete button
             IconButton(
               onPressed: () async {
-                CoolAlert.show(
+                AwesomeDialog(
                   context: context,
-                  type: CoolAlertType.warning,
-                  backgroundColor: Colors.black,
-                  text: Strings.approveChangesInDb,
-                  confirmBtnText: Strings.approveChangesInDbConfirmBtnText,
-                  confirmBtnColor: Colors.black,
-                  cancelBtnText: Strings.approveChangesInDbCancelBtnText,
-                  showCancelBtn: true,
-                  loopAnimation: true,
-                  borderRadius: 20.0,
-                  onConfirmBtnTap: () async {
+                  dialogType: DialogType.warning,
+                  animType: AnimType.scale,
+                  title: 'Warning',
+                  desc: Strings.approveChangesInDb,
+                  btnOkText: Strings.approveChangesInDbConfirmBtnText,
+                  btnOkColor: Colors.black,
+                  btnCancelText: Strings.approveChangesInDbCancelBtnText,
+                  btnCancelOnPress: () {},
+                  btnOkOnPress: () async {
                     await StorageService().deleteProductImage(
                       productImageURL: imageUrl,
                     );
                     await productsData.deleteProduct(
                       productId,
                     );
-                    Navigator.of(context).pop();
                   },
-                );
-
-                // showDialog(
-                //     context: context,
-                //     barrierDismissible: false,
-                //     builder: (BuildContext context) {
-                //       return AlertDialog(
-                //         title: Text('Remove $productName'),
-                //         content: SingleChildScrollView(
-                //           child: ListBody(
-                //             children: [
-                //               Text(
-                //                   "Delete this product from your product list?")
-                //             ],
-                //           ),
-                //         ),
-                //         actions: [
-                //           TextButton(
-                //               onPressed: () {
-                //                 Navigator.of(context).pop();
-                //               },
-                //               child: Text('Cancel')),
-                //           TextButton(
-                //               onPressed: () {
-                //                 StorageService().deleteProductImage(
-                //                     productImageURL: imageUrl);
-                //                 productsData.deleteProduct(productId);
-                //                 Navigator.of(context).pop();
-                //               },
-                //               child: Text('Delete',
-                //                   style: TextStyle(color: Colors.red)))
-                //         ],
-                //       );
-                //     });
+                  width: 400,
+                ).show();
               },
               icon: Icon(
                 Icons.remove_circle_outline,

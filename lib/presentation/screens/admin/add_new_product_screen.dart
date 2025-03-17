@@ -6,7 +6,7 @@ import 'package:QuoteApp/data/models/product.dart';
 import 'package:QuoteApp/data/providers/products_provider.dart';
 import 'package:QuoteApp/presentation/screens/constants/strings.dart';
 import 'package:QuoteApp/services/storage_service.dart';
-import 'package:cool_alert/cool_alert.dart';
+import 'package:awesome_dialog/awesome_dialog.dart'; // Add this import
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -290,36 +290,33 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
 Future<dynamic>? _uploadImageErrorManger(
     BuildContext context, String errorMessage) {
-  final CoolAlertType type = CoolAlertType.error;
-  final Color color = Colors.black;
-  final double border = 20.0;
-  final bool loop = true;
-
   switch (errorMessage) {
     case "ERROR":
       {
-        return CoolAlert.show(
+        return AwesomeDialog(
           context: context,
-          type: type,
-          backgroundColor: color,
-          confirmBtnColor: color,
-          borderRadius: border,
-          loopAnimation: loop,
-          text: "Grant Permissions and try again",
-        );
+          dialogType: DialogType.error,
+          animType: AnimType.scale,
+          title: 'Error',
+          desc: "Grant Permissions and try again",
+          btnOkOnPress: () {},
+          btnOkColor: Colors.black,
+          width: 400,
+        ).show();
       }
     case "Failed":
       {
-        return CoolAlert.show(
+        return AwesomeDialog(
           context: context,
-          type: type,
-          backgroundColor: color,
-          confirmBtnColor: color,
-          borderRadius: border,
-          loopAnimation: loop,
-          text:
+          dialogType: DialogType.error,
+          animType: AnimType.scale,
+          title: 'Error',
+          desc:
               "Operation failed. We will contact you as soon as possible to deal with the fault.",
-        );
+          btnOkOnPress: () {},
+          btnOkColor: Colors.black,
+          width: 400,
+        ).show();
       }
   }
   return null;

@@ -60,3 +60,4 @@ ios/build/Runner.build/Release-iphoneos/Runner.build/dgph
 
 #ios
 ios/build/**!/android/app/google-services.json
+.qodo

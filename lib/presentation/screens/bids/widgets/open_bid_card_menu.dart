@@ -2,7 +2,7 @@ import 'package:QuoteApp/data/providers/bids_provider.dart';
 import 'package:QuoteApp/services/call_service.dart';
 import 'package:QuoteApp/services/email_service.dart';
 
-import 'package:cool_alert/cool_alert.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,22 +53,24 @@ class OpenTileMenu extends StatelessWidget {
           ),
           IconButton(
             onPressed: () async {
-              CoolAlert.show(
+              AwesomeDialog(
                 context: context,
-                type: CoolAlertType.confirm,
-                text: "Move $bidId to Archive?",
-                confirmBtnText: 'Yes',
-                cancelBtnText: 'No',
-                confirmBtnColor: Colors.black,
-                backgroundColor: Colors.black,
-                loopAnimation: true,
-                borderRadius: 20.0,
-                onConfirmBtnTap: () async {
+                dialogType: DialogType.question,
+                animType: AnimType.scale,
+                title: 'Confirmation',
+                desc: "Move $bidId to Archive?",
+                btnOkText: 'Yes',
+                btnCancelText: 'No',
+                btnOkColor: Colors.black,
+                btnOkOnPress: () async {
                   await bidsData.updateBidFlag(bidId);
                   bidsData.eraseAllUserBid();
                 },
-                closeOnConfirmBtnTap: true,
-              );
+                btnCancelOnPress: () {},
+                width: 400,
+                borderSide: BorderSide(color: Colors.black, width: 2),
+                buttonsBorderRadius: BorderRadius.circular(20),
+              ).show();
             },
             icon: Icon(
               Icons.archive,
